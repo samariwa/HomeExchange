@@ -6,10 +6,10 @@
 //Define MySQL database parameters
 
 $username = "root";
-$password = "samokoth.1999";
-$hostname = "127.0.0.1";
+$password = "";
+$hostname = "localhost";
 $database = "home_exchange";
-$port = "3306";
+$port = "3307";
 
 //Defining authenticator credentials
 $authenticator_email = 'symphauthenticator@gmail.com';
