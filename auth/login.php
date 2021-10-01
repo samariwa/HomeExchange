@@ -202,7 +202,7 @@ if (!$_SESSION['logged_in']):
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->  
-  <link rel="shortcut icon" type="image/png" sizes="196x196" href="../assets/images/sympha_fresh_white.png" />
+  <link rel="shortcut icon" type="image/png" sizes="196x196" href="../assets/images/home_swap_logo.png" />
 <!--===============================================================================================-->
   <link rel="stylesheet" type="text/css" href="../assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
@@ -225,12 +225,14 @@ if (!$_SESSION['logged_in']):
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <!--===============================================================================================-->
     <script src="https://www.google.com/recaptcha/api.js?render=<?php echo $public_key; ?>"></script>
-    
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
 </head>
   <div class="limiter">
-    <div class="container-login100">
-      <div class="wrap-login100">
-        <div class="login100-form-title" style="background-image:url('../assets/images/auth-bg.jpg')">
+    <div class="container-login100" style="background-image:url('../assets/images/login_bg.jpeg');background-repeat: no-repeat;background-size: 1300px 800px;">
+      <div class="wrap-login100" >
+        <div class="login100-form-title" style="background-image:url('../assets/images/login_auth_bg.jpg')">
           <span class="login100-form-title-1">
             Sign In
           </span>
@@ -266,12 +268,12 @@ if (!$_SESSION['logged_in']):
           </div>
           <div class="container-login100-form-btn">
             <button class="login100-form-btn" name="login-button">
-              Login
+              Sign In
             </button>
           </div>
           <div>
             <br>
-             <p>Don't have an account?&ensp;<a href="registration.php" style="color: inherit;text-decoration: underline;">Register</a></p>
+             <p>Don't have an account?&ensp;<a href="registration.php" style="color: inherit;text-decoration: underline;">Sign Up</a></p>
           </div>
           <?php 
           if (($validationresults == FALSE) || ($registered == FALSE)){
@@ -294,6 +296,7 @@ if (!$_SESSION['logged_in']):
     </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
   <script type="text/javascript">
   $(function(){
     $(`#email-error`).hide();

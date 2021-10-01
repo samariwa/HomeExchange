@@ -117,7 +117,7 @@ if (isset($_REQUEST['submit_button'])) {
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-    <link rel="shortcut icon" type="image/png" sizes="196x196" href="../assets/images/sympha_fresh_white.png" />
+    <link rel="shortcut icon" type="image/png" sizes="196x196" href="../assets/images/home_swap_logo.png" />
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
@@ -143,9 +143,9 @@ if (isset($_REQUEST['submit_button'])) {
 </head>
 <body>	
 	<div class="limiter">
-		<div class="container-login100">
+		<div class="container-login100" style="background-image:url('../assets/images/signup_bg.jpeg');background-repeat: no-repeat;background-size: 1300px 1050px;">
 			<div class="wrap-login100">
-				<div class="login100-form-title" style="background-image:url('../assets/images/auth-bg.jpg')">
+				<div class="login100-form-title" style="background-image:url('../assets/images/signup_auth_bg.jpeg')">
 					<span class="login100-form-title-1">
 						Sign Up
 					</span>
@@ -171,17 +171,17 @@ if (isset($_REQUEST['submit_button'])) {
 					</div>
 
 					<div class="wrap-input100 m-b-20">
-						<span style="color: red;" id="email-error"></span>
-						<span class="label-input100">Email Address</span>
-						<input class="input100" type="email" name="email" id="email" required placeholder="&#xf0e0; christine*****@gmail.com" style="font-family:Arial, FontAwesome">
-						<span class="focus-input100"></span>
-					</div>
-
-					<div class="wrap-input100 m-b-20">
 						<span style="color: red;" id="mobile-error"></span>
 						<span class="label-input100">Mobile Number</span>
 						<input class="input100" type="text" name="mobile" id="mobile" required placeholder="&#xf095; +254 7## ### ###" style="font-family:Arial, FontAwesome">
 						<span class="focus-input100" ></span>
+					</div>
+
+					<div class="wrap-input100 m-b-20">
+						<span style="color: red;" id="email-error"></span>
+						<span class="label-input100">Email Address</span>
+						<input class="input100" type="email" name="email" id="email" required placeholder="&#xf0e0; christine*****@gmail.com" style="font-family:Arial, FontAwesome">
+						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 m-b-20">
@@ -209,13 +209,13 @@ if (isset($_REQUEST['submit_button'])) {
 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" name="submit_button">
-							Register
+							Sign Up
 						</button>
 					</div>
 					<div>
 						<br>
 						
-						<p>Already have an account?&ensp;<a href="<?php echo 'login.php?page_url=../'.$home_url; ?>" style="color: inherit;text-decoration: underline;">Login</a></p>
+						<p>Already have an account?&ensp;<a href="<?php echo 'login.php?page_url=../'.$home_url; ?>" style="color: inherit;text-decoration: underline;">Sign In</a></p>
 					</div>	
 					<div style="margin-top: 20px">
 		                  <!-- Display error -->
