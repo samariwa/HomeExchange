@@ -54,14 +54,16 @@ $sessiontimeout = 60*30;
 
 //client ip address
 $iptocheck = $_SERVER['REMOTE_ADDR'];
-
 //Defining cookies timeout in seconds
 //remember me cookies
 $remember_me_expiry = time()+60*60*7*24;
-//cart cookies
-$cart_expiry = time() +60*60*7*24;
-//wishlistcookies
-$wishlist_expiry = time() +60*60*7*24;
+//favouritescookies
+$favourite_expiry = time() +60*60*7*24;
+
+spl_autoload_register(function($class)
+{
+   require_once 'classes/'.$class.'.php';
+});
 
 ////////////////////////////////////
 //END OF USER CONFIGURATION/////////

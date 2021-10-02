@@ -29,9 +29,9 @@ if (isset($_REQUEST['submit_button'])) {
 	$response = file_get_contents($url, false, $context);
 	$res = json_decode($response, true);
 	if ($res['success'] == true && $res['score'] >= 0.5) {
-
 		//sanitize user inputs
     $first_name = sanitize($_POST["firstname"]);
+	$other_name = sanitize($_POST["othername"]);
     $last_name = sanitize($_POST["lastname"]);
 	$location = sanitize($_POST["location"]);
     $email = sanitize($_POST["email"]);
@@ -40,14 +40,14 @@ if (isset($_REQUEST['submit_button'])) {
     $desired_password1 = sanitize($_POST["pass2"]);
     $random = generateRandomString();
     $hash = password_hash($desired_password, PASSWORD_DEFAULT);
-    if (!($fetch = mysqli_fetch_array(mysqli_query($connection,"SELECT `number` FROM `users` WHERE `number`='$mobile'")))) {
+    if (!($fetch = mysqli_fetch_array(mysqli_query($connection,"SELECT `phone_number` FROM `users` WHERE `phone_number`='$mobile'")))) {
 //no records for this user in the MySQL database
         $usernotduplicate = TRUE;
     } else {
         $usernotduplicate = FALSE;
     }
 
-    if (!($fetch = mysqli_fetch_array(mysqli_query($connection,"SELECT `email` FROM `users` WHERE `email`='$email'")))) {
+    if (!($fetch = mysqli_fetch_array(mysqli_query($connection,"SELECT `email_address` FROM `users` WHERE `email_address`='$email'")))) {
 //no records for this user in the MySQL database
         $usernotduplicate = TRUE;
     } else {
@@ -81,12 +81,7 @@ if (isset($_REQUEST['submit_button'])) {
         && ($passwordvalidate == TRUE)
         ){
 	//Insert details to database
-    mysqli_query($connection,"INSERT INTO `users` (`firstname`,`lastname`,`number`,`email`,`location`,`password`) VALUES ('$first_name','$last_name','$mobile','$email','$location','$hash')") or die(mysqli_error($connection));
-	$customer_fullname = $first_name.' '.$last_name;
-	mysqli_query($connection,"INSERT INTO `customers` (`Name`,`Number`,`Location`,`Status`,`Note`) VALUES ('$customer_fullname','$mobile','$location','clean','Add Note...')") or die(mysqli_error($connection));
-    $result = mysqli_query($connection,"SELECT `id` FROM `users` WHERE `email`='$email'");
-          $row = mysqli_fetch_array($result);
-          $owner_id = $row['id'];
+    mysqli_query($connection,"INSERT INTO `users` (`role_id`,`first_name`,`other_name`,`last_name`,`phone_number`,`email_address`,`physical_address`,`password`) VALUES ('2','$first_name','$other_name','$last_name','$mobile','$email','$location','$hash')") or die(mysqli_error($connection));
         $_SESSION['user'] = $first_name;
         $_SESSION['email'] = $email;
         $random = genRandomSaltString();
@@ -99,8 +94,9 @@ if (isset($_REQUEST['submit_button'])) {
         $_SESSION['logged_in'] = TRUE;
         $_SESSION['LAST_ACTIVITY'] = time();
         if (isset($_SESSION['logged_in'])) {
-            mysqli_query($connection,"UPDATE `users` SET `online` = '1', ipAddress = '$iptocheck' WHERE `email` = '$email'");
+            mysqli_query($connection,"UPDATE `users` SET `online` = '1', ipAddress = '$iptocheck' WHERE `email_address` = '$email'");
         }
+		Session::flash('success', 'You have registered successfully!');
      header("Location: ../$home_url");
      exit;
 	 }
@@ -143,7 +139,7 @@ if (isset($_REQUEST['submit_button'])) {
 </head>
 <body>	
 	<div class="limiter">
-		<div class="container-login100" style="background-image:url('../assets/images/signup_bg.jpeg');background-repeat: no-repeat;background-size: 1300px 1050px;">
+		<div class="container-login100" style="background-image:url('../assets/images/signup_bg.jpeg');background-repeat: no-repeat;background-size: 1300px 1200px;">
 			<div class="wrap-login100">
 				<div class="login100-form-title" style="background-image:url('../assets/images/signup_auth_bg.jpeg')">
 					<span class="login100-form-title-1">
@@ -155,6 +151,12 @@ if (isset($_REQUEST['submit_button'])) {
 					<div class="wrap-input100 m-b-20">
 						<span class="label-input100">First Name</span>
 						<input class="input100" type="text" name="firstname" id="firstname" required placeholder="Christine">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 m-b-20">
+						<span class="label-input100">Other Name</span>
+						<input class="input100" type="text" name="othername" id="othername" required placeholder="Zawadi">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -237,7 +239,7 @@ if (isset($_REQUEST['submit_button'])) {
 			</div>
 		</div>
 	</div>
-	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		$(function(){
 		  $(`#email-error`).hide();
@@ -266,7 +268,6 @@ if (isset($_REQUEST['submit_button'])) {
           
           function check_email(){
           	var email = $(`#email`).val();
-			
           	var where = 'email';
             $.post("verification.php",{email:email,where:where},
               function(result){

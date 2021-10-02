@@ -83,7 +83,7 @@ if (isset($_REQUEST['forgot-button'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->  
-  <link rel="shortcut icon" type="image/png" sizes="196x196" href="../assets/images/sympha_fresh_white.png" />
+  <link rel="shortcut icon" type="image/png" sizes="196x196" href="../assets/images/home_swap_logo.png" />
 <!--===============================================================================================-->
   <link rel="stylesheet" type="text/css" href="../assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
@@ -109,9 +109,9 @@ if (isset($_REQUEST['forgot-button'])) {
     
 </head>
   <div class="limiter">
-    <div class="container-login100">
+    <div class="container-login100" style="background-image:url('../assets/images/forgot_bg.jpeg');background-repeat: no-repeat;background-size: 1300px 800px;">
       <div class="wrap-login100">
-        <div class="login100-form-title" style="background-image:url('../assets/images/auth-bg.jpg')">
+        <div class="login100-form-title" style="background-image:url('../assets/images/forgot_auth_bg.png')">
           <span class="login100-form-title-1">
             Forgot Password
           </span>

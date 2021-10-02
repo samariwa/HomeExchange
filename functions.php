@@ -35,6 +35,10 @@
      $data = mysqli_real_escape_string($connection,$data);
      return $data;
 }
+function shuffleImage($min,$max)
+{
+  return rand($min,$max);
+}
 
 function total_views($connection, $page_id = null)
 {
