@@ -27,14 +27,14 @@ if (isset($_REQUEST['forgot-button'])) {
 	if ($res['success'] == true && $res['score'] >= 0.5) {
    if (isset($_POST['email'])){
       $email = $connection->real_escape_string($_POST['email']);
-      $sql= "SELECT firstname FROM users WHERE email='$email'";
+      $sql= "SELECT first_name FROM users WHERE email_address='$email'";
        $check=mysqli_query($connection,$sql);
        $row = mysqli_fetch_array($check);
       $exists=mysqli_num_rows($check);
-        $name = $row['firstname'];
+        $name = $row['first_name'];
       if ($exists > 0){
         $random = generateRandomString();
-        $reset_link = $protocol.$_SERVER['HTTP_HOST'].'/SymphaFresh/auth/reset.php?email='.$email.'&token='.$random;
+        $reset_link = $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/auth/reset.php?email='.$email.'&token='.$random;
         mysqli_query($connection, "UPDATE users SET token= '$random',tokenExpire=DATE_ADD(NOW(), INTERVAL 5 MINUTE )WHERE email='$email'");
         require_once "PHPMailer/PHPMailer.php";
         require_once "PHPMailer/Exception.php";
@@ -57,8 +57,8 @@ if (isset($_REQUEST['forgot-button'])) {
                 <a href='
                 $reset_link'>Password Reset Link</a><br><br>
                 Kindly reset your password in the given time limit of 5 minutes.<br><br>
-                Kind Regards,
-                Sympha Fresh Limited.
+                Kind Regards,<br>
+                Home Swap.
                 ";
           if($mail -> send()){
             $verified = TRUE;

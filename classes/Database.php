@@ -31,33 +31,33 @@ class Database{
             $x = 1;
             foreach($fields as $field)
             {
-                $values .= "?";
+                $values .= $field;
                 if($x < count($fields))
                 {
-                    $values .= ', ';
+                    $values .= "', '";
                 }
                 $x++;
             }
 
-            return "INSERT INTO users (`".implode('`,`',$keys)."`) VALUES ({$values})";
+            return "INSERT INTO {$table} (`".implode('`,`',$keys)."`) VALUES ('{$values}')";
         }
         return false;
     }
 
-    public function update($table, $id, $fields)
+    public function update($table, $condition , $val, $fields)
     {
         $set = '';
         $x = 1;
         foreach($fields as $name => $value)
         {
-            $set .= "{$name} = ?";
+            $set .= "{$name} = '{$value}'";
             if($x < count($fields))
             {
                 $set .= ', ';
             }
             $x++;
         }
-        return "UPDATE {$table} SET {$set} WHERE id = {$id}";
+        return "UPDATE {$table} SET {$set} WHERE {$condition} = {$val}";
     }
 
     public function delete($table, $where)

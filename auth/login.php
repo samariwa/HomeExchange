@@ -38,10 +38,10 @@ if (isset($_SESSION['logged_in'])) {
     }
     else{
       $logged_in_email = $_SESSION['email'];
-      $session_access = mysqli_query($connection,"SELECT * FROM `users` WHERE `email`='$logged_in_email'");
+      $session_access = mysqli_query($connection,"SELECT * FROM `users` WHERE `email_address`='$logged_in_email'");
         $row = mysqli_fetch_array($session_access);
-        $access = $row['access'];
-      if($access == 'customer'){
+        $access = $row['role_id'];
+      if($access == '2'){
         header("Location: ../$home_url"); 
         exit();
       }else{
@@ -94,98 +94,55 @@ if ((isset($_POST["pass"])) && (isset($_POST["email"])) && ($_SESSION['logged_in
 
     $email = sanitize($_POST["email"]);
     $pass = sanitize($_POST["pass"]);
-    $Name = mysqli_query($connection,"SELECT * FROM `users` WHERE `email`='$email'");
+    $Name = mysqli_query($connection,"SELECT * FROM `users` WHERE `email_address`='$email'");
         $row = mysqli_fetch_array($Name);
-        $identity = $row['firstname'];
+        $identity = $row['first_name'];
         $user_id = $row['id'];
-        $user_email = $row['email'];
-        $access = $row['access'];
-        $roleSession = mysqli_query($connection,"SELECT jobs.Name as Name FROM `users` inner join jobs on users.Job_id = jobs.id WHERE `email`='$user_email'");
+        $user_email = $row['email_address'];
+        $access = $row['role_id'];
+        $roleSession = mysqli_query($connection,"SELECT roles.role_name as Name FROM `roles` inner join users on users.role_id = roles.id WHERE users.email_address='$user_email'");
         $row5 = mysqli_fetch_array($roleSession);
         $role = $row5['Name'];      
      $_SESSION['role'] = $role;
     $_SESSION['user'] = $identity;
     $_SESSION['email'] = $user_email;
 //validate email
-    if (!($fetch = mysqli_fetch_array(mysqli_query($connection,"SELECT `email` FROM `users` WHERE `email`='$email'")))) {
+    if (!($fetch = mysqli_fetch_array(mysqli_query($connection,"SELECT `email_address` FROM `users` WHERE `email_address`='$email'")))) {
 //no records of email in database
 //user is not yet registered
         $registered = FALSE;
     }
    
 //u is registered in database, now get the hashed password    
-    $result = mysqli_query($connection,"SELECT `password` FROM `users` WHERE `email`='$email'");
+    $result = mysqli_query($connection,"SELECT `password` FROM `users` WHERE `email_address`='$email'");
         $row = mysqli_fetch_array($result);
         $correctpassword = $row['password'];
     if (!password_verify($pass, $correctpassword) || ($registered == FALSE)) {
-    
            $validationresults = FALSE;
-              $result1 = mysqli_query($connection,"SELECT `loginattempt` FROM `users` WHERE `email`='$email'");
+              $result1 = mysqli_query($connection,"SELECT `loginattempt` FROM `users` WHERE `email_address`='$email'");
               $row = mysqli_fetch_array($result1);
               $loginattempts_email = $row['loginattempt'];
             $loginattempts_email = $loginattempts_email + 1;
             $loginattempts_email = intval($loginattempts_email);
 //update login attempt records
          
-            mysqli_query($connection,"UPDATE `users` SET `loginattempt` = '$loginattempts_email' WHERE `email` = '$email'"); 
+            mysqli_query($connection,"UPDATE `users` SET `loginattempt` = '$loginattempts_email' WHERE `email_address` = '$email'"); 
      
     } 
     else {
     	//remember me functionality
-        $rem = sanitize($_POST["remember"]);
-        if(isset($rem)){
-        setcookie('email', $email, $remember_me_expiry);
-        setcookie('pass', $pass, $remember_me_expiry);
-        }
-        else{
-        	if(isset($_COOKIE['email']))
-        	{
-        		setcookie('email','');
-        	}
-        	if(isset($_COOKIE['pass']))
-        	{
-        		setcookie('pass','');
-        	}
-        }
+      $rem = sanitize($_POST['remember']);
 
-//user successfully authenticates with the provided email address and password
-//Reset login attempts for a specific email address to 0 as well as the ip address
+      //Generate unique signature of the user based on IP address
+      //and the browser then append it to session
+      //This will be used to authenticate the user session
+      //To make sure it belongs to an authorized user and not to anyone else.
+      //generate random hash
+      $random = genRandomSaltString();
 
-        $loginattempts_email = 0;
-        $loginattempts_total = 0;
-        $loginattempts_email = intval($loginattempts_email);
-        $loginattempts_total = intval($loginattempts_total);
-        mysqli_query($connection,"UPDATE `users` SET `loginattempt` = '$loginattempts_email' WHERE `email` = '$email'");
-        //mysqli_query("UPDATE `ipcheck` SET `failedattempts` = '$loginattempts_total' WHERE `loggedip` = '$iptocheck'");
-
-//Generate unique signature of the user based on IP address
-//and the browser then append it to session
-//This will be used to authenticate the user session
-//To make sure it belongs to an authorized user and not to anyone else.
-//generate random hash
-        $random = genRandomSaltString();
-        $salt_ip = substr($random, 0, $length_salt);
-
-//hash the ip address, user-agent and the salt
-        $hash_user = sha1($salt_ip . $iptocheck . $useragent);
-
-//concatenate the salt and the hash to form a signature
-        $signature = $salt_ip . $hash_user;
-
-//Regenerate session id prior to setting any session variable
-//to mitigate session fixation attacks
-        session_regenerate_id();
-
-       
-//Finally store user unique signature in the session
-//and set logged_in to TRUE as well as start activity time
-        $_SESSION['signature'] = $signature;
-        $_SESSION['logged_in'] = TRUE;
-        $_SESSION['LAST_ACTIVITY'] = time();
-        if (isset($_SESSION['logged_in'])) {
-          mysqli_query($connection,"INSERT INTO `logged_devices` (`user`,`ip_address`,`browser/device`) VALUES ('$user_id','$iptocheck','$useragent')");
-        }
-        
+      $user = new User();
+ 	    $user->login($connection, $rem, $random, $user_id, $email, $iptocheck, $useragent);
+             
     }
 }
 }
@@ -378,19 +335,16 @@ if (!$_SESSION['logged_in']):
 <?php
 else:
 	//redirect to dashboard
-  if($access == 'customer'){
+  if($access == '2'){
     $redirect_page = $_REQUEST['page_url'];
     if($redirect_link == ''){
-      header("Location: ../$home_url"); 
-      exit();
+      Redirect::to("../".$home_url);
     }
     else{
-      header("Location: $redirect_page"); 
-    exit();
+    Redirect::to($redirect_page); 
     }
   }else{
-    header("Location: ../$admin_url"); 
-    exit();
+    Redirect::to("../".$admin_url);
   }
 endif;
 ?>

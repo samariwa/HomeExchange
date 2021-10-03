@@ -11,6 +11,7 @@ $usernotduplicate = TRUE;
 $passwordnotempty = TRUE;
 $passwordvalidate = TRUE;
 $passwordmatch  = TRUE;
+$query = new Database();
 if (isset($_REQUEST['submit_button'])) {
 	$url = $token_verification_site;
 	$data = [
@@ -40,14 +41,14 @@ if (isset($_REQUEST['submit_button'])) {
     $desired_password1 = sanitize($_POST["pass2"]);
     $random = generateRandomString();
     $hash = password_hash($desired_password, PASSWORD_DEFAULT);
-    if (!($fetch = mysqli_fetch_array(mysqli_query($connection,"SELECT `phone_number` FROM `users` WHERE `phone_number`='$mobile'")))) {
+    if (!($fetch = mysqli_fetch_array(mysqli_query($connection,$query->get("users","phone_number", array('phone_number','=',$mobile)))))) {
 //no records for this user in the MySQL database
         $usernotduplicate = TRUE;
     } else {
         $usernotduplicate = FALSE;
     }
-
-    if (!($fetch = mysqli_fetch_array(mysqli_query($connection,"SELECT `email_address` FROM `users` WHERE `email_address`='$email'")))) {
+	
+    if (!($fetch = mysqli_fetch_array(mysqli_query($connection,$query->get("users","email_address", array('email_address','=',$email)))))) {
 //no records for this user in the MySQL database
         $usernotduplicate = TRUE;
     } else {
@@ -81,7 +82,8 @@ if (isset($_REQUEST['submit_button'])) {
         && ($passwordvalidate == TRUE)
         ){
 	//Insert details to database
-    mysqli_query($connection,"INSERT INTO `users` (`role_id`,`first_name`,`other_name`,`last_name`,`phone_number`,`email_address`,`physical_address`,`password`) VALUES ('2','$first_name','$other_name','$last_name','$mobile','$email','$location','$hash')") or die(mysqli_error($connection));
+	 $user = new User();
+	 $user->create($connection, array('role_id' => '2','first_name' => $first_name,'other_name' => $other_name,'last_name' => $last_name,'phone_number' => $mobile,'email_address' => $email,'physical_address' => $location,'password' => $hash));
         $_SESSION['user'] = $first_name;
         $_SESSION['email'] = $email;
         $random = genRandomSaltString();
@@ -94,10 +96,10 @@ if (isset($_REQUEST['submit_button'])) {
         $_SESSION['logged_in'] = TRUE;
         $_SESSION['LAST_ACTIVITY'] = time();
         if (isset($_SESSION['logged_in'])) {
-            mysqli_query($connection,"UPDATE `users` SET `online` = '1', ipAddress = '$iptocheck' WHERE `email_address` = '$email'");
+            mysqli_query($connection,$query->update("users", "email_address", $email, array('online' => '1','ipAddress' => $iptocheck)));
         }
-		Session::flash('success', 'You have registered successfully!');
-     header("Location: ../$home_url");
+		SessionManager::flash('success', 'You have registered successfully!');
+		Redirect::to("../".$home_url);
      exit;
 	 }
 	}
