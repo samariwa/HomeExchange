@@ -57,7 +57,7 @@ class Database{
             }
             $x++;
         }
-        return "UPDATE {$table} SET {$set} WHERE {$condition} = {$val}";
+        return "UPDATE {$table} SET {$set} WHERE {$condition} = '{$val}'";
     }
 
     public function delete($table, $where)

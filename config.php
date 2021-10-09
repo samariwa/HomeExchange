@@ -19,13 +19,13 @@ $authenticator_password = 'Kenya.2030';
 $mail_host = "smtp.gmail.com";
 
 //site primary contact number
-$contact_number = "+254 797 233 726";
+$contact_number = "+254 7XX XXX XXX";
 
 //business physical address
 $physical_address = "This address";
 
 //Defining organization details
-$organization = 'Home Swap';
+$organization = 'Holiday Swap';
 $mission = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur quibusdam enim expedita sed nesciunt incidunt accusamus adipisci officia libero laboriosam! Proin gravida nibh vel velit auctor aliquet. nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vultate cursus a sit amet mauris. Duis sed odio sit amet nibh vultate cursus a sit amet mauris.';
 $vision = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur quibusdam enim expedita sed nesciunt incidunt accusamus adipisci officia libero laboriosam! Proin gravida nibh vel velit auctor aliquet. nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vultate cursus a sit amet mauris. Duis sed odio sit amet nibh vultate cursus a sit amet mauris.';
 $purpose = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur quibusdam enim expedita sed nesciunt incidunt accusamus adipisci officia libero laboriosam! Proin gravida nibh vel velit auctor aliquet. nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vultate cursus a sit amet mauris. Duis sed odio sit amet nibh vultate cursus a sit amet mauris.';
@@ -75,6 +75,7 @@ or die("Unable to connect to Server");
 $login_url = 'auth/login.php';
 $logout_url = 'auth/logout.php';
 $home_url = 'index.php';
+$dashboard_url = 'dashboard.php';
 $admin_url = 'admin/dashboard.php';
 $protocol = $_SERVER['SERVER_PROTOCOL'];
 if(strpos($protocol, "https"))
@@ -85,5 +86,7 @@ else
 {
     $protocol="http://";
 }
+$home_link = $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange';
+$dashboard_link = $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/'.$dashboard_url;
 $redirect_link = $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 ?>

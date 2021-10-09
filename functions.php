@@ -142,6 +142,38 @@ function getStringBetween($str,$from,$to)
     return substr($sub,0,strpos($sub,$to));
 }
 
+function rate($val)
+{
+  $max = 5;
+  $min = 0;
+  $stars ='';
+  $i = 1;
+  $j = 1;
+  if( $val == $max)
+  {
+     while($i < 5)
+     {
+       $stars .= '<i class="fas fa-star"></i>';
+       $i++;
+     }
+  }
+  if($val >= $min || $val < $max)
+  {
+    $diff = $max-$val;
+     while($i<=$val)
+     {
+      $stars .= '<i class="fas fa-star"></i>';
+      $i++;
+     }
+     while($j<=$diff)
+     {
+      $stars .= '<i class="far fa-star"></i>';
+      $j++;
+     }
+  }
+   echo $stars;
+}
+
 function text_limit($x, $length)
 {
   if(strlen($x)<=$length)

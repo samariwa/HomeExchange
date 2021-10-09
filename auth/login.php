@@ -7,12 +7,14 @@ session_start();
 //require user configuration and database connection parameters
 require('../config.php');
 require_once "../functions.php";
-if (isset($_SESSION['logged_in'])) {
-	if ($_SESSION['logged_in'] == TRUE) {
+$query = new Database();
+$session = new SessionManager();
+if ($session->exists('logged_in')) {
+	if ($session->get('logged_in') == TRUE) {
 //valid user has logged-in to the website
 //Check for unauthorized use of user sessions
-    mysqli_query($connection,"UPDATE `users` SET `on` = '1' WHERE `email` = '$email'");
-    $signaturerecreate = $_SESSION['signature'];
+mysqli_query($connection,$query->update("users", "email_address", $email, array('online' => '1')));
+    $signaturerecreate = $session->get('signature');
 
 //Extract original salt from authorized signature
 
@@ -33,31 +35,27 @@ if (isset($_SESSION['logged_in'])) {
 //authorized signature
 //This is unauthorized access
 //Block it
-        header("Location: ../$logout_url?page_url=<?php echo $redirect_link; ?>");
+        Redirect::to("../$logout_url?page_url=<?php echo $redirect_link; ?>");
         exit;
     }
     else{
-      $logged_in_email = $_SESSION['email'];
-      $session_access = mysqli_query($connection,"SELECT * FROM `users` WHERE `email_address`='$logged_in_email'");
-        $row = mysqli_fetch_array($session_access);
+      $logged_in_email = $session->get('email');
+        $row = mysqli_fetch_array(mysqli_query($connection,$query->get("users","*", array('email_address','=',$logged_in_email))));
         $access = $row['role_id'];
       if($access == '2'){
-        header("Location: ../$home_url"); 
-        exit();
+        Redirect::to("../$dashboard_url");
       }else{
-        header("Location: ../$admin_url"); 
-        exit();
+        Redirect::to("../$admin_url");
       }
     }
 
 //Session Lifetime control for inactivity
 
-    if ((isset($_SESSION['LAST_ACTIVITY'])) && (time() - $_SESSION['LAST_ACTIVITY'] > $sessiontimeout)) {
+    if (( $session->exists('LAST_ACTIVITY')) && (time() - $session->get('LAST_ACTIVITY') > $sessiontimeout)) {
 //redirect the user back to login page for re-authentication
-         header("Location: ../$logout_url?page_url=<?php echo $redirect_link; ?>");
-        exit;
+      Redirect::to("../$logout_url?page_url=<?php echo $home_link; ?>");
     }
-    $_SESSION['LAST_ACTIVITY'] = time();
+    $session->put('LAST_ACTIVITY', time());
 }
 }
 //Pre-define validation
@@ -65,8 +63,8 @@ $validationresults = TRUE;
 $registered = TRUE;
 $botDetect = FALSE;
 //Check if a user has logged-in
-if (!isset($_SESSION['logged_in'])) {
-    $_SESSION['logged_in'] = FALSE;
+if (!$session->exists('logged_in')) {
+    $session->put('logged_in', FALSE);
 }
 if(isset($_REQUEST['login-button'])){
   $url = $token_verification_site;
@@ -87,15 +85,15 @@ if(isset($_REQUEST['login-button'])){
 	$res = json_decode($response, true);
 	if ($res['success'] == true && $res['score'] >= 0.5) {
 //Check if the form is submitted
-if ((isset($_POST["pass"])) && (isset($_POST["email"])) && ($_SESSION['logged_in'] == FALSE)) {
+if ((isset($_POST["pass"])) && (isset($_POST["email"])) && (!$session->get('logged_in'))) {
 //Email and password has been submitted by the user
 //Receive and sanitize the submitted information
 
 
     $email = sanitize($_POST["email"]);
     $pass = sanitize($_POST["pass"]);
-    $Name = mysqli_query($connection,"SELECT * FROM `users` WHERE `email_address`='$email'");
-        $row = mysqli_fetch_array($Name);
+    
+        $row = mysqli_fetch_array(mysqli_query($connection,$query->get("users","*", array('email_address','=',$email))));
         $identity = $row['first_name'];
         $user_id = $row['id'];
         $user_email = $row['email_address'];
@@ -107,27 +105,24 @@ if ((isset($_POST["pass"])) && (isset($_POST["email"])) && ($_SESSION['logged_in
     $_SESSION['user'] = $identity;
     $_SESSION['email'] = $user_email;
 //validate email
-    if (!($fetch = mysqli_fetch_array(mysqli_query($connection,"SELECT `email_address` FROM `users` WHERE `email_address`='$email'")))) {
+    if (!($fetch = mysqli_fetch_array(mysqli_query($connection,$query->get("users","email_address", array('email_address','=',$email)))))) {
 //no records of email in database
 //user is not yet registered
         $registered = FALSE;
     }
    
 //u is registered in database, now get the hashed password    
-    $result = mysqli_query($connection,"SELECT `password` FROM `users` WHERE `email_address`='$email'");
-        $row = mysqli_fetch_array($result);
+        $row = mysqli_fetch_array(mysqli_query($connection,$query->get("users","password", array('email_address','=',$email))));
         $correctpassword = $row['password'];
     if (!password_verify($pass, $correctpassword) || ($registered == FALSE)) {
            $validationresults = FALSE;
-              $result1 = mysqli_query($connection,"SELECT `loginattempt` FROM `users` WHERE `email_address`='$email'");
-              $row = mysqli_fetch_array($result1);
+
+              $row = mysqli_fetch_array(mysqli_query($connection,$query->get("users","loginattempt", array('email_address','=',$email))));
               $loginattempts_email = $row['loginattempt'];
             $loginattempts_email = $loginattempts_email + 1;
             $loginattempts_email = intval($loginattempts_email);
 //update login attempt records
-         
-            mysqli_query($connection,"UPDATE `users` SET `loginattempt` = '$loginattempts_email' WHERE `email_address` = '$email'"); 
-     
+mysqli_query($connection,$query->update("users", "email_address", $email, array('loginattempt' => $loginattempts_email)));
     } 
     else {
     	//remember me functionality
@@ -141,8 +136,7 @@ if ((isset($_POST["pass"])) && (isset($_POST["email"])) && ($_SESSION['logged_in
       $random = genRandomSaltString();
 
       $user = new User();
- 	    $user->login($connection, $rem, $random, $user_id, $email, $iptocheck, $useragent);
-             
+ 	    $user->login($connection, $rem, $random, $user_id, $email,$pass, $remember_me_expiry, $length_salt, $iptocheck, $useragent);  
     }
 }
 }
@@ -150,7 +144,7 @@ else{
   $botDetect = TRUE;
 }
 }
-if (!$_SESSION['logged_in']):
+if (!$session->get('logged_in')):
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -338,7 +332,7 @@ else:
   if($access == '2'){
     $redirect_page = $_REQUEST['page_url'];
     if($redirect_link == ''){
-      Redirect::to("../".$home_url);
+      Redirect::to("../".$dashboard_url);
     }
     else{
     Redirect::to($redirect_page); 

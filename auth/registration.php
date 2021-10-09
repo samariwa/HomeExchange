@@ -99,7 +99,7 @@ if (isset($_REQUEST['submit_button'])) {
             mysqli_query($connection,$query->update("users", "email_address", $email, array('online' => '1','ipAddress' => $iptocheck)));
         }
 		SessionManager::flash('success', 'You have registered successfully!');
-		Redirect::to("../".$home_url);
+		Redirect::to("../".$dashboard_url);
      exit;
 	 }
 	}
@@ -219,7 +219,7 @@ if (isset($_REQUEST['submit_button'])) {
 					<div>
 						<br>
 						
-						<p>Already have an account?&ensp;<a href="<?php echo 'login.php?page_url=../'.$home_url; ?>" style="color: inherit;text-decoration: underline;">Sign In</a></p>
+						<p>Already have an account?&ensp;<a href="<?php echo 'login.php?page_url=../'.$dashboard_url; ?>" style="color: inherit;text-decoration: underline;">Sign In</a></p>
 					</div>	
 					<div style="margin-top: 20px">
 		                  <!-- Display error -->

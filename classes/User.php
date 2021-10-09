@@ -7,9 +7,11 @@ class User{
         mysqli_query($connection,$db->insert("users", $fields)) or die(mysqli_error($connection));
     }
 
-    public function login($connection, $remember, $random,$user_id,$email,$iptocheck,$useragent)
+    public function login($connection, $remember, $random, $user_id, $email, $pass, $remember_me_expiry, $length_salt, $iptocheck, $useragent)
     {
         $db = new Database();
+        $session = new SessionManager();
+        $cookie = new CookieManager();
          //user successfully authenticates with the provided email address and password
         //Reset login attempts for a specific email address to 0 as well as the ip address
       $loginattempts_email = 0;
@@ -29,34 +31,33 @@ class User{
       //to mitigate session fixation attacks
       session_regenerate_id();
 
-      if(isset($rem)){
-        setcookie('email', $email, $remember_me_expiry);
-        setcookie('pass', $pass, $remember_me_expiry);
+      if(isset($remember)){
+        $cookie->put('email',$email, $remember_me_expiry);
+        $cookie->put('pass',$pass, $remember_me_expiry);
         }
         else{
-        	if(isset($_COOKIE['email']))
+        	if($cookie->exists('email'))
         	{
-        		setcookie('email','');
+                $cookie->empty('email');
         	}
-        	if(isset($_COOKIE['pass']))
+        	if($cookie->exists('pass'))
         	{
-        		setcookie('pass','');
+        		$cookie->empty('pass');
         	}
         }
 
-
-        mysqli_query($connection,"UPDATE `users` SET `loginattempt` = '$loginattempts_email' WHERE `email_address` = '$email'");
-        //mysqli_query("UPDATE `ipcheck` SET `failedattempts` = '$loginattempts_total' WHERE `loggedip` = '$iptocheck'");
-
+        mysqli_query($connection,$db->update("users", "email_address", $email, array('loginattempt' => $loginattempts_email))) or die(mysqli_error($connection));
 
        
 //Finally store user unique signature in the session
 //and set logged_in to TRUE as well as start activity time
-        $_SESSION['signature'] = $signature;
-        $_SESSION['logged_in'] = TRUE;
-        $_SESSION['LAST_ACTIVITY'] = time();
-        if (isset($_SESSION['logged_in'])) {
-          mysqli_query($connection,"INSERT INTO `logged_devices` (`user`,`ip_address`,`browser/device`) VALUES ('$user_id','$iptocheck','$useragent')");
+         $session->put('signature', $signature);
+         $session->put('logged_in', TRUE);
+         $session->put('LAST_ACTIVITY', time());
+
+        if ($session->exists('logged_in'))
+        {
+            mysqli_query($connection,$db->insert("logged_devices", array('user_id' => $user_id, 'ip_address' => $iptocheck, 'browser/device' => $useragent))) or die(mysqli_error($connection));
         }
     }
 }

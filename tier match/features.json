@@ -1,0 +1,21 @@
+{
+    "features": [
+        {
+            "swimming" : 1,
+            "gym" : 0,
+            "workers" : 1,
+            "garden" : 1,
+            "home_type" : 0,
+            "security" : 1,
+            "kids" : 1,
+            "wheelchair" : 0,
+            "parking" : 1,
+            "wifi" : 1,
+            "tv" : 1,
+            "ac" : 1,
+            "residence_type" : 1,
+            "smokers" : 0,
+            "pets" : 1 
+        }
+    ]
+}

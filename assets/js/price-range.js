@@ -2382,7 +2382,7 @@ $(function() {
         $inputTo = $(".js-input-to"),
         instance,
         min = 0,
-        max = 2000,
+        max = 5,
         from = 0,
         to = 0;
 
@@ -2392,10 +2392,10 @@ $(function() {
         max: max,
         from: 0,
         to: 3000,
-        prefix: 'Ksh.',
+        prefix: '',
         onStart: updateInputs,
         onChange: updateInputs,
-        step: 100,
+        step: 1,
         prettify_enabled: true,
         prettify_separator: ".",
         values_separator: " - ",

@@ -5,6 +5,7 @@ $passwordnotempty = TRUE;
 $passwordvalidate = TRUE;
 $passwordmatch  = TRUE;
 $botDetect = FALSE;
+$query = new Database();
 if (isset($_REQUEST['reset_button'])) {
 	$url = $token_verification_site;
 	$data = [
@@ -26,9 +27,7 @@ if (isset($_REQUEST['reset_button'])) {
    if (isset($_GET['email']) && isset($_GET['token'])){
       $email = $connection->real_escape_string($_GET['email']);
       $token = $connection->real_escape_string($_GET['token']);
-      $sql = "SELECT number FROM users WHERE email='$email' AND token='$token' AND tokenExpire > NOW()";
-      $check=mysqli_query($connection,$sql);
-      $exists=mysqli_num_rows($check);
+      $exists=mysqli_num_rows(mysqli_query($connection,"SELECT number FROM users WHERE email='$email' AND token='$token' AND tokenExpire > NOW()"));
       if($exists > 0){
          if ((isset($_POST["pass"])) &&  (isset($_POST["pass2"]))) {
          $desired_password = sanitize($_POST["pass"]);
@@ -57,7 +56,7 @@ if (isset($_REQUEST['reset_button'])) {
         
              if(($passwordnotempty == TRUE) && ($passwordnotempty1 == TRUE) && ($passwordmatch == TRUE)){
                  $hash = password_hash($desired_password, PASSWORD_DEFAULT);
-                 mysqli_query($connection, "UPDATE users SET password= '$hash' WHERE email='$email'");
+                 mysqli_query($connection,$query->update("users", "email_address", $email, array('password' => $hash))) or die(mysqli_error($connection));
                  //redirect to login page
                  echo '<script type="text/javascript">
                 alert("Your password reset was successfull!");

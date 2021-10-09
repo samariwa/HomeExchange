@@ -3,6 +3,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 require_once "../functions.php";
 require('../config.php');
+$query = new Database();
 $verified = FALSE;
 $no_Error = TRUE;
 $exists = TRUE;
@@ -27,8 +28,7 @@ if (isset($_REQUEST['forgot-button'])) {
 	if ($res['success'] == true && $res['score'] >= 0.5) {
    if (isset($_POST['email'])){
       $email = $connection->real_escape_string($_POST['email']);
-      $sql= "SELECT first_name FROM users WHERE email_address='$email'";
-       $check=mysqli_query($connection,$sql);
+      $check=mysqli_query($connection,$query->get("users","first_name", array('email_address','=',$email)));
        $row = mysqli_fetch_array($check);
       $exists=mysqli_num_rows($check);
         $name = $row['first_name'];
