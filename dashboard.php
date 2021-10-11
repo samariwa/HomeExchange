@@ -23,7 +23,7 @@ include('header.php');
                     </div>
                     <div class="col-sm-6">
                         <div class="card" style="border-radius:3%;border-bottom: 3px solid #FD5555;">
-                            <a href="#">
+                            <a href="holiday-requirements.php">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm-3 mt-4">

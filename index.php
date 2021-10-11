@@ -242,7 +242,7 @@
                                 <div class="container">
                                     <div class="banner-content text-center text-lg-left">
                                         <h6 style="color: rgb(77, 72, 72);">Lorem Ipsum</h6>
-                                        <h3>Get your next magical experience<br>anywhere, anytime, at a low cost.</h3>
+                                        <h3 style="color: black;">Get your next magical experience<br>anywhere, anytime, at a low cost.</h3>
                                         <a href="auth/registration.php" class="banner-btn">Sign up for free</a>
                                     </div>
                                 </div>
@@ -255,7 +255,7 @@
                                 <div class="container">
                                     <div class="banner-content text-center">
                                         <h6 style="color: rgb(77, 72, 72);">Lorem Ipsum</h6>
-                                        <h3>Get your next magical experience<br>anywhere, anytime, at a low cost.</h3>
+                                        <h3 style="color: black;">Get your next magical experience<br>anywhere, anytime, at a low cost.</h3>
                                         <a href="auth/registration.php" class="banner-btn">Sign up for free</a>
                                     </div>
                                 </div>
@@ -268,7 +268,7 @@
                                 <div class="container">
                                     <div class="banner-content text-center text-lg-left">
                                         <h6 style="color: rgb(77, 72, 72);">Lorem Ipsum</h6>
-                                        <h3>Get your next magical experience<br>anywhere, anytime, at a low cost.</h3>
+                                        <h3 style="color: black;">Get your next magical experience<br>anywhere, anytime, at a low cost.</h3>
                                         <a href="auth/registration.php" class="banner-btn">Sign up for free</a>
                                     </div>
                                 </div>
@@ -283,15 +283,15 @@
             <section class="catagory-section homepage-stats">
                 <div class="container col-md-12 p-lg-0 row">
                    <div class="col-md-4 text-center">
-                        <i class="fas fa-home fa-3x"></i>
+                        <i class="fas fa-home fa-3x" style="color: #BDBBBB;"></i>
                         <h6>2,694 Homes</h6>
                    </div>
                    <div class="col-md-4 text-center">
-                       <i class="fas fa-exchange-alt fa-3x"></i>
+                       <i class="fas fa-exchange-alt fa-3x" style="color: #BDBBBB;"></i>
                         <h6>1,074 Swaps</h6>
                    </div>
                    <div class="col-md-4 text-center">
-                        <i class="fa fa-user-friends fa-3x"></i>
+                        <i class="fa fa-user-friends fa-3x" style="color: #BDBBBB;"></i>
                         <h6>3,000 Customers</h6>
                    </div>
                 </div>

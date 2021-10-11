@@ -86,13 +86,13 @@
                             <div class="card-body">
                                 <h5 class="card-title">Home Owner</h5>
                                 <br>
-                                <h6 class="card-subtitle mb-2 text-muted">XXX Name</h6>
+                                <h6 class="card-subtitle mb-2">XXX Name</h6>
                                 <br><br>
-                                <h6 class="card-subtitle mb-2 text-muted">12 Exchanges</h6>
+                                <h6 class="card-subtitle mb-2">12 Exchanges</h6>
                                 <br><br>
-                                <h6 class="card-subtitle mb-2 text-muted">Ratings <?php rate(4) ?></h6>
+                                <h6 class="card-subtitle mb-2">Ratings <?php rate(4) ?></h6>
                                 <br><br>
-                                <h6 class="card-subtitle mb-2 text-muted text-center"><i class="fas fa-phone"></i> 07XX XXX XXX</h6>
+                                <h6 class="card-subtitle mb-2 text-center"><i class="fas fa-phone"></i> 07XX XXX XXX</h6>
                                 <br>
                                 <div class="text-center">
                                     <div class="home-owner-contact">
@@ -109,7 +109,7 @@
             <section class="catagory-section  mt-n5">
                 <div class="container col-12 p-lg-0 home-dash-features row">
                    <div class="col-3 text-center">
-                        <i class="fas fa-home fa-3x"></i>
+                        <i class="fas fa-home fa-3x" style="color: #BDBBBB;"></i>
                         <h6>Bungalow</h6>
                    </div>
                    <div class="col-3 text-center">
