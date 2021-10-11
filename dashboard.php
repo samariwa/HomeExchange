@@ -107,8 +107,8 @@ include('header.php');
                                             </a>
                                             </div>
                                             <div class="product-content">
-                                            <a href="#" class="cata">Tier 3</a>
-                                            <h6><a href="#" class="product-title">XXX's Home</a></h6>
+                                            <a href="home-dashboard.php" class="cata">Tier 3</a>
+                                            <h6><a href="home-dashboard.php" class="product-title">XXX's Home</a></h6>
                                             <p class="quantity">Likoni</p>
                                             <div class="d-flex justify-content-between align-items-center">
                                             <div class="price">Ratings</div><?php rate(3); ?>                        

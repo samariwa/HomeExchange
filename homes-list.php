@@ -7,7 +7,7 @@
                     <div class="row">
                         <div class="col-12 d-flex justify-content-between justify-content-md-end">
                             <ul class="breadcrumb">
-                                <li><a href="index.php">Home</a></li>
+                                <li><a href="dashboard.php">Dashboard</a></li>
                                 <li><span>/</span></li>
                                 <li>Homes List</li>
                             </ul>
@@ -142,8 +142,8 @@
                                             </a>
                                         </div>
                                         <div class="product-content">
-                                            <a href="#" class="cata" id="itemCategory<?php //echo $row['id']; ?>">Tier 1</a>
-                                            <h6><a href="product-detail.php" class="product-title">YYY's Home</a></h6>
+                                            <a href="home-dashboard.php" class="cata" id="itemCategory<?php //echo $row['id']; ?>">Tier 1</a>
+                                            <h6><a href="home-dashboard.php" class="product-title">YYY's Home</a></h6>
                                             <p class="quantity">Nanyuki</p>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="price">Ratings</div><?php rate(5); ?>
@@ -166,7 +166,7 @@
                                             <a ><img src="assets/images/homes/home1.jpeg" alt="product"></a>
                                             <span class="batch sale">In 2 days</span>
                                             <a class="wish-link"
-                                            href="<?php echo $protocol.$_SERVER['HTTP_HOST'].'/SymphaFresh/index.php?action=add_wishlist&id='.$row['id'] ?>">
+                                            href="<?php echo $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/index.php?action=add_wishlist&id='.$row['id'] ?>">
                                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="svg-inline--fa fa-heart fa-w-16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path
                                                 <?php
                                                 //if($item_in_wishlist == true){
@@ -181,8 +181,8 @@
                                              </a>
                                     </div>
                                     <div class="product-content">
-                                    <a href="#" class="cata">Tier 3</a>
-                                    <h6><a href="#" class="product-title">XXX's Home</a></h6>
+                                    <a href="home-dashboard.php" class="cata">Tier 3</a>
+                                    <h6><a href="home-dashboard.php" class="product-title">XXX's Home</a></h6>
                                     <p class="quantity">Likoni</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                     <div class="price">Ratings</div><?php rate(3); ?>                        

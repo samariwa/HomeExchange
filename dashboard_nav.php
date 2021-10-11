@@ -94,8 +94,8 @@ require('config.php');
                     <ul class="menu d-xl-flex flex-wrap list-unstyled">
                         <li class="item-has-children" ><a href="#"><i class="fas fa-question-circle"></i> Help & More<i class="fas fa-angle-down"></i></a>
                         <ul class="submenu">
-                                <li><a href="about.php#who_we_are">How it works</a></li>
-                                <li><a href="about.php#mission&vision">Contact Us</a></li>
+                                <li><a href="#">How it works</a></li>
+                                <li><a href="contact.php">Contact Us</a></li>
                                 <li><a href="faq.php">FAQs</a></li>
                         </ul>  
                         </li>      

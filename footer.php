@@ -65,11 +65,10 @@
 
                             <div class="col-md-6 col-lg-3">
                                 <div class="footer-widget">
-                                    <h5 class="footer-title">Get to know us</h5>
+                                    <h5 class="footer-title">Get to know more</h5>
                                     <div class="widget-wrapper">
                                         <ul>
-                                        <li><a href="about.php#who_we_are">Who We Are</a></li>
-                                        <li><a href="about.php#mission&vision">Mission and Vision</a></li>
+                                        <li><a href="about.php#who_we_are">How it works</a></li>
                                         <li><a href="faq.php">FAQs</a></li>
                                         <li><a href="privacy-policy.php">Privacy policy</a></li>
                                         <li><a href="cookie-policy.php">Cookies</a></li>
@@ -83,8 +82,7 @@
                                     <h5 class="footer-title">Useful Links</h5>
                                     <div class="widget-wrapper">
                                         <ul>
-                                            <li><a href="product-list.php">Our Products</a></li>
-                                            <li><a href="blog.php">Blog</a></li>
+                                            <li><a href="homes-list.php">Homes List</a></li>
                                             <!--<li><a href="#">Careers</a></li>-->
                                             <li><a href="contact.php">Contact Us</a></li>
                                             <li><a href="site-map.php">Site Map</a></li>
@@ -129,139 +127,13 @@
 
 
 
-    <!-- product-details-popup start -->
-    <section id="product-details-popup" class="product-details-popup">
-        <div class="modal-overlay" onclick="closeModal()"></div></div>
-        <div class="container">
-            <div class="product-zoom-info-container">
-                <div id="closed-modal" class="closed-modal" onclick="closeModal()">X</div>
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <div class="product-zoom-area">
-                            <span class="batch">30%</span>
-                            <div class="cart-btn-toggle d-lg-none">
-                                <span class="cart-btn"><i class="fas fa-shopping-cart"></i> Cart</span>
-
-                                <div class="price-btn">
-                                    <div class="price-increase-decrese-group d-flex">
-                                        <span class="decrease-btn">
-                                            <button type="button"
-                                                class="btn quantity-left-minus" data-type="minus" data-field="">-
-                                            </button> 
-                                        </span>
-                                        <input type="text" name="quantity" class="form-controls input-number" value="1">
-                                        <span class="increase">
-                                            <button type="button"
-                                                class="btn quantity-right-plus" data-type="plus" data-field="">+
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-slick" >
-                            <!--<div id="modal-product-image"></div>-->
-                                <div><img src="assets/images/product-detail/02.jpg" alt="image"
-                                        class="img-fluid blur-up lazyload image_zoom_cls-1"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="slider-nav">
-                                        <div><img src="assets/images/product-detail/01.jpg" alt=""
-                                                class="img-fluid blur-up lazyload"></div>
-                                        <div><img src="assets/images/product-detail/02.jpg" alt=""
-                                                class="img-fluid blur-up lazyload"></div>
-                                        <div><img src="assets/images/product-detail/03.jpg" alt=""
-                                                class="img-fluid blur-up lazyload"></div>
-                                        <div><img src="assets/images/product-detail/01.jpg" alt=""
-                                                class="img-fluid blur-up lazyload"></div>
-                                        <!-- <div><img src="assets/images/product-detail/02.jpg" alt=""
-                                                class="img-fluid blur-up lazyload"></div> -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="product-details-content">
-                            <a class="wish-link" href="#">
-                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="svg-inline--fa fa-heart fa-w-16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path></svg>
-                            </a>
-                            <a href="#" class="cata" id="modal-product-category"></a>
-                            <h2 id="modal-product-name"></h2>
-                            <p class="quantity" id="modal-product-unit"></p>
-                            <h3 class="price" id="modal-product-price">Ksh329 <del>Ksh400</del></h3>
-                            <div class="price-increase-decrese-group d-flex">
-                                <span class="decrease-btn">
-                                    <button type="button"
-                                        class="btn quantity-left-minus" data-type="minus" data-field="">-
-                                    </button> 
-                                </span>
-                                <input type="text" name="quantity" class="form-controls input-number" value="1">
-                                <span class="increase">
-                                    <button type="button"
-                                        class="btn quantity-right-plus" data-type="plus" data-field="">+
-                                    </button>
-                                </span>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penas et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>
-                            <div class="d-flex justify-content-end">
-                                <a href="#" class="buy-now">Buy Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- product-details-popup end -->
-
-
-
-     <!--login-area 
-    <section id="login-area" class="login-area">
-        <div onclick="CloseSignUpForm()" class="overlay"></div>
-        <div class="login-body-wrapper">
-            <div class="login-body">
-                <div class="close-icon" onclick="CloseSignUpForm()">
-                    <i class="fas fa-times"></i>
-                </div>
-                <div class="login-header">
-                    <h4>Sign In</h4>
-                    <p>Login with your email & password</p>
-                </div>
-                <div class="login-content">
-                    <form action="#" class="login-form">
-                        <input type="text" name="name" placeholder="Name">
-                        <input type="email" name="email" placeholder="Email">
-                        <button type="submit" class="submit">Sign In</button>
-                    </form>
-                    <div class="text-center seperator">
-                        <span>Or</span>
-                    </div>
-                    <div class="othersignup-option">
-                        <a class="facebook" href="#"><i class="fab fa-facebook-square"></i>Continue with Facebook</a>
-                        <a class="google" href="#"><i class="fab fa-google-plus"></i>Continue with Google</a>
-                    </div>
-                    <div class="text-center dont-account py-4">
-                        <p class="mb-0">Don't have an account? <a href="#">Sign Up</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="forgot-password text-center">
-                <p><a href="#">Forgot Password?</a></p>
-            </div>
-        </div>
-    </section>
-    login-area -->
-
-
 
     <!-- mobile-footer -->
     <div class="mobile-footer d-flex justify-content-between align-items-center d-xl-none">
         <button class="info" type="button" data-toggle="modal" data-target="#siteinfo1"><i class="fas fa-info-circle"></i></button>
 
         <div class="footer-cart">
-            <a onclick="cartopen()" href="#" class="d-flex align-items-center"><span class="cart-icon"><i class="fas fa-shopping-cart"></i><span class="count"><?php echo $cart_count; ?></span></span> <span class="cart-amount ml-2">Ksh <span id="mobile_cart_total"><?php echo number_format($total,2); ?></span></span></a>
+              <a onclick="cartopen()" href="#"><span class="cart-icon"><i class="fa fa-bell"></i></span> <span class="cart-amount"></span></a>
         </div>
 
         <div class="footer-admin-area">

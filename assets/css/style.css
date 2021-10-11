@@ -1191,9 +1191,15 @@ ul {
 
 .signin-option a {
   padding: 9px 25px;
-  background-color: #e8eaee;
+  background-color: #FD5555;
   border-radius: 30px;
+  color: white;
 }
+
+.signin-option a:hover {
+  background-color: rgb(77, 72, 72);
+}
+
 
 .all-catagory-option {
   position: relative;
@@ -2012,7 +2018,7 @@ ul {
   text-transform: uppercase;
 }
 .banner-content .banner-btn:hover {
-  background-color: #438e1c;
+  background-color: rgb(77, 72, 72);
 }
 @media only screen and (max-width: 1200px) {
   .banner-content {
@@ -2224,6 +2230,7 @@ ul {
 }
 
 .info-box-section {
+  background-color: #ffffff;
   padding-top: 60px;
   padding-bottom: 60px;
 }
@@ -3391,6 +3398,33 @@ blockquote span span {
   .testimonial-slider-btn-group .testimonial-slider-next {
     right: -10px;
   }
+}
+
+.make-reservation a {
+  padding: 3px 25px;
+  background-color: #FD5555;
+  border-radius: 30px;
+  color: white;
+}
+
+.make-reservation a:hover {
+  background-color: rgb(77, 72, 72);
+}
+
+.home-owner-contact a {
+  padding: 3px 25px;
+  background-color: #FD5555;
+  border-radius: 30px;
+  color: white;
+}
+
+.home-owner-contact a:hover {
+  background-color: rgb(77, 72, 72);
+}
+
+.home-owner-card{
+  left: -100px;
+  top: -180px;
 }
 
 .sitebar-drawar {
@@ -6151,7 +6185,8 @@ blockquote span span {
   overflow: hidden;
 }
 .product-order-success-container .product-order-success {
-  background-color: #85cb62;
+  background-image: url(../images/success-image.jpeg);
+  background-size: 100% 100%;
   text-align: center;
   padding: 75px 20px;
 }
@@ -6189,40 +6224,10 @@ blockquote span span {
 .product-order-success-container .order-description {
   padding: 50px 30px 30px 60px;
 }
-.product-order-success-container .order-description .order-info {
-  margin-bottom: 30px;
-}
-.product-order-success-container .order-description .order-info li {
-  display: flex;
-  line-height: 2.5;
-}
-.product-order-success-container .order-description .order-info li h6 {
-  width: 180px;
-  font-size: 15px;
-  font-weight: 500;
-}
-.product-order-success-container .order-description .order-info li p {
-  margin-left: 40px;
-  margin-bottom: 0;
-}
-@media only screen and (max-width: 767px) {
-  .product-order-success-container .order-description {
-    padding: 30px 30px 30px 30px;
-  }
-  .product-order-success-container .order-description li h6 {
-    width: 160px !important;
-  }
-  .product-order-success-container .order-description li p {
-    margin-left: 20px !important;
-  }
-}
-.product-order-success-container .order-description .view-summery {
-  font-size: 15px;
+
+.product-order-success-container .order-description h5{
+  text-align: center;
   color: #FD5555;
-  text-decoration: underline;
-}
-.product-order-success-container .order-description .view-summery:hover {
-  text-decoration: none;
 }
 
 .cookieContainer{
@@ -6700,7 +6705,7 @@ Preloader
     line-height: 48px;
     font-size: 16px;
     font-weight: 600;
-    background-color: #59b828;
+    background-color: #FD5555;
     color: white;
     display: inline-block;
     border-radius: 4px;
@@ -6722,6 +6727,11 @@ Preloader
 
   .homepage-stats{
     background-color: white;
+  }
+
+  .home-dash-features{
+    background-color: white;
+    margin-top: -200px;
   }
 
   .top-destination-text{

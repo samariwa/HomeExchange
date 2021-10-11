@@ -25,7 +25,7 @@
  //authorized signature
  //This is unauthorized access
  //Block it
-         header("Location: $home_url");
+         header("Location: $dashboard_url");
          exit;
      }
      $logged_in_user = $_SESSION['user'];
@@ -63,6 +63,14 @@
      }
      $_SESSION['LAST_ACTIVITY'] = time();
  }
+ else{
+    header('Location: '.$login_url.'?page_url='.$dashboard_link );
+    exit;
+ }
+}
+else{
+    header('Location: '.$login_url.'?page_url='.$dashboard_link );
+    exit;
  }
 ?>
 <!DOCTYPE html>
@@ -300,7 +308,7 @@
                         }
                         
                     ?>
-                   <span><?php echo $cart_count; ?> Items</span>
+                   <span><?php echo $cart_count; ?> Notifications</span>
                 </div>
                 <span onclick="cartclose()" class="close-icon"><i class="fas fa-times"></i></span>
         </div>
@@ -375,7 +383,7 @@
             }
             else{
                 echo'
-            <h4 style="text-align:center;" class="mt-5">No Item in Cart</h4>
+            <h4 style="text-align:center;" class="mt-5">No Notification</h4>
             ';
             }
             }
@@ -521,7 +529,7 @@
             }
             else{
                 echo'
-                <h4 style="text-align:center;" class="mt-5">No Item in Cart</h4>
+                <h4 style="text-align:center;" class="mt-5">No Notification</h4>
                 ';
             }
         }

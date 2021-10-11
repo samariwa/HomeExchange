@@ -2,6 +2,6 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]
 Options -Indexes
-#ErrorDocument 403 /HomeExchange/error.php
+ErrorDocument 403 /HomeExchange/error.php
 ErrorDocument 404 /HomeExchange/error.php
 ErrorDocument 408 /HomeExchange/error.php

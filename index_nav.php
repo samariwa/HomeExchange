@@ -60,8 +60,8 @@ require('config.php');
                         <ul class="menu d-xl-flex flex-wrap list-unstyled">
                             <li class="item-has-children" ><a href="#"> Learn More<i class="fas fa-angle-down"></i></a>
                             <ul class="submenu">
-                                    <li><a href="about.php#who_we_are">How it works</a></li>
-                                    <li><a href="about.php#mission&vision">Contact Us</a></li>
+                                    <li><a href="#">How it works</a></li>
+                                    <li><a href="contact.php">Contact Us</a></li>
                             </ul>  
                             <li class="nav-item"><a href="faq.php">FAQs</a></li>
                             </li>      
