@@ -23,16 +23,144 @@
              <!-- category section start -->
              <section class="catagory-section">
                 <div class="container p-lg-0">
-                    <div class="section-heading">
-                        <h4 class="heading-title"><span class="heading-circle green"></span> Help us get the home for you</h4>
-                    </div>
-
+                    <div class="row">
+                        <div class="col-9">
+                            <div class="section-heading">
+                                <h4 class="heading-title"><span class="heading-circle green"></span> Help us get the home for you</h4>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                                <h6>Exchange Points: 274</h6>
+                        </div>
+                    </div> 
+                    <br>
                     <div class="section-wrapper">
-                       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur quibusdam enim expedita sed nesciunt incidunt accusamus adipisci officia libero laboriosam! Proin gravida nibh vel velit auctor aliquet. nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vultate cursus a sit amet mauris. Duis sed odio sit amet nibh vultate cursus a sit amet mauris.</p>
+                        <div class="row">
+                            <h6>Where are you visiting?</h6>
+                        </div>
+                       <br>
+                       <div class="row">
+                            <h6>How many people are accompanying you?</h6>
+                        </div>
+                       <br>
+                       <div class="row">
+                            <h6>When do you plan to start the vacation?</h6>
+                        </div>
+                       <br>
+                       <div class="row">
+                           <div class="col-4">
+                               <div class="ios-switch">
+                                <label><h6>Are you bringing along kids?</h6></label>
+                                    <div class="switch-body">
+                                        <div class="toggle">
+
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" name="kids">
+                                </div>
+                           </div>
+                           <div class="col-6">
+                               <div class="row" style="align-items: center;">
+                               <h6>If yes, how many?</h6>
+                               <button class="btn">
+                                   <i id="downQuantity" onclick="" class='fa fa-minus-circle' style="color:#FD5555;font-size:20px"></i>
+                                </button>
+                                <h4><span name="kids_no" id="kids_no">0</span></h4>
+                               <button class="btn">
+                                   <i id="upQuantity" onclick="" class='fa fa-plus-circle' style="color:#FD5555;font-size:20px"></i>
+                               </button>
+                               </div>
+                           </div>
+                        </div>
+                       <br>
+                       <div class="row" style="align-items: center;">
+                            <h6>How many nights do you intend to stay there?</h6>
+                            <button class="btn">
+                                   <i id="downQuantity" onclick="" class='fa fa-minus-circle' style="color:#FD5555;font-size:20px"></i>
+                                </button>
+                                <h4><span name="kids_no" id="kids_no">0</span></h4>
+                               <button class="btn">
+                                   <i id="upQuantity" onclick="" class='fa fa-plus-circle' style="color:#FD5555;font-size:20px"></i>
+                               </button>
+                        </div>
+                       <br>
                     </div>
+                </div>
+                <div class="container">
+                    <h5>Kindly select facilities you would like to have in the home</h5>
+                    <div class="row">
+                    <label class="option_item">
+                    <input type="checkbox" class="checkbox">
+                    <div class="option_inner swimming">
+                        <div class="tickmark"></div>
+                        <div class="icon"><i class="fas fa-swimming-pool fa-2x"></i></div>
+                        <div class="name">Swimming Pool</div>
+                    </div>
+                    </label>
+                    <label class="option_item">
+                    <input type="checkbox" class="checkbox">
+                    <div class="option_inner wifi">
+                        <div class="tickmark"></div>
+                        <div class="icon"><i class="fas fa-wifi fa-2x"></i></div>
+                        <div class="name">WiFi</div>
+                    </div>
+                    </label>
+                    <label class="option_item">
+                    <input type="checkbox" class="checkbox">
+                    <div class="option_inner tv">
+                        <div class="tickmark"></div>
+                        <div class="icon"><i class="fas fa-tv fa-2x"></i></div>
+                        <div class="name">TV</div>
+                    </div>
+                    </label>
+                    <label class="option_item">
+                    <input type="checkbox" class="checkbox">
+                    <div class="option_inner smokers">
+                        <div class="tickmark"></div>
+                        <div class="icon"><i class="fas fa-smoking fa-2x"></i></div>
+                        <div class="name">Smokers Friendly</div>
+                    </div>
+                    </label>
+                    <label class="option_item">
+                    <input type="checkbox" class="checkbox">
+                    <div class="option_inner wheelchair">
+                        <div class="tickmark"></div>
+                        <div class="icon"><i class="fab fa-accessible-icon"></i></div>
+                        <div class="name">Wheelchair Accessible</div>
+                    </div>
+                    </label>
+                    </div>
+                    <div class="row">
+                    <label class="option_item">
+                    <input type="checkbox" class="checkbox">
+                    <div class="option_inner parking">
+                        <div class="tickmark"></div>
+                        <div class="icon"><i class="fas fa-parking fa-2x"></i></div>
+                        <div class="name">Private Parking</div>
+                    </div>
+                    </label>
+                    <label class="option_item">
+                    <input type="checkbox" class="checkbox">
+                    <div class="option_inner security">
+                        <div class="tickmark"></div>
+                        <div class="icon"><i class="fas fa-shield-alt fa-2x"></i></div>
+                        <div class="name">Security</div>
+                    </div>
+                    </label>
+                    <label class="option_item">
+                    <input type="checkbox" class="checkbox">
+                    <div class="option_inner gym">
+                        <div class="tickmark"></div>
+                        <div class="icon"><i class="fas fa-dumbbell fa-2x"></i></div>
+                        <div class="name">Private Gym</div>
+                    </div>
+                    </label>
+                    </div> 
                 </div>
             </section>
             <!-- category section end -->
+
+    
 <?php
     include('footer.php');
 ?>

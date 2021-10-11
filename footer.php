@@ -177,6 +177,7 @@
     <script src='assets/js/scroll-nav.js'></script>
     <script src="assets/js/jquery.elevatezoom.js"></script>
     <script src='assets/js/price-range.js?293082'></script>
+    <script src='assets/js/toggle.js?23468082'></script>
     <script src='assets/js/custom-select.js'></script>
     <script src='assets/js/fly-cart.js?359597'></script>
     <script src='assets/js/multi-countdown.js'></script>
