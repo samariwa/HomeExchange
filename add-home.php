@@ -122,12 +122,12 @@
                     <div class="section-wrapper ml-5">
                             <h6>County</h6>
                             <div class="col-7">
-                                <input type="text" class="form-control" style="font-family:Arial, FontAwesome" id="county" name="county" placeholder="&#xF002; Search...">
+                                <input type="text" class="form-control" style="font-family:Arial, FontAwesome" id="county" name="county" placeholder="&#xF002; Search..." required>
                             </div>
                             <br><br>
                             <h6>Sub-County</h6>
                             <div class="col-7">
-                                <input type="text" class="form-control" style="font-family:Arial, FontAwesome" id="county" name="subcounty" placeholder="&#xF002; Search..." disabled>
+                                <input type="text" class="form-control" style="font-family:Arial, FontAwesome" id="county" name="subcounty" placeholder="&#xF002; Search..." disabled required>
                             </div>
                             <br><br>
                            <div class="row">
@@ -179,7 +179,7 @@
                             </div>
                             <br><br>
                             <div class="row">
-                            <i class="fas fa-door-open fa-2x" style="color: #BDBBBB;"></i>
+                            <i class="fas fa-door-open fa-2x ml-5" style="color: #BDBBBB;"></i>
                             <h6 class="ml-5">Bedrooms</h6>
                             <button class="btn">
                                    <i id="bedroomsDownQuantity" onclick="" class='fa fa-minus-circle ml-5' style="color:#FD5555;font-size:30px"></i>
@@ -191,7 +191,7 @@
                             </div>
                             <br><br>
                             <div class="row">
-                            <i class="fas fa-bath fa-2x" style="color: #BDBBBB;"></i>
+                            <i class="fas fa-bath fa-2x ml-5" style="color: #BDBBBB;"></i>
                             <h6 class="ml-5">Bathrooms</h6>
                             <button class="btn">
                                    <i id="bathroomsDownQuantity" onclick="" class='fa fa-minus-circle ml-5' style="color:#FD5555;font-size:30px"></i>
@@ -203,7 +203,7 @@
                             </div>
                             <br><br>
                             <div class="row">
-                            <i class="fas fa-users fa-2x" style="color: #BDBBBB;"></i>
+                            <i class="fas fa-users fa-2x ml-5" style="color: #BDBBBB;"></i>
                             <h6 class="ml-5">Occupancy</h6>
                             <button class="btn">
                                    <i id="occupancyDownQuantity" onclick="" class='fa fa-minus-circle ml-5' style="color:#FD5555;font-size:30px"></i>
@@ -328,8 +328,8 @@
                      </div>
                      <div class="row">
                      <label class="radio_item ml-5">
-                        <input type="checkbox" name="child" id="child" class="checkbox">
-                        <div class="option_inner child">
+                        <input type="checkbox" name="kids" id="kids" class="checkbox">
+                        <div class="option_inner kids">
                             <div class="tickmark"></div>
                             <div class="icon"><i class="fas fa-child fa-2x"></i></div>
                             <div class="name">Kids Friendly</div>
@@ -348,7 +348,7 @@
                         <div class="option_inner ac">
                             <div class="tickmark"></div>
                             <div class="icon"><h2>AC</h2></div>
-                            <div class="name">Air Con</div>
+                            <div class="name">Air Con.</div>
                         </div>
                         </label>
                      </div>
@@ -424,12 +424,17 @@
                     <div class="section-wrapper ml-5">
                             <h6>Title</h6>
                             <div class="col-8">
-                                <input type="text" class="form-control"  id="title" name="title" placeholder="Christine's Spectacular Beach House">
+                                <input type="text" class="form-control"  id="title" name="title" placeholder="Christine's Spectacular Beach House" required>
                             </div>
-                            <br><br>
+                            <br>
                             <h6>Description</h6>
                             <div class="col-8">
-                            <textarea id="description" class="form-control" name="description" rows="8" cols="30"></textarea>
+                            <textarea id="description" class="form-control" name="description" rows="8" cols="30" required></textarea>
+                            </div>
+                            <br>
+                            <h6>Insert an image of your house</h6>
+                            <div class="col-6">
+                            <input type="file" class="form-control" id="house-image" name="house-image" required>
                             </div>
                            </div> 
                             <br><br>

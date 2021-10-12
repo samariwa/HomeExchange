@@ -74,8 +74,8 @@ require('config.php');
                 <ul class="submenu dropdown-menu" aria-labelledby="myaccount">
                     <li><a href="profile.php#dashboard-nav">Profile</a></li>
                     <li><a href="#">Exchange Points</a></li>
-                    <li><a href="#">My Exchanges</a></li>
-                    <li><a href="#">My Homes</a></li>
+                    <li><a href="my-exchanges.php#dashboard-nav">My Exchanges</a></li>
+                    <li><a href="my-homes.php#dashboard-nav">My Homes</a></li>
                     <li><a href="<?php echo $logout_url.'?page_url='.$home_link; ?>">Sign Out</a></li>
                 </ul>
             </li>

@@ -22,6 +22,7 @@
 
              <!-- category section start -->
              <section class="catagory-section">
+                <form method = "POST">
                 <div class="container p-lg-0">
                     <div class="row">
                         <div class="col-9">
@@ -38,7 +39,7 @@
                         <div class="row">
                             <h6>Where are you visiting?</h6>
                             <div class="col-4">
-                                <input type="text" class="form-control" id="location" placeholder="Mombasa">
+                                <input type="text" class="form-control" id="location" placeholder="Mombasa" required>
                             </div>
                         </div>
                        <br>
@@ -148,26 +149,69 @@
                     </label>
                     <label class="option_item">
                     <input type="checkbox" class="checkbox">
-                    <div class="option_inner security">
-                        <div class="tickmark"></div>
-                        <div class="icon"><i class="fas fa-shield-alt fa-2x"></i></div>
-                        <div class="name">Security</div>
-                    </div>
-                    </label>
-                    <label class="option_item">
-                    <input type="checkbox" class="checkbox">
                     <div class="option_inner gym">
                         <div class="tickmark"></div>
                         <div class="icon"><i class="fas fa-dumbbell fa-2x"></i></div>
                         <div class="name">Private Gym</div>
                     </div>
                     </label>
+                    <label class="option_item">
+                    <input type="checkbox" class="checkbox">
+                    <div class="option_inner kids">
+                        <div class="tickmark"></div>
+                        <div class="icon"><i class="fas fa-child fa-2x"></i></div>
+                        <div class="name">Kids Friendly</div>
+                    </div>
+                    </label>
+                    <label class="option_item">
+                    <input type="checkbox" class="checkbox">
+                    <div class="option_inner garden">
+                        <div class="tickmark"></div>
+                        <div class="icon"><h2>G</h2></div>
+                        <div class="name">Private Garden</div>
+                    </div>
+                    </label>
                     </div> 
+                    <div class="row">
+                    <label class="option_item">
+                    <input type="checkbox" class="checkbox">
+                    <div class="option_inner ac">
+                        <div class="tickmark"></div>
+                        <div class="icon"><h2>AC</h2></div>
+                        <div class="name">Air Con.</div>
+                    </div>
+                    </label>
+                    <label class="option_item">
+                    <input type="checkbox" class="checkbox">
+                    <div class="option_inner workers">
+                        <div class="tickmark"></div>
+                        <div class="icon"><i class="fas fa-user-friends fa-2x"></i></div>
+                        <div class="name">Home Workers</div>
+                    </div>
+                    </label>
+                    <label class="option_item">
+                    <input type="checkbox" class="checkbox">
+                    <div class="option_inner security">
+                        <div class="tickmark"></div>
+                        <div class="icon"><i class="fas fa-shield-alt fa-2x"></i></div>
+                        <div class="name">Security</div>
+                    </div>
+                    </label>
+                    </div>
                 </div>
+                <br>
                 <div class="container p-lg-0">
                   <h6>Kindly list any other requirements you have</h6>
                   <textarea id="extra-requirements" class="form-control" name="extra-requirements" rows="4" cols="50"></textarea>
                 </div>
+                <br>
+                <div class="row">
+                    <div class="col-10"></div>
+                    <div class="col-2">
+                    <input type="submit" value="&#xF002; Search" style="background-color: #FD5555;font-family:Arial, FontAwesome" id="requirements-submit" class="btn btn-danger rounded-pill mr-3"/>
+                    </div>
+                </div>
+                </form>
             </section>
             <!-- category section end -->
 
