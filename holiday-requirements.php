@@ -37,14 +37,32 @@
                     <div class="section-wrapper">
                         <div class="row">
                             <h6>Where are you visiting?</h6>
+                            <div class="col-4">
+                                <input type="text" class="form-control" id="location" placeholder="Mombasa">
+                            </div>
                         </div>
                        <br>
                        <div class="row">
                             <h6>How many people are accompanying you?</h6>
+                            <button class="btn">
+                                   <i id="peopleDownQuantity" onclick="" class='fa fa-minus-circle' style="color:#FD5555;font-size:20px"></i>
+                                </button>
+                                <h4><span name="people_no" id="people_no">0</span></h4>
+                               <button class="btn">
+                                   <i id="peopleUpQuantity" onclick="" class='fa fa-plus-circle' style="color:#FD5555;font-size:20px"></i>
+                               </button>
                         </div>
                        <br>
                        <div class="row">
-                            <h6>When do you plan to start the vacation?</h6>
+                            <h6>What duration do you plan to stay there?</h6>
+                            <h6 class="ml-3">From:</h6>
+                            <div class="col-3">
+                                <input type="date" class="form-control" id="date">
+                            </div>
+                            <h6>To:</h6>
+                            <div class="col-3">
+                                <input type="date" class="form-control" id="date">
+                            </div>
                         </div>
                        <br>
                        <div class="row">
@@ -63,30 +81,19 @@
                                <div class="row" style="align-items: center;">
                                <h6>If yes, how many?</h6>
                                <button class="btn">
-                                   <i id="downQuantity" onclick="" class='fa fa-minus-circle' style="color:#FD5555;font-size:20px"></i>
+                                   <i id="kidsDownQuantity" onclick="" class='fa fa-minus-circle' style="color:#FD5555;font-size:20px"></i>
                                 </button>
                                 <h4><span name="kids_no" id="kids_no">0</span></h4>
                                <button class="btn">
-                                   <i id="upQuantity" onclick="" class='fa fa-plus-circle' style="color:#FD5555;font-size:20px"></i>
+                                   <i id="kidsUpQuantity" onclick="" class='fa fa-plus-circle' style="color:#FD5555;font-size:20px"></i>
                                </button>
                                </div>
                            </div>
                         </div>
                        <br>
-                       <div class="row" style="align-items: center;">
-                            <h6>How many nights do you intend to stay there?</h6>
-                            <button class="btn">
-                                   <i id="downQuantity" onclick="" class='fa fa-minus-circle' style="color:#FD5555;font-size:20px"></i>
-                                </button>
-                                <h4><span name="kids_no" id="kids_no">0</span></h4>
-                               <button class="btn">
-                                   <i id="upQuantity" onclick="" class='fa fa-plus-circle' style="color:#FD5555;font-size:20px"></i>
-                               </button>
-                        </div>
-                       <br>
                     </div>
                 </div>
-                <div class="container">
+                <div class="container p-lg-0">
                     <h5>Kindly select facilities you would like to have in the home</h5>
                     <div class="row">
                     <label class="option_item">
@@ -156,6 +163,10 @@
                     </div>
                     </label>
                     </div> 
+                </div>
+                <div class="container p-lg-0">
+                  <h6>Kindly list any other requirements you have</h6>
+                  <textarea id="extra-requirements" class="form-control" name="extra-requirements" rows="4" cols="50"></textarea>
                 </div>
             </section>
             <!-- category section end -->

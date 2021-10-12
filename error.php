@@ -1,5 +1,5 @@
 <?php
-  include('header.php');
+  include('neutral-header.php');
   $error = $_SERVER["REDIRECT_STATUS"];
   $error_code = '';
   $error_title = '';
@@ -18,13 +18,6 @@
       $error_message = 'Your request took too long to respond.';
   }
 ?> 
-            <!-- page-header-section start -->
-            <div class="page-header-section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 d-flex justify-content-between justify-content-md-end">
-                            <ul class="breadcrumb">
-                                <li><a href="index.html">Home</a></li>
                                 <li><span>/</span></li>
                                 <li><?php  echo $error_code; ?> Page</li>
                             </ul>

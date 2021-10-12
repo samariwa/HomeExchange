@@ -110,15 +110,15 @@
                 <div class="container col-12 p-lg-0 home-dash-features row">
                    <div class="col-3 text-center">
                         <i class="fas fa-home fa-3x" style="color: #BDBBBB;"></i>
-                        <h6>Bungalow</h6>
+                        <h6>House</h6>
                    </div>
                    <div class="col-3 text-center">
                        <h2>3</h2>
                         <h6>Bedrooms</h6>
                    </div>
                    <div class="col-3 text-center">
-                       <h2>2</h2>
-                        <h6>Single beds</h6>
+                       <h2>5</h2>
+                        <h6>Occupancy</h6>
                    </div>
                    <div class="col-3 text-center">
                        <h2>80</h2>

@@ -89,6 +89,7 @@ else{
     <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
     <link rel="stylesheet" href="assets/css/custom-select.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <script src="https://www.google.com/recaptcha/api.js?render=<?php echo $public_key; ?>"></script>
 </head>
 <style type="text/css">
