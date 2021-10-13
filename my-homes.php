@@ -15,7 +15,7 @@ $location = $result['physical_address'];
                     <div class="row">
                         <div class="col-12 d-flex justify-content-between justify-content-md-start">
                             <ul class="breadcrumb">
-                                <li><a href="index.php">Home</a></li>
+                                <li><a href="dashboard.php">Dashboard</a></li>
                                 <li><span>/</span></li>
                                 <li>My Homes</li>
                             </ul>
@@ -28,7 +28,7 @@ $location = $result['physical_address'];
 
 
            <!-- admin-page start -->
-           <section class="admin-page-section d-flex align-items-center" style="background-image: url('assets/images/admin/profile-bg.jpg'); background-size: cover;">
+           <section class="admin-page-section d-flex align-items-center" style="background-image: url('assets/images/admin/dashboard-wallpaper.jpeg'); background-size: cover;">
                 <div class="aps-wrapper w-100">
                     <div class="container">
                         <div class="row justify-content-center justify-content-md-start">

@@ -6769,6 +6769,18 @@ Preloader
     margin-top: -200px;
   }
 
+  .home-dash-facilities{
+    background-color: white;
+  }
+
+  .home-feature-badge{
+    background-color: #FD5555;
+    font-size: 13px;
+    color: white;
+    padding: 9px 25px;
+
+  }
+
   .top-destination-text{
     position: absolute;
     top: 30%;

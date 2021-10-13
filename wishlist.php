@@ -1,6 +1,6 @@
 <?php
   include('header.php');
-  $profile_details = mysqli_query($connection,"SELECT first_name,last_name,email_address,physical_address,phone_number FROM users where email_address = '$logged_in_email' ")or die($connection->error);
+$profile_details = mysqli_query($connection,"SELECT first_name,last_name,email_address,physical_address,phone_number FROM users where email_address = '$logged_in_email' ")or die($connection->error);
 $result = mysqli_fetch_array($profile_details);
 $firstname = $result['first_name'];
 $lastname = $result['last_name'];
@@ -14,7 +14,7 @@ $location = $result['physical_address'];
                     <div class="row">
                         <div class="col-12 d-flex justify-content-between justify-content-md-start">
                             <ul class="breadcrumb">
-                                <li><a href="index.php">Home</a></li>
+                                <li><a href="dashboard.php">Dashboard</a></li>
                                 <li><span>/</span></li>
                                 <li>Wishlist</li>
                             </ul>

@@ -108,26 +108,113 @@
 
             <section class="catagory-section  mt-n5">
                 <div class="container col-12 p-lg-0 home-dash-features row">
-                   <div class="col-3 text-center">
+                   <div class="col-2 text-center">
                         <i class="fas fa-home fa-3x" style="color: #BDBBBB;"></i>
                         <h6>House</h6>
                    </div>
-                   <div class="col-3 text-center">
+                   <div class="col-2 text-center">
+                       <h2>3</h2>
+                        <h6>Tier</h6>
+                   </div>
+                   <div class="col-2 text-center">
                        <h2>3</h2>
                         <h6>Bedrooms</h6>
                    </div>
-                   <div class="col-3 text-center">
+                   <div class="col-2 text-center">
+                       <h2>2</h2>
+                        <h6>Bathrooms</h6>
+                   </div>
+                   <div class="col-2 text-center">
                        <h2>5</h2>
                         <h6>Occupancy</h6>
                    </div>
-                   <div class="col-3 text-center">
+                   <div class="col-2 text-center">
                        <h2>80</h2>
                         <h6>m sq</h6>
                    </div>
                 </div>
+                <hr>
             </section>
 
-             <!-- category section start -->
+            <section class="catagory-section  home-dash-facilities mt-n5">
+                <div class="container p-lg-0 ">
+                   <h4>Features</h4>
+                   <br>
+                   <div class="row">
+                      <span class="badge badge-pill home-feature-badge ml-4 mt-2">Security</span>
+                      <span class="badge badge-pill home-feature-badge ml-4 mt-2">Kids Friendly</span>
+                      <span class="badge badge-pill home-feature-badge ml-4 mt-2">Smokers Allowed</span>
+                      <span class="badge badge-pill home-feature-badge ml-4 mt-2">Pets Allowed</span>
+                      <span class="badge badge-pill home-feature-badge ml-4 mt-2">Home Workers</span>
+                      <span class="badge badge-pill home-feature-badge ml-4 mt-2">TV</span>
+                      <span class="badge badge-pill home-feature-badge ml-4 mt-2">WiFi</span>
+                      <span class="badge badge-pill home-feature-badge ml-4 mt-2">Air Con.</span>
+                   </div>
+                </div>
+            </section>
+            
+            <section class="catagory-section  home-dash-facilities mt-n5">
+                <div class="container p-lg-0 ">
+                   <h4>Images</h4>
+                   <br>
+                   <div class="row">
+                      <img src="assets/images/homes/image1.jpeg" width="500px" height="500px" class="ml-2 mt-2" alt="product">
+                      <img src="assets/images/homes/image2.jpeg" width="500px" height="500px" class="ml-2 mt-2" alt="product">
+                      <img src="assets/images/homes/image3.jpeg" width="500px" height="500px" class="ml-2 mt-2" alt="product">
+                   </div>
+                </div>
+            </section>
+
+            <section class="catagory-section  mt-n5">
+            <div class="container p-lg-0">
+                <div class="comment-section pt--70 pb--40" id="comments-section">
+                <h5 class="comment-title mb--30"><i class="far fa-comment-alt"></i> 5 Reviews</h5>
+
+                <div class="comment-list">
+                <?php
+                /*    foreach($comments as $row){
+                    $comment_id = $row['id'];
+                    $commenter = $row['commenter'];
+                    $comment = $row['comment'];
+                    $comment_Date = $row['Created_at'];
+                    $comment_date = date( 'l, F d, Y h:i A', strtotime($comment_Date) );
+                    $subcomments = mysqli_query($connection,"SELECT * FROM comments WHERE comment_id = '$comment_id' AND belongs_to = 'comment'")or die($connection->error);
+                    */
+                    $commenter = "Samuel Mariwa";
+                    $words = explode(" ", $commenter);
+                    $acronym = "";
+                    foreach ($words as $w) {
+                    $acronym .= $w[0];
+                    } 
+                ?>
+                    <div class="comment-item">
+                        <div class="comment-author d-flex flex-wrap">
+                            <div class="author-image">
+                                <?php echo $acronym; ?>
+                            </div>
+                            <div class="author-name-info">
+                                <h6 class="name" id="commenter"><?php echo $commenter; ?></h6>
+                                <p class="publish-date">Posted on 27th March 2021<?php //echo $comment_date; ?></p>
+                                <button id="<?php //echo $comment_id; ?>" class="reply-btn reply-button btn">Reply</button>
+                            </div>
+                        </div>
+                        <div class="comment-content">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur quibusdam enim expedita sed nesciunt incidunt accusamus adipisci officia libero laboriosam! Proin gravida nibh vel velit auctor aliquet. nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vultate cursus a sit amet mauris. Duis sed odio sit amet nibh vultate cursus a sit amet mauris.
+                            <?php //echo $comment; ?>
+                        </div>
+
+                        </div>
+
+                    </div>
+                <?php
+                    //  }
+                ?>
+
+                </div>
+            </div>
+            </div>
+        </section>
+
 <?php
     include('footer.php');
 ?>

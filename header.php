@@ -272,41 +272,11 @@ else{
     <!-- sidebar-cart -->
     <div id="sitebar-cart" class="sitebar-cart">
         <div class="sc-head d-flex justify-content-between align-items-center">
-            <div class="cart-count"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                width="20px" height="20px" viewBox="0 0 472.337 472.336" style="enable-background:new 0 0 472.337 472.336;"
-                xml:space="preserve"><path d="M406.113,126.627c0-5.554-4.499-10.05-10.053-10.05h-76.377V91.715C319.684,41.143,278.543,0,227.969,0
-                   c-50.573,0-91.713,41.143-91.713,91.715v24.862H70.45c-5.549,0-10.05,4.497-10.05,10.05L3.914,462.284
-                   c0,5.554,4.497,10.053,10.055,10.053h444.397c5.554,0,10.057-4.499,10.057-10.053L406.113,126.627z M156.352,91.715
-                   c0-39.49,32.13-71.614,71.612-71.614c39.49,0,71.618,32.13,71.618,71.614v24.862h-143.23V91.715z M146.402,214.625
-                   c-9.92,0-17.959-8.044-17.959-17.961c0-7.269,4.34-13.5,10.552-16.325v17.994h14.337v-18.237
-                   c6.476,2.709,11.031,9.104,11.031,16.568C164.363,206.586,156.319,214.625,146.402,214.625z M310.484,214.625
-                   c-9.922,0-17.959-8.044-17.959-17.961c0-7.269,4.341-13.495,10.548-16.325v17.994h14.338v-18.241
-                   c6.478,2.714,11.037,9.108,11.037,16.568C328.448,206.586,320.407,214.625,310.484,214.625z"/></svg>
+            <div class="cart-count"><i class="fa fa-bell"></i>
                    <?php
                         $cart_count=0;
-                        if (isset($_SESSION['logged_in'])) {
-                            if ($_SESSION['logged_in'] == TRUE) {
-                              $cart_checker = mysqli_query($connection,"SELECT s.id AS id,s.Name as Name,cart.quantity as cartQty,image,i_u.Name as unit_name,s.Discount as Discount,sf.Selling_price as Price,c.Category_Name as Category_Name,s.Restock_Level as Restock_Level,s.Quantity as Quantity FROM `cart` inner join stock s on cart.product_id = s.id INNER JOIN stock_flow sf ON s.id = sf.Stock_id JOIN inventory_units i_u ON s.Unit_id = i_u.id JOIN category c ON s.Category_id=c.id INNER JOIN (SELECT s.id AS max_id, MAX(sf.Created_at) AS max_created_at FROM stock s INNER JOIN stock_flow sf ON s.id = sf.Stock_id GROUP BY s.id) subQuery ON subQuery.max_id = s.id AND subQuery.max_created_at = sf.Created_at WHERE cart.customer_id='$customer_id';");
-                              $cart_count = mysqli_num_rows($cart_checker);
-                            }
-                            else{
-                                if(isset($_COOKIE['shopping_cart'])){
-                                    $cookie_data = stripslashes($_COOKIE['shopping_cart']);
-                                    $cart_data = json_decode($cookie_data, true); 
-                                    foreach($cart_data as $cart){
-                                        $cart_count++;
-                                    }
-                                }
-                            }
-                        }else{
-                            if(isset($_COOKIE['shopping_cart'])){
-                                $cookie_data = stripslashes($_COOKIE['shopping_cart']);
-                                $cart_data = json_decode($cookie_data, true); 
-                                foreach($cart_data as $cart){
-                                    $cart_count++;
-                                }
-                            }
-                        }
+                        //$cart_checker = mysqli_query($connection,"SELECT s.id AS id,s.Name as Name,cart.quantity as cartQty,image,i_u.Name as unit_name,s.Discount as Discount,sf.Selling_price as Price,c.Category_Name as Category_Name,s.Restock_Level as Restock_Level,s.Quantity as Quantity FROM `cart` inner join stock s on cart.product_id = s.id INNER JOIN stock_flow sf ON s.id = sf.Stock_id JOIN inventory_units i_u ON s.Unit_id = i_u.id JOIN category c ON s.Category_id=c.id INNER JOIN (SELECT s.id AS max_id, MAX(sf.Created_at) AS max_created_at FROM stock s INNER JOIN stock_flow sf ON s.id = sf.Stock_id GROUP BY s.id) subQuery ON subQuery.max_id = s.id AND subQuery.max_created_at = sf.Created_at WHERE cart.customer_id='$customer_id';");
+                        //$cart_count = mysqli_num_rows($cart_checker);
                         
                     ?>
                    <span><?php echo $cart_count; ?> Notifications</span>
@@ -316,12 +286,11 @@ else{
     <div class="cart-product-container">
         <?php
         $total = 0;
-        if (isset($_SESSION['logged_in'])) {
-            if ($_SESSION['logged_in'] == TRUE) {
-              $cart_checker = mysqli_query($connection,"SELECT s.id AS id,s.Name as Name,cart.quantity as cartQty,image,i_u.Name as unit_name,s.Discount as Discount,sf.Selling_price as Price,c.Category_Name as Category_Name,s.Restock_Level as Restock_Level,s.Quantity as Quantity FROM `cart` inner join stock s on cart.product_id = s.id INNER JOIN stock_flow sf ON s.id = sf.Stock_id JOIN inventory_units i_u ON s.Unit_id = i_u.id JOIN category c ON s.Category_id=c.id INNER JOIN (SELECT s.id AS max_id, MAX(sf.Created_at) AS max_created_at FROM stock s INNER JOIN stock_flow sf ON s.id = sf.Stock_id GROUP BY s.id) subQuery ON subQuery.max_id = s.id AND subQuery.max_created_at = sf.Created_at WHERE cart.customer_id='$customer_id';");
-              $cart_count = mysqli_num_rows($cart_checker);
-              if($cart_count > 0){
-              foreach($cart_checker as $row)
+              //$notifications_checker = mysqli_query($connection,"SELECT s.id AS id,s.Name as Name,cart.quantity as cartQty,image,i_u.Name as unit_name,s.Discount as Discount,sf.Selling_price as Price,c.Category_Name as Category_Name,s.Restock_Level as Restock_Level,s.Quantity as Quantity FROM `cart` inner join stock s on cart.product_id = s.id INNER JOIN stock_flow sf ON s.id = sf.Stock_id JOIN inventory_units i_u ON s.Unit_id = i_u.id JOIN category c ON s.Category_id=c.id INNER JOIN (SELECT s.id AS max_id, MAX(sf.Created_at) AS max_created_at FROM stock s INNER JOIN stock_flow sf ON s.id = sf.Stock_id GROUP BY s.id) subQuery ON subQuery.max_id = s.id AND subQuery.max_created_at = sf.Created_at WHERE cart.customer_id='$customer_id';");
+             // $notifications_count = mysqli_num_rows($cart_checker);
+              $notifications_count = 0;
+              if($notifications_count > 0){
+              foreach($notification_checker as $row)
              {
                  ?>
                     <div class="cart-product-item">
@@ -387,153 +356,6 @@ else{
             <h4 style="text-align:center;" class="mt-5">No Notification</h4>
             ';
             }
-            }
-            else{
-                if(isset($_COOKIE['shopping_cart']))
-        {     
-            $cookie_data = stripslashes($_COOKIE['shopping_cart']);
-            $cart_data = json_decode($cookie_data, true);
-            foreach($cart_data as $keys => $values)
-            {
-                
-        ?>
-            <div class="cart-product-item">
-                <div class="row align-items-center">
-                    <div class="col-6 p-0">
-                        <div class="thumb">
-                            <a href="#"><img src="assets/images/products/<?php echo $values["item_image"]; ?>" alt="products"></a>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="product-content">
-                            <a href="#" class="product-title"><?php echo $values["item_name"]; ?></a>
-                            <div class="product-cart-info">
-                            <?php if($values['item_discount'] > 0){ ?> <del>Ksh<?php echo number_format($values["item_price"],2); ?> /unit</del> <br><?php }?>
-                            Ksh<?php echo number_format($values["item_price"] - $values["item_discount"],2); ?> /unit
-                            <br>
-                            x<span id="cart_unit_qty<?php echo $values['item_id']; ?>"><?php echo $values["item_quantity"]; ?></span> <?php echo $values["item_unit"]; ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-  
-                <div class="row align-items-center mt-1">
-                    <div class="col-6">
-                        <div class="price-increase-decrese-group d-flex">
-                        
-                            <span class="decrease-btn">
-                                <button type="button"
-                                    class="btn quantity-left-minus cart_decrease" id="<?php echo $values['item_id']; ?>" data-type="minus" data-field="">-
-                                </button> 
-                            </span>
-                            <input type="text" name="quantity" disabled class="form-controls input-number" id="cart_qty<?php echo $values["item_id"]; ?>" value="<?php echo $values["item_quantity"]; ?>">
-                            
-                            <span class="increase">
-                                <button type="button"
-                                    class="btn quantity-right-plus cart_increase" id="<?php echo $values['item_id']; ?>" data-type="plus" data-field="" >+
-                                </button>
-                            </span>
-                          
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div >
-                            <span class="ml-2">Ksh<span id="cart_subtotal<?php echo $values['item_id']; ?>"><?php echo number_format($values["item_quantity"] * ($values["item_price"] - $values["item_discount"]),2); ?></span></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row align-items-center mt-1">
-                <div class="col-6">
-
-                </div>
-                  <div class="col-6">
-                    <a href="<?php echo $protocol.$_SERVER['HTTP_HOST'].'/SymphaFresh/product-list.php?action=delete&id='.$values["item_id"] ?>" class="ml-5 text-danger"><i class="fas fa-times"></i> Remove</a>
-                  </div>
-                </div>
-            </div>   
-        <?php 
-          $total = $total + ($values["item_quantity"] * ($values["item_price"] - $values["item_discount"])); 
-            }      
-        }
-        else{
-            echo'
-            <h4 style="text-align:center;" class="mt-5">No Item in Cart</h4>
-            ';
-        }
-            }   
-        }
-        else{
-            if(isset($_COOKIE['shopping_cart']))
-            {     
-                $cookie_data = stripslashes($_COOKIE['shopping_cart']);
-                $cart_data = json_decode($cookie_data, true);
-                foreach($cart_data as $keys => $values)
-                {
-            ?>
-                <div class="cart-product-item">
-                    <div class="row align-items-center">
-                        <div class="col-6 p-0">
-                            <div class="thumb">
-                                <a href="#"><img src="assets/images/products/<?php echo $values["item_image"]; ?>" alt="products"></a>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="product-content">
-                                <a href="#" class="product-title"><?php echo $values["item_name"]; ?></a>
-                                <div class="product-cart-info">
-                                <?php if($values['item_discount'] > 0){ ?> <del>Ksh<?php echo number_format($values["item_price"],2); ?> /unit</del> <br><?php }?>
-                                Ksh<?php echo number_format($values["item_price"] - $values["item_discount"],2); ?> /unit
-                                <br>
-                                x<span id="cart_unit_qty<?php echo $values['item_id']; ?>"><?php echo $values["item_quantity"]; ?></span> <?php echo $values["item_unit"]; ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-      
-                    <div class="row align-items-center mt-1">
-                        <div class="col-6">
-                            <div class="price-increase-decrese-group d-flex">
-                            
-                                <span class="decrease-btn">
-                                    <button type="button"
-                                        class="btn quantity-left-minus cart_decrease" id="<?php echo $values['item_id']; ?>" data-type="minus" data-field="">-
-                                    </button> 
-                                </span>
-                                <input type="text" name="quantity" disabled class="form-controls input-number" id="cart_qty<?php echo $values["item_id"]; ?>" value="<?php echo $values["item_quantity"]; ?>">
-                                
-                                <span class="increase">
-                                    <button type="button"
-                                        class="btn quantity-right-plus cart_increase" id="<?php echo $values['item_id']; ?>" data-type="plus" data-field="" >+
-                                    </button>
-                                </span>
-                              
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div >
-                                <span class="ml-2">Ksh<span id="cart_subtotal<?php echo $values['item_id']; ?>"><?php echo number_format($values["item_quantity"] * ($values["item_price"] - $values["item_discount"]),2); ?></span></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mt-1">
-                    <div class="col-6">
-    
-                    </div>
-                      <div class="col-6">
-                        <a href="<?php echo $protocol.$_SERVER['HTTP_HOST'].'/SymphaFresh/product-list.php?action=delete&id='.$values["item_id"] ?>" class="ml-5 text-danger"><i class="fas fa-times"></i> Remove</a>
-                      </div>
-                    </div>
-                </div>   
-            <?php 
-              $total = $total + ($values["item_quantity"] * ($values["item_price"] - $values["item_discount"])); 
-                }      
-            }
-            else{
-                echo'
-                <h4 style="text-align:center;" class="mt-5">No Notification</h4>
-                ';
-            }
-        }
         
         ?>
         <br><br><br>
