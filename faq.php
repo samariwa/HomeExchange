@@ -18,30 +18,30 @@ include('neutral-header.php');
                     <div class="faq-container">
                         <div class="accordion" id="faqaccordion">
                             <?php
-                             //   foreach($faqsList as $row){
-                               // $id = $row['id'];
-                               // $question = $row['question'];
-                               // $answer = $row['answer'];
+                                foreach($faqsList as $row){
+                                $id = $row['id'];
+                                $question = $row['question'];
+                                $answer = $row['answer'];
                             ?>
                                 <div class="faq">
-                                    <div class="faq-header" id="faq1<?php //echo $id; ?>">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse1<?php //echo $id; ?>" aria-expanded="false" aria-controls="collapse1<?php //echo $id; ?>">
+                                    <div class="faq-header" id="faq<?php echo $id; ?>">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?php echo $id; ?>" aria-expanded="false" aria-controls="collapse<?php echo $id; ?>">
                                             <span class="icon">
                                                 <i class="fas fa-plus"></i>
                                                 <i class="fas fa-minus"></i>
-                                            </span>question
-                                            <?php //echo $question; ?>
+                                            </span>
+                                            <?php echo $question; ?>
                                         </button>
                                     </div>
 
-                                    <div id="collapse<?php //echo $id; ?>1" class="collapse show" aria-labelledby="faq1<?php //echo $id; ?>" data-parent="#faqaccordion">
+                                    <div id="collapse<?php echo $id; ?>" class="collapse show" aria-labelledby="faq<?php echo $id; ?>" data-parent="#faqaccordion">
                                         <div class="faq-body">
-                                            <p>answer<?php //echo $answer; ?></p>
+                                            <p><?php echo $answer; ?></p>
                                         </div>
                                     </div>
                                 </div>
                             <?php
-                               // }
+                                }
                             ?>
                             
                         </div>

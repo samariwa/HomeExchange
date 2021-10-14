@@ -334,7 +334,13 @@ else:
     if($redirect_link == ''){
       Redirect::to("../".$dashboard_url);
     }
+    else if($redirect_page == ''){
+      Redirect::to("../".$dashboard_url);
+    }
     else{
+      if (strpos($redirect_link, 'admin') == TRUE) {
+        Redirect::to("../".$dashboard_url);
+      }
     Redirect::to($redirect_page); 
     }
   }else{

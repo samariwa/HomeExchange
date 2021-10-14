@@ -20,38 +20,32 @@ if ($session->exists('logged_in')) {
     session_unset();
     if($access == '2'){
         $redirect_page = $_REQUEST['page_url'];
-        $profile_link = FALSE;
-        if (strpos($redirect_link, 'profile.php') == TRUE) {
-          $profile_link = TRUE;
+        $neutral_link = FALSE;
+      if (strpos($redirect_link, 'cookie-policy.php') == TRUE) {
+        $neutral_link = TRUE;
       }
-      elseif (strpos($redirect_link, 'checkout.php') == TRUE){
-        $profile_link = TRUE;
+      elseif (strpos($redirect_link, 'site-map.php') == TRUE){
+        $neutral_link = TRUE;
       }
-      elseif (strpos($redirect_link, 'order-details.php') == TRUE){
-        $profile_link = TRUE;
+      elseif (strpos($redirect_link, 'faqs.php') == TRUE){
+        $neutral_link = TRUE;
       }
-      elseif (strpos($redirect_link, 'track-order-single.php') == TRUE){
-        $profile_link = TRUE;
+      elseif (strpos($redirect_link, 'contact.php') == TRUE){
+        $neutral_link = TRUE;
       }
-      elseif (strpos($redirect_link, 'track-order.php') == TRUE){
-        $profile_link = TRUE;
-      }
-      elseif (strpos($redirect_link, 'user-dashboard.php') == TRUE){
-        $profile_link = TRUE;
-      }
-      elseif (strpos($redirect_link, 'wishlist.php') == TRUE){
-        $profile_link = TRUE;
+      elseif (strpos($redirect_link, 'privacy-policy.php') == TRUE){
+        $neutral_link = TRUE;
       }
       elseif (strpos($redirect_link, 'login.php') == TRUE){
-        $profile_link = TRUE;
+        $neutral_link = TRUE;
       }
-        if(($redirect_link == '') || ($profile_link == TRUE))
+        if(($redirect_link == '') || ($neutral_link == TRUE))
         {
-          Redirect::to("../$home_url");
+          Redirect::to($redirect_page);
         }
         else
         {
-          Redirect::to($redirect_page);
+          Redirect::to("../$home_url");
         }
       }else{
         Redirect::to("../$home_url");

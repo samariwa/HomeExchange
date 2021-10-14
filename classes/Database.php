@@ -17,6 +17,11 @@ class Database{
         }
     }
 
+    public function getAll($table)
+    {
+        return "SELECT * FROM {$table}";
+    }
+
     public function get($table, $field, $where)
     {
          return $this->action('SELECT '.$field,$table,$where);

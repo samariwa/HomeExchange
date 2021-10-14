@@ -21,10 +21,6 @@
       <div class="col-md-7">   
       <h6 class="offset-9">Total Number: <?php echo $faqsrowcount; ?></h6>
     </div>
-      <?php
-       if ($view == 'Software' || $view == 'Director' || $view == 'CEO') {
-
-        ?>
      <div class="col-md-5">   
       <a data-toggle="modal" data-target="#exampleModalScrollable" class="btn btn-success btn-md active offset-8" role="button" aria-pressed="true"><i class="fa fa-plus-circle"></i>&ensp;Add FAQ</a>
        <!-- Modal -->
@@ -55,9 +51,6 @@
           </div>
         </div>
       </div>
-        <?php
-        }
-        ?>
      </div>   
     </div><br> 
     <?php
@@ -73,9 +66,6 @@
         <hr class="my-4">
         <h4>Answer</h4>
         <p><?php echo $answer; ?></p>
-        <?php
-            if ($view == 'Software' || $view == 'Director' || $view == 'CEO') {
-           ?>
            <div class="row">
            <div class="col-6">
               <button data-toggle="modal" data-target="#exampleModalScrollable<?php echo $id; ?>" id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-primary" role="button" aria-pressed="true" ><i class="fa fa-edit"></i>&ensp;Edit</button>
@@ -111,9 +101,6 @@
                 <a class="btn btn-danger btn-md deleteFAQ offset-9" href="#" id="<?php echo $id; ?>"  role="button"><i class="fa fa-trash"></i>&ensp;Delete</a>
                 </div>
             </div>    
-           <?php
-            }
-            ?>
         
      </div>
            

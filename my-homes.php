@@ -330,12 +330,12 @@ $location = $result['physical_address'];
                             <div class="col-lg-10">
                                 <div class="orders-container offset-2">
                                 <?php
-                                    if (mysqli_num_rows($my_orders) ==0) {
+                                    if (mysqli_num_rows($my_homes) ==0) {
                                 ?>
                                         <p style="text-align:center"><i><b>You have not added any home yet.</b></i></p>
                                 <?php
                                     }
-                                    foreach($my_orders as $row){
+                                    foreach($my_homes as $row){
                                         $order_details = mysqli_query($connection,"SELECT SUM(orders.Quantity * (stock.Price - stock.Discount))as sum,COUNT(orders.Status_id) as count FROM orders INNER JOIN stock on orders.Stock_id = stock.id where orders.Status_id = '".$row ['status_id']."' ")or die($connection->error);
                                         $value = mysqli_fetch_array($order_details);
                                     ?>

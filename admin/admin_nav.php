@@ -127,7 +127,7 @@ Preloader
   width: 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  border: 0 solid #67BB4C;
+  border: 0 solid #FD5555;
   border-radius: 50%;
   -webkit-animation: loader-figure 1.15s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
   -moz-animation: loader-figure 1.15s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -145,7 +145,7 @@ Preloader
   font-size: 0.875em;
   letter-spacing: 0.1em;
   line-height: 1.5em;
-  color: #67BB4C;
+  color: #FD5555;
   white-space: nowrap;
   -webkit-animation: loader-label 1.15s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
   -moz-animation: loader-label 1.15s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -300,25 +300,13 @@ Preloader
       </li>
       <br>
       <?php
-       if ($view == 'Software' || $view == 'Director' || $view == 'CEO') {
+       if ($view == 'superuser') {
 
         ?>
-      
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">&emsp;
-        <a style="color: black;" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fa fa-id-card"></i>
-          <span>Admins</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Departments:</h6>
-            <a class="collapse-item" href="deliverers.php">Deliverers</a>
-            <a class="collapse-item" href="office.php">Office</a>
-            <a class="collapse-item" href="cooks.php">Cooks</a>
-            <a class="collapse-item" href="cleaners.php">Cleaners</a>
-          </div>
-        </div>
+       <li class="nav-item">&emsp;
+        <a style="color: black;" href="admins.php">
+        <i class="fa fa-id-card"></i>
+          <span>Admins</span></a>
       </li>
        <br>
        <?php

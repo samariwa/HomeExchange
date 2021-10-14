@@ -2,6 +2,8 @@
  session_start();
  require('config.php');
  require('functions.php');
+ require('queries.php');
+ include('wishlist_process.php');
  if (isset($_SESSION['logged_in'])) {
     if ($_SESSION['logged_in'] == TRUE) {
          //valid user has logged-in to the website

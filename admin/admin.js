@@ -1392,13 +1392,11 @@ function getIndexOfProduct(arr, k) {
   $('#customersEditable td').on('change', function(evt, newValue) {
    var rowx = parseInt(evt.target._DT_CellIndex.row)+1;
   var id = $(`#id${rowx}`).text();
-  var name = $(`#name${rowx}`).text();
   var number = $(`#number${rowx}`).text();
   var location = $(`#location${rowx}`).text();
-  var deliverer = $(`#deliverer${rowx}`).text();
-  var note = $(`#note${rowx}`).text();
+  var email = $(`#email${rowx}`).text();
   var where = 'customer';
-  $.post("../save.php",{id:id,name:name,location:location,number:number,deliverer:deliverer,note:note,where:where},
+  $.post("../save.php",{id:id,location:location,number:number,email:email,where:where},
   function(result){});
 });
 
