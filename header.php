@@ -25,7 +25,7 @@
  //authorized signature
  //This is unauthorized access
  //Block it
-         header("Location: $dashboard_url");
+         header('Location: '.$logout_url.'?page_url='.$home_link);
          exit;
      }
      $logged_in_user = $_SESSION['user'];

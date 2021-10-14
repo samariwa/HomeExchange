@@ -88,5 +88,6 @@ else
 }
 $home_link = $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange';
 $dashboard_link = $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/'.$dashboard_url;
+$admin_dashboard_link = $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/'.$admin_url;
 $redirect_link = $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 ?>

@@ -73,7 +73,6 @@ require('config.php');
             <li class="my-account"><a class="dropdown-toggle" href="#" role="button" id="myaccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user mr-1"></i> <?php echo $logged_in_user; ?></a>
                 <ul class="submenu dropdown-menu" aria-labelledby="myaccount">
                     <li><a href="profile.php#dashboard-nav">Profile</a></li>
-                    <li><a href="#">Exchange Points</a></li>
                     <li><a href="my-exchanges.php#dashboard-nav">My Exchanges</a></li>
                     <li><a href="my-homes.php#dashboard-nav">My Homes</a></li>
                     <li><a href="<?php echo $logout_url.'?page_url='.$home_link; ?>">Sign Out</a></li>
@@ -101,9 +100,12 @@ require('config.php');
                         </li>      
                     </ul>
                     <ul class="menu-action d-none d-lg-block">
+                    <div class="row" style="align-items:center">
+                       <li class="menu mr-5"><a href="#"><b>450 EPs</b></a></li>
                             <input type="hidden" id="navbar_cart_hidden" value="0" >
-                        <li class="cart-option"><a onclick="cartopen()" href="#"><span class="cart-icon"><i class="fa fa-bell"></i></span> <span class="cart-amount"></span></a>
-                        </li>
+                        <li class="cart-option"><a onclick="cartopen()" href="#"><span class="cart-icon"><i class="fa fa-bell"></i></span> <span class="cart-amount"></span></a></li>
+                    </div>    
+                   
                     </ul>
                 </div>
             </div>
