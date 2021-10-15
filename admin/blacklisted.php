@@ -29,19 +29,12 @@ include('../queries.php');
   <thead class="thead-dark">
     <tr>
       <th scope="col" width="6%">#</th>
-      <th scope="col" width="15%">Name</th>
-      <th scope="col" width="15%">Location</th>
-      <th scope="col" width="14%">Contact Number</th>
-      <th scope="col" width="10%">Deliverer</th>
-       <?php
-       if ($view == 'Software' || $view == 'Director' || $view == 'CEO') {
-
-        ?>
-      <th scope="col" width="10%">Balance</th>
-      <th scope="col"width="15%"></th>
-      <?php
-        }
-        ?>
+      <th scope="col" width="16%">Name</th>
+      <th scope="col" width="10%">Physical Address</th>
+      <th scope="col" width="13%">Contact Number</th>
+      <th scope="col" width="8%">Email Address</th>
+      <th scope="col"width="7%">Exchange Points</th>
+      <th scope="col"width="20%"></th>
     </tr>
   </thead>
   <tbody >
@@ -49,30 +42,23 @@ include('../queries.php');
         $count = 0;    
         foreach($blacklistedList as $row){
          $count++;
-          $id = $row['id'];
-         $name = $row['Name'];
-        $location = $row['Location'];
-        $number = $row['Number'];
-        $deliverer = $row['Deliverer'];
-        $balance = $row['Balance'];
+         $id = $row['id'];
+         $name =$row['first_name'].' '.$row['other_name'].' '.$row['last_name'];
+         $location = $row['physical_address'];
+         $number = $row['phone_number'];
+         $email = $row['email_address'];
+         $points = $row['exchange_points'];
       ?>
     <tr>
-      <th scope="row" class="uneditable" id="id<?php echo $count; ?>"><?php echo $id; ?></th>
-      <td class="uneditable" id="name<?php echo $count; ?>"><?php echo $name; ?></td>
+     <th scope="row" class="uneditable" id="id<?php echo $count; ?>"><?php echo $id; ?></th>
+      <td  class="uneditable" id="name<?php echo $count; ?>"><?php echo $name; ?></td>
       <td class="editable" id="location<?php echo $count; ?>"><?php echo $location; ?></td>
       <td class="editable" id="number<?php echo $count; ?>"><?php echo $number; ?></td>
-      <td class="uneditable" id="deliverer<?php echo $count; ?>"><?php echo $deliverer; ?></td>
-      <?php
-       if ($view == 'Software' || $view == 'Director' || $view == 'CEO') {
-
-        ?>
-      <td class="editable" id="balance<?php echo $count; ?>"><?php echo $balance; ?></td>
+      <td class="editable" id="email<?php echo $count; ?>"><?php echo $email; ?></td>
+      <td class="uneditable"id="points<?php echo $count; ?>"><?php echo $points; ?></td>
        <td> <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-success btn-sm active restoreBlacklist" role="button" aria-pressed="true" >Restore</button>
          <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-danger btn-sm active deleteBlacklist" role="button" aria-pressed="true" ><i class="fa fa-user-times"></i>Delete</button>
      </td>
-     <?php
-        }
-        ?>
     </tr>
     <?php
     }

@@ -17,6 +17,7 @@ class Database{
         }
     }
 
+
     public function getAll($table)
     {
         return "SELECT * FROM {$table}";

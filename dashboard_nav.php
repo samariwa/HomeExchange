@@ -75,7 +75,37 @@ require('config.php');
                     <li><a href="profile.php#dashboard-nav">Profile</a></li>
                     <li><a href="my-exchanges.php#dashboard-nav">My Exchanges</a></li>
                     <li><a href="my-homes.php#dashboard-nav">My Homes</a></li>
-                    <li><a href="<?php echo $logout_url.'?page_url='.$home_link; ?>">Sign Out</a></li>
+                    <?php
+                       $redirect_page = '';
+                       $neutral_link = FALSE;
+                     if (strpos($redirect_link, 'cookie-policy.php') == TRUE) {
+                       $neutral_link = TRUE;
+                     }
+                     elseif (strpos($redirect_link, 'site-map.php') == TRUE){
+                       $neutral_link = TRUE;
+                     }
+                     elseif (strpos($redirect_link, 'faq.php') == TRUE){
+                       $neutral_link = TRUE;
+                     }
+                     elseif (strpos($redirect_link, 'contact.php') == TRUE){
+                       $neutral_link = TRUE;
+                     }
+                     elseif (strpos($redirect_link, 'privacy-policy.php') == TRUE){
+                       $neutral_link = TRUE;
+                     }
+                     elseif (strpos($redirect_link, 'login.php') == TRUE){
+                       $neutral_link = TRUE;
+                     }
+                     if(($redirect_link == '') || ($neutral_link == TRUE))
+                    {
+                        $redirect_page = $redirect_link;
+                    }
+                    else
+                    {
+                        $redirect_page = $home_link;
+                    }
+                    ?>
+                    <li><a href="<?php echo $logout_url.'?page_url='.$redirect_page; ?>">Sign Out</a></li>
                 </ul>
             </li>
 

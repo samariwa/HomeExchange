@@ -3,6 +3,7 @@ require('config.php');
 session_start();
 $view = $_SESSION['role'];
 $where =$_POST['where'];
+$customer = new Customer();
 if ($where == 'customer' ) {
 	$id = $_POST['id'];
    $location = $_POST['location'];

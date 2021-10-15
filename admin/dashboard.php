@@ -120,7 +120,7 @@
       <i class="fa fa-address-book fa-4x" style="margin-left: 70px;"></i>
       <br><br>
       <?php 
-        $customersrowcount = mysqli_num_rows($customersList);
+        $customersrowcount = mysqli_num_rows($activeCustomersList);
       ?>
       <p style="text-align: center;font-size: 35px"><?php echo $customersrowcount; ?></p>
     </div>

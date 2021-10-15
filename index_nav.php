@@ -42,8 +42,37 @@ require('config.php');
         <ul class="site-action d-none d-lg-flex align-items-center justify-content-between  ml-auto">
             <li class="site-phone"><a href="tel:<?php echo $contact_number; ?>"><i class="fas fa-phone"></i> <?php echo $contact_number; ?></a></li>
             <li class="site-help ml-5"><a data-toggle="collapse" href="#" style="font-size:15px">Register</a></li>
-
-            <li class="signin-option ml-n5"><a href="<?php echo  $login_url.'?page_url='.$dashboard_link; ?>"><i class="fas fa-user mr-2"></i>Sign In</a></li>
+            <?php
+                       $redirect_page = '';
+                       $neutral_link = FALSE;
+                     if (strpos($redirect_link, 'cookie-policy.php') == TRUE) {
+                       $neutral_link = TRUE;
+                     }
+                     elseif (strpos($redirect_link, 'site-map.php') == TRUE){
+                       $neutral_link = TRUE;
+                     }
+                     elseif (strpos($redirect_link, 'faq.php') == TRUE){
+                       $neutral_link = TRUE;
+                     }
+                     elseif (strpos($redirect_link, 'contact.php') == TRUE){
+                       $neutral_link = TRUE;
+                     }
+                     elseif (strpos($redirect_link, 'privacy-policy.php') == TRUE){
+                       $neutral_link = TRUE;
+                     }
+                     elseif (strpos($redirect_link, 'login.php') == TRUE){
+                       $neutral_link = TRUE;
+                     }
+                     if(($redirect_link == '') || ($neutral_link == TRUE))
+                    {
+                        $redirect_page = $redirect_link;
+                    }
+                    else
+                    {
+                        $redirect_page = $dashboard_link;
+                    }
+                    ?>
+            <li class="signin-option ml-n5"><a href="<?php echo  $login_url.'?page_url='.$redirect_page; ?>"><i class="fas fa-user mr-2"></i>Sign In</a></li>
         </ul>
     </div>
 

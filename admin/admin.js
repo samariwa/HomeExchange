@@ -2258,9 +2258,6 @@ function saveOrderToday(idx){
                 $(this).remove();
               });
             }
-            else{
-              alert("Error: Selected Customer hasn't made any order yet.");
-            }
         });
       }});
     });

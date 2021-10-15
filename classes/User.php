@@ -46,7 +46,7 @@ class User{
         	}
         }
 
-        mysqli_query($connection,$db->update("users", "email_address", $email, array('loginattempt' => $loginattempts_email))) or die(mysqli_error($connection));
+        mysqli_query($connection,$db->update("users", "email_address", $email, array('loginattempt' => $loginattempts_email, 'online' => '1'))) or die(mysqli_error($connection));
 
        
 //Finally store user unique signature in the session
@@ -60,4 +60,6 @@ class User{
             mysqli_query($connection,$db->insert("logged_devices", array('user_id' => $user_id, 'ip_address' => $iptocheck, 'browser/device' => $useragent))) or die(mysqli_error($connection));
         }
     }
+
+
 }
