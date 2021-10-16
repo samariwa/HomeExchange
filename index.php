@@ -2,6 +2,7 @@
  session_start();
  require('config.php');
  require('functions.php');
+ require('queries.php');
  if (isset($_SESSION['logged_in'])) {
     if ($_SESSION['logged_in'] == TRUE) {
          //valid user has logged-in to the website
@@ -292,7 +293,7 @@
                    </div>
                    <div class="col-md-4 text-center">
                         <i class="fa fa-user-friends fa-3x" style="color: #BDBBBB;"></i>
-                        <h6>3,000 Customers</h6>
+                        <h6><?php echo $activeCustomersCount; ?> Customer<?php if($activeCustomersCount > 1){ ?>s<?php } ?></h6>
                    </div>
                 </div>
             </section>
@@ -374,6 +375,19 @@
             </section>
             <!-- category section end -->
 
+            <!-- category section start -->
+            <section class="catagory-section">
+                <div class="container p-lg-0">
+                    <div class="section-heading">
+                        <h4 class="heading-title"><span class="heading-circle"></span> The Home Tier System</h4>
+                    </div>
+
+                    <div class="section-wrapper">
+                       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur quibusdam enim expedita sed nesciunt incidunt accusamus adipisci officia libero laboriosam! Proin gravida nibh vel velit auctor aliquet. nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vultate cursus a sit amet mauris. Duis sed odio sit amet nibh vultate cursus a sit amet mauris.</p>
+                    </div>
+                </div>
+            </section>
+            <!-- category section end -->
 
 
             <!-- testimonial-section start -->

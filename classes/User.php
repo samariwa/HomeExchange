@@ -61,5 +61,13 @@ class User{
         }
     }
 
+    public function GetUserRole()
+    {
 
+    }
+
+    public function UpdateUserDetails()
+    {
+        
+    }
 }
