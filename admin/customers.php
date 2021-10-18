@@ -17,7 +17,7 @@
           ?>
     <div class="row">
       <div class="col-md-3">
-
+      <a href="home-owners.php" class="btn btn-primary btn-md active" role="button" aria-pressed="true" >Home Owners</a>
        </div>
        <div class="col-md-5">
       <?php
@@ -33,11 +33,10 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col" width="3%">#</th>
-      <th scope="col" width="14%">Name</th>
-      <th scope="col" width="10%">Physical Address</th>
-      <th scope="col" width="17%">Contact Number</th>
+      <th scope="col" width="25%">Name</th>
+      <th scope="col" width="17%">Physical Address</th>
+      <th scope="col" width="10%">Contact Number</th>
       <th scope="col" width="8%">Email Address</th>
-      <th scope="col"width="10%">Exchange Points</th>
       <th scope="col"width="22%"></th>
     </tr>
   </thead>
@@ -51,7 +50,6 @@
          $location = $row['physical_address'];
          $number = $row['phone_number'];
          $email = $row['email_address'];
-         $points = $row['exchange_points'];
       ?>
     <tr>
       <th scope="row" class="uneditable" id="id<?php echo $count; ?>"><?php echo $id; ?></th>
@@ -59,7 +57,6 @@
       <td class="editable" id="location<?php echo $count; ?>"><?php echo $location; ?></td>
       <td class="editable" id="number<?php echo $count; ?>"><?php echo $number; ?></td>
       <td class="editable" id="email<?php echo $count; ?>"><?php echo $email; ?></td>
-      <td class="uneditable"id="points<?php echo $count; ?>"><?php echo $points; ?></td>
        <td>&emsp;&emsp;
          <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-dark btn-sm active blacklistCustomer" role="button" aria-pressed="true" >Blacklist</button>
        <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-danger btn-sm active deleteCustomer" role="button" aria-pressed="true" ><i class="fa fa-user-times"></i>Delete</button></td>

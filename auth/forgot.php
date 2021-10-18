@@ -35,7 +35,7 @@ if (isset($_REQUEST['forgot-button'])) {
       if ($exists > 0){
         $random = generateRandomString();
         $reset_link = $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/auth/reset.php?email='.$email.'&token='.$random;
-        mysqli_query($connection, "UPDATE users SET token= '$random',tokenExpire=DATE_ADD(NOW(), INTERVAL 5 MINUTE )WHERE email='$email'");
+        mysqli_query($connection, "UPDATE users SET token= '$random',tokenExpire=DATE_ADD(NOW(), INTERVAL 5 MINUTE )WHERE email_address ='$email'");
         require_once "PHPMailer/PHPMailer.php";
         require_once "PHPMailer/Exception.php";
         require_once "PHPMailer/SMTP.php";

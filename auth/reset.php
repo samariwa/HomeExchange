@@ -27,7 +27,7 @@ if (isset($_REQUEST['reset_button'])) {
    if (isset($_GET['email']) && isset($_GET['token'])){
       $email = $connection->real_escape_string($_GET['email']);
       $token = $connection->real_escape_string($_GET['token']);
-      $exists=mysqli_num_rows(mysqli_query($connection,"SELECT number FROM users WHERE email='$email' AND token='$token' AND tokenExpire > NOW()"));
+      $exists=mysqli_num_rows(mysqli_query($connection,"SELECT phone_number FROM users WHERE email_address='$email' AND token='$token' AND tokenExpire > NOW()"));
       if($exists > 0){
          if ((isset($_POST["pass"])) &&  (isset($_POST["pass2"]))) {
          $desired_password = sanitize($_POST["pass"]);

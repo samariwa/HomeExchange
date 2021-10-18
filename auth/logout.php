@@ -13,7 +13,7 @@ if ($session->exists('logged_in')) {
     $row = mysqli_fetch_array(mysqli_query($connection,$query->get("users","*", array('email_address','=',$email))));
     $access = $row['role_id'];
     $user_id = $row['id'];
-    mysqli_query($connection,$query->update("users", "email_address", $email, array('online' => '0', 'lastActivity' => 'NOW()')));
+    mysqli_query($connection,"UPDATE `users` SET `online` = '0', `lastActivity` = NOW() WHERE `email_address` = '$email'");
    mysqli_query($connection,"DELETE FROM `logged_devices` WHERE `user_id` = '$user_id' AND ip_address = '$iptocheck'");
    $session->put('logged_in', FALSE);
     session_destroy();

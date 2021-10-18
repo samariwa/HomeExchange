@@ -36,8 +36,8 @@ elseif ($where == 'blacklist') {
 	$id = $_POST['id'];
     $location = $_POST['location'];
     $number = $_POST['number'];
-    $balance = $_POST['balance'];
-mysqli_query($connection,"UPDATE `customers` INNER JOIN `orders` ON customers.id = orders.Customer_id SET `Location` = '".$location."',`Number` = '".$number."',`Balance` = '".$balance."' WHERE customers.id = '".$id."'")or die($connection->error);
+    $email = $_POST['email'];
+mysqli_query($connection,"UPDATE `users` SET `physical_address` = '".$location."',`phone_number` = '".$number."',`email_address` = '".$email."' WHERE id = '".$id."'")or die($connection->error);
 }
 elseif ($where == 'categories') {
 	$id = $_POST['id'];

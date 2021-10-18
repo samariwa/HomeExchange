@@ -1430,9 +1430,9 @@ $('#blacklistEditable').editableTableWidget();
   var id = $(`#id${rowx}`).text();
   var location = $(`#location${rowx}`).text();
   var number = $(`#number${rowx}`).text();
-  var balance = $(`#balance${rowx}`).text();
+  var email = $(`#email${rowx}`).text();
   var where = 'blacklist';
-  $.post("../save.php",{id:id,location:location,number:number,balance:balance,where:where},
+  $.post("../save.php",{id:id,location:location,number:number,email:email,where:where},
   function(result){});
 });
 

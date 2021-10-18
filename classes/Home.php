@@ -5,7 +5,12 @@ class Home{
       
    }
 
-   public function fetchHome()
+   public function fetchHomeDetails()
+   {
+
+   }
+
+   public function fetchHomeImages($home_id)
    {
 
    }

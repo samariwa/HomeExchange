@@ -61,13 +61,15 @@ class User{
         }
     }
 
-    public function GetUserRole()
+    public function GetUserRole($user_email)
     {
-
+        $query = new Database();
+        return $query->get("users","role_id", array('email_address','=',$user_email));
     }
 
-    public function UpdateUserDetails()
+    public function UpdateUserDetails($user_id, $first_name, $other_name, $last_name, $email, $mobile, $location)
     {
-        
+        $query = new Database();
+        return $query->update("users", "id", $user_id, array('first_name' => $first_name, 'other_name' => $other_name, 'last_name' => $last_name, 'email_address' => $email, 'phone_number' => $mobile, 'physical_address' => $location));
     }
 }
