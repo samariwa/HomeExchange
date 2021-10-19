@@ -8,23 +8,20 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard <span style="font-size: 18px;">/Homes</span></h1>
-            <h6 class="text-gray-600" style="margin-left: 500px;">Time: <span id="time"></span></h6>
+            <h1 class="h3 mb-0 text-gray-800">Dashboard <span style="font-size: 18px;">/Homes </span><span style="font-size: 15px;">/Home Features</span></h1>
+            <h6 class="text-gray-600" style="margin-left: 440px;">Time: <span id="time"></span></h6>
              <button class="btn btn-light btn-md active printCustomers mr-3" role="button" aria-pressed="true" ><i class="fa fa-print"></i>&ensp;Print</button>
           </div>
         <?php
            include "dashboard_tabs.php";
           ?>
     <div class="row">
-      <div class="col-md-3">
-      <a href="home-features.php" class="btn btn-light btn-md active" role="button" aria-pressed="true" >Home Features</a>
-       </div>
-       <div class="col-md-5">
-      <h6 class="offset-5">Total Number: <?php echo $activeHomesCount; ?></h6>
-      </div>
       <div class="col-md-4">
-      <a href="blacklisted-homes.php" class="btn btn-dark btn-md active offset-5" role="button" aria-pressed="true" >Blacklisted Homes</a>
+      <a href="homes.php" class="btn btn-primary btn-md active" role="button" aria-pressed="true" ><i class="fa fa-arrow-left"></i>&ensp;Back</a>
       </div>
+      <div class="col-md-8">
+
+    </div>
     </div><br>
     <table id="homesEditable" class="table table-striped table-hover paginate" style="display:block;overflow-y:scroll;text-align: center;">
   <thead class="thead-dark">

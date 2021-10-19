@@ -26,7 +26,7 @@
       <h6 class="offset-5">Total Number: <?php echo $customersrowcount; ?></h6>
       </div>
       <div class="col-md-4">
-      <a href="blacklisted.php" class="btn btn-dark btn-md active offset-5" role="button" aria-pressed="true" >Blacklisted Customers</a>
+      <a href="blacklisted-customers.php" class="btn btn-dark btn-md active offset-5" role="button" aria-pressed="true" >Blacklisted Customers</a>
       </div>
     </div><br>
     <table id="customersEditable" class="table table-striped table-hover paginate" style="display:block;overflow-y:scroll;text-align: center;">

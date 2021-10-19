@@ -17,5 +17,7 @@ $activeAdminsList = mysqli_query($connection, $admin->GetActiveAdmins())or die($
 $activeAdminsCount = mysqli_num_rows($activeAdminsList);
 $activeHomesList = mysqli_query($connection, $home->GetActiveHomes())or die($connection->error);
 $activeHomesCount = mysqli_num_rows($activeHomesList);
+$deactivatedHomesList =  mysqli_query($connection,$home->GetDeactivatedHomes())or die($connection->error);
+$deactivatedHomesCount = mysqli_num_rows($deactivatedHomesList);
 ?>
 

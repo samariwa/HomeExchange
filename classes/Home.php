@@ -2,8 +2,7 @@
 class Home{
    public function GetActiveHomes()
    {
-      $query = new Database();
-        return $query->get("homes","*", array('home_status','=','1'));
+        return "SELECT homes.id as home_id, first_name, last_name, name, county, subcounty, homes.average_rating as average_rating, home_tier,home_extra_details  FROM homes INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id INNER JOIN subcounties ON homes.address = subcounties.id INNER JOIN counties ON subcounties.county_id = counties.id WHERE home_status = '1'";
    }
 
    public function fetchHomeDetails($home_id)
@@ -57,6 +56,12 @@ class Home{
    {
       $query = new Database();
       return $query->update("home_features", "home_id", $home_id, array('home_status' => '0'));
+   }
+
+   public function GetDeactivatedHomes()
+   {
+      $query = new Database();
+      return $query->get("homes","*", array('home_status','=', '0'));
    }
 
    public function ReactivateHome($home_id)
