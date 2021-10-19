@@ -5,6 +5,11 @@ class Customer{
        return "SELECT id, first_name,other_name, last_name, physical_address, phone_number, email_address FROM users WHERE role_id = '2' AND user_status = '1'";
    }
 
+   public function FetchCustomer($user_id)
+    {
+        return "SELECT id, first_name,other_name, last_name, phone_number, email_address FROM users WHERE role_id = '2' AND if = '$user_id'";
+    }
+
    public function GetExchangePoints($user_id)
    {
      $query = new Database();
@@ -25,24 +30,6 @@ class Customer{
    public function GetBlacklistedCustomer()
    {
        return "SELECT id, first_name,other_name, last_name, physical_address, phone_number, email_address FROM users WHERE role_id = '2' AND user_status = '0'";
-   }
-
-   public function BlacklistCustomer($id)
-   {
-       $db = new Database();
-       return $db->update("users", "id", $id, array('user_status' => '0'));
-   }
-
-   public function RestoreCustomer($id)
-   {
-       $db = new Database();
-       return $db->update("users", "id", $id, array('user_status' => '1'));
-   }
-
-   public function DeleteCustomer($id)
-   {
-       $db = new Database();
-       return $db->delete("users", $id);
    }
 
 }

@@ -9,7 +9,7 @@ class HomeRating{
     public function GetAverageHomeRating($home_id)
     {
         $query = new Database();
-        return $query->get("homes","average_rating", array('id','=',$home_id));
+        return $query->get("home_ratings","AVG(rating_value)", array('home_id','=',$home_id));
     }
 
     public function GetAllHomeRatings($home_id)
@@ -18,8 +18,9 @@ class HomeRating{
         return $query->get("home_ratings","*", array('home_id','=',$home_id));
     }
 
-    public function SetAverageHomeRating()
+    public function SetAverageHomeRating($home_id, $rating)
     {
-
+        $query = new Database();
+        return $query->update("homes", "id", $home_id, array('average_rating' => $rating));
     }
 }

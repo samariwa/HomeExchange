@@ -72,4 +72,22 @@ class User{
         $query = new Database();
         return $query->update("users", "id", $user_id, array('first_name' => $first_name, 'other_name' => $other_name, 'last_name' => $last_name, 'email_address' => $email, 'phone_number' => $mobile, 'physical_address' => $location));
     }
+
+    public function DeactivateUser($user_id)
+    {
+        $query = new Database();
+       return $query->update("users", "id", $user_id, array('user_status' => '0'));
+    }
+
+    public function ReactivateUser($user_id)
+    {
+        $query = new Database();
+        return $query->update("users", "id", $user_id, array('user_status' => '1'));
+    }
+
+    public function DeleteUser($user_id)
+    {
+        $db = new Database();
+       return $db->delete("users", $user_id);
+    }
 }

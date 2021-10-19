@@ -18,11 +18,8 @@ include('../queries.php');
       <div class="col-md-4">
       <a href="customers.php" class="btn btn-primary btn-md active" role="button" aria-pressed="true" ><i class="fa fa-arrow-left"></i>&ensp;Back</a>
       </div>
-      <?php
-        $blacklistedrowcount = mysqli_num_rows($blacklistedList);
-      ?>
       <div class="col-md-8">
-      <h6 class="offset-2">Total Number: <?php echo $blacklistedrowcount; ?></h6>
+      <h6 class="offset-2">Total Number: <?php echo $blacklistedCount; ?></h6>
     </div>
     </div><br>
     <table id="blacklistEditable" class="table table-striped table-hover paginate" style="display:block;overflow-y:scroll;text-align: center;">

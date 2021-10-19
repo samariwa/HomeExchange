@@ -21,7 +21,9 @@ class HomeExchangeRequest{
 
    public function AcceptExchangeRequest($requester_id, $availability_id)
    {
+      $home_availability = new HomeAvailabilityDetails();
       return "UPDATE home_exchange_request SET request_response = '1' WHERE requester_id = '$sender_id' AND availability_id = '$availability_id'";
+      $home_availability->RemoveHomeAvailability($availability_id);
    }
 
    public function DeclineExchangeRequest($requester_id, $availability_id)
