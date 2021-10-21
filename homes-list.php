@@ -163,7 +163,7 @@
                                     <div class="product-thumb">
                                             <!--you can add this onclick to anchor tag below when necessary-->
                                             <!--onclick="openModal()"-->
-                                            <a ><img src="assets/images/homes/home1.jpeg" alt="product"></a>
+                                            <a href="home-dashboard.php"><img src="assets/images/homes/home1.jpeg" alt="product"></a>
                                             <span class="batch sale">In 2 days</span>
                                             <a class="wish-link"
                                             href="<?php echo $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/index.php?action=add_wishlist&id='.$row['id'] ?>">

@@ -122,12 +122,22 @@
                     <div class="section-wrapper ml-5">
                             <h6>County</h6>
                             <div class="col-7">
-                                <input type="text" class="form-control" style="font-family:Arial, FontAwesome" id="county" name="county" placeholder="&#xF002; Search..." required>
+                                <input type="text" class="form-control" style="font-family:Arial, FontAwesome" id="county_search" name="county_search" placeholder="&#xF002; Search..." required>
+                                <div class="col-7" style="position: absolute;z-index: 4;">
+                                    <div class="list-group" id="county_list" >
+                                        
+                                    </div>
+                                </div>
                             </div>
                             <br><br>
                             <h6>Sub-County</h6>
                             <div class="col-7">
-                                <input type="text" class="form-control" style="font-family:Arial, FontAwesome" id="county" name="subcounty" placeholder="&#xF002; Search..." disabled required>
+                                <input type="text" class="form-control" style="font-family:Arial, FontAwesome" id="subcounty_search" name="subcounty_search" placeholder="&#xF002; Search..." disabled required>
+                                <div class="col-12" style="position: absolute;z-index: 4;">
+                                    <div class="list-group" id="subcounty_list" >
+                                        
+                                    </div>
+                                </div>
                             </div>
                             <br><br>
                            <div class="row">
@@ -181,37 +191,25 @@
                             <div class="row">
                             <i class="fas fa-door-open fa-2x ml-5" style="color: #BDBBBB;"></i>
                             <h6 class="ml-5">Bedrooms</h6>
-                            <button class="btn">
-                                   <i id="bedroomsDownQuantity" onclick="" class='fa fa-minus-circle ml-5' style="color:#FD5555;font-size:30px"></i>
-                                </button>
+                                   <i id="bedroomsDownQuantity" onclick="increase_decrease_btn('decrease', '#bedrooms')" class='fa fa-minus-circle ml-5' style="color:#FD5555;font-size:30px"></i>
                                 <h3 class="ml-5"><span name="bedrooms" id="bedrooms">1</span></h3>
-                               <button class="btn">
-                                   <i id="bedroomsUpQuantity" onclick="" class='fa fa-plus-circle ml-5' style="color:#FD5555;font-size:30px"></i>
-                               </button>
+                                   <i id="bedroomsUpQuantity" onclick="increase_decrease_btn('increase', '#bedrooms')" class='fa fa-plus-circle ml-5' style="color:#FD5555;font-size:30px"></i>
                             </div>
                             <br><br>
                             <div class="row">
                             <i class="fas fa-bath fa-2x ml-5" style="color: #BDBBBB;"></i>
                             <h6 class="ml-5">Bathrooms</h6>
-                            <button class="btn">
-                                   <i id="bathroomsDownQuantity" onclick="" class='fa fa-minus-circle ml-5' style="color:#FD5555;font-size:30px"></i>
-                                </button>
+                                   <i id="bathroomsDownQuantity" onclick="increase_decrease_btn('decrease', '#bathrooms')" class='fa fa-minus-circle ml-5' style="color:#FD5555;font-size:30px"></i>
                                 <h3 class="ml-5"><span name="bathrooms" id="bathrooms">1</span></h3>
-                               <button class="btn">
-                                   <i id="bathroomsUpQuantity" onclick="" class='fa fa-plus-circle ml-5' style="color:#FD5555;font-size:30px"></i>
-                               </button>
+                                   <i id="bathroomsUpQuantity" onclick="increase_decrease_btn('increase', '#bathrooms')" class='fa fa-plus-circle ml-5' style="color:#FD5555;font-size:30px"></i>
                             </div>
                             <br><br>
                             <div class="row">
                             <i class="fas fa-users fa-2x ml-5" style="color: #BDBBBB;"></i>
                             <h6 class="ml-5">Occupancy</h6>
-                            <button class="btn">
-                                   <i id="occupancyDownQuantity" onclick="" class='fa fa-minus-circle ml-5' style="color:#FD5555;font-size:30px"></i>
-                                </button>
+                                   <i id="occupancyDownQuantity" onclick="increase_decrease_btn('decrease', '#occupancy')" class='fa fa-minus-circle ml-5' style="color:#FD5555;font-size:30px"></i>
                                 <h3 class="ml-5"><span name="occupancy" id="occupancy">1</span></h3>
-                               <button class="btn">
-                                   <i id="occupancyUpQuantity" onclick="" class='fa fa-plus-circle ml-5' style="color:#FD5555;font-size:30px"></i>
-                               </button>
+                                   <i id="occupancyUpQuantity" onclick="increase_decrease_btn('increase', '#occupancy')" class='fa fa-plus-circle ml-5' style="color:#FD5555;font-size:30px"></i>
                             </div> 
                              <br><br>
                             <div class="row">

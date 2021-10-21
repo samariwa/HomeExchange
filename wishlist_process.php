@@ -4,13 +4,13 @@ $refresh_page = '';
 $products_page = 'product-list.php';
 $wishlist_page = 'wishlist.php'; 
 if (strpos($redirect_link, $home_url) == TRUE) {
-    $refresh_page = $protocol.$_SERVER['HTTP_HOST'].'/SymphaFresh/index.php';
+    $refresh_page = $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/dashboard.php';
 }
 elseif (strpos($redirect_link, $products_page) == TRUE){
-    $refresh_page = $protocol.$_SERVER['HTTP_HOST'].'/SymphaFresh/product-list.php';
+    $refresh_page = $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/homes-list.php';
 } 
 elseif (strpos($redirect_link, $wishlist_page) == TRUE){
-    $refresh_page = $protocol.$_SERVER['HTTP_HOST'].'/SymphaFresh/wishlist.php';
+    $refresh_page = $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/wishlist.php';
 } 
 if(isset($_GET['action']))
 {

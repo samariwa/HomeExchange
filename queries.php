@@ -5,6 +5,7 @@ $faq = new Faq();
 $role = new Role();
 $admin = new Administrator();
 $home = new Home();
+$exchange = new HomeExchangeRequest();
 $subscribersList = mysqli_query($connection,"SELECT * FROM newsletter_subscribers ORDER BY id DESC")or die($connection->error);
 $faqsList = mysqli_query($connection,$faq->GetAllFaqs())or die($connection->error);
 $activeCustomersList = mysqli_query($connection, $customer->GetActiveCustomer())or die($connection->error);
@@ -19,5 +20,7 @@ $activeHomesList = mysqli_query($connection, $home->GetActiveHomes())or die($con
 $activeHomesCount = mysqli_num_rows($activeHomesList);
 $deactivatedHomesList =  mysqli_query($connection,$home->GetDeactivatedHomes())or die($connection->error);
 $deactivatedHomesCount = mysqli_num_rows($deactivatedHomesList);
+$acceptedExchangeRequests = mysqli_query($connection,$exchange->GetExchanges())or die($connection->error);
+$acceptedExchangeCount = mysqli_num_rows($acceptedExchangeRequests);
 ?>
 

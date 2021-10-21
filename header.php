@@ -54,7 +54,14 @@
             }
             setcookie('shopping_wishlist', '', $cart_expiry);
         }
-
+        $exchangePoints = 0;
+        $customer = new Customer();
+        $exchangePointsResult = mysqli_query($connection,$customer->GetExchangePoints($customer_id))or die($connection->error);
+        if(mysqli_num_rows($exchangePointsResult) > 0)
+        {
+            $row = mysqli_fetch_array($exchangePointsResult);
+            $exchangePoints = $row['exchange_points'];
+        }
  //Session Lifetime control for inactivity
      if ((isset($_SESSION['LAST_ACTIVITY'])) && (time() - $_SESSION['LAST_ACTIVITY'] > $sessiontimeout) || (isset($_SESSION['LAST_ACTIVITY'])) && ($active == 2)) {
  //redirect the user back to login page for re-authentication
@@ -189,13 +196,13 @@ else{
                                     }
                                 else{
                                 ?>
-                                href="auth/login.php?page_url=<?php echo $protocol.$_SERVER['HTTP_HOST'].'/SymphaFresh/wishlist.php#dashboard-nav' ?>"
+                                href="auth/login.php?page_url=<?php echo $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/wishlist.php#dashboard-nav' ?>"
                                 <?php    
                                 }   
                             } 
                             else{
                             ?>
-                                href="auth/login.php?page_url=<?php echo $protocol.$_SERVER['HTTP_HOST'].'/SymphaFresh/wishlist.php#dashboard-nav' ?>"
+                                href="auth/login.php?page_url=<?php echo $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/wishlist.php#dashboard-nav' ?>"
                             <?php
                             }
                                 ?>
@@ -230,7 +237,7 @@ else{
                     <div class="select-search-option">
 
                         <form action="search" method="POST" class="search-form">
-                            <input type="text" name="search" id="Product_Search" placeholder="Where are you visiting?">
+                            <input type="text" name="search" id="Location_Search" placeholder="Where are you visiting?">
                             <button type="submit" class="submit-btn" name="searchSubmit"><i class="fas fa-search"></i></button>
                         </form>
                         <div class="col-12" style="position: relative;z-index: 4;">

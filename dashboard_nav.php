@@ -29,11 +29,11 @@ require('config.php');
        
         <div class="select-search-option d-none d-md-flex">
             <form action="search" method="POST" class="search-form">
-                <input type="text" name="search" id="product_Search" placeholder="Where are you visiting?">
+                <input type="text" name="search" id="location_Search" placeholder="Where are you visiting?">
                 <button type="submit" class="submit-btn" name="searchSubmit"><i class="fas fa-search"></i></button>
             </form>
         </div>
-        <div class="col-7 offset-4" style="position: absolute;z-index: 4;">
+        <div class="col-7" style="position: absolute;z-index: 4;">
             <div class="list-group" id="show_list" >
             </div>
         </div>
@@ -131,7 +131,7 @@ require('config.php');
                     </ul>
                     <ul class="menu-action d-none d-lg-block">
                     <div class="row" style="align-items:center">
-                       <li class="menu mr-5"><a href="#"><b>450 EPs</b></a></li>
+                       <li class="menu mr-5"><a href="#"><b><?php echo $exchangePoints; ?> EPs</b></a></li>
                             <input type="hidden" id="navbar_cart_hidden" value="0" >
                         <li class="cart-option"><a onclick="cartopen()" href="#"><span class="cart-icon"><i class="fa fa-bell"></i></span> <span class="cart-amount"></span></a></li>
                     </div>    

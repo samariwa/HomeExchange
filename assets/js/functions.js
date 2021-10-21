@@ -967,6 +967,39 @@ $(document).on('click','.anonymous_subcomment',function(){
     });        
 });
 
+function increase_decrease_btn(action, html_id)
+{
+    var qty = parseInt($(html_id).text());
+    if(action == "decrease")
+    {
+        qty--;
+        if(qty < 0)
+     {
+         qty = 0;
+     }
+     $(html_id).html(qty);
+    }
+    else if(action == "increase")
+    {
+        qty++;
+        $(html_id).html(qty);
+    }
+}
+function increase_decrease_btn_kids(action, html_id)
+{
+    $('.kids_coming').each(function() {
+        if($(this).prop('checked')) 
+        {
+            increase_decrease_btn(action, html_id);
+        }
+        else
+        {
+            $(html_id).html(0);
+        }
+    });
+}
+
+
 function filter_data()
     {
         var organization = $('.organization_name').val();
@@ -1005,6 +1038,7 @@ $(document).on('click','.category_selector',function(){
 
 $(document).on('click','.editProfile',function(){
     var firstname = $('#firstname').val();
+    var othername = $('#othername').val();
     var lastname = $('#lastname').val();
     var email = $('#email').val();
     var mobile = $('#mobile').val();
@@ -1012,7 +1046,7 @@ $(document).on('click','.editProfile',function(){
     var old_email = $('#old_email').val();
     var token= $('#token').val();
     var where = $('#where').val();
-    $.post("save.php",{firstname:firstname,lastname:lastname,email:email,mobile:mobile,location:Location,old_email:old_email,token:token,where:where},
+    $.post("save.php",{firstname:firstname,othername:othername,lastname:lastname,email:email,mobile:mobile,location:Location,old_email:old_email,token:token,where:where},
     function(result){
         if (result == 'success') {
             alert('Your details have been edited successfully');
@@ -1045,16 +1079,16 @@ $(document).on('click','.pagination_link',function(){
   paginate(page);
 });
 
-$('#product_Search').keyup(function(){
-    var txt = $('#product_Search').val();
+$('#location_Search').keyup(function(){
+    var txt = $('#location_Search').val();
     var selector = document.getElementById('Cat_select');
-    var category = selector[selector.selectedIndex].value;
+    //var category = selector[selector.selectedIndex].value;
     if(txt != '')
     {
       $.ajax({
         url: 'search.php',
         type:"post",
-        data:{search:txt,category:category},
+        data:{search:txt},
         dataType:"text",
         success:function(data)
         {
@@ -1067,21 +1101,21 @@ $('#product_Search').keyup(function(){
       $('#show_list').html('');
     }
     $(document).on('click','a',function(){
-        $("#product_Search").val($(this).text());
+        $("#location_Search").val($(this).text());
         $("#show_list").html(''); 
     });
  });
 
- $('#Product_Search').keyup(function(){
-    var txt = $('#Product_Search').val();
+ $('#Location_Search').keyup(function(){
+    var txt = $('#Location_Search').val();
     var selector = document.getElementById('Cat_Select');
-    var category = selector[selector.selectedIndex].value;
+    //var category = selector[selector.selectedIndex].value;
     if(txt != '')
     {
       $.ajax({
         url: 'search.php',
         type:"post",
-        data:{search:txt,category:category},
+        data:{search:txt},
         dataType:"text",
         success:function(data)
         {
@@ -1094,8 +1128,64 @@ $('#product_Search').keyup(function(){
       $('#Show_List').html('');
     }
     $(document).on('click','a',function(){
-        $("#Product_Search").val($(this).text());
+        $("#Location_Search").val($(this).text());
         $("#Show_List").html(''); 
+    });
+ });
+
+ $('#county_search').keyup(function(){
+    var subcounty = document.getElementById('subcounty_search');
+    var text = $("#county_search").val();
+    var where = 'county';
+    if(text != "")
+    {
+        subcounty.disabled = false;
+        $.ajax({
+            url: 'search.php',
+            type:"post",
+            data:{text:text,where:where},
+            dataType:"text",
+            success:function(data)
+            {
+              $('#county_list').html(data);
+            }
+          });
+    }
+    else
+    {
+        subcounty.disabled = true;
+        $('#county_list').html('');
+    }
+    $(document).on('click','#county',function(){
+        $("#county_search").val($(this).text());
+        $("#county_list").html(''); 
+    });
+ });
+
+ $('#subcounty_search').keyup(function(){
+    var subcounty = $('#subcounty_search').val();
+    var county = $('#county_search').val();
+    var where = 'subcounty';
+    if(subcounty != '')
+    {
+      $.ajax({
+        url: 'search.php',
+        type:"post",
+        data:{subcounty:subcounty, county:county, where:where},
+        dataType:"text",
+        success:function(data)
+        {
+          $('#subcounty_list').html(data);
+        }
+      });
+    }
+    else
+    {
+      $('#subcounty_list').html('');
+    }
+    $(document).on('click','#subcounty',function(){
+        $("#subcounty_search").val($(this).text());
+        $("#subcounty_list").html(''); 
     });
  });
 

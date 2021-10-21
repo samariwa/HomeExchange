@@ -252,7 +252,7 @@
 
                         <div class="swiper-slide">
                             <div class="banner-content-area" >
-                                <div class="slider-image slider-image1" style="background-image:url('assets/images/banner/bog10.jpeg');background-size: 160%;"></div>
+                                <div class="slider-image slider-image1" style="background-image:url('assets/images/banner/banner-bg5.jpeg');background-repeat: no-repeat;background-size: 100%;"></div>
                                 <div class="container">
                                     <div class="banner-content text-center">
                                         <h6 style="color: rgb(77, 72, 72);">Lorem Ipsum</h6>
@@ -285,11 +285,11 @@
                 <div class="container col-md-12 p-lg-0 row">
                    <div class="col-md-4 text-center">
                         <i class="fas fa-home fa-3x" style="color: #BDBBBB;"></i>
-                        <h6>2,694 Homes</h6>
+                        <h6><?php echo $activeHomesCount; ?> Home<?php if($activeHomesCount > 1 || $activeHomesCount ==0){ ?>s<?php } ?></h6>
                    </div>
                    <div class="col-md-4 text-center">
                        <i class="fas fa-exchange-alt fa-3x" style="color: #BDBBBB;"></i>
-                        <h6>1,074 Swaps</h6>
+                        <h6><?php echo $acceptedExchangeCount; ?> Swap<?php if($acceptedExchangeCount > 1 || $acceptedExchangeCount ==0){ ?>s<?php } ?></h6>
                    </div>
                    <div class="col-md-4 text-center">
                         <i class="fa fa-user-friends fa-3x" style="color: #BDBBBB;"></i>

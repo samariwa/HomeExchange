@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class="col-3">
-                                <h6>Exchange Points: 274</h6>
+                                <h6>Exchange Points: <?php echo $exchangePoints; ?></h6>
                         </div>
                     </div> 
                     <br>
@@ -39,19 +39,28 @@
                         <div class="row">
                             <h6>Where are you visiting?</h6>
                             <div class="col-4">
-                                <input type="text" class="form-control" id="location" placeholder="Mombasa" required>
+                                <input type="text" class="form-control" style="font-family:Arial, FontAwesome" name="county_search" id="county_search" placeholder="&#xF002; County..." required>
+                                <div class="col-7" style="position: absolute;z-index: 4;">
+                                    <div class="list-group" id="county_list" >
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control" style="font-family:Arial, FontAwesome" name="subcounty_search" id="subcounty_search" placeholder="&#xF002; Sub-County..." disabled>
+                                <div class="col-12" style="position: absolute;z-index: 4;">
+                                    <div class="list-group" id="subcounty_list" >
+                                        
+                                    </div>
+                                </div>
                             </div>
                         </div>
                        <br>
                        <div class="row">
                             <h6>How many people are accompanying you?</h6>
-                            <button class="btn">
-                                   <i id="peopleDownQuantity" onclick="" class='fa fa-minus-circle' style="color:#FD5555;font-size:20px"></i>
-                                </button>
-                                <h4><span name="people_no" id="people_no">0</span></h4>
-                               <button class="btn">
-                                   <i id="peopleUpQuantity" onclick="" class='fa fa-plus-circle' style="color:#FD5555;font-size:20px"></i>
-                               </button>
+                                   <i id="peopleDownQuantity" onclick="increase_decrease_btn('decrease', '#people_no')" class='fa fa-minus-circle ml-2' style="color:#FD5555;font-size:20px"></i>
+                                    <h4 class="ml-2"><span name="people_no" id="people_no">0</span></h4>
+                                   <i id="peopleUpQuantity" onclick="increase_decrease_btn('increase', '#people_no')" class='fa fa-plus-circle ml-2' style="color:#FD5555;font-size:20px"></i>
                         </div>
                        <br>
                        <div class="row">
@@ -75,19 +84,15 @@
 
                                         </div>
                                     </div>
-                                    <input type="checkbox" name="kids">
+                                    <input type="checkbox" class="kids_coming" name="kids">
                                 </div>
                            </div>
                            <div class="col-6">
-                               <div class="row" style="align-items: center;">
+                               <div class="row">
                                <h6>If yes, how many?</h6>
-                               <button class="btn">
-                                   <i id="kidsDownQuantity" onclick="" class='fa fa-minus-circle' style="color:#FD5555;font-size:20px"></i>
-                                </button>
-                                <h4><span name="kids_no" id="kids_no">0</span></h4>
-                               <button class="btn">
-                                   <i id="kidsUpQuantity" onclick="" class='fa fa-plus-circle' style="color:#FD5555;font-size:20px"></i>
-                               </button>
+                                   <i id="kidsDownQuantity" onclick="increase_decrease_btn_kids('decrease', '#kids_no')" class='fa fa-minus-circle ml-2' style="color:#FD5555;font-size:20px"></i>
+                                    <h4 class="ml-2"><span name="kids_no" id="kids_no">0</span></h4>
+                                   <i id="kidsUpQuantity" onclick="increase_decrease_btn_kids('increase', '#kids_no')" class='fa fa-plus-circle ml-2' style="color:#FD5555;font-size:20px"></i>
                                </div>
                            </div>
                         </div>

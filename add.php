@@ -299,7 +299,7 @@ elseif ($where == 'newsletter') {
    else{
     echo "success";
     $registered = "";
-    $row = mysqli_query($connection,"SELECT * FROM users WHERE email = '".$_POST['email']."'")or die($connection->error);
+    $row = mysqli_query($connection,"SELECT * FROM users WHERE email_address = '".$_POST['email']."'")or die($connection->error);
     $result = mysqli_fetch_array($row);
     if ( $result == TRUE) {
       $registered = "1";
@@ -336,21 +336,21 @@ elseif ($where == 'site_contact') {
 	$response = file_get_contents($token_verification_site, false, $context);
 	$res = json_decode($response, true);
 	if ($res['success'] == 'true' && $res['score'] >= 0.5) {
-  $row = mysqli_query($connection,"SELECT * FROM users WHERE email = '".$_POST['email']."'")or die($connection->error);
+  $row = mysqli_query($connection,"SELECT * FROM users WHERE email_address = '".$_POST['email']."'")or die($connection->error);
    $result = mysqli_fetch_array($row);
    if ( $result == TRUE) {
      $registered = "1";
-     $full_name = $result['firstname'].' '.$result['lastname'];
-     $number = $result['number'];
+     $full_name = $result['first_name'].' '.$result['last_name'];
+     $number = $result['phone_number'];
    }
    else{ 
     $registered = "0";
     $full_name = $_POST['name'];
     $number = $_POST['number'];
    }
-    require_once "PHPMailer/PHPMailer.php";
-    require_once "PHPMailer/Exception.php";
-    require_once "PHPMailer/SMTP.php";
+    require_once "auth/PHPMailer/PHPMailer.php";
+    require_once "auth/PHPMailer/Exception.php";
+    require_once "auth/PHPMailer/SMTP.php";
     $mail = new PHPMailer(true);
     $mail -> addAddress($authenticator_email,$organization);
     $mail -> setFrom($authenticator_email,$organization);
