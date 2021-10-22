@@ -1,4 +1,6 @@
 import json
+from flask import Flask, jsonify, render_template, request
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -8,27 +10,33 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report, confusion_matrix
 
-house_features = [0,0,0,0,1,1,0,0,0,0,0,0,0,0,1]
-data = pd.read_csv('/Users/Mariwa/.bitnami/stackman/machines/xampp/volumes/root/htdocs/HomeExchange/tier match/tier_dataset.csv')
-X = data.iloc[:,:-1].values
-Y = data.iloc[:, 15].values
+#app = Flask(__name__)
 
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.9)
+def knn_prediction():
+    house_features = [0,0,0,0,1,1,2,1,4,0,0,0,0,0,0,0,0,1]
+    #house_features = request.json
+    data = pd.read_csv('/Users/Mariwa/.bitnami/stackman/machines/xampp/volumes/root/htdocs/HomeExchange/tier match/home_tier_dataset.csv')
+    X = data.iloc[:,:-1].values
+    Y = data.iloc[:, 18].values
 
-scaler = StandardScaler()
-scaler.fit(X_train)
-X_train = scaler.transform(X_train)
-X_test = scaler.transform(X_test)
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.9)
 
-classifier = KNeighborsClassifier(n_neighbors=5)
-classifier.fit(X_train,Y_train)
+    scaler = StandardScaler()
+    scaler.fit(X_train)
+    X_train = scaler.transform(X_train)
+    X_test = scaler.transform(X_test)
 
-y_pred = classifier.predict(X_test)
+    classifier = KNeighborsClassifier(n_neighbors=5)
+    classifier.fit(X_train,Y_train)
 
-check_value = np.array(house_features)
+    y_pred = classifier.predict(X_test)
 
-tier_prediction = classifier.predict([check_value])
-#json_obj = json.dumps(tier_prediction)
-tier = tier_prediction[0]
-print(tier)
+    check_value = np.array(house_features)
 
+    tier_prediction = classifier.predict([check_value])
+    #json_obj = json.dumps(tier_prediction)
+    tier = tier_prediction[0]
+    return jsonify(tier)
+
+run = knn_prediction()
+print(run)

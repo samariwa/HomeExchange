@@ -1202,6 +1202,9 @@ ul {
   background-color: rgb(77, 72, 72);
 }
 
+.disable-click{
+  pointer-events:none;
+}
 
 .all-catagory-option {
   position: relative;
@@ -7026,7 +7029,7 @@ Preloader
   .top{
      background-color: #f9f9f9;
      color:rgba(0, 0, 0, 0.6);
-     z-index: 2;
+     z-index: 1;
      width: 50vw;
   }
 

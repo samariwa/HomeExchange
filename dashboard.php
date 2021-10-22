@@ -89,7 +89,7 @@ include('header.php');
                                                 <a href="home-dashboard.php"><img src="assets/images/homes/home1.jpeg" alt="product"></a>
                                                 <span class="batch sale">In 2 days</span>
                                             <a class="wish-link"
-                                            href="<?php echo $protocol.$_SERVER['HTTP_HOST'].'/SymphaFresh/index.php?action=add_wishlist&id='.$row['id'] ?>">
+                                            href="<?php echo $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/dashboard.php?action=add_wishlist&id='.$row['id'] ?>">
                                                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="svg-inline--fa fa-heart fa-w-16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path
                                                     <?php
                                                        //if($item_in_wishlist == true){

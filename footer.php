@@ -177,12 +177,12 @@
     <script src='assets/js/scroll-nav.js'></script>
     <script src="assets/js/jquery.elevatezoom.js"></script>
     <script src='assets/js/price-range.js?293082'></script>
-    <script src='assets/js/toggle.js?2343243082'></script>
+    <script src='assets/js/toggle.js?23924389082'></script>
     <script src='assets/js/custom-select.js'></script>
     <script src='assets/js/fly-cart.js?359597'></script>
     <script src='assets/js/multi-countdown.js'></script>
     <script src='assets/js/theia-sticky-sidebar.js'></script>
-    <script src='assets/js/functions.js?876643238733479'></script>
+    <script src='assets/js/functions.js?6832'></script>
    <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 $(function() {

@@ -23,10 +23,10 @@ class Home{
       return $query->delete("homes", $home_id);
    }
 
-   public function AddHome($owner_id, $name, $description, $address, $tier, $extra_details, $image_url)
+   public function AddHome($details = array())
    {
       $query = new Database();
-      return $query->insert("homes", array('home_owner_id' => $owner_id,'name' => $name,'description' => $description ,'address' => $address,'home_tier' => $tier ,'home_extra_details' => $extra_details,'home_image' => $image_url ));
+      return $query->insert("homes", $details);
    }
 
    public function FetchOwnerLatestHomeId($owner_id)

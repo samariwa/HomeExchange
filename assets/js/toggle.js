@@ -1,4 +1,5 @@
 let switches = document.querySelectorAll('.ios-switch')
+let radioCards = document.querySelectorAll('.radio_item')
 const prevBtns = document.querySelectorAll(".prev")
 const nextBtns = document.querySelectorAll(".next")
 const formSteps = document.querySelectorAll(".form-step")
@@ -20,9 +21,9 @@ for(var i =0; i < switches.length; i++)
 }
 
 nextBtns.forEach((btn) =>{
-    btn.addEventListener("click", () => {
-      formStepsNum ++;
-      updateFormSteps();
+    btn.addEventListener("click", () => {  
+        formStepsNum ++;
+        updateFormSteps();   
     });
 });
 

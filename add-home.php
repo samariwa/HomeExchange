@@ -19,7 +19,7 @@
             <div id="actionAlert">
               <?php //echo $message; ?>
             </div>
-
+            
             <section class="skewed form-step active" id="wrapper">
                  <div class="layer bottom" style="background-image:url('assets/images/add-home/home-add-icon.png'); background-repeat: no-repeat;background-size: 110%; ">
                      <div class="content-wrap">
@@ -45,7 +45,7 @@
                         <h6>Home Type</h6>
                         <div class="row">
                             <label class="radio_item">
-                            <input type="radio" name="home_type" class="checkbox">
+                            <input type="radio" name="home_type" id="home_type_house" value="1" class="checkbox">
                             <div class="option_inner house">
                                 <div class="tickmark"></div>
                                 <div class="icon"><i class="fas fa-home fa-2x"></i></div>
@@ -53,7 +53,7 @@
                             </div>
                             </label>
                             <label class="radio_item ml-5">
-                            <input type="radio" name="home_type" class="checkbox">
+                            <input type="radio" name="home_type" id="home_type_apartment" value="0" class="checkbox">
                             <div class="option_inner apartment">
                                 <div class="tickmark"></div>
                                 <div class="icon"><i class="fas fa-building fa-2x"></i></div>
@@ -65,7 +65,7 @@
                         <h6>Residence Type</h6>
                         <div class="row">
                             <label class="radio_item">
-                            <input type="radio" name="residence_type" class="checkbox">
+                            <input type="radio" name="residence_type" id="residence_type" value="1" class="checkbox">
                             <div class="option_inner primary">
                                 <div class="tickmark"></div>
                                 <div class="icon"><h2>1</h2></div>
@@ -73,7 +73,7 @@
                             </div>
                             </label>
                             <label class="radio_item ml-5">
-                            <input type="radio" name="residence_type" class="checkbox">
+                            <input type="radio" name="residence_type" id="residence_type" value="0" class="checkbox">
                             <div class="option_inner secondary">
                                 <div class="tickmark"></div>
                                 <div class="icon"><h2>2</h2></div>
@@ -82,10 +82,10 @@
                             </label>
                         </div>
                        <br><br>
-                        <div class="next">
+                        <div class="next home-like">
                                 <a href="#">Next</a>
                         </div>
-                    </div>
+                     </div>
                      </div>
                         </div>
                        <br>
@@ -406,6 +406,7 @@
                      </div>
                  </div>
                  <div class="layer top">
+                 <form method="POST" id="form">
                      <div class="content-wrap">
                      <div class="container p-lg-0">
 
@@ -419,6 +420,7 @@
                         </div>
                     </div> 
                     <br>
+                    
                     <div class="section-wrapper ml-5">
                             <h6>Title</h6>
                             <div class="col-8">
@@ -432,10 +434,12 @@
                             <br>
                             <h6>Insert an image of your house</h6>
                             <div class="col-6">
-                            <input type="file" class="form-control" id="house-image" name="house-image" required>
+                            <input type="file" class="form-control" id="upload" name="upload" onchange="displayname(this,$(this))" required>
                             </div>
                            </div> 
                             <br><br>
+                            <input type="hidden" name="where" id="where"  value="home">
+                            <input type="hidden" name="user"  value="<?php echo $customer_id; ?>">
                             <div class="row">
                             <div class="col-6">
                             <div class="prev ml-5">
@@ -444,7 +448,7 @@
                             </div>
                             <div class="col-6">
                            <div class="submit">
-                                 <input type="submit" value="Complete" style="background-color: #FD5555;" class="btn btn-danger rounded-pill ml-3"/>
+                                 <button type="submit" id="completeAddHome" style="background-color: #FD5555;" class="btn btn-danger rounded-pill ml-3">Complete</button>
                            </div>
                            </div>
                             </div>
@@ -454,12 +458,13 @@
                        <br>
                     </div>
                     </div>
-                <!-- end of description page-->
+                  <!-- end of description page-->
                 </div> 
                      </div>
-                 </div>
+                     </form>
+                 </div>         
             </section>
-    
+         
 <?php
     include('footer.php');
 ?>

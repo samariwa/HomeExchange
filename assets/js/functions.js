@@ -999,6 +999,128 @@ function increase_decrease_btn_kids(action, html_id)
     });
 }
 
+/*
+$(document).on('click','.home-like',function(){
+    if($('input[name="home_type"]:checked').val() == null && )
+    {
+
+    }
+    alert($('input[name="home_type"]:checked').val());
+
+});
+*/
+function encodeHomeFeatures(value)
+{
+   var result;
+   if(value == null)
+   {
+       result = 0;
+   }
+   else
+   {
+       result = 1;
+   }
+   return result;
+}
+
+$(document).on('submit','#form',function(e){
+ e.preventDefault();
+ e.stopPropagation();
+   var form_data = new FormData(this);
+   form_data.append('subcounty',$('#subcounty_search').val());
+   form_data.append('area',$('#area').val());
+   $.ajax({
+    url: 'add.php',
+    type: 'post',
+    data: form_data,
+    contentType : false,
+    processData : false,
+    cache : false,
+      success : function(data){
+        var xml = new XMLHttpRequest();
+        xml.open("POST", "{{url_for(func.func)}}",true);
+        xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xml.onload = function()
+        {
+            var dataReply = JSON.parse(this.responseText)
+            alert(dataReply)
+        }
+        var dataSend = JSON.stringify({
+            'home_type' : $('input[name="home_type"]:checked').val(),
+            'residence_type' : $('input[name="residence_type"]:checked').val(),
+            'bedrooms' : $('#bedrooms').text(),
+            'bathrooms' : $('#bathrooms').text(),
+            'occupancy' : $('#occupancy').text(),
+            'swimming' : encodeHomeFeatures($('input[name="swimming"]:checked').val()),
+            'wifi' : encodeHomeFeatures($('input[name="wifi"]:checked').val()),
+            'tv' : encodeHomeFeatures($('input[name="tv"]:checked').val()),
+            'workers' : encodeHomeFeatures($('input[name="workers"]:checked').val()),
+            'wheelchair' : encodeHomeFeatures($('input[name="wheelchair"]:checked').val()),
+            'parking' : encodeHomeFeatures($('input[name="parking"]:checked').val()),
+            'gym' : encodeHomeFeatures($('input[name="gym"]:checked').val()),
+            'kids' : encodeHomeFeatures($('input[name="kids"]:checked').val()),
+            'security' : encodeHomeFeatures($('input[name="security"]:checked').val()),
+            'garden' : encodeHomeFeatures($('input[name="garden"]:checked').val()),
+            'ac' : encodeHomeFeatures($('input[name="ac"]:checked').val()),
+            'pets' : encodeHomeFeatures($('input[name="pets"]:checked').val()),
+            'smokers' : encodeHomeFeatures($('input[name="smokers"]:checked').val())
+        });
+        xml.send(dataSend)
+       }
+      });
+});
+
+function tier_analysis()
+{
+    var xml = new XMLHttpRequest();
+    xml.open("POST", "{{url_for(func.func)}}",true);
+    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xml.onload = function()
+    {
+        var dataReply = JSON.parse(this.responseText)
+        alert(dataReply)
+    }
+    var dataSend = {}
+    xml.send(dataSend)
+}
+
+function formAjax(module){
+    var form_data = new FormData($('form')[0]);
+    var form_data = new FormData();
+    form_data.append('where', 'home');
+    $.ajax({
+      url: '../add.php',
+      type: 'post',
+      data: form_data,
+      contentType : false,
+      processData : false,
+      cache : false,
+        success : function(data){
+         if (data == 'success') {
+          alert(module+' Added Successfully');
+          location.reload(true);
+         }
+          else if (data == 'exists') {
+          alert(module+' Already Exists');
+         }
+           else{
+          alert("Something went wrong");
+         }
+         }
+        });
+ }
+
+ function displayname(input,_this) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            _this.siblings('label').html(input.files[0]['name'])
+            
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 
 function filter_data()
     {
