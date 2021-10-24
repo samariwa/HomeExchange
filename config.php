@@ -48,6 +48,9 @@ $useragent = $_SERVER["HTTP_USER_AGENT"];
 //minimum is 5
 $maxfailedattempts = 5;
 
+//initial exchange points awarded when customer adds home
+$initial_exchange_points = 750;
+
 //Defining session timeout in seconds
 //minimum 60 (for one minute)
 $sessiontimeout = 60*30;

@@ -1,5 +1,6 @@
 <?php
  include('../queries.php');
+ require('../config.php');
  session_start();
  ?> 
 <!doctype html>
@@ -40,11 +41,20 @@ $today = date('l, F d, Y h:i A', time());
         foreach($activeCustomersList as $row){
          $count++;
          $id = $row['id'];
+         $owner_id= mysqli_query($connection,"SELECT exchange_points FROM home_owners WHERE user_id = '".$row['id']."'")or die($connection->error);
+        $owner_result = mysqli_fetch_array($owner_id);
+        $points = '';
+        if ($owner_result == TRUE) 
+        {
+            $points = $owner_result['exchange_points'];
+        }
+        else{
+          $points = 0;
+        }
          $name = $row['first_name'].' '.$row['other_name'].' '.$row['last_name'];
         $location = $row['physical_address'];
         $number = $row['phone_number'];
         $email = $row['email_address'];
-        $points = $row['exchange_points'];
       ?>
     <tr>
       <th scope="row"><?php echo $id; ?></th>

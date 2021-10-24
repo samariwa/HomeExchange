@@ -36,33 +36,19 @@
 
                                 <div class="widget-wrapper" id="scatagory-widget01">
                                     <ul class="catagory-menu collapse show" id="catagory-main">   
-                                        <li><a class="collapsed"  data-toggle="collapse" href="#catagory-widget-s1" role="button" aria-expanded="false" aria-controls="catagory-widget-s1">Location<span class="plus-minus"></span></a>
+                                        <li><a class="collapsed"  data-toggle="collapse" href="#catagory-widget-s1" role="button" aria-expanded="false" aria-controls="catagory-widget-s1">County<span class="plus-minus"></span></a>
                                             <ul class="catagory-submenu collapse" id="catagory-widget-s1">
-
+                                            <?php                              
+                                                foreach($countyList as $row){
+                                            ?>
                                                 <li class="checkbox-item">
                                                     <input type="checkbox" class="category_selector" id="2" value="erfer">
-                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
-                                                    <span class="label">Nairobi<?php //echo $row2['Name']; ?></span>
+                                                    <span class="checkbox" value="refre<?php echo $row['county']; ?>"></span>
+                                                    <span class="label"><?php echo $row['county']; ?></span>
                                                 </li>
-
-                                                <li class="checkbox-item">
-                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
-                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
-                                                    <span class="label">Mombasa<?php //echo $row2['Name']; ?></span>
-                                                </li>
-
-                                                <li class="checkbox-item">
-                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
-                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
-                                                    <span class="label">Nanyuki<?php //echo $row2['Name']; ?></span>
-                                                </li>
-
-                                                <li class="checkbox-item">
-                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
-                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
-                                                    <span class="label">Narok<?php //echo $row2['Name']; ?></span>
-                                                </li>
-
+                                            <?php
+                                                }
+                                            ?>
                                             </ul>
                                         </li>
                                     </ul>
@@ -74,27 +60,74 @@
                                                 <li class="checkbox-item">
                                                     <input type="checkbox" class="category_selector" id="2" value="erfer">
                                                     <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
-                                                    <span class="label">Swimming Pool<?php //echo $row2['Name']; ?></span>
+                                                    <span class="label">Swimming Pool</span>
                                                 </li>
 
                                                 <li class="checkbox-item">
                                                     <input type="checkbox" class="category_selector" id="2" value="erfer">
                                                     <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
-                                                    <span class="label">Security<?php //echo $row2['Name']; ?></span>
+                                                    <span class="label">Security</span>
                                                 </li>
 
                                                 <li class="checkbox-item">
                                                     <input type="checkbox" class="category_selector" id="2" value="erfer">
                                                     <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
-                                                    <span class="label">Private Garden<?php //echo $row2['Name']; ?></span>
+                                                    <span class="label">Private Garden</span>
                                                 </li>
 
                                                 <li class="checkbox-item">
                                                     <input type="checkbox" class="category_selector" id="2" value="erfer">
                                                     <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
-                                                    <span class="label">Private Gym<?php //echo $row2['Name']; ?></span>
+                                                    <span class="label">Private Gym</span>
                                                 </li>
 
+                                                <li class="checkbox-item">
+                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
+                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <span class="label">Wheelchair Accessible</span>
+                                                </li>
+
+                                                <li class="checkbox-item">
+                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
+                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <span class="label">Private Parking</span>
+                                                </li>
+
+                                                <li class="checkbox-item">
+                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
+                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <span class="label">WiFi</span>
+                                                </li>
+
+                                                <li class="checkbox-item">
+                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
+                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <span class="label">TV</span>
+                                                </li>
+                                                
+                                                <li class="checkbox-item">
+                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
+                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <span class="label">AC</span>
+                                                </li>
+
+                                                <li class="checkbox-item">
+                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
+                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <span class="label">Kids Friendly</span>
+                                                </li>
+
+                                                <li class="checkbox-item">
+                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
+                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <span class="label">Home Workers</span>
+                                                </li>
+
+                                                <li class="checkbox-item">
+                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
+                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <span class="label">Smokers Allowed</span>
+                                                </li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -119,12 +152,47 @@
                         <div class="col-lg-9 order-lg-last">
                             <div class="row product-list">
                             <?php
-                               // foreach($stockList as $row){
+                                foreach($activeHomesList as $row){
                             ?> 
+                                <div class="col-sm-6 col-xl-4" id="kjgj">
+                                    <div class="product-item <?php if($row['home_status'] == 1 ){ ?> cancelled <?php }?>" id="<?php echo $row['id']; ?>">
+                                        <div class="product-thumb">
+                                            <a  href="home-dashboard.php" class="modalOpen" id="<?php echo $row['id']; ?>"><img src="assets/images/homes/<?php echo $row['home_image']; ?>" alt="product"></a> 
+
+                                            <a class="wish-link"
+                                            href="<?php echo $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/Home-list.php?action=add_wishlist&id='.$row['id'] ?>">
+                                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="svg-inline--fa fa-heart fa-w-16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path
+                                                    <?php
+                                                      // if($item_in_wishlist == true){
+                                                          //fill with red
+                                                    ?>
+                                                    style="fill:;"
+                                                     <?php
+                                                      // }
+                                                     ?>
+                                                d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path></svg>
+                                               
+                                            </a>
+                                        </div>
+                                        <div class="product-content">
+                                            <a href="home-dashboard.php" class="cata" id="itemCategory<?php echo $row['id']; ?>">Tier <?php echo $row['home_tier']; ?></a>
+                                            <h6><a href="home-dashboard.php" class="product-title"><?php echo $row['name']; ?></a></h6>
+                                            <p class="quantity"><?php echo $row['county']; ?></p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="price">Ratings</div><?php  rate($row['average_rating']); ?>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                        <?php
+                                }  
+                                ?>
+
                                 <div class="col-sm-6 col-xl-4" id="kjgj">
                                     <div class="product-item <?php //if($row['Quantity'] < $row['Restock_Level'] ){ ?> cancelled <?php //}?>" id="<?php //echo $row['Name']; ?>">
                                         <div class="product-thumb">
-                                            <a  class="modalOpen" id="<?php echo $row['id']; ?>"><img src="assets/images/homes/home2.jpeg" alt="product"></a> 
+                                            <a  href="home-dashboard.php" class="modalOpen" id="<?php echo $row['id']; ?>"><img src="assets/images/homes/home2.jpeg" alt="product"></a> 
 
                                             <a class="wish-link"
                                             href="<?php echo $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/Home-list.php?action=add_wishlist&id='.$row['id'] ?>">
@@ -152,9 +220,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                        <?php
-                             //   }  
-                                ?>
 
 
                                  <div class="col-sm-6 col-xl-4" id="kjgj">
@@ -190,6 +255,8 @@
                                     </div>
                                     </div>
                                 </div>
+
+                                
                                 <!--<div class="col-12 text-center mt-4">
                                     <button class="loadMore">Load More</button>
                                 </div>-->

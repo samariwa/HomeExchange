@@ -1037,8 +1037,8 @@ $(document).on('submit','#form',function(e){
     processData : false,
     cache : false,
       success : function(data){
-        var xml = new XMLHttpRequest();
-        xml.open("POST", "{{url_for(func.func)}}",true);
+       /* var xml = new XMLHttpRequest();
+        xml.open("POST", "tier match/run.py",true);
         xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xml.onload = function()
         {
@@ -1065,8 +1065,8 @@ $(document).on('submit','#form',function(e){
             'pets' : encodeHomeFeatures($('input[name="pets"]:checked').val()),
             'smokers' : encodeHomeFeatures($('input[name="smokers"]:checked').val())
         });
-        xml.send(dataSend)
-       }
+        xml.send(dataSend)*/
+      }
       });
 });
 

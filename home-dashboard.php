@@ -137,8 +137,19 @@
             </section>
 
             <section class="catagory-section  home-dash-facilities mt-n5">
+                <div class="container p-lg-0 " style="margin-top:-100px">
+                <div class="section-heading">
+                        <h4 class="heading-title" style="background-color:white;color: #BDBBBB;"><span class="heading-circle green"></span> Description</h4>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur quibusdam enim expedita sed nesciunt incidunt accusamus adipisci officia libero laboriosam! Proin gravida nibh vel velit auctor aliquet. nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vultate cursus a sit amet mauris. Duis sed odio sit amet nibh vultate cursus a sit amet mauris.</p>
+                </div>
+            </section>
+
+            <section class="catagory-section  home-dash-facilities mt-n5">
                 <div class="container p-lg-0 ">
-                   <h4>Features</h4>
+                <div class="section-heading">
+                        <h4 class="heading-title" style="background-color:white;color: #BDBBBB;"><span class="heading-circle green"></span> Features</h4>
+                    </div>
                    <br>
                    <div class="row">
                       <span class="badge badge-pill home-feature-badge ml-4 mt-2">Security</span>
@@ -155,12 +166,18 @@
             
             <section class="catagory-section  home-dash-facilities mt-n5">
                 <div class="container p-lg-0 ">
-                   <h4>Images</h4>
+                <div class="section-heading">
+                        <h4 class="heading-title" style="background-color:white;color: #BDBBBB;"><span class="heading-circle green"></span> Images</h4>
+                    </div>
                    <br>
                    <div class="row">
                       <img src="assets/images/homes/image1.jpeg" width="500px" height="500px" class="ml-2 mt-2" alt="product">
                       <img src="assets/images/homes/image2.jpeg" width="500px" height="500px" class="ml-2 mt-2" alt="product">
                       <img src="assets/images/homes/image3.jpeg" width="500px" height="500px" class="ml-2 mt-2" alt="product">
+                      <input type="file" id="home-dashboard-image" name="home-dashboard-image" accept="image/*" />
+                      <label for="home-dashboard-image" class="home-dashboard-image">
+                       <i class="fas fa-file-image"></i>&emsp;Add an image
+                      </label>
                    </div>
                 </div>
             </section>

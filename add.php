@@ -465,7 +465,7 @@ elseif ($where == 'home')
    }
    else
    {
-    mysqli_query($connection,"INSERT INTO `home_owners` (`user_id`) VALUES ('".$_POST['user']."')") or die(mysqli_error($connection));
+    mysqli_query($connection,"INSERT INTO `home_owners` (`user_id`,`exchange_points`) VALUES ('".$_POST['user']."','$initial_exchange_points')") or die(mysqli_error($connection));
     $owner_id= mysqli_query($connection,"SELECT id FROM home_owners WHERE user_id = '".$_POST['user']."'")or die($connection->error);
     $owner_result = mysqli_fetch_array($owner_id);
     $home_owner_id = $owner_result['id'];

@@ -7051,5 +7051,34 @@ Preloader
     margin-top: 50px;
   }
 
+input[type="file"]{
+  display : none;
+}
+
+.home-dashboard-image{
+  color: white;
+  height: 60px;
+  width: 250px;
+  background-color: #FD5555;
+  margin: auto;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.add-home-image{
+  color: white;
+  height: 40px;
+  width: 150px;
+  background-color: #FD5555;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
   
  

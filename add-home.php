@@ -434,7 +434,10 @@
                             <br>
                             <h6>Insert an image of your house</h6>
                             <div class="col-6">
-                            <input type="file" class="form-control" id="upload" name="upload" onchange="displayname(this,$(this))" required>
+                            <input type="file" id="upload" name="upload" accept="image/*" onchange="displayname(this,$(this))"/>
+                            <label for="upload" class="add-home-image">
+                            <i class="fas fa-file-image"></i>&emsp;Upload an image
+                            </label>
                             </div>
                            </div> 
                             <br><br>

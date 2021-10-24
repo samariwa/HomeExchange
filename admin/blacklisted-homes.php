@@ -22,34 +22,40 @@ include('../queries.php');
       <h6 class="offset-2">Total Number: <?php echo $deactivatedHomesCount; ?></h6>
     </div>
     </div><br>
-    <table id="blacklistEditable" class="table table-striped table-hover paginate" style="display:block;overflow-y:scroll;text-align: center;">
+    <table id="blacklistedHomesEditable" class="table table-striped table-hover paginate" style="display:block;overflow-y:scroll;text-align: center;">
   <thead class="thead-dark">
     <tr>
-      <th scope="col" width="3%">#</th>
-      <th scope="col" width="25%">Name</th>
-      <th scope="col" width="17%">Physical Address</th>
-      <th scope="col" width="10%">Contact Number</th>
-      <th scope="col" width="8%">Email Address</th>
+    <th scope="col" width="3%">#</th>
+      <th scope="col" width="14%">Home Owner</th>
+      <th scope="col" width="10%">Name</th>
+      <th scope="col" width="17%">Location</th>
+      <th scope="col" width="8%">Rating</th>
+      <th scope="col"width="6%">Tier</th>
+      <th scope="col"width="14%">Extra Details</th>
       <th scope="col"width="22%"></th>
     </tr>
   </thead>
   <tbody >
     <?php
-        $count = 0;    
-        foreach($blacklistedList as $row){
+        $count = 0;
+        foreach($deactivatedHomesList as $row){
          $count++;
-         $id = $row['id'];
-         $name =$row['first_name'].' '.$row['other_name'].' '.$row['last_name'];
-         $location = $row['physical_address'];
-         $number = $row['phone_number'];
-         $email = $row['email_address'];
+         $id = $row['home_id'];
+         $owner_name = $row['first_name'].' '.$row['last_name'];
+         $name = $row['name'];
+        $location = $row['county'].', '.$row['subcounty'];
+        $rating = $row['average_rating'];
+        $tier = $row['home_tier'];
+        $extra_details = $row['home_extra_details'];
       ?>
     <tr>
-     <th scope="row" class="uneditable" id="id<?php echo $count; ?>"><?php echo $id; ?></th>
-      <td  class="uneditable" id="name<?php echo $count; ?>"><?php echo $name; ?></td>
+    <th scope="row" class="uneditable" id="id<?php echo $count; ?>"><?php echo $id; ?></th>
+      <td  class="editable" id="owner_name<?php echo $count; ?>"><?php echo $owner_name; ?></td>
+      <td class="editable" id="name<?php echo $count; ?>"><?php echo $name; ?></td>
       <td class="editable" id="location<?php echo $count; ?>"><?php echo $location; ?></td>
-      <td class="editable" id="number<?php echo $count; ?>"><?php echo $number; ?></td>
-      <td class="editable" id="email<?php echo $count; ?>"><?php echo $email; ?></td>
+      <td class="editable" id="rating<?php echo $count; ?>"><?php echo $rating; ?></td>
+      <td class="uneditable"id="tier<?php echo $count; ?>"><?php echo $tier; ?></td>
+      <td class="editable"id="extra<?php echo $count; ?>"><?php echo $extra_details; ?></td>
        <td> <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-success btn-sm active restoreBlacklist" role="button" aria-pressed="true" >Restore</button>
          <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-danger btn-sm active deleteBlacklist" role="button" aria-pressed="true" ><i class="fa fa-user-times"></i>Delete</button>
      </td>

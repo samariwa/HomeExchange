@@ -1,6 +1,3 @@
-import json
-from flask import Flask, jsonify, render_template, request
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -10,10 +7,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report, confusion_matrix
 
-#app = Flask(__name__)
 
-def knn_prediction():
-    house_features = [0,0,0,0,1,1,2,1,4,0,0,0,0,0,0,0,0,1]
+
+def knn_prediction(features):
     #house_features = request.json
     data = pd.read_csv('/Users/Mariwa/.bitnami/stackman/machines/xampp/volumes/root/htdocs/HomeExchange/tier match/home_tier_dataset.csv')
     X = data.iloc[:,:-1].values
@@ -31,12 +27,9 @@ def knn_prediction():
 
     y_pred = classifier.predict(X_test)
 
-    check_value = np.array(house_features)
+    check_value = np.array(features)
 
     tier_prediction = classifier.predict([check_value])
-    #json_obj = json.dumps(tier_prediction)
     tier = tier_prediction[0]
-    return jsonify(tier)
 
-run = knn_prediction()
-print(run)
+    return tier
