@@ -19,14 +19,14 @@
       <div class="col-md-3">
       <a href="home-owners.php" class="btn btn-primary btn-md active" role="button" aria-pressed="true" >Home Owners</a>
        </div>
-       <div class="col-md-5">
+       <div class="col-md-4">
       <?php
         $customersrowcount = mysqli_num_rows($activeCustomersList);
       ?>
       <h6 class="offset-5">Total Number: <?php echo $customersrowcount; ?></h6>
       </div>
-      <div class="col-md-4">
-      <a href="blacklisted-customers.php" class="btn btn-dark btn-md active offset-5" role="button" aria-pressed="true" >Blacklisted Customers</a>
+      <div class="col-md-5">
+      <a href="blacklisted-customers.php" class="btn btn-dark btn-md active offset-6" role="button" aria-pressed="true" >Blacklisted Customers</a>
       </div>
     </div><br>
     <table id="customersEditable" class="table table-striped table-hover paginate" style="display:block;overflow-y:scroll;text-align: center;">

@@ -13,11 +13,7 @@
 </head><body>
 <p align="center"><strong><img src="../assets/images/LOGO.png" height="100" width="150"></strong></p>
 <p align="center">Active Customers</p>
-  <?php
-        $activecustomersrowcount = mysqli_num_rows($activeCustomersList);
-      ?>
-
-<p align="center">Total Number: <?php echo $activecustomersrowcount; ?></p>
+<p align="center">Total Number: <?php echo $activeCustomersCount; ?></p>
 <?php
 $today = date('l, F d, Y h:i A', time());
 ?>

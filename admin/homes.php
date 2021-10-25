@@ -10,7 +10,7 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard <span style="font-size: 18px;">/Homes</span></h1>
             <h6 class="text-gray-600" style="margin-left: 500px;">Time: <span id="time"></span></h6>
-             <button class="btn btn-light btn-md active printCustomers mr-3" role="button" aria-pressed="true" ><i class="fa fa-print"></i>&ensp;Print</button>
+             <button class="btn btn-light btn-md active printHomes mr-3" role="button" aria-pressed="true" ><i class="fa fa-print"></i>&ensp;Print</button>
           </div>
         <?php
            include "dashboard_tabs.php";
@@ -62,7 +62,7 @@
       <td class="editable"id="extra<?php echo $count; ?>"><?php echo $extra_details; ?></td>
        <td>&emsp;&emsp;
          <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-dark btn-sm active blacklistHome" role="button" aria-pressed="true" >Blacklist</button>
-       <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-danger btn-sm active deleteHome" role="button" aria-pressed="true" ><i class="fa fa-user-times"></i>Delete</button></td>
+       <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-danger btn-sm active deleteHome" role="button" aria-pressed="true" ><i class="fa fa-trash"></i>Delete</button></td>
     </tr>
     <?php
     }

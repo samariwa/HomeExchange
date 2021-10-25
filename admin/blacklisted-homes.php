@@ -56,8 +56,8 @@ include('../queries.php');
       <td class="editable" id="rating<?php echo $count; ?>"><?php echo $rating; ?></td>
       <td class="uneditable"id="tier<?php echo $count; ?>"><?php echo $tier; ?></td>
       <td class="editable"id="extra<?php echo $count; ?>"><?php echo $extra_details; ?></td>
-       <td> <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-success btn-sm active restoreBlacklist" role="button" aria-pressed="true" >Restore</button>
-         <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-danger btn-sm active deleteBlacklist" role="button" aria-pressed="true" ><i class="fa fa-user-times"></i>Delete</button>
+       <td> <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-success btn-sm active restoreHome" role="button" aria-pressed="true" >Restore</button>
+         <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-danger btn-sm active deleteBlacklistedHome" role="button" aria-pressed="true" ><i class="fa fa-trash"></i>Delete</button>
      </td>
     </tr>
     <?php

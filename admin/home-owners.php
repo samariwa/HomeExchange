@@ -8,9 +8,9 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard <span style="font-size: 18px;">/Homes</span></h1>
-            <h6 class="text-gray-600" style="margin-left: 500px;">Time: <span id="time"></span></h6>
-             <button class="btn btn-light btn-md active printCustomers mr-3" role="button" aria-pressed="true" ><i class="fa fa-print"></i>&ensp;Print</button>
+            <h1 class="h3 mb-0 text-gray-800">Dashboard <span style="font-size: 18px;">/Customers </span> <span style="font-size: 15px;">/Home Owners</span></h1>
+            <h6 class="text-gray-600" style="margin-left: 400px;">Time: <span id="time"></span></h6>
+             <button class="btn btn-light btn-md active printHomeOwners mr-3" role="button" aria-pressed="true" ><i class="fa fa-print"></i>&ensp;Print</button>
           </div>
         <?php
            include "dashboard_tabs.php";
@@ -35,14 +35,6 @@
       <th scope="col"width="10%">Email Address</th>
       <th scope="col" width="13%">Average Rating</th>
       <th scope="col" width="17%">Exchange Points</th>
-       <?php
-       if ($view == 'Software' || $view == 'Director' || $view == 'CEO') {
-
-        ?>
-      <th scope="col"width="22%"></th>
-      <?php
-        }
-        ?>
     </tr>
   </thead>
   <tbody >
@@ -55,7 +47,7 @@
         $phone_number = $row['phone_number'];
         $email_address = $row['email_address'];
         $exchange_points = $row['exchange_points'];
-        $average_rating = $row['email_address'];
+        $average_rating = $row['average_rating'];
       ?>
     <tr>
       <th scope="row" class="uneditable" id="id<?php echo $count; ?>"><?php echo $id; ?></th>
@@ -64,16 +56,6 @@
       <td class="editable" id="email<?php echo $count; ?>"><?php echo $email_address; ?></td>
       <td class="editable" id="rating<?php echo $count; ?>"><?php echo $average_rating; ?></td>
       <td class="editable" id="points<?php echo $count; ?>"><?php echo $exchange_points; ?></td>
-        <?php
-       if ($view == 'Software' || $view == 'Director' || $view == 'CEO') {
-
-        ?>
-       <td>&emsp;&emsp;
-         <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-dark btn-sm active blacklistCustomer" role="button" aria-pressed="true" >Blacklist</button>
-       <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-danger btn-sm active deleteCustomer" role="button" aria-pressed="true" ><i class="fa fa-user-times"></i>Delete</button></td>
-        <?php
-        }
-        ?>
     </tr>
     <?php
     }

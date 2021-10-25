@@ -28,6 +28,16 @@ else if($where == 'blacklist' )
     echo 1;
     exit();
 }
+
+else if($where == 'home' )
+{  
+    $home = new Home();
+	$id =$_POST['id'];
+    mysqli_query($connection, $home->DeleteHome($id));
+    echo 1;
+    exit();
+}
+
 else if($where == 'category' )
 {  
 	$id =$_POST['id'];

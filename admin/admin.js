@@ -2182,12 +2182,21 @@ function saveOrderToday(idx){
        deleteAjax($(this).attr("id"),$(this),'customer', 'customer');
     });
 
-    $('.deleteStock').click(function(){
-      deleteAjax($(this).attr("id"),$(this),'stock', 'stock');
-    });
+    $('.deleteHomeOwner').click(function(){
+      deleteAjax($(this).attr("id"),$(this),'home owner', 'customer');
+   });
+
+   $('.deleteHome').click(function(){
+    deleteAjax($(this).attr("id"),$(this),'home', 'home');
+ });
+
 
     $('.deleteBlacklist').click(function(){
       deleteAjax($(this).attr("id"),$(this),'blacklisted customer', 'blacklist');
+    });
+
+    $('.deleteBlacklistedHome').click(function(){
+      deleteAjax($(this).attr("id"),$(this),'blacklisted home', 'home');
     });
 
     $('.deleteExpenseHeading').click(function(){
@@ -2264,11 +2273,51 @@ function saveOrderToday(idx){
   });
 
   $(document).ready(function(){
+    $('.blacklistHome').click(function(){
+      var el = $(this);
+      var where = 'blacklistHome';
+      var id = el.attr("id");
+      bootbox.confirm('Do you really want to blacklist the selected home?',function(result)
+        {if(result){
+          $.post("blacklist_restore.php",{id:id,where:where},
+        function(result){
+            if(result == 1){
+              $(el).closest('tr').css('background','gray');
+              $(el).closest('tr').fadeOut(800,function(){
+                $(this).remove();
+              });
+            }
+        });
+      }});
+    });
+  });
+
+  $(document).ready(function(){
     $('.restoreBlacklist').click(function(){
       var el = $(this);
       var where = 'restore';
       var id = el.attr("id");
       bootbox.confirm('Do you really want to restore the selected blacklisted customer?',function(result)
+        {if(result){
+          $.post("blacklist_restore.php",{id:id,where:where},
+        function(result){
+            if(result == 1){
+              $(el).closest('tr').css('background','lime');
+              $(el).closest('tr').fadeOut(800,function(){
+                $(this).remove();
+              });
+            }
+        });
+      }});
+    });
+  });
+
+  $(document).ready(function(){
+    $('.restoreHome').click(function(){
+      var el = $(this);
+      var where = 'restoreHome';
+      var id = el.attr("id");
+      bootbox.confirm('Do you really want to restore the selected blacklisted home?',function(result)
         {if(result){
           $.post("blacklist_restore.php",{id:id,where:where},
         function(result){
@@ -2409,24 +2458,7 @@ function saveOrderToday(idx){
             $('#customerId').val(id);
             $("#customerReceiptResult").html(''); 
         });
-      })
-
-      $(document).on('click','.printReceipt',function(){
-        var name = $(`#receiptCustomer`).val();
-       var date = $(`#receiptDate`).val();
-       var time = $(`#receiptTime`).val();
-       $.post("receiptPDF.php",{name:name,date:date,time:time},
-       function(result){ var mywindow = window.open('', 'Sympha Fresh', 'height=400,width=600');
-                       mywindow.document.write('<html><head><title></title>');
-                       mywindow.document.write('</head><body>');
-                       mywindow.document.write(result);
-                       mywindow.document.write('</body></html>');
-                       mywindow.document.close();
-                       mywindow.focus();
-                       mywindow.print();
-                       //mywindow.close();
-        });
-      });   
+      })  
 
  $(document).on('click','.printCustomers',function(){
                 $.ajax({
@@ -2434,7 +2466,7 @@ function saveOrderToday(idx){
                     type: 'get',
                     dataType: 'html',
                     success:function(data) {
-                        var mywindow = window.open('', 'Sympha Fresh', 'height=400,width=600');
+                        var mywindow = window.open('', 'Home Exchange', 'height=400,width=600');
                         mywindow.document.write('<html><head><title></title>');
                         mywindow.document.write('</head><body>');
                         mywindow.document.write(data);
@@ -2448,13 +2480,13 @@ function saveOrderToday(idx){
         });
     });
 
- $(document).on('click','.printStock',function(){
+ $(document).on('click','.printHomeOwners',function(){
                 $.ajax({
-                    url: 'stockPrint.php',
+                    url: 'homeOwnersPrint.php',
                     type: 'get',
                     dataType: 'html',
                     success:function(data) {
-                        var mywindow = window.open('', 'Sympha Fresh', 'height=400,width=600');
+                        var mywindow = window.open('', 'Home Exchange', 'height=400,width=600');
                         mywindow.document.write('<html><head><title></title>');
                         mywindow.document.write('</head><body>');
                         mywindow.document.write(data);
@@ -2467,129 +2499,25 @@ function saveOrderToday(idx){
         });
     });
 
- $(document).on('click','.printSales',function(){
-                $.ajax({
-                    url: 'salesPrint.php',
-                    type: 'get',
-                    dataType: 'html',
-                    success:function(data) {
-                        var mywindow = window.open('', 'Sympha Fresh', 'height=400,width=600');
-                        mywindow.document.write('<html><head><title></title>');
-                        mywindow.document.write('</head><body>');
-                        mywindow.document.write(data);
-                        mywindow.document.write('</body></html>');
-                        mywindow.document.close();
-                        mywindow.focus();
-                        mywindow.print();
-                        //mywindow.close();
+    $(document).on('click','.printHomes',function(){
+      $.ajax({
+          url: 'homesPrint.php',
+          type: 'get',
+          dataType: 'html',
+          success:function(data) {
+              var mywindow = window.open('', 'Home Exchange', 'height=400,width=600');
+              mywindow.document.write('<html><head><title></title>');
+              mywindow.document.write('</head><body>');
+              mywindow.document.write(data);
+              mywindow.document.write('</body></html>');
+              mywindow.document.close();
+              mywindow.focus();
+              mywindow.print();
+              //mywindow.close();
+          }
+});
+});
 
-                    }
-        });
-    });
-
- $(document).on('click','.printExtraSales',function(){
-                $.ajax({
-                    url: 'extraSalesPrint.php',
-                    type: 'get',
-                    dataType: 'html',
-                    success:function(data) {
-                        var mywindow = window.open('', 'Sympha Fresh', 'height=400,width=600');
-                        mywindow.document.write('<html><head><title></title>');
-                        mywindow.document.write('</head><body>');
-                        mywindow.document.write(data);
-                        mywindow.document.write('</body></html>');
-                        mywindow.document.close();
-                        mywindow.focus();
-                        mywindow.print();
-                        //mywindow.close();
-
-                    }
-        });
-    });
-
-  $(document).on('click','.printGatePass',function(){
-         var deliverer = $(`#deliverer`).val();
-        var time = $(`#gatePassTime`).val();
-        $.post("gatePassPDF.php",{deliverer:deliverer,time:time},
-        function(result){ var mywindow = window.open('', 'Sympha Fresh', 'height=400,width=600');
-                        mywindow.document.write('<html><head><title></title>');
-                        mywindow.document.write('</head><body>');
-                        mywindow.document.write(result);
-                        mywindow.document.write('</body></html>');
-                        mywindow.document.close();
-                        mywindow.focus();
-                        mywindow.print();
-                        //mywindow.close();
-         });
-       });
-
-  $(document).on('click','.printDistribution',function(){
-         var deliverer = $(`#deliverer`).val();
-        var time = $(`#distributionTime`).val();
-        $.post("distributionPDF.php",{deliverer:deliverer,time:time},
-        function(result){
-           var mywindow = window.open('', 'Sympha Fresh', 'height=400,width=600');
-                        mywindow.document.write('<html><head><title></title>');
-                        mywindow.document.write('</head><body>');
-                        mywindow.document.write(result);
-                        mywindow.document.write('</body></html>');
-                        mywindow.document.close();
-                        mywindow.focus();
-                        mywindow.print();
-                        //mywindow.close();
-         });
-       });
-
-  $(document).on('click','.printSalesInvoice',function(){
-         var deliverer = $(`#deliverer`).val();
-        var date = $(`#invoiceDate`).val();
-        $.post("sales_invoice_print.php",{deliverer:deliverer,date:date},
-        function(result){
-           var mywindow = window.open('', 'Sympha Fresh', 'height=400,width=600');
-                        mywindow.document.write('<html><head><title></title>');
-                        mywindow.document.write('</head><body>');
-                        mywindow.document.write(result);
-                        mywindow.document.write('</body></html>');
-                        mywindow.document.close();
-                        mywindow.focus();
-                        mywindow.print();
-                        //mywindow.close();
-         });
-       });
-
-  $(document).on('click','.printCreditNote',function(){
-         var deliverer = $(`#deliverer`).val();
-        var date = $(`#creditDate`).val();
-        $.post("credit_note_print.php",{deliverer:deliverer,date:date},
-        function(result){
-           var mywindow = window.open('', 'Sympha Fresh', 'height=400,width=600');
-                        mywindow.document.write('<html><head><title></title>');
-                        mywindow.document.write('</head><body>');
-                        mywindow.document.write(result);
-                        mywindow.document.write('</body></html>');
-                        mywindow.document.close();
-                        mywindow.focus();
-                        mywindow.print();
-                        //mywindow.close();
-         });
-       });
-
-  $(document).on('click','.printPaymentStatus',function(){
-         var deliverer = $(`#deliverer`).val();
-        var date = $(`#statusDate`).val();
-        $.post("payment_status_print.php",{deliverer:deliverer,date:date},
-        function(result){
-           var mywindow = window.open('', 'Sympha Fresh', 'height=400,width=600');
-                        mywindow.document.write('<html><head><title></title>');
-                        mywindow.document.write('</head><body>');
-                        mywindow.document.write(result);
-                        mywindow.document.write('</body></html>');
-                        mywindow.document.close();
-                        mywindow.focus();
-                        mywindow.print();
-                        //mywindow.close();
-         });
-       });
       
       $(document).ready(function(){
        var tableLeftovers = document.getElementById("leftoversEditable");

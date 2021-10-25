@@ -10,7 +10,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 
 
 def knn_prediction(features):
-    #house_features = request.json
+    house_features = [0,0,0,0,1,1,2,1,4,0,0,0,0,0,0,0,0,1]
     data = pd.read_csv('/Users/Mariwa/.bitnami/stackman/machines/xampp/volumes/root/htdocs/HomeExchange/tier match/home_tier_dataset.csv')
     X = data.iloc[:,:-1].values
     Y = data.iloc[:, 18].values

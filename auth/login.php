@@ -181,7 +181,7 @@ if (!$session->get('logged_in')):
 
 </head>
   <div class="limiter">
-    <div class="container-login100" style="background-image:url('../assets/images/login_bg<? echo shuffleImage(1,7) ?>.jpeg');background-repeat: no-repeat;background-size: 1300px 800px;">
+    <div class="container-login100" style="background-image:url('../assets/images/login_bg<?php echo shuffleImage(1,7) ?>.jpeg');background-repeat: no-repeat;background-size: 1300px 800px;">
       <div class="wrap-login100" >
         <div class="login100-form-title" style="background-image:url('../assets/images/login_auth_bg.jpg')">
           <span class="login100-form-title-1">
