@@ -39,20 +39,20 @@
         $customer_id = $customer_row['id']; 
         $last_name = $customer_row['last_name'];  
         //transfer wishlist cookie to database
-        if(isset($_COOKIE["shopping_wishlist"]))
+        if(isset($_COOKIE["homes_wishlist"]))
         {
-            $wishlist_data = stripslashes($_COOKIE['shopping_wishlist']);
+            $wishlist_data = stripslashes($_COOKIE['homes_wishlist']);
             $wishlist_data = json_decode($wishlist_data, true);
             foreach($wishlist_data as $keys => $values)
             {
-                $product_id = $values["item_id"];
-                $wishlist_duplicate = mysqli_query($connection,"SELECT * FROM `wishlist` WHERE customer_id ='$customer_id' AND product_id = '$product_id'");
+                $home_id = $values["home_id"];
+                $wishlist_duplicate = mysqli_query($connection,"SELECT * FROM `wishlist` WHERE customer_id ='$customer_id' AND home_id = '$home_id'");
                 $wishlist_duplicate_result = mysqli_fetch_array($wishlist_duplicate);
                 if ( $wishlist_duplicate_result == FALSE) {
-                    mysqli_query($connection,"INSERT INTO `wishlist` (`customer_id`,`product_id`) VALUES ('$customer_id','$product_id')");
+                    mysqli_query($connection,"INSERT INTO `wishlist` (`customer_id`,`home_id`) VALUES ('$customer_id','$home_id')");
                 }
             }
-            setcookie('shopping_wishlist', '', $cart_expiry);
+            setcookie('homes_wishlist', '', $favourite_expiry);
         }
         $exchangePoints = 0;
         $customer = new Customer();

@@ -66,7 +66,7 @@ $location = $result['physical_address'];
                         <div class="wish-list-container">
                         <?php
                         $total = 0;
-                        $wishlist_checker = mysqli_query($connection,"SELECT h.id AS id,h.name as Name,home_image,h.address as address,h.home_tier as tier FROM `wishlist` inner join homes h on wishlist.home_id = h.id WHERE wishlist.customer_id='$customer_id';");
+                        $wishlist_checker = mysqli_query($connection,"SELECT h.id AS id,h.name as Name,home_image,h.address as address,h.home_tier as tier,h.average_rating as rating FROM `wishlist` inner join homes h on wishlist.home_id = h.id WHERE wishlist.customer_id='$customer_id';");
                         $wishlist_count = mysqli_num_rows($wishlist_checker);
                         foreach($wishlist_checker as $row)
                        {
@@ -74,17 +74,16 @@ $location = $result['physical_address'];
                             <div class="wishlist-item product-item d-flex align-items-center <?php if($row['Quantity'] < $row['Restock_Level'] ){ ?>stock-out<?php }?>">
                                 <span class="close-item"><a href="<?php echo $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/wishlist.php?action=wishlist_delete&id='.$row["id"] ?>" class="ml-5 text-danger">Remove <i class="fas fa-times"></i></a></span>
                                 <div class="thumb">
-                                <?php if($row["Discount"] > 0){?><span class="batch sale">Sale</span><?php } ?>
+                                <?php if($row["tier"] > 0){?><span class="batch sale">Sale</span><?php } ?>
                                     <a onclick="openModal()"><img src="assets/images/homes/<?php echo $row["home_image"]; ?>" width="200px" height="170px" alt="products"></a>
                                 </div>
                                 <div class="product-content">
-                                    <a href="product-detail.php" class="product-title"><?php echo $row["Name"]; ?></a>
+                                        Home#<?php echo $row ['id']?>
                                     <div class="product-cart-info">
-                                    <?php echo $row["address"]; ?>
+                                        Tier:<?php echo $row ['tier']; ?>
                                     </div>
                                     <div class="product-price">
-                                    <?php if($row['Discount'] > 0){ ?> <del>Ksh<?php echo number_format($row["Price"],2); ?> /unit</del> <br><?php }?>
-                                       Ksh<?php echo number_format($row["Price"] - $row["Discount"],2); ?> /unit
+                                       Rating: <?php rate($row ['rating'])  ?>
                                     </div>
                                     <div class="cart-btn-toggle">
                                     <button type="submit" class="cart-btn" name="cart_button">

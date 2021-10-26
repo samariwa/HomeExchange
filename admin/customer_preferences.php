@@ -15,10 +15,6 @@
            include "dashboard_tabs.php";
           ?>
           <br><br>
-         <?php
-       if ($view == 'Software' || $view == 'Director' || $view == 'CEO') {
-
-        ?>
       <table class="table table-striped table-hover paginate" style="display:block;overflow-y:scroll;text-align: center;">
   <thead class="thead-dark">
     <tr>
@@ -49,37 +45,5 @@
     ?>
   </tbody>
 </table>
-<?php
-        }
-        else{
-        ?>
-
-         <table id="categoriesEditable" class="table table-striped table-hover paginate" style="display:block;overflow-y:scroll;width: 100%">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col" width="40%">#&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-      <th scope="col" width="60%">Category Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-    </tr>
-  </thead>
-  <tbody >
-    <?php
-        $count = 0;
-        foreach($categoriesList as $row){
-         $count++;
-         $id = $row['id'];
-        $category = $row['Category_Name'];
-      ?>
-    <tr>
-      <th scope="row" class="uneditable" id="id<?php echo $count; ?>"><?php echo $id; ?></th>
-      <td class="uneditable" id="category<?php echo $count; ?>"><?php echo $category; ?></td>
-    </tr>
-    <?php
-    }
-    ?>
-  </tbody>
-</table>
-<?php
-    }
-    ?>
   <!-- Scroll to Top Button-->
   <?php include "admin_footer.php" ?> 

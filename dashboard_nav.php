@@ -50,8 +50,8 @@ require('config.php');
                   $wishlist_count = mysqli_num_rows($wishlist_checker);
                 }
                 else{
-                    if(isset($_COOKIE['shopping_wishlist'])){
-                        $wishlist_data = stripslashes($_COOKIE['shopping_wishlist']);
+                    if(isset($_COOKIE['homes_wishlist'])){
+                        $wishlist_data = stripslashes($_COOKIE['homes_wishlist']);
                         $wishlist_data = json_decode($wishlist_data, true); 
                         foreach($wishlist_data as $cart){
                             $wishlist_count++;
@@ -60,8 +60,8 @@ require('config.php');
                 }
             }
             else{
-                if(isset($_COOKIE['shopping_wishlist'])){
-                    $wishlist_data = stripslashes($_COOKIE['shopping_wishlist']);
+                if(isset($_COOKIE['homes_wishlist'])){
+                    $wishlist_data = stripslashes($_COOKIE['homes_wishlist']);
                     $wishlist_data = json_decode($wishlist_data, true); 
                     foreach($wishlist_data as $cart){
                         $wishlist_count++;
