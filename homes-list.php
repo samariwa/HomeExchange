@@ -152,7 +152,7 @@
                         <div class="col-lg-9 order-lg-last">
                             <div class="row product-list">
                             <?php
-                                foreach($activeHomesList as $row){
+                                foreach($availableHomesList as $row){
                             ?> 
                                 <div class="col-sm-6 col-xl-4" id="kjgj">
                                     <div class="product-item <?php if($row['home_status'] == 1 ){ ?> cancelled <?php }?>" id="<?php echo $row['id']; ?>">

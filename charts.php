@@ -19,6 +19,28 @@ if($where == 'fastmoving' )
        $array = json_encode($fastmovingproducts);
         echo $array;
 }  
+else if($where == 'newsignups' )
+{   
+  $signupsTotal = array();
+  $row1 = mysqli_fetch_array($signupsWk1);
+  $total1 = $row1['sum'];
+  $Total1 = $total1;
+  $row2 = mysqli_fetch_array($signupsWk2);
+  $total2 = $row2['sum'];
+  $Total2 = $total2;
+  $row3 = mysqli_fetch_array($signupsWk3);
+  $total3 = $row3['sum'];
+  $Total3 = $total3;
+  $row4 = mysqli_fetch_array($signupsWk4);
+  $total4 = $row4['sum'];
+  $Total4 = $total4;
+  array_push($signupsTotal, $Total1);
+  array_push($signupsTotal, $Total2);
+  array_push($signupsTotal, $Total3);
+  array_push($signupsTotal, $Total4);
+ $array = json_encode($signupsTotal);
+  echo $array;
+}
 else if($where == 'fastselling' )
 {   
        $fastsum = 0;

@@ -38,7 +38,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                   <div class="chart-area">
-                    <div id="curve_chart" style="width: 640px; height: 320px;"></div>
+                    <div id="curve_chart" style="width: 620px; height: 320px;"></div>
                   
                   </div>
                 </div>

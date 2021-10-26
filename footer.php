@@ -182,7 +182,7 @@
     <script src='assets/js/fly-cart.js?359597'></script>
     <script src='assets/js/multi-countdown.js'></script>
     <script src='assets/js/theia-sticky-sidebar.js'></script>
-    <script src='assets/js/functions.js?683543'></script>
+    <script src='assets/js/functions.js?69565543'></script>
    <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 $(function() {

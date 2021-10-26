@@ -538,7 +538,7 @@ setTime();
       google.charts.setOnLoadCallback(drawSalesChart);
 
       function drawSalesChart() {
-        var where = 'salesTotal';
+        var where = 'newsignups';
        $.post("../charts.php",{where:where},
         function(result){
           var data = $.parseJSON(result);
@@ -555,7 +555,7 @@ setTime();
         ]);
 
         var options = {
-          title: 'Total sales value for the month',
+          title: 'Total sign ups for the month',
           curveType: 'function',
           legend: { position: 'bottom' }
         };
@@ -2190,6 +2190,9 @@ function saveOrderToday(idx){
     deleteAjax($(this).attr("id"),$(this),'home', 'home');
  });
 
+$('.cancelAvailability').click(function(){
+    deleteAjax($(this).attr("id"),$(this),'home availability', 'home_avaliability');
+ });
 
     $('.deleteBlacklist').click(function(){
       deleteAjax($(this).attr("id"),$(this),'blacklisted customer', 'blacklist');
@@ -2518,7 +2521,25 @@ function saveOrderToday(idx){
 });
 });
 
-      
+$(document).on('click','.printAvailableHomes',function(){
+  $.ajax({
+      url: 'availableHomesPrint.php',
+      type: 'get',
+      dataType: 'html',
+      success:function(data) {
+          var mywindow = window.open('', 'Home Exchange', 'height=400,width=600');
+          mywindow.document.write('<html><head><title></title>');
+          mywindow.document.write('</head><body>');
+          mywindow.document.write(data);
+          mywindow.document.write('</body></html>');
+          mywindow.document.close();
+          mywindow.focus();
+          mywindow.print();
+          //mywindow.close();
+      }
+});
+});   
+
       $(document).ready(function(){
        var tableLeftovers = document.getElementById("leftoversEditable");
        var  sumVal = 0; 

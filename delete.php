@@ -23,8 +23,7 @@ else if($where == 'stock' )
 else if($where == 'blacklist' )
 {  
     $customer = new Customer();
-	$id =$_POST['id'];
-    mysqli_query($connection, $customer->DeleteCustomer($id));
+    mysqli_query($connection, $customer->DeleteCustomer($_POST['id']))or die($connection->error);
     echo 1;
     exit();
 }
@@ -32,11 +31,19 @@ else if($where == 'blacklist' )
 else if($where == 'home' )
 {  
     $home = new Home();
-	$id =$_POST['id'];
-    mysqli_query($connection, $home->DeleteHome($id));
+    mysqli_query($connection, $home->DeleteHome($_POST['id']))or die($connection->error);
     echo 1;
     exit();
 }
+
+else if($where == 'home_avaliability' )
+{  
+    $home_availability = new HomeAvailabilityDetails();
+    mysqli_query($connection, $home_availability->RemoveHomeAvailability($_POST["id"]))or die($connection->error);
+    echo 1;
+    exit();
+}
+
 
 else if($where == 'category' )
 {  

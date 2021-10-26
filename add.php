@@ -473,4 +473,9 @@ elseif ($where == 'home')
    mysqli_query($connection,"INSERT INTO `homes` (`home_owner_id`,`name`, `description`, `address`,`home_image`) VALUES ('$home_owner_id','".$_POST['title']."','".$_POST['description']."','".$subcounty_result['id']."','$path')") or die(mysqli_error($connection));
    echo "success";
 }
+elseif ($where == 'availability') {
+    $home_availability = new HomeAvailabilityDetails();
+     mysqli_query($connection, $home_availability->AddHomeAvailability($_POST['home_id'], $_POST['start_date'], $_POST['end_date'], $_POST['extra_details'])) or die(mysqli_error($connection));
+     echo 'success';
+}
  ?>

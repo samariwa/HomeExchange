@@ -5,10 +5,21 @@ class Home{
         return "SELECT homes.id as home_id, first_name, last_name, name, county, subcounty, homes.average_rating as average_rating, home_tier,home_image,home_extra_details  FROM homes INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id INNER JOIN subcounties ON homes.address = subcounties.id INNER JOIN counties ON subcounties.county_id = counties.id WHERE home_status = '1'";
    }
 
+   public function GetAvailableHomes()
+   {
+      return "SELECT homes.id as home_id, first_name, last_name, name, county, subcounty, homes.average_rating as average_rating, home_tier,home_image,home_extra_details,availability_start_date,availability_end_date,extra_details  FROM homes INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id INNER JOIN subcounties ON homes.address = subcounties.id INNER JOIN counties ON subcounties.county_id = counties.id INNER JOIN home_availability ON home_availability.home_id = homes.id WHERE home_status = '1'";
+   }
+
    public function fetchHomeDetails($home_id)
    {
       $query = new Database();
       return $query->get("homes","*", array('id','=', $home_id));
+   }
+
+   public function getUserHomes($owner_id)
+   {
+      $query = new Database();
+      return $query->get("homes","*", array('home_owner_id','=', $owner_id));
    }
 
    public function fetchHomeImages($home_id)

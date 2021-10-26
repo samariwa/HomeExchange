@@ -7,6 +7,7 @@ $lastname = $result['last_name'];
 $mobile = $result['phone_number'];
 $email = $result['email_address'];
 $location = $result['physical_address'];
+$owner_id = mysqli_query($connection,"SELECT home_owners.id as id FROM users INNER JOIN home_owners ON users.id = home_owners.user_id where email_address = '$logged_in_email' ")or die($connection->error);
 //$my_orders = mysqli_query($connection,"SELECT order_status.id as status_id,order_status.status as status,DATE(orders.Delivery_time) as order_date FROM order_status INNER JOIN orders ON orders.Status_id = order_status.id INNER JOIN customers ON orders.Customer_id = customers.id where orders.Customer_id = '$customer_id' GROUP BY order_status.id ORDER BY order_status.Created_at DESC")or die($connection->error);
 ?>
              <!-- page-header-section start -->
@@ -330,48 +331,80 @@ $location = $result['physical_address'];
                             <div class="col-lg-10">
                                 <div class="orders-container offset-2">
                                 <?php
-                                    if (mysqli_num_rows($my_homes) ==0) {
+                                $ownership_result = mysqli_fetch_array($owner_id);
+                                if($ownership_result == FALSE)
+                                {
                                 ?>
-                                        <p style="text-align:center"><i><b>You have not added any home yet.</b></i></p>
+                                  <p style="text-align:center"><i><b>You have not added any home yet.</b></i></p>
                                 <?php
                                     }
+                                    else{
+                                        $home = new Home();
+                                        $my_homes = mysqli_query($connection,$home->getUserHomes( $ownership_result['id']))or die($connection->error);
                                     foreach($my_homes as $row){
-                                        $order_details = mysqli_query($connection,"SELECT SUM(orders.Quantity * (stock.Price - stock.Discount))as sum,COUNT(orders.Status_id) as count FROM orders INNER JOIN stock on orders.Stock_id = stock.id where orders.Status_id = '".$row ['status_id']."' ")or die($connection->error);
-                                        $value = mysqli_fetch_array($order_details);
                                     ?>
                                     <div class="order-item">
                                         <table class="table table-responsive1">
                                             <thead>
                                                 <tr>
-                                                    <th class="px-3">My Orders</th>
-                                                    <th class="text-center">Items</th>
-                                                    <th class="text-right pr-5">Status</th>
+                                                    <th class="px-3"><?php echo $row ['name']; ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td class="px-3 py-4">
                                                         <div>
-                                                            <h6 class="order-number">Order#<?php echo $row ['status_id']?></h6>
-                                                            <p class="date"><?php echo date('d.m.Y',strtotime($row ['order_date'])); ?></p>
-                                                            <p class="price">Ksh. <?php echo number_format($value['sum'],2); ?></p>
+                                                        <a href="home-dashboard.php"><img src="assets/images/homes/<?php echo $row['home_image']; ?>" alt="product"></a>
                                                         </div>
                                                     </td>
                                                     <td class="text-center">
-                                                        <div>
-                                                            <?php echo $value['count']; ?> item<?php if($value['count'] > 1){ ?>s<?php } ?>
-                                                        </div>
+                                                        
                                                     </td>
                                                     <td class="text-right pr-5">
-                                                        <div class=" <?php if($row ['status'] == 'Pending') {?>pending<?php } else{ ?>done<?php } ?>">
-                                                           <?php echo $row ['status']?>
+                                                        <div >
+                                                            <h6 class="order-number">Home#<?php echo $row ['id']?></h6>
+                                                            <p class="tier">Tier:<?php echo $row ['home_tier']; ?></p>
+                                                            <p class="rating">Rating: <?php rate($row ['average_rating'])  ?></p>
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="px-3">
                                                         <div>
-                                                            <a href="track-order-single.php?id=<?php echo $row ['status_id']?>">Track Order</a>
+                                                            <a data-toggle="modal" data-target="#exampleModalScrollable" role="button" aria-pressed="true">Add Availability</a>
+                                                            <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalScrollableTitle">Home Availability</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                <form method="POST">
+
+                                                                    <div class="row">
+                                                                    <label for="start_date" style="margin-left: 60px;">Start Date:</label>    
+                                                                    <input type="date" name="start_date" id="start_date" class="form-control col-md-9" style="padding:15px;margin-left: 60px" required  placeholder="Start Date...">
+                                                                    </div><br>
+                                                                    <div class="row">
+                                                                    <label for="end_date" style="margin-left: 60px;">End Date:</label>
+                                                                        <input type="date" name="end_date" id="end_date" class="form-control col-md-9"  style="padding:15px;margin-left: 60px" required placeholder="End Date...">
+                                                                    </div><br> 
+                                                                    <div class="row">
+                                                                    <label for="extra_details" style="margin-left: 60px;">Extra Details:</label>
+                                                                    <textarea id="extra-details" class="form-control col-md-9" style="padding:15px;margin-left: 60px" name="extra-details"></textarea>
+                                                                    </div><br>
+                                                                    <input type="hidden" name="home_id" id="home_id"  value="<?php echo $row ['id']?>">
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-danger" name="addAvailability" style="margin-right: 50px" id="addAvailability">Add Availability</button>
+                                                                </form>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
                                                         </div>
                                                     </td>
                                                     <td class="text-right px-4" colspan="2">
@@ -385,6 +418,7 @@ $location = $result['physical_address'];
                                     </div>
                                     <?php
                                     }
+                                }
                                     ?>
                                 </div>
                             </div>
