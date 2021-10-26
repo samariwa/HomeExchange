@@ -787,15 +787,16 @@ $(document).on('click','.anonymousSubscription',function(){
     }); 
   });
 
-  $(document).on('click','#addAvailability',function(){
-    var start_date = $('#start_date').val();
-    var end_date = $('#end_date').val();
-    var extra_details = $('#extra_details').val();
+
+    $('.addAvailabilityDetails').click(function(){
+    var home_id = $(this).attr("id");
+    var start_date = $(`#start_date${home_id}`).val();
+    var end_date = $(`#end_date${home_id}`).val();
+    var extra_details = $(`#extra_details${home_id}`).val();
     if(extra_details == null)
     {
         extra_details = 'No extra details';
-    }
-    var home_id = $('#home_id').val();
+    }   
     var where = 'availability'
     $.post("add.php",{start_date:start_date,end_date:end_date,extra_details:extra_details,home_id:home_id,where:where},
     function(result){
@@ -805,6 +806,7 @@ $(document).on('click','.anonymousSubscription',function(){
             else{
             alert("Something went wrong. Please try again later.");
            }
+           location.reload(true);
     });        
 });
 

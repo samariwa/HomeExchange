@@ -371,8 +371,8 @@ $owner_id = mysqli_query($connection,"SELECT home_owners.id as id FROM users INN
                                                 <tr>
                                                     <td class="px-3">
                                                         <div>
-                                                            <a data-toggle="modal" data-target="#exampleModalScrollable" role="button" aria-pressed="true">Add Availability</a>
-                                                            <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                                            <a data-toggle="modal" data-target="#exampleModalScrollable<?php echo $row ['id']?>" role="button" aria-pressed="true">Add Availability</a>
+                                                            <div class="modal fade" id="exampleModalScrollable<?php echo $row ['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -382,25 +382,23 @@ $owner_id = mysqli_query($connection,"SELECT home_owners.id as id FROM users INN
                                                                 </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                <form method="POST">
 
                                                                     <div class="row">
                                                                     <label for="start_date" style="margin-left: 60px;">Start Date:</label>    
-                                                                    <input type="date" name="start_date" id="start_date" class="form-control col-md-9" style="padding:15px;margin-left: 60px" required  placeholder="Start Date...">
+                                                                    <input type="date" name="start_date" id="start_date<?php echo $row ['id']?>" class="form-control col-md-9" style="padding:15px;margin-left: 60px" required  placeholder="Start Date...">
                                                                     </div><br>
                                                                     <div class="row">
                                                                     <label for="end_date" style="margin-left: 60px;">End Date:</label>
-                                                                        <input type="date" name="end_date" id="end_date" class="form-control col-md-9"  style="padding:15px;margin-left: 60px" required placeholder="End Date...">
+                                                                        <input type="date" name="end_date" id="end_date<?php echo $row ['id']?>" class="form-control col-md-9"  style="padding:15px;margin-left: 60px" required placeholder="End Date...">
                                                                     </div><br> 
                                                                     <div class="row">
                                                                     <label for="extra_details" style="margin-left: 60px;">Extra Details:</label>
-                                                                    <textarea id="extra-details" class="form-control col-md-9" style="padding:15px;margin-left: 60px" name="extra-details"></textarea>
+                                                                    <textarea id="extra-details<?php echo $row ['id']?>" class="form-control col-md-9" style="padding:15px;margin-left: 60px" name="extra-details"></textarea>
                                                                     </div><br>
-                                                                    <input type="hidden" name="home_id" id="home_id"  value="<?php echo $row ['id']?>">
+                                                                    <input type="hidden" name="home_id" id="home_id<?php echo $row ['id']?>"  value="<?php echo $row ['id']?>">
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-danger" name="addAvailability" style="margin-right: 50px" id="addAvailability">Add Availability</button>
-                                                                </form>
+                                                                <button class="btn btn-danger addAvailabilityDetails" role="button" aria-pressed="true" data_id="<?php echo $row ['id']?>" style="margin-right: 50px" id="<?php echo $row ['id'] ?>">Add Availability</button>
                                                                 </div>
                                                             </div>
                                                             </div>
