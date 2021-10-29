@@ -112,13 +112,14 @@ mysqli_query($connection,"Delete from `suppliers` where id='".$id."'")or die($co
     echo 1;
     exit();
 }
-else if($where == 'vehicle' )
-{  
-	$id =$_POST['id'];
-mysqli_query($connection,"Delete from `vehicles` where id='".$id."'")or die($connection->error);
-    echo 1;
-    exit();
- }
+elseif ($where == 'cancel_availability') {
+    mysqli_query($connection,"DELETE FROM `home_availability` WHERE `id` = '".$_POST['availability_id']."'") or die(mysqli_error($connection));
+    echo 'success';
+  }
+  elseif ($where == 'delete_home') {
+    mysqli_query($connection,"DELETE FROM `homes` WHERE `id` = '".$_POST['id']."'") or die(mysqli_error($connection));
+    echo 'success';
+  }
  else if($where == 'deliverer' )
 {  
     $id =$_POST['id'];

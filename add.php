@@ -211,6 +211,51 @@ else if ($where == 'deliverer') {
      }
 }
 
+else if ($where == 'home-images') {
+  $fileName = $_FILES['upload']['tmp_name'];
+  $sourceProperties = getimagesize($fileName);
+  $resizeFileName = time();
+  $uploadPath = 'assets/images/homes/'; 
+  $fileExt = pathinfo($_FILES['upload']['name'], PATHINFO_EXTENSION);
+  $path = $resizeFileName.'.'.$fileExt;
+  $fullPath = $uploadPath.$path;
+  $imageProcess = '';
+  $uploadImageType = $sourceProperties[2];
+  $sourceImageWidth = $sourceProperties[0];
+  $sourceImageHeight = $sourceProperties[1];
+  switch ($uploadImageType){
+    case IMAGETYPE_JPEG:
+      $resourceType = imagecreatefromjpeg($fileName);
+      $imageLayer = resizeImage($resourceType,$sourceImageWidth,$sourceImageHeight);
+      imagejpeg($imageLayer,$fullPath);
+      $imageProcess = 1;
+      break;
+    case IMAGETYPE_GIF:
+      $resourceType = imagecreatefromgif($fileName);
+      $imageLayer =  resizeImage($resourceType, $sourceImageWidth, $sourceImageHeight);
+      imagegif($imageLayer,$fullPath);
+      $imageProcess = 1;
+      break;
+    case IMAGETYPE_PNG:
+      $resourceType = imagecreatefrompng($fileName);
+      $imageLayer =  resizeImage($resourceType, $sourceImageWidth, $sourceImageHeight);
+      imagepng($imageLayer,$fullPath);
+      $imageProcess = 1;
+      break;
+
+    default:
+    $imageProcess = 0;
+    break;  
+  }
+  
+  if($imageProcess == 1)
+  {
+    move_uploaded_file($fileName, $fullPath);
+    $home = new Home();
+    mysqli_query($connection,$home->addHomeImages($_POST['home_id'], $path)) or die(mysqli_error($connection));
+  }
+}
+
 else if ($where == 'note') {
      $title = $_POST['title'];
      $message = $_POST['message'];
@@ -451,9 +496,45 @@ elseif ($where == 'site_subcomment') {
 }
 elseif ($where == 'home')
 {
-  $fileName = $_FILES['upload']['name'];
-  $path = time().'.png';
-  move_uploaded_file($_FILES['upload']['tmp_name'], 'assets/images/homes/'.$path);
+  $fileName = $_FILES['upload']['tmp_name'];
+  $sourceProperties = getimagesize($fileName);
+  $resizeFileName = time();
+  $uploadPath = 'assets/images/homes/'; 
+  $fileExt = pathinfo($_FILES['upload']['name'], PATHINFO_EXTENSION);
+  $path = $resizeFileName.'.'.$fileExt;
+  $fullPath = $uploadPath.$path;
+  $imageProcess = '';
+  $uploadImageType = $sourceProperties[2];
+  $sourceImageWidth = $sourceProperties[0];
+  $sourceImageHeight = $sourceProperties[1];
+  switch ($uploadImageType){
+    case IMAGETYPE_JPEG:
+      $resourceType = imagecreatefromjpeg($fileName);
+      $imageLayer = resizeHomeImage($resourceType,$sourceImageWidth,$sourceImageHeight);
+      imagejpeg($imageLayer,$fullPath);
+      $imageProcess = 1;
+      break;
+    case IMAGETYPE_GIF:
+      $resourceType = imagecreatefromgif($fileName);
+      $imageLayer =  resizeHomeImage($resourceType, $sourceImageWidth, $sourceImageHeight);
+      imagegif($imageLayer,$fullPath);
+      $imageProcess = 1;
+      break;
+    case IMAGETYPE_PNG:
+      $resourceType = imagecreatefrompng($fileName);
+      $imageLayer =  resizeHomeImage($resourceType, $sourceImageWidth, $sourceImageHeight);
+      imagepng($imageLayer,$fullPath);
+      $imageProcess = 1;
+      break;
+
+    default:
+    $imageProcess = 0;
+    break;  
+  }
+  
+  if($imageProcess == 1)
+  {
+    move_uploaded_file($fileName, $fullPath);
   $subcounty_id= mysqli_query($connection,"SELECT id FROM subcounties WHERE subcounty = '".$_POST['subcounty']."'")or die($connection->error);
    $subcounty_result = mysqli_fetch_array($subcounty_id);
     $owner_id= mysqli_query($connection,"SELECT id FROM home_owners WHERE user_id = '".$_POST['user']."'")or die($connection->error);
@@ -472,6 +553,7 @@ elseif ($where == 'home')
    }
    mysqli_query($connection,"INSERT INTO `homes` (`home_owner_id`,`name`, `description`, `address`,`home_image`) VALUES ('$home_owner_id','".$_POST['title']."','".$_POST['description']."','".$subcounty_result['id']."','$path')") or die(mysqli_error($connection));
    echo "success";
+  }
 }
 elseif ($where == 'availability') {
     $home_availability = new HomeAvailabilityDetails();

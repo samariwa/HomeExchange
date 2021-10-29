@@ -155,15 +155,11 @@
                                 foreach($availableHomesList as $row){
                             ?> 
                                 <div class="col-sm-6 col-xl-4" id="<?php echo $row['home_id']; ?>">
-                                    <div class="product-item <?php if($row['home_status'] == 1 ){ ?> cancelled <?php }?>" id="<?php echo $row['home_id']; ?>">
+                                    <div class="product-item <?php if($row['home_availability_status'] == 0 ){ ?> reserved <?php }?>" id="<?php echo $row['home_id']; ?>">
                                         <div class="product-thumb">
-                                            <a  href="home-dashboard.php" class="modalOpen" id="<?php echo $row['home_id']; ?>"><img src="assets/images/homes/<?php echo $row['home_image']; ?>" alt="product"></a> 
+                                            <a  href="home-dashboard.php?id=<?php echo $row['home_id'] ?>" class="modalOpen" id="<?php echo $row['home_id']; ?>"><img src="assets/images/homes/<?php echo $row['home_image']; ?>" alt="product"></a> 
                                            <?php
                                                $item_in_wishlist = '';
-                                               $item_in_wishlist_id = '';
-                                               if (isset($_SESSION['logged_in'])) {
-                                                   //session set to true
-                                                   if ($_SESSION['logged_in'] == TRUE) {
                                                $product_in_wishlist = mysqli_query($connection,"SELECT * FROM `wishlist` WHERE customer_id ='$customer_id' AND home_id = '".$row['home_id']."'");
                                                $product_wishlist_result = mysqli_fetch_array($product_in_wishlist);
                                                if ( $product_wishlist_result == true) {
@@ -173,71 +169,33 @@
                                                else{
                                                    $item_in_wishlist = false;
                                                }
-                                               }
-                                               //session set to false
-                                               else{
-                                                   //wishlist cookie set
-                                                   if(isset($_COOKIE["homes_wishlist"]))
-                                                   {
-                                                       $wishlist_data = stripslashes($_COOKIE['homes_wishlist']);
-                                                       $wishlist_data = json_decode($wishlist_data, true);
-                                                       $item_id = array_column($wishlist_data, 'home_id');
-                                                   if(in_array( $row['home_id'], $item_id))
-                                                   {
-                                                       foreach($wishlist_data as $keys => $values)
-                                                       {
-                                                           if($wishlist_data[$keys]["home_id"] == $row['home_id'])
-                                                           {
-                                                               $item_in_wishlist = true;
-                                                               $item_in_wishlist_id = $values["home_id"];
-                                                           }
-                                                       }
+                                               $start_date = strtotime($row['availability_start_date']);
+                                               $current_date = time();
+                                               $diff_date = round(($start_date - $current_date) / (60 * 60 * 24));
+                                               if($diff_date <= 10)
+                                               {
+                                                   if($diff_date == 1){
+                                           ?>
+                                                      <span class="batch sale">Tomorrow</span>
+                                           <?php
                                                    }
-                                                   else{
-                                                       $item_in_wishlist = false;
+                                                   elseif($diff_date > 1){
+                                           ?>
+                                           <span class="batch sale">In <?php echo $diff_date; ?> days</span>
+                                           <?php
+                                                   }
+                                                   elseif($diff_date == 0){
+                                                ?>
+                                                 <span class="batch sale">Today</span>
+                                                <?php
                                                    }
                                                }
-                                               //wishlist cookie not set
-                                               else{
-                                                   $item_in_wishlist = false; 
-                                               }
-                                               }
-                                           }
-                                           //session not set
-                                           else{
-                                               //wishlist cookie set
-                                               if(isset($_COOKIE["homes_wishlist"]))
-                                                   {
-                                                       $wishlist_data = stripslashes($_COOKIE['homes_wishlist']);
-                                                       $wishlist_data = json_decode($wishlist_data, true);
-                                                       $item_id = array_column($wishlist_data, 'home_id');
-                                                   if(in_array( $row['home_id'], $item_id))
-                                                   {
-                                                       foreach($wishlist_data as $keys => $values)
-                                                       {
-                                                           if($wishlist_data[$keys]["home_id"] == $row['home_id'])
-                                                           {
-                                                               $item_in_wishlist = true;
-                                                               $item_in_wishlist_id = $values["home_id"];
-                                                           }
-                                                       }
-                                                   }
-                                                   else{
-                                                       $item_in_wishlist = false;
-                                                   }
-                                               }
-                                               //wishlist cookie not set
-                                               else{
-                                                   $item_in_wishlist = false; 
-                                               }
-                                           } 
                                            ?>
                                             <a class="wish-link"
                                             href="<?php echo $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/homes-list.php?action=add_wishlist&id='.$row['home_id'] ?>">
                                                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="svg-inline--fa fa-heart fa-w-16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path
                                                     <?php
                                                        if($item_in_wishlist == true){
-                                                          //fill with red
                                                     ?>
                                                     style="fill:red;"
                                                      <?php
@@ -248,8 +206,8 @@
                                             </a>
                                         </div>
                                         <div class="product-content">
-                                            <a href="home-dashboard.php" class="cata" id="itemCategory<?php echo $row['home_id']; ?>">Tier <?php echo $row['home_tier']; ?></a>
-                                            <h6><a href="home-dashboard.php" class="product-title"><?php echo $row['name']; ?></a></h6>
+                                            <a href="home-dashboard.php?id=<?php echo $row['home_id'] ?>" class="cata" id="itemCategory<?php echo $row['home_id']; ?>">Tier <?php echo $row['home_tier']; ?></a>
+                                            <h6><a href="home-dashboard.php?id=<?php echo $row['home_id'] ?>" class="product-title"><?php echo $row['name']; ?></a></h6>
                                             <p class="quantity"><?php echo $row['county']; ?></p>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="price">Ratings</div><?php  rate($row['average_rating']); ?>
@@ -263,7 +221,7 @@
                                 ?>
 
                                 <div class="col-sm-6 col-xl-4" id="kjgj">
-                                    <div class="product-item <?php //if($row['Quantity'] < $row['Restock_Level'] ){ ?> cancelled <?php //}?>" id="<?php //echo $row['Name']; ?>">
+                                    <div class="product-item <?php //if($row['Quantity'] < $row['Restock_Level'] ){ ?> reserved <?php //}?>" id="<?php //echo $row['Name']; ?>">
                                         <div class="product-thumb">
                                             <a  href="home-dashboard.php" class="modalOpen" id="<?php echo $row['home_id']; ?>"><img src="assets/images/homes/home2.jpeg" alt="product"></a> 
 

@@ -213,4 +213,15 @@ function resizeImage($resourceType,$image_width,$image_height){
   imagecopyresampled($imageLayer,$resourceType,0,0,0,0,$resizeWidth,$resizeHeight,$image_width,$image_height);
   return $imageLayer;
 }
+
+function resizeHomeImage($resourceType,$image_width,$image_height){
+
+
+  $resizeWidth = 1500;
+  $resizeHeight = 1000;
+
+  $imageLayer = imagecreatetruecolor($resizeWidth,$resizeHeight);
+  imagecopyresampled($imageLayer,$resourceType,0,0,0,0,$resizeWidth,$resizeHeight,$image_width,$image_height);
+  return $imageLayer;
+}
  ?>

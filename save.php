@@ -999,72 +999,20 @@ elseif ($where == 'damaged') {
     $qty = $_POST['qty'];
 mysqli_query($connection,"UPDATE `stock_flow` JOIN stock ON stock_flow.Stock_id = stock.id SET Damaged = Damaged + '".$qty."',Quantity = Quantity - '".$qty."' WHERE stock_flow.id = '".$id."'")or die($connection->error);
 }
-elseif ($where == 'leftovers') {
-  $id = $_POST['id'];
-    $difference = $_POST['difference'];
-mysqli_query($connection,"UPDATE `cooked_cereals`  SET `Quantity_Difference` =  '".$difference."',`Quantity_Prepared` = Quantity_Prepared + '$difference' WHERE `id` = '".$id."'") or die(mysqli_error($connection));
+
+elseif ($where == 'edit_availability') {
+  $home_availability = new HomeAvailabilityDetails();
+
+  mysqli_query($connection, $home_availability->UpdateHomeAvailability($_POST['id'], $_POST['start'], $_POST['end'], $_POST['extra_details'])) or die(mysqli_error($connection));
+  echo 'success';
 }
-elseif ($where == 'sickoff') {
-  $id = $_POST['id'];
-  $reason = $_POST['reason'];
-  $start = $_POST['start'];
-  $days = $_POST['days'];
-$result2 = mysqli_query($connection,"SELECT id from employee_sickoff_data  WHERE Staff_id = '$id' AND Start_day='$start'")or die($connection->error);
-$row2 = mysqli_fetch_array($result2);
-$ID = $row2['id'];
-mysqli_query($connection,"UPDATE `employee_sickoff_data`  SET `Reason` =  '".$reason."',`Start_day` = '$start', `sickoff_days_no` = '$days',`End_day` = DATE_ADD( '".$start."', INTERVAL ".$days." DAY ) WHERE `id` = '".$ID."'") or die(mysqli_error($connection));
+
+elseif ($where == 'edit_home') {
+  $home = new Home();
+  mysqli_query($connection, $home->UpdateHomeDetails($_POST['id'], $_POST['name'], $_POST['description'])) or die(mysqli_error($connection));
+  echo 'success';
 }
-elseif ($where == 'leave') {
-  $id = $_POST['id'];
-  $standIn = $_POST['standIn'];
-  $start = $_POST['start'];
-  $days = $_POST['days'];
-$result2 = mysqli_query($connection,"SELECT id from employee_leave_data  WHERE Staff_id = '$id' AND Start_day='$start'")or die($connection->error);
-$row2 = mysqli_fetch_array($result2);
-$ID = $row2['id'];
-$arr = explode(' ',trim($standIn));
-$firstname = $arr[0];
-$lastname = $arr[1];
-$result3 = mysqli_query($connection,"SELECT staffID from users  WHERE firstname = '$firstname' AND lastname = '$lastname'")or die($connection->error);
-$row3 = mysqli_fetch_array($result3);
-$standID = $row3['staffID'];
-if ($id == $standID) {
-  echo "Kindly choose another stand in employee. Action Failed";
-  exit();
-}
-mysqli_query($connection,"UPDATE `employee_leave_data`  SET `Stand_in_employee` = '".$standID."',`Start_day` = '$start', `leave_days_no` = '$days',`End_day` = DATE_ADD( '".$start."', INTERVAL ".$days." DAY ) WHERE `id` = '".$ID."'") or die(mysqli_error($connection));
-}
-elseif ($where == 'stock_automation') {
-  $stock = $_POST['stock'];
-  $unit = $_POST['unit'];
-  $contains = $_POST['contains'];
-  $subunit = $_POST['subunit'];
-   $replenish = $_POST['replenish'];
-  $restock = $_POST['restock'];
-$result2 = mysqli_query($connection,"SELECT stock.id as id,inventory_units.name as current_unit from stock  inner join inventory_units ON stock.Unit_id = inventory_units.id WHERE stock.Name = '$stock' ")or die($connection->error);
-$row2 = mysqli_fetch_array($result2);
-$ID = $row2['id'];
-$current_unit = $row2['current_unit'];
-$result = mysqli_query($connection,"SELECT Name FROM inventory_units WHERE inventory_units.id = '$unit' ")or die($connection->error);
-$row = mysqli_fetch_array($result);
-$new_unit = $row['Name'];
-$new_name = str_replace($current_unit,$new_unit,$stock);
-mysqli_query($connection,"UPDATE `stock`  SET `Name` = '$new_name',`Unit_id` =  '".$unit."',`Contains` = '$contains', `Subunit_id` = '$subunit',`subunit_replenish_qty` = '$replenish',`Restock_Level` = '$restock' WHERE `id` = '".$ID."'") or die(mysqli_error($connection));
-echo "success";
-}
-elseif ($where == 'inventory_units') {
-  $id = $_POST['id'];
-    $unit = $_POST['name'];
-     $stock_names = mysqli_query($connection,"SELECT s.id as stock_id,s.Name as initial_name, u.Name as initial_unit FROM stock s INNER JOIN inventory_units u ON s.Unit_id = u.id WHERE u.id = '$id'")or die($connection->error);
-     foreach($stock_names as $row){
-       $initial_name = $row['initial_name'];
-        $initial_unit = $row['initial_unit'];
-        $stock_id = $row['stock_id'];
-        $new_name = str_replace($initial_unit,$unit,$initial_name);
-        mysqli_query($connection,"UPDATE `stock` SET `Name` = '".$new_name."' WHERE `id` = '".$stock_id."'")or die($connection->error);
-     }
-mysqli_query($connection,"UPDATE `inventory_units` SET `Name` = '".$unit."' WHERE `id` = '".$id."'")or die($connection->error);
-}
+
 elseif ($where == 'customerProfile') {
   if (isset($_POST['email']) && isset($_POST['mobile']) && isset($_POST['firstname']) && isset($_POST['othername']) && isset($_POST['lastname']) && isset($_POST['location'])) {
     $data = [
@@ -1104,36 +1052,5 @@ else{
   echo "error";
 } 
 }
-}
-elseif ($where == 'process_order') {
-  $id = $_POST['id'];
-  $value = $_POST['value'];
-  $action = $_POST['action'];
-  $status = '';
-  if($action == 'Processed' && $value == '1')
-  {
-     $status = 'Processed';
-  }
-  elseif($action == 'Processed' && $value == '0')
-  {
-     $status = 'Pending';
-  }
-  elseif($action == 'Shipped' && $value == '1')
-  {
-    $status = 'Shipped';
- }
- elseif($action == 'Shipped' && $value == '0')
-  {
-    $status = 'Processed';
- }
- elseif($action == 'Delivered' && $value == '1')
- {
-    $status = 'Delivered';
- }
- elseif($action == 'Delivered' && $value == '0')
- {
-     $status = 'Shipped';
- }
-mysqli_query($connection,"UPDATE `order_status` SET status = '".$status."' WHERE id = '".$id."'")or die($connection->error);
 }
  ?>

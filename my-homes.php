@@ -407,7 +407,7 @@ $owner_id = mysqli_query($connection,"SELECT home_owners.id as id FROM users INN
                                                     </td>
                                                     <td class="text-right px-4" colspan="2">
                                                         <div>
-                                                            <a class="view-details" href="order-details.php?id=<?php echo $row ['status_id']?>">View Details</a>
+                                                            <a class="view-details" href="home-dashboard.php?id=<?php echo $row ['id']?>">View Details</a>
                                                         </div>
                                                     </td>
                                                 </tr>

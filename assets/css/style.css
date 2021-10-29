@@ -3220,10 +3220,10 @@ blockquote span span {
     transform: scale(1.1);
   }
 }
-.product-item.cancelled {
+.product-item.reserved {
   position: relative;
 }
-.product-item.cancelled:after {
+.product-item.reserved:after {
   content: "";
   position: absolute;
   left: 0;
@@ -3232,8 +3232,8 @@ blockquote span span {
   height: 100%;
   background-color: rgba(255, 255, 255, 0.8);
 }
-.product-item.cancelled:before {
-  content: "Cancelled";
+.product-item.reserved:before {
+  content: "Reserved";
   position: absolute;
   left: 50%;
   top: 50%;
@@ -3243,7 +3243,7 @@ blockquote span span {
   transform: translate(-50%, -50%);
   border-radius: 3px;
 }
-.product-item:hover.cancelled {
+.product-item:hover.reserved {
   transform: scale(1);
 }
 

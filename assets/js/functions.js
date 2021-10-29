@@ -1060,6 +1060,7 @@ $(document).on('submit','#form',function(e){
     processData : false,
     cache : false,
       success : function(data){
+          alert(data)
        /* var xml = new XMLHttpRequest();
         xml.open("POST", "tier match/run.py",true);
         xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -1091,6 +1092,106 @@ $(document).on('submit','#form',function(e){
         xml.send(dataSend)*/
       }
       });
+});
+
+$('#home-dashboard-image').on('change',function(){
+    var form_data = new FormData(document.getElementById('images-form'));
+    $.ajax({
+        url: 'add.php',
+        type: 'post',
+        data: form_data,
+        contentType : false,
+        processData : false,
+      cache : false,
+        success : function(result){
+            $( "#home-image-section" ).load(window.location.href + " #home-image-section" );
+         }
+        });
+});
+
+$(document).on('click','#cancel-availability',function(e){
+    bootbox.confirm('Do you really want to cancel this homes availability?',function(result)
+    {if(result){
+    e.preventDefault();
+    e.stopPropagation();
+    var where = 'cancel_availability';
+    var availability_id = $('#availability_id').val();
+    $.post("delete.php",{availability_id:availability_id, where:where},
+    function(result){
+        if (result == 'success') {
+            alert("The home's availbility has been cancelled");
+            location.reload(true);
+           }
+             else{
+            alert("Something went wrong. Try again.");
+           }
+    });
+}});  
+});
+
+$(document).on('click','#delete-home',function(){
+    bootbox.confirm('Do you really want to delete the selected home?',function(result)
+    {if(result){
+    var where = 'delete_home';
+    var id = $('#home_id').val();
+    $.post("delete.php",{id:id, where:where},
+    function(result){
+        if (result == 'success') {
+            alert("Home successfully deleted");
+            window.location.href = 'my-homes.php';
+           }
+             else{
+            alert("Something went wrong. Try again.");
+           }
+    });
+  }});  
+});
+
+$(document).on('click','#edit_home',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var where = 'edit_home';
+    var name = $('#home_name').val();
+    var description = $('#home_description').val();
+    var id = $('#home_id').val();
+    $.post("save.php",{id:id, name:name, description:description, where:where},
+    function(result){
+        if (result == 'success') {
+            alert("The home's details have been changed");
+            location.reload(true);
+           }
+             else{
+            alert("Something went wrong. Try again.");
+           }
+    });
+});
+
+$(document).on('click','#edit_availability',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var where = 'edit_availability';
+    var id = $('#availability_id').val();
+    var start = $('#start_date').val();
+    var end = $('#end_date').val();
+    var extra_details ='';
+    if($('#extra_details').val() == null)
+    {
+       extra_details = 'No extra details';
+    }
+    else
+    {
+       extra_details = $('#extra_details').val();
+    }    
+    $.post("save.php",{id:id, start:start, end:end, extra_details:extra_details, where:where},
+    function(result){
+        if (result == 'success') {
+            alert("The home's availability details have been changed");
+            location.reload(true);
+           }
+             else{
+            alert("Something went wrong. Try again.");
+           }
+    });
 });
 
 function tier_analysis()
@@ -1132,6 +1233,7 @@ function formAjax(module){
          }
         });
  }
+
 
  function displayname(input,_this) {
     if (input.files && input.files[0]) {

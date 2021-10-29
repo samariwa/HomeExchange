@@ -7,13 +7,17 @@ class Home{
 
    public function GetAvailableHomes()
    {
-      return "SELECT homes.id as home_id, first_name, last_name, name, county, subcounty, homes.average_rating as average_rating, home_tier,home_image,home_extra_details,availability_start_date,availability_end_date,extra_details  FROM homes INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id INNER JOIN subcounties ON homes.address = subcounties.id INNER JOIN counties ON subcounties.county_id = counties.id INNER JOIN home_availability ON home_availability.home_id = homes.id WHERE home_status = '1'";
+      return "SELECT homes.id as home_id, first_name, last_name, name, county, subcounty, homes.average_rating as average_rating, home_tier,home_image,home_extra_details,availability_start_date,availability_end_date,home_availability_status,extra_details  FROM homes INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id INNER JOIN subcounties ON homes.address = subcounties.id INNER JOIN counties ON subcounties.county_id = counties.id INNER JOIN home_availability ON home_availability.home_id = homes.id WHERE home_status = '1'";
    }
 
    public function fetchHomeDetails($home_id)
    {
-      $query = new Database();
-      return $query->get("homes","*", array('id','=', $home_id));
+      return "SELECT homes.id as home_id, users.id as user_id, first_name, last_name, name,description, county, subcounty, homes.average_rating as average_rating, home_tier,home_image,home_extra_details  FROM homes INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id INNER JOIN subcounties ON homes.address = subcounties.id INNER JOIN counties ON subcounties.county_id = counties.id WHERE homes.id = '$home_id'";
+   }
+
+   public function fetchAvailabilityDetails($home_id)
+   {
+      return "SELECT homes.id as home_id,home_availability.id as availability_id, first_name, last_name, home_owners.average_rating as owner_rating, phone_number, name,  homes.average_rating as average_rating, home_tier,availability_start_date,availability_end_date,extra_details  FROM homes INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id INNER JOIN home_availability ON home_availability.home_id = homes.id WHERE homes.id = '$home_id'";
    }
 
    public function getUserHomes($owner_id)
@@ -26,6 +30,12 @@ class Home{
    {
       $query = new Database();
       return $query->get("images","url", array('home_id','=', $home_id));
+   }
+   
+   public function addHomeImages($home_id, $url)
+   {
+      $query = new Database();
+      return $query->insert("images", array('home_id' => $home_id, 'url' => $url ));
    }
 
    public function DeleteHome($home_id)
@@ -80,10 +90,10 @@ class Home{
       return $query->update("homes", "id", $home_id, array('home_status' => '1'));
    }
 
-   public function UpdateHomeDetails($home_id)
+   public function UpdateHomeDetails($home_id, $name, $description)
    {
       $query = new Database();
-      return $query->update("homes", "id", $home_id, $values = array());
+      return $query->update("homes", "id", $home_id, array('name' => $name,'description' => $description));
    }
 
    public function GetHomeRating($home_id)

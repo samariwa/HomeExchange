@@ -12,6 +12,11 @@ class HomeExchangeRequest{
       $query = new Database();
       return $query->get("home_exchange_request","*", array('request_status','=','1'));
    }
+
+   public function getExchangeRequests($home_id)
+   {
+     return "SELECT COUNT(home_exchange_request.id) as sum, first_name, last_name, exchange_start_date,exchange_end_date,exchange_extra_details  FROM home_exchange_request INNER JOIN users ON home_exchange_request.requester_id = users.id INNER JOIN home_availability ON home_exchange_request.availability_id = home_availability.id WHERE home_availability.home_id = '$home_id'";
+   }
    
    public function CancelExchangeRequest($request_id)
    {
