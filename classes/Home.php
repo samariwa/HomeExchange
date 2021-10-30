@@ -29,7 +29,7 @@ class Home{
    public function fetchHomeImages($home_id)
    {
       $query = new Database();
-      return $query->get("images","url", array('home_id','=', $home_id));
+      return $query->get("images","*", array('home_id','=', $home_id));
    }
    
    public function addHomeImages($home_id, $url)

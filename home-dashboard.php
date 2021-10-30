@@ -88,7 +88,30 @@
                                     <h6>Kenya > <?php echo $result['county'].' > '.$result['subcounty'] ?></h6>
                             </div>
                             <div class="col-5 ml-5">
-                                <h6>Ratings   <?php rate($result['average_rating']) ?></h6>
+                                <div class="row">
+                                <h6>Ratings   <?php rate($result['average_rating']) ?></h6>  
+                                <div class="home-owner-contact ml-5">
+                                        <a href="#" data-toggle="modal" data-target="#exampleModalScrollableratehome">Rate Home</a>
+                                        <div class="modal fade" id="exampleModalScrollableratehome" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalScrollableTitle">Rate Home</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">   
+                                                        <input type="date" name="start_date" id="start_date<?php echo $row ['id']?>" class="form-control col-md-9" style="padding:15px;margin-left: 60px" required  placeholder="Start Date...">
+                                                        </div><br>
+                                                        <input type="hidden" name="home_id" id="home_id<?php echo $row ['id']?>"  value="<?php echo $row ['id']?>">
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                </div> 
+                                </div>
                             </div>
                         </div>
                         <br>
@@ -117,11 +140,35 @@
                                 <h5 class="card-title">Home Owner</h5>
                                 <br>
                                 <h6 class="card-subtitle mb-2"><?php echo $result['first_name'].' '.$result['last_name']; ?></h6>
-                                <br><br>
+                                <br>
                                 <h6 class="card-subtitle mb-2"><?php echo $request_result['sum'] ?> Exchanges</h6>
-                                <br><br>
+                                <br>
                                 <h6 class="card-subtitle mb-2">Ratings <?php rate($availability_result['owner_rating']) ?></h6>
-                                <br><br>
+                                <br>
+                                <div class="text-center">
+                                    <div class="home-owner-contact mb-2">
+                                            <a href="#" data-toggle="modal" data-target="#exampleModalScrollablerateowner">Rate Home Owner</a>
+                                            <div class="modal fade" id="exampleModalScrollablerateowner" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalScrollableTitle">Rate Home Owner</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">   
+                                                        <input type="date" name="start_date" id="start_date<?php echo $row ['id']?>" class="form-control col-md-9" style="padding:15px;margin-left: 60px" required  placeholder="Start Date...">
+                                                        </div><br>
+                                                        <input type="hidden" name="home_id" id="home_id<?php echo $row ['id']?>"  value="<?php echo $row ['id']?>">
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                                <br>
                                 <h6 class="card-subtitle mb-2 text-center"><i class="fas fa-phone"></i> <?php echo $availability_result['phone_number'] ?></h6>
                                 <br>
                                 <div class="text-center">
@@ -346,7 +393,15 @@
                            if($images_result == true){
                                foreach($home_images as $row){
                        ?>
-                      <img src="assets/images/homes/<?php echo $row['url']?>" width="350px" height="350px" class="ml-2 mt-2" alt="home-image">
+
+                       <div class="dashboard-images">
+                            <img src="assets/images/homes/<?php echo $row['url']?>" width="350px" height="350px" class="ml-2 mt-2" alt="home-image">
+                            <?php if($result['user_id'] == $customer_id){ ?>
+                            <a href="#" class="btn remove-images-btn" id="<?php echo $row['id']?>">Remove</a>
+                            <?php
+                            }
+                            ?>
+                       </div>
                       <?php
                                }
                            }

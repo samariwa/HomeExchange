@@ -1166,6 +1166,17 @@ $(document).on('click','#edit_home',function(e){
     });
 });
 
+    $('.remove-images-btn').click(function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var where = 'remove_image';
+    var id = $(this).attr('id');
+    $.post("delete.php",{id:id, where:where},
+    function(result){
+        $( "#home-image-section" ).load(window.location.href + " #home-image-section" );
+    });
+});
+
 $(document).on('click','#edit_availability',function(e){
     e.preventDefault();
     e.stopPropagation();
@@ -1322,7 +1333,7 @@ function paginate(page)
 }
 
 $(document).on('click','.pagination_link',function(){
-  var page = $(this).attr("id");
+    remove-images-btn
   paginate(page);
 });
 

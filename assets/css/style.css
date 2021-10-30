@@ -6841,7 +6841,6 @@ Preloader
     display: none;
   }
 
-
   
   .container .option_item {
     display: block;
@@ -7080,5 +7079,34 @@ input[type="file"]{
   border-radius: 10px;
 }
 
-  
+.dashboard-images .btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color:#FD5555;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+.dashboard-images .btn:hover {
+  background-color:#6c6c6c;
+}
+
+.dashboard-images {
+  position: relative;
+}
+
+ .dashboard-images a{
+  display: none;
+}
+
+.dashboard-images:hover a{
+  display: block;
+}
  

@@ -120,11 +120,9 @@ elseif ($where == 'cancel_availability') {
     mysqli_query($connection,"DELETE FROM `homes` WHERE `id` = '".$_POST['id']."'") or die(mysqli_error($connection));
     echo 'success';
   }
- else if($where == 'deliverer' )
-{  
-    $id =$_POST['id'];
-mysqli_query($connection,"Delete from `users` where id='".$id."'")or die($connection->error);
-    echo 1;
+ else if($where == 'remove_image' )
+{   
+    mysqli_query($connection,"Delete from `images` where id='".$_POST['id']."'")or die($connection->error);
     exit();
  }
  else if($where == 'cook' )
