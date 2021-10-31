@@ -102,10 +102,25 @@
                                                     </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="row">   
-                                                        <input type="date" name="start_date" id="start_date<?php echo $row ['id']?>" class="form-control col-md-9" style="padding:15px;margin-left: 60px" required  placeholder="Start Date...">
-                                                        </div><br>
-                                                        <input type="hidden" name="home_id" id="home_id<?php echo $row ['id']?>"  value="<?php echo $row ['id']?>">
+                                                    <form method="POST">
+                                                    <div class="star-widget mr-5">
+                                                    <input type="radio" name="rate-home" id="home-rate-5" value="5">
+                                                    <label for="home-rate-5" class="fas fa-star"></label>
+                                                    <input type="radio" name="rate-home" id="home-rate-4" value="4">
+                                                    <label for="home-rate-4" class="fas fa-star"></label>
+                                                    <input type="radio" name="rate-home" id="home-rate-3" value="3">
+                                                    <label for="home-rate-3" class="fas fa-star"></label>
+                                                    <input type="radio" name="rate-home" id="home-rate-2" value="2">
+                                                    <label for="home-rate-2" class="fas fa-star"></label>
+                                                    <input type="radio" name="rate-home" id="home-rate-1" value="1">
+                                                    <label for="home-rate-1" class="fas fa-star"></label>  
+                                                    </div>
+                                                        <input type="hidden" name="home_id" id="home_id"  value="<?php echo $_GET['id']?>">
+                                                        <input type="hidden" name="rater_id" id="rater_id"  value="<?php echo $customer_id ?>">
+                                                    </div>
+                                                    </form>
+                                                    <div class="modal-footer">
+                                                    <button class="btn btn-danger" role="button" aria-pressed="true"  style="margin-right: 50px" id="rate_home">Rate</button>
                                                     </div>
                                                 </div>
                                                 </div>
@@ -158,10 +173,25 @@
                                                     </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="row">   
-                                                        <input type="date" name="start_date" id="start_date<?php echo $row ['id']?>" class="form-control col-md-9" style="padding:15px;margin-left: 60px" required  placeholder="Start Date...">
-                                                        </div><br>
-                                                        <input type="hidden" name="home_id" id="home_id<?php echo $row ['id']?>"  value="<?php echo $row ['id']?>">
+                                                    <form method="POST">
+                                                        <div class="star-widget mr-5"> 
+                                                        <input type="radio" name="rate-home-owner" id="home-owner-rate-5" value="5">
+                                                        <label for="home-owner-rate-5" class="fas fa-star"></label>
+                                                        <input type="radio" name="rate-home-owner" id="home-owner-rate-4" value="4">
+                                                        <label for="home-owner-rate-4" class="fas fa-star"></label>
+                                                        <input type="radio" name="rate-home-owner" id="home-owner-rate-3" value="3">
+                                                        <label for="home-owner-rate-3" class="fas fa-star"></label>
+                                                        <input type="radio" name="rate-home-owner" id="home-owner-rate-2" value="2">
+                                                        <label for="home-owner-rate-2" class="fas fa-star"></label>
+                                                        <input type="radio" name="rate-home-owner" id="home-owner-rate-1" value="1">
+                                                        <label for="home-owner-rate-1" class="fas fa-star"></label> 
+                                                        </div>
+                                                        <input type="hidden" name="home_owner_id" id="home_owner_id"  value="<?php echo $result['owner_id']?>">
+                                                        <input type="hidden" name="rater_id" id="rater_id"  value="<?php echo $customer_id ?>">
+                                                        </div>   
+                                                    </form>
+                                                    <div class="modal-footer">
+                                                    <button class="btn btn-danger" role="button" aria-pressed="true"  style="margin-right: 50px" id="rate_home_owner">Rate</button>
                                                     </div>
                                                 </div>
                                                 </div>

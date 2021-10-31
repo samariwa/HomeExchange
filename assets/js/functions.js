@@ -1177,6 +1177,48 @@ $(document).on('click','#edit_home',function(e){
     });
 });
 
+$('#rate_home').click(function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var where = 'rate-home';
+    var home_id = $('#home_id').val();
+    var rater_id = $('#rater_id').val();
+    var val = $("input[type='radio'][name='rate-home']:checked").val();
+    $.post("add.php",{home_id:home_id, rater_id:rater_id, val:val, where:where},
+    function(result){
+        if(result == 1)
+        {
+            alert('Home rating added successfully');
+        }
+        else
+        {
+            alert('Something went wrong. Try again.')
+        }
+        location.reload(true);
+    });
+});
+
+$('#rate_home_owner').click(function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var where = 'rate-home-owner';
+    var owner_id = $('#home_owner_id').val();
+    var rater_id = $('#rater_id').val();
+    var val = $("input[type='radio'][name='rate-home-owner']:checked").val();
+    $.post("add.php",{owner_id:owner_id, rater_id:rater_id, val:val, where:where},
+    function(result){
+        if(result == 1)
+        {
+            alert('Home owner rating added successfully');
+        }
+        else
+        {
+            alert('Something went wrong. Try again.')
+        }
+        location.reload(true);
+    });
+});
+
 $(document).on('click','#edit_availability',function(e){
     e.preventDefault();
     e.stopPropagation();

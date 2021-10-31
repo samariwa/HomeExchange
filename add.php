@@ -267,28 +267,40 @@ else if ($where == 'note') {
      $id = $result['id'];
       mysqli_query($connection,"INSERT INTO `notes` (`User_id`,`Title`,`Note`,`Public`) VALUES ('$id','$title','$message','$access')") or die(mysqli_error($connection));
 }
-elseif ($where == 'purchase') {
-  $id = $_POST['id'];
-    $received = $_POST['received'];
-     $qty = $_POST['qty'];
-     $bp = $_POST['bp'];
-     $sp = $_POST['sp'];
-     $expiry = $_POST['expiry'];
-     mysqli_query($connection,"INSERT INTO `stock_flow` (`Stock_id`,`Buying_price`,`Selling_Price`,`Received_date`,`Purchased`,`Expiry_date`) VALUES ('$id','$bp','$sp','$received','$qty','$expiry')") or die(mysqli_error($connection));
-mysqli_query($connection,"UPDATE `stock` SET `Quantity` = Quantity + '".$qty."',Buying_price = '".$bp."',Price = '".$sp."' WHERE `id` = '".$id."'")or die($connection->error);
+elseif ($where == 'rate-home') {
+  $home_rating = new HomeRating();
+  $rater_unique = mysqli_query($connection, $home_rating->CheckRaterUnique($_POST['home_id'],$_POST['rater_id'])) or die(mysqli_error($connection));
+  $rater_result = mysqli_fetch_array($rater_unique);
+  if($rater_result == TRUE)
+  {
+    mysqli_query($connection, $home_rating->UpdateRating($rater_result['id'],$_POST['val'])) or die(mysqli_error($connection));
+  }
+  else
+  {
+    mysqli_query($connection, $home_rating->RateHome($_POST['home_id'],$_POST['rater_id'],$_POST['val'])) or die(mysqli_error($connection));
+  }
+  $avg_rating = mysqli_query($connection, $home_rating->GetAverageHomeRating($_POST['home_id'])) or die(mysqli_error($connection));
+  $result = mysqli_fetch_array($avg_rating);
+  mysqli_query($connection, $home_rating->SetAverageHomeRating($_POST['home_id'],$result['rating'])) or die(mysqli_error($connection));
+  echo "1";
 }
-elseif ($where == 'calendar') {
-  if(isset($_POST["title"]))
-{
-  $title = $_POST["title"];
-  $start_event = $_POST["start"];
-  $end_event = $_POST["end"];
-  $user = $_SESSION['user'];
-   $userId = mysqli_query($connection,"SELECT id  FROM `users` WHERE username = '$user'")or die($connection->error);
-   $value = mysqli_fetch_array($userId);
-   $userID = $value['id'];
-  mysqli_query($connection,"INSERT INTO event (title,User_id, start_event, end_event) VALUES ('$title','$userID', '$start_event', '$end_event')") or die(mysqli_error($connection));
-}
+
+elseif ($where == 'rate-home-owner') {
+  $home_owner_rating = new HomeOwnerRating();
+  $rater_unique = mysqli_query($connection, $home_owner_rating->CheckRaterUnique($_POST['owner_id'],$_POST['rater_id'])) or die(mysqli_error($connection));
+  $rater_result = mysqli_fetch_array($rater_unique);
+  if($rater_result == TRUE)
+  {
+    mysqli_query($connection, $home_owner_rating->UpdateRating($rater_result['id'],$_POST['val'])) or die(mysqli_error($connection));
+  }
+  else
+  {
+    mysqli_query($connection, $home_owner_rating->RateHomeOwner($_POST['owner_id'],$_POST['rater_id'],$_POST['val'])) or die(mysqli_error($connection));
+  }
+  $avg_rating = mysqli_query($connection, $home_owner_rating->GetAverageHomeOwnerRating($_POST['owner_id'])) or die(mysqli_error($connection));
+  $result = mysqli_fetch_array($avg_rating);
+  mysqli_query($connection, $home_owner_rating->SetAverageHomeOwnerRating($_POST['owner_id'],$result['rating'])) or die(mysqli_error($connection));
+  echo "1";
 }
 
 
