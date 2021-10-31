@@ -101,7 +101,7 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                     </div>
-                                                    <div class="modal-body">
+                                                    <div class="modal-body modal-body-star">
                                                     <form method="POST">
                                                     <div class="star-widget mr-5">
                                                     <input type="radio" name="rate-home" id="home-rate-5" value="5">
@@ -172,7 +172,7 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                     </div>
-                                                    <div class="modal-body">
+                                                    <div class="modal-body modal-body-star">
                                                     <form method="POST">
                                                         <div class="star-widget mr-5"> 
                                                         <input type="radio" name="rate-home-owner" id="home-owner-rate-5" value="5">

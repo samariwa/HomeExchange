@@ -1060,7 +1060,6 @@ $(document).on('submit','#form',function(e){
     processData : false,
     cache : false,
       success : function(data){
-          alert(data)
        /* var xml = new XMLHttpRequest();
         xml.open("POST", "tier match/run.py",true);
         xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

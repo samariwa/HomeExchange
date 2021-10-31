@@ -7110,7 +7110,7 @@ input[type="file"]{
   display: block;
 }
 
-.modal-body input{
+.modal-body-star input{
   display: none;
 }
 
