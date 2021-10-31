@@ -7079,6 +7079,21 @@ input[type="file"]{
   border-radius: 10px;
 }
 
+.add-home-image:hover{
+  background-color: grey;
+  color:white;
+}
+
+.add-home-image:hover{
+  background-color: grey;
+  color:white;
+}
+
+.home-dashboard-image:hover{
+  background-color: grey;
+  color:white;
+}
+
 .dashboard-images .btn {
   position: absolute;
   top: 50%;

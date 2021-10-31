@@ -442,7 +442,7 @@
                            }
                       if($result['user_id'] == $customer_id){ ?>
                       <form method="POST" id="images-form" class="ml-5 mt-5">
-                        <input type="file" id="home-dashboard-image" name="upload" onchange="displayname(this,$(this))"/>
+                        <input type="file" id="home-dashboard-image" class="home-dashboard-image" name="upload" onchange="displayname(this,$(this))"/>
                         <label for="home-dashboard-image" class="home-dashboard-image">
                             <i class="fas fa-file-image"></i>&emsp;Add an image
                         </label>
