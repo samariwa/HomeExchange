@@ -469,7 +469,7 @@
                     $comment = $row['comment'];
                     $comment_Date = $row['Created_at'];
                     $comment_date = date( 'l, F d, Y h:i A', strtotime($comment_Date) );
-                    $subcomments = mysqli_query($connection,"SELECT * FROM comments WHERE comment_id = '$comment_id' AND belongs_to = 'comment'")or die($connection->error);
+                    $subcomments = mysqli_query($connection,"SELECT * FROM comments WHERE home_id = '$comment_id'")or die($connection->error);
                     */
                     $commenter = "Samuel Mariwa";
                     $words = explode(" ", $commenter);
@@ -486,7 +486,6 @@
                             <div class="author-name-info">
                                 <h6 class="name" id="commenter"><?php echo $commenter; ?></h6>
                                 <p class="publish-date">Posted on 27th March 2021<?php //echo $comment_date; ?></p>
-                                <button id="<?php //echo $comment_id; ?>" class="reply-btn reply-button btn">Reply</button>
                             </div>
                         </div>
                         <div class="comment-content">
@@ -500,7 +499,15 @@
                 <?php
                     //  }
                 ?>
-
+                <div class="comment-input">
+                         
+                </div>
+                <?php
+                if($result['user_id'] != $customer_id){ ?>
+                <button class="btn btn-danger" role="button" aria-pressed="true" style="margin-right: 50px;float: right" id="add_comment">Add Comment</button>
+                <?php
+                }
+                ?>
                 </div>
             </div>
             </div>

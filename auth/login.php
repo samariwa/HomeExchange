@@ -62,6 +62,7 @@ mysqli_query($connection,$query->update("users", "email_address", $email, array(
 $validationresults = TRUE;
 $registered = TRUE;
 $botDetect = FALSE;
+$internet_connection = TRUE;
 //Check if a user has logged-in
 if (!$session->exists('logged_in')) {
     $session->put('logged_in', FALSE);
@@ -77,11 +78,22 @@ if(isset($_REQUEST['login-button'])){
 		'http' => array(
 		 'header' => "Content-type: application/x-www-form-urlencoded\r\n",
 		     'method' => 'POST',
+        // 'ignore_errors' => true,
 		     'content' => http_build_query($data)
+         
 		 )
 	);
   $context = stream_context_create($options);
+  try
+  {
 	$response = file_get_contents($url, false, $context);
+  if(empty($response)){
+    $internet_connection = FALSE;
+ }
+  }
+  catch (Exception $e) {
+    echo $e;
+}
 	$res = json_decode($response, true);
 	if ($res['success'] == true && $res['score'] >= 0.5) {
 //Check if the form is submitted
@@ -227,15 +239,16 @@ if (!$session->get('logged_in')):
              <p>Don't have an account?&ensp;<a href="registration.php" style="color: inherit;text-decoration: underline;">Sign Up</a></p>
           </div>
           <?php 
-          if (($validationresults == FALSE) || ($registered == FALSE)){
+          if (($validationresults == FALSE) || ($registered == FALSE) || ($botDetect == TRUE) || ($internet_connection == FALSE)){
           ?>
           <div style="margin-top: 20px">
           <!-- Display validation errors -->
-                     <?php if ($botDetect == TRUE)
+                     <?php if ($botDetect == TRUE && $internet_connection  == TRUE)
 		                        echo '<font color="red"><i class="bx bx-shield-quarter bx-flashing"></i>&ensp;Access Denied!</font>';
-		                   ?>
-                  <?php if ($validationresults == FALSE || $registered == FALSE)
-                        echo '<font color="red"><i class="bx bxs-lock bx-flashing"></i>&ensp;Please enter valid email address, password <br> &ensp;&emsp;(if required).</font>';
+                            if ($internet_connection  == FALSE)
+		                        echo '<br><font color="red"><i class="bx bx-wifi bx-flashing"></i>&ensp;Please check your internet connection and try again.</font>';
+                            if ($validationresults == FALSE || $registered == FALSE)
+                        echo '<br><font color="red"><i class="bx bxs-lock bx-flashing"></i>&ensp;Please enter valid email address, password <br> &ensp;&emsp;(if required).</font>';
                    ?>
                   </div>
             <?php

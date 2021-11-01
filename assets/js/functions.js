@@ -943,6 +943,25 @@ $(document).on('click','.reply-btn',function(){
     $(`.subcomment-response-anonymous${id}`).html(extraForm); 
 });
 
+$(document).on('click','#add_comment',function(){
+    var form = "";
+    form += "<br>";
+    form += "<form action='#' class='respons-contact-form'>";
+    form += "<input type='hidden' class='comment_token' id='token' name='token'>";
+    form += "<div class='form-item col-lg-12 p-0'>";
+    form += "<textarea name='comment' id='comment' style='color:gray' placeholder='Type your comment' required></textarea>";
+    form += "<i class='fab fa-telegram-plane fa-2x'></i>";
+    form += "<br>";
+    form += "<button class='btn btn-danger' role='button' aria-pressed='true' style='margin-right: 50px;float: right; border-radius: 25px' id='post_comment_btn'>Post Comment</button>";
+    form += "<br>";
+    form += "<br>";
+    $('.comment-input').html(form); 
+});
+
+$(document).on('click','#post_comment_btn',function(){
+    alert('hi')
+});
+
 $(document).on('click','.user_subcomment',function(){
     var email = $('#subcomment_hidden_email').val();
     var id = $('#comment_id').val();
