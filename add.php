@@ -432,8 +432,7 @@ elseif ($where == 'site_contact') {
 }
 elseif ($where == 'site_comment') {
   $name = "";
-  $registered = "";
-  if (isset($_POST['email']) && isset($_POST['comment'])) {
+  if (isset($_POST['home']) && isset($_POST['comment'])) {
 	$data = [
 		'secret' => $private_key,
 		'response' => $_POST['token'],
@@ -450,17 +449,11 @@ elseif ($where == 'site_comment') {
 	$response = file_get_contents($token_verification_site, false, $context);
 	$res = json_decode($response, true);
 	if ($res['success'] == 'true' && $res['score'] >= 0.5) {
-  $row = mysqli_query($connection,"SELECT * FROM users WHERE email = '".$_POST['email']."'")or die($connection->error);
+  $row = mysqli_query($connection,"SELECT * FROM users WHERE id = '".$_POST['commenter']."'")or die($connection->error);
    $result = mysqli_fetch_array($row);
-   if ( $result == TRUE) {
      $registered = "1";
-     $name = $result['firstname'].' '.$result['lastname'];
-   }
-   else{ 
-    $registered = "0";
-    $name = $_POST['name'];
-   }
-   mysqli_query($connection,"INSERT INTO `comments` (`blog_id`,`commenter`, `registered`, `belongs_to`,`comment`) VALUES ('".$_POST['id']."','$name','$registered','blog','".$_POST['comment']."')") or die(mysqli_error($connection));
+     $name = $result['first_name'].' '.$result['last_name'];
+   mysqli_query($connection,"INSERT INTO `comments` (`home_id`,`commenter`,`comment`) VALUES ('".$_POST['home']."','$name','".$_POST['comment']."')") or die(mysqli_error($connection));
     echo "success";
   }
   else{

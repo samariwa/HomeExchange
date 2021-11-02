@@ -31,6 +31,12 @@ class Home{
       $query = new Database();
       return $query->get("images","*", array('home_id','=', $home_id));
    }
+
+   public function fetchHomeComments($home_id)
+   {
+      $query = new Database();
+      return $query->get("comments","*", array('home_id','=', $home_id));
+   }
    
    public function addHomeImages($home_id, $url)
    {

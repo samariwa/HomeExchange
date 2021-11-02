@@ -455,23 +455,20 @@
                    </div>
                 </div>
             </section>
-
+             <?php
+             $home_comments = mysqli_query($connection,$home->fetchHomeComments($_GET['id']))or die($connection->error);
+             $comments_count = mysqli_num_rows($home_comments);
+             ?>
             <section class="catagory-section  mt-n5">
             <div class="container p-lg-0">
                 <div class="comment-section pt--70 pb--40" id="comments-section">
-                <h5 class="comment-title mb--30"><i class="far fa-comment-alt"></i> 5 Reviews</h5>
+                <h5 class="comment-title mb--30"><i class="far fa-comment-alt"></i> <?php echo $comments_count; ?> Comment<?php if($comments_count != 1){?>s<?php } ?></h5>
 
                 <div class="comment-list">
                 <?php
-                /*    foreach($comments as $row){
-                    $comment_id = $row['id'];
+                    
+                    foreach($home_comments as $row){
                     $commenter = $row['commenter'];
-                    $comment = $row['comment'];
-                    $comment_Date = $row['Created_at'];
-                    $comment_date = date( 'l, F d, Y h:i A', strtotime($comment_Date) );
-                    $subcomments = mysqli_query($connection,"SELECT * FROM comments WHERE home_id = '$comment_id'")or die($connection->error);
-                    */
-                    $commenter = "Samuel Mariwa";
                     $words = explode(" ", $commenter);
                     $acronym = "";
                     foreach ($words as $w) {
@@ -485,23 +482,25 @@
                             </div>
                             <div class="author-name-info">
                                 <h6 class="name" id="commenter"><?php echo $commenter; ?></h6>
-                                <p class="publish-date">Posted on 27th March 2021<?php //echo $comment_date; ?></p>
+                                <p class="publish-date">Posted on <?php echo date('d F Y', strtotime($row['Created_at'])); ?></p>
                             </div>
                         </div>
                         <div class="comment-content">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur quibusdam enim expedita sed nesciunt incidunt accusamus adipisci officia libero laboriosam! Proin gravida nibh vel velit auctor aliquet. nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vultate cursus a sit amet mauris. Duis sed odio sit amet nibh vultate cursus a sit amet mauris.
-                            <?php //echo $comment; ?>
+                            <?php echo $row['comment']; ?>
                         </div>
 
                         </div>
 
                     </div>
                 <?php
-                    //  }
+                     }
                 ?>
                 <div class="comment-input">
                          
                 </div>
+                <input type='hidden' class='token' id='token' name='token'>
+                <input type='hidden' class='home_id' id='home_id' name='home_id' value="<?php echo $_GET['id'] ?>">
+                <input type='hidden' class='commenter_id' id='commenter_id' name='commenter_id' value="<?php echo $customer_id ?>">
                 <?php
                 if($result['user_id'] != $customer_id){ ?>
                 <button class="btn btn-danger" role="button" aria-pressed="true" style="margin-right: 50px;float: right" id="add_comment">Add Comment</button>
