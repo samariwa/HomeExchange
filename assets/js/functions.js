@@ -1340,14 +1340,14 @@ function filter_data()
         var loader = '<div class="loader__figure"></div';
         loader += '<p class="loader__label">'+organization+'</p>';
         $('.loader').html(loader);
-        var action = 'fetch data';
         var range = $('.js-range-slider').val();
         var arr = range.split(";");
-        var minimum_price = arr.splice(0,1).join("");
-        var maximum_price = arr.join(";");
-        var category = get_filter('category_selector');
+        var minimum_rating = arr.splice(0,1).join("");
+        var maximum_rating = arr.join(";");
+        var county = get_filter('county_selector');
+        var features = JSON.stringify(get_filter('feature_selector'));
         var where = 'filter';
-        $.post("load.php",{action:action,minimum_price:minimum_price,maximum_price:maximum_price,category:category,where:where},
+        $.post("load.php",{minimum_rating:minimum_rating,maximum_rating:maximum_rating,features:features,county:county,where:where},
     function(data){
         $('.product-list').html(data);
     });
@@ -1360,13 +1360,17 @@ function get_filter(class_name)
          filter.push($(this).val());
     });
     return filter;
-}    
+} 
 
 $(document).on('change','.js-range-slider',function(){
     filter_data();
 });
 
-$(document).on('click','.category_selector',function(){
+$(document).on('click','.county_selector',function(){
+    filter_data();
+});
+
+$(document).on('click','.feature_selector',function(){
     filter_data();
 });
 

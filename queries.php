@@ -24,7 +24,7 @@ $deactivatedHomesList =  mysqli_query($connection,$home->GetDeactivatedHomes())o
 $deactivatedHomesCount = mysqli_num_rows($deactivatedHomesList);
 $acceptedExchangeRequests = mysqli_query($connection,$exchange->GetExchanges())or die($connection->error);
 $acceptedExchangeCount = mysqli_num_rows($acceptedExchangeRequests);
-$countyList = mysqli_query($connection,"SELECT county from counties")or die($connection->error);
+$countyList = mysqli_query($connection,"SELECT id, county from counties")or die($connection->error);
 $homeOwnersList = mysqli_query($connection,"SELECT home_owners.id as id,first_name,last_name,phone_number,email_address,average_rating,exchange_points from home_owners INNER JOIN users ON home_owners.user_id = users.id")or die($connection->error);
 $homeOwnersCount = mysqli_num_rows($homeOwnersList);
 $signupsWk1 = mysqli_query($connection,"SELECT COALESCE(COUNT(id),0) AS 'sum' FROM users where DATE(Created_at) >= DATE_SUB( CURDATE(), INTERVAL 1 MONTH ) and DATE(Created_at) < DATE_SUB( CURDATE(), INTERVAL 3 WEEK )")or die($connection->error);

@@ -351,31 +351,48 @@
                 </div>  
                       
             </section>
-             <?php } ?>
+             <?php } 
+              $home_features = mysqli_query($connection,$home->GetHomeFeatures($_GET['id']))or die($connection->error);
+              $features_result = mysqli_fetch_array($home_features);
+             ?>
             <section class="catagory-section  mt-n5">
                 <div class="container col-12 p-lg-0 home-dash-features row">
                    <div class="col-2 text-center">
+                       <?php
+                           if($features_result['home_type'] == 1)
+                           {
+                       ?>
                         <i class="fas fa-home fa-3x" style="color: #BDBBBB;"></i>
                         <h6>House</h6>
+                        <?php
+                           }
+                           else
+                           {
+                        ?>
+                        <i class="fas fa-building fa-3x" style="color: #BDBBBB;"></i>
+                        <h6>Apartment</h6>
+                        <?php
+                           }
+                        ?>
                    </div>
                    <div class="col-2 text-center">
-                       <h2>3</h2>
+                       <h2><?php echo $result['home_tier'] ?></h2>
                         <h6>Tier</h6>
                    </div>
                    <div class="col-2 text-center">
-                       <h2>3</h2>
+                       <h2><?php echo $features_result['bedrooms'] ?></h2>
                         <h6>Bedrooms</h6>
                    </div>
                    <div class="col-2 text-center">
-                       <h2>2</h2>
+                       <h2><?php echo $features_result['bathrooms'] ?></h2>
                         <h6>Bathrooms</h6>
                    </div>
                    <div class="col-2 text-center">
-                       <h2>5</h2>
+                       <h2><?php echo $features_result['capacity'] ?></h2>
                         <h6>Occupancy</h6>
                    </div>
                    <div class="col-2 text-center">
-                       <h2>80</h2>
+                       <h2><?php echo $features_result['size'] ?></h2>
                         <h6>m sq</h6>
                    </div>
                 </div>
@@ -398,14 +415,19 @@
                     </div>
                    <br>
                    <div class="row">
-                      <span class="badge badge-pill home-feature-badge ml-4 mt-2">Security</span>
-                      <span class="badge badge-pill home-feature-badge ml-4 mt-2">Kids Friendly</span>
-                      <span class="badge badge-pill home-feature-badge ml-4 mt-2">Smokers Allowed</span>
-                      <span class="badge badge-pill home-feature-badge ml-4 mt-2">Pets Allowed</span>
-                      <span class="badge badge-pill home-feature-badge ml-4 mt-2">Home Workers</span>
-                      <span class="badge badge-pill home-feature-badge ml-4 mt-2">TV</span>
-                      <span class="badge badge-pill home-feature-badge ml-4 mt-2">WiFi</span>
-                      <span class="badge badge-pill home-feature-badge ml-4 mt-2">Air Con.</span>
+                      <?php if($features_result['swimming_pool'] == 1){ ?><span class="badge badge-pill home-feature-badge ml-4 mt-2">Swimming pool</span><?php } ?>
+                      <?php if($features_result['security_guard'] == 1){ ?><span class="badge badge-pill home-feature-badge ml-4 mt-2">Security</span><?php } ?>
+                      <?php if($features_result['kids_friendly'] == 1){ ?><span class="badge badge-pill home-feature-badge ml-4 mt-2">Kids Friendly</span><?php } ?>
+                      <?php if($features_result['smokers_allowed'] == 1){ ?><span class="badge badge-pill home-feature-badge ml-4 mt-2">Smokers Allowed</span><?php } ?>
+                      <?php if($features_result['pets_allowed'] == 1){ ?><span class="badge badge-pill home-feature-badge ml-4 mt-2">Pets Allowed</span><?php } ?>
+                      <?php if($features_result['private_garden'] == 1){ ?><span class="badge badge-pill home-feature-badge ml-4 mt-2">Private Garden</span><?php } ?>
+                      <?php if($features_result['wheelchair_accessibility'] == 1){ ?><span class="badge badge-pill home-feature-badge ml-4 mt-2">Wheelchair accessibility</span><?php } ?>
+                      <?php if($features_result['private_gym'] == 1){ ?><span class="badge badge-pill home-feature-badge ml-4 mt-2">Private gym</span><?php } ?>
+                      <?php if($features_result['home_workers'] == 1){ ?><span class="badge badge-pill home-feature-badge ml-4 mt-2">Home Workers</span><?php } ?>
+                      <?php if($features_result['tv'] == 1){ ?><span class="badge badge-pill home-feature-badge ml-4 mt-2">TV</span><?php } ?>
+                      <?php if($features_result['wifi'] == 1){ ?><span class="badge badge-pill home-feature-badge ml-4 mt-2">WiFi</span><?php } ?>
+                      <?php if($features_result['ac'] == 1){ ?><span class="badge badge-pill home-feature-badge ml-4 mt-2">Air Con.</span><?php } ?>
+                      <?php if($features_result['parking'] == 1){ ?><span class="badge badge-pill home-feature-badge ml-4 mt-2">Private parking</span><?php } ?>
                    </div>
                 </div>
             </section>

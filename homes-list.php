@@ -27,7 +27,7 @@
                             <div class="widget widget-head">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <h6>Filter</h6>
-                                    <a href="product-list.php" id="clear_filter">Clear All</a>
+                                    <a href="homes-list.php" id="clear_filter">Clear All</a>
                                 </div>
                             </div>
                             <div class="widget">
@@ -42,8 +42,8 @@
                                                 foreach($countyList as $row){
                                             ?>
                                                 <li class="checkbox-item">
-                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
-                                                    <span class="checkbox" value="refre<?php echo $row['county']; ?>"></span>
+                                                    <input type="checkbox" class="county_selector" id="<?php echo $row['id']; ?>" value="<?php echo $row['county']; ?>">
+                                                    <span class="checkbox" value="<?php echo $row['county']; ?>"></span>
                                                     <span class="label"><?php echo $row['county']; ?></span>
                                                 </li>
                                             <?php
@@ -58,74 +58,74 @@
                                             <ul class="catagory-submenu collapse" id="catagory-widget-s2">
 
                                                 <li class="checkbox-item">
-                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
-                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <input type="checkbox" class="feature_selector" id="2" value="swimming_pool">
+                                                    <span class="checkbox" value="swimming_pool"></span>
                                                     <span class="label">Swimming Pool</span>
                                                 </li>
 
                                                 <li class="checkbox-item">
-                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
-                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <input type="checkbox" class="feature_selector" id="2" value="security_guard">
+                                                    <span class="checkbox" value="security_guard"></span>
                                                     <span class="label">Security</span>
                                                 </li>
 
                                                 <li class="checkbox-item">
-                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
-                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <input type="checkbox" class="feature_selector" id="2" value="private_garden">
+                                                    <span class="checkbox" value="private_garden"></span>
                                                     <span class="label">Private Garden</span>
                                                 </li>
 
                                                 <li class="checkbox-item">
-                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
-                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <input type="checkbox" class="feature_selector" id="2" value="private_gym">
+                                                    <span class="checkbox" value="private_gym"></span>
                                                     <span class="label">Private Gym</span>
                                                 </li>
 
                                                 <li class="checkbox-item">
-                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
-                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <input type="checkbox" class="feature_selector" id="2" value="wheelchair_accessibility">
+                                                    <span class="checkbox" value="wheelchair_accessibility"></span>
                                                     <span class="label">Wheelchair Accessible</span>
                                                 </li>
 
                                                 <li class="checkbox-item">
-                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
-                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <input type="checkbox" class="feature_selector" id="2" value="parking">
+                                                    <span class="checkbox" value="parking"></span>
                                                     <span class="label">Private Parking</span>
                                                 </li>
 
                                                 <li class="checkbox-item">
-                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
-                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <input type="checkbox" class="feature_selector" id="2" value="wifi">
+                                                    <span class="checkbox" value="wifi"></span>
                                                     <span class="label">WiFi</span>
                                                 </li>
 
                                                 <li class="checkbox-item">
-                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
-                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <input type="checkbox" class="feature_selector" id="2" value="tv">
+                                                    <span class="checkbox" value="tv"></span>
                                                     <span class="label">TV</span>
                                                 </li>
                                                 
                                                 <li class="checkbox-item">
-                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
-                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <input type="checkbox" class="feature_selector" id="2" value="ac">
+                                                    <span class="checkbox" value="ac"></span>
                                                     <span class="label">AC</span>
                                                 </li>
 
                                                 <li class="checkbox-item">
-                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
-                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <input type="checkbox" class="feature_selector" id="2" value="kids_friendly">
+                                                    <span class="checkbox" value="kids_friendly"></span>
                                                     <span class="label">Kids Friendly</span>
                                                 </li>
 
                                                 <li class="checkbox-item">
-                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
-                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <input type="checkbox" class="feature_selector" id="2" value="home_workers">
+                                                    <span class="checkbox" value="home_workers"></span>
                                                     <span class="label">Home Workers</span>
                                                 </li>
 
                                                 <li class="checkbox-item">
-                                                    <input type="checkbox" class="category_selector" id="2" value="erfer">
-                                                    <span class="checkbox" value="refre<?php //echo $row2['Name']; ?>"></span>
+                                                    <input type="checkbox" class="feature_selector" id="2" value="smokers_allowed">
+                                                    <span class="checkbox" value="smokers_allowed"></span>
                                                     <span class="label">Smokers Allowed</span>
                                                 </li>
                                             </ul>
@@ -157,7 +157,7 @@
                                 <div class="col-sm-6 col-xl-4" id="<?php echo $row['home_id']; ?>">
                                     <div class="product-item <?php if($row['home_availability_status'] == 0 ){ ?> reserved <?php }?>" id="<?php echo $row['home_id']; ?>">
                                         <div class="product-thumb">
-                                            <a  href="home-dashboard.php?id=<?php echo $row['home_id'] ?>" class="modalOpen" id="<?php echo $row['home_id']; ?>"><img src="assets/images/homes/<?php echo $row['home_image']; ?>" alt="product"></a> 
+                                            <a  href="home-dashboard.php?id=<?php echo $row['home_id'] ?>" class="modalOpen" id="<?php echo $row['home_id']; ?>"><img src="assets/images/homes/<?php echo $row['home_image']; ?>" alt="home"></a> 
                                            <?php
                                                $item_in_wishlist = '';
                                                $product_in_wishlist = mysqli_query($connection,"SELECT * FROM `wishlist` WHERE customer_id ='$customer_id' AND home_id = '".$row['home_id']."'");

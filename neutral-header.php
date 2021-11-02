@@ -3,7 +3,6 @@
  require('config.php');
  require('functions.php');
  require('queries.php');
- include('wishlist_process.php');
  if (isset($_SESSION['logged_in'])) {
     if ($_SESSION['logged_in'] == TRUE) {
          //valid user has logged-in to the website
@@ -45,7 +44,14 @@
             }
             setcookie('shopping_wishlist', '', $cart_expiry);
         }
-
+        $exchangePoints = 0;
+        $customer = new Customer();
+        $exchangePointsResult = mysqli_query($connection,$customer->GetExchangePoints($customer_id))or die($connection->error);
+        if(mysqli_num_rows($exchangePointsResult) > 0)
+        {
+            $row = mysqli_fetch_array($exchangePointsResult);
+            $exchangePoints = $row['exchange_points'];
+        }
  //Session Lifetime control for inactivity
      if ((isset($_SESSION['LAST_ACTIVITY'])) && (time() - $_SESSION['LAST_ACTIVITY'] > $sessiontimeout) || (isset($_SESSION['LAST_ACTIVITY'])) && ($active == 2)) {
  //redirect the user back to login page for re-authentication
