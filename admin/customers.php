@@ -20,10 +20,7 @@
       <a href="home-owners.php" class="btn btn-primary btn-md active" role="button" aria-pressed="true" >Home Owners</a>
        </div>
        <div class="col-md-4">
-      <?php
-        $customersrowcount = mysqli_num_rows($activeCustomersList);
-      ?>
-      <h6 class="offset-5">Total Number: <?php echo $customersrowcount; ?></h6>
+      <h6 class="offset-5">Total Number: <?php echo $activeCustomersCount; ?></h6>
       </div>
       <div class="col-md-5">
       <a href="blacklisted-customers.php" class="btn btn-dark btn-md active offset-6" role="button" aria-pressed="true" >Blacklisted Customers</a>
