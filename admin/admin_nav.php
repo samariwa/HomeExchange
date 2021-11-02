@@ -272,7 +272,7 @@ Preloader
       <li class="nav-item active">
         <a class="nav-link" href="dashboard.php" style="color: black;">
               <?php
-                if ($view == 'superuser'){
+                if ($view == 'super user'){
                ?> 
             <span style="margin-left: 55px">Super User</span></a>
               <?php
@@ -300,7 +300,7 @@ Preloader
       </li>
       <br>
       <?php
-       if ($view == 'superuser') {
+       if ($view == 'super user') {
 
         ?>
        <li class="nav-item">&emsp;

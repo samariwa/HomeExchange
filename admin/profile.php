@@ -17,7 +17,7 @@
          <br>
         <?php
          $user = $_SESSION['user'];
-         $profileQuery = mysqli_query($connection,"SELECT first_name,last_name,phone_number,email_address,roles.role_name as role FROM users INNER JOIN roles ON users.role_id = roles.id WHERE first_name = '$user'")or die($connection->error);
+         $profileQuery = mysqli_query($connection,"SELECT first_name,last_name,phone_number,email_address,roles.role_name as role FROM users INNER JOIN roles ON users.role_id = roles.id WHERE email_address = '".$_SESSION['email']."'")or die($connection->error);
           $result = mysqli_fetch_array($profileQuery);
           $firstname = $result['first_name'];
           $lastname = $result['last_name'];
