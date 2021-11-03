@@ -5,20 +5,23 @@ require('config.php');
 require_once "functions.php";
 $where =$_POST['where'];
 session_start();
-if($where == 'customer' )
+if($where == 'admin' )
 {
-   $name = $_POST['name'];
-   $location = $_POST['location'];
-   $number = $_POST['number'];
-   #$deliverer = $_POST['deliverer'];
-   $row = mysqli_query($connection,"SELECT id,Name,Location,Number,Status,Note FROM customers WHERE Name = '".$name."' OR Number = '".$number."'")or die($connection->error);
+   $firstname = $_POST['firstname'];
+   $othername = $_POST['othername'];
+   $lastname = $_POST['lastname'];
+   $email = $_POST['email'];
+   $number = $_POST['mobile'];
+   $hash = password_hash($default_admin_pass, PASSWORD_DEFAULT);
+   $row = mysqli_query($connection,"SELECT * FROM users WHERE email_address = '".$email."' OR phone_number = '".$number."'")or die($connection->error);
    $result = mysqli_fetch_array($row);
    if ( $result == TRUE) {
     echo "exists";
    }
    else{
      echo "success";
-    mysqli_query($connection,"INSERT INTO `customers` (`Name`,`Location`,`Number`) VALUES ('$name','$location','$number')") or die(mysqli_error($connection));
+     $user = new User();
+	   $user->create($connection, array('role_id' => '1','first_name' => $firstname,'other_name' => $othername,'last_name' => $lastname,'phone_number' => $number,'email_address' => $email,'password' => $hash, 'user_status' => '0')) or die(mysqli_error($connection));
    }
 }
 elseif($where == 'stock'){

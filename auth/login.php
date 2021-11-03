@@ -63,6 +63,7 @@ $validationresults = TRUE;
 $registered = TRUE;
 $botDetect = FALSE;
 $internet_connection = TRUE;
+$inactive = FALSE;
 //Check if a user has logged-in
 if (!$session->exists('logged_in')) {
     $session->put('logged_in', FALSE);
@@ -123,7 +124,7 @@ if ((isset($_POST["pass"])) && (isset($_POST["email"])) && (!$session->get('logg
         $registered = FALSE;
     }
    
-//u is registered in database, now get the hashed password    
+//user is registered in database, now get the hashed password    
         $row = mysqli_fetch_array(mysqli_query($connection,$query->get("users","password", array('email_address','=',$email))));
         $correctpassword = $row['password'];
     if (!password_verify($pass, $correctpassword) || ($registered == FALSE)) {
@@ -137,6 +138,41 @@ if ((isset($_POST["pass"])) && (isset($_POST["email"])) && (!$session->get('logg
 mysqli_query($connection,$query->update("users", "email_address", $email, array('loginattempt' => $loginattempts_email)));
     } 
     else {
+      if(password_verify($default_admin_pass, $correctpassword) && ($access == '1'))
+      {       
+          $random = generateRandomString();
+          $reset_link = $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/auth/reset.php?email='.$user_email.'&token='.$random;
+          mysqli_query($connection, "UPDATE users SET token= '$random',tokenExpire=DATE_ADD(NOW(), INTERVAL 5 MINUTE )WHERE email_address ='$user_email'");
+          require_once "PHPMailer/PHPMailer.php";
+          require_once "PHPMailer/Exception.php";
+          require_once "PHPMailer/SMTP.php";
+           $mail = new PHPMailer(true);
+          $mail -> addAddress($user_email,'Recepient');
+          $mail -> setFrom($authenticator_email,$organization);
+          $mail->IsSMTP();
+          $mail->Host = $mail_host;
+          // optional
+          // used only when SMTP requires authentication  
+          $mail->SMTPAuth = true;
+          $mail->Username = $authenticator_email;
+          $mail->Password = $authenticator_password;
+          $mail -> Subject = "Reset Password";
+          $mail -> isHTML(true);
+          $mail -> Body = "
+                Hi $identity,<br><br>
+                  Kindly reset your default administrator password for security purposes. In order to reset it, please click on the link below:<br>
+                  <a href='
+                  $reset_link'>Password Reset Link</a><br><br>
+                  Kindly reset your password in the given time limit of 5 minutes.<br><br>
+                  Kind Regards,<br>
+                  Home Swap.
+                  ";
+            if($mail -> send()){
+              $inactive = TRUE;
+          }
+      }
+      else
+      {
     	//remember me functionality
       $rem = sanitize($_POST['remember']);
 
@@ -149,6 +185,7 @@ mysqli_query($connection,$query->update("users", "email_address", $email, array(
 
       $user = new User();
  	    $user->login($connection, $rem, $random, $user_id, $email,$pass, $remember_me_expiry, $length_salt, $iptocheck, $useragent);  
+      }
     }
 }
 }
@@ -239,7 +276,7 @@ if (!$session->get('logged_in')):
              <p>Don't have an account?&ensp;<a href="registration.php" style="color: inherit;text-decoration: underline;">Sign Up</a></p>
           </div>
           <?php 
-          if (($validationresults == FALSE) || ($registered == FALSE) || ($botDetect == TRUE) || ($internet_connection == FALSE)){
+          if (($validationresults == FALSE) || ($registered == FALSE) || ($botDetect == TRUE) || ($internet_connection == FALSE) || ($inactive == TRUE)){
           ?>
           <div style="margin-top: 20px">
           <!-- Display validation errors -->
@@ -247,6 +284,8 @@ if (!$session->get('logged_in')):
 		                        echo '<font color="red"><i class="bx bx-shield-quarter bx-flashing"></i>&ensp;Access Denied!</font>';
                             if ($internet_connection  == FALSE)
 		                        echo '<br><font color="red"><i class="bx bx-wifi bx-flashing"></i>&ensp;Please check your internet connection and try again.</font>';
+                            if ($inactive  == TRUE)
+		                        echo '<br><font color="red"><i class="bx bxs-error-alt bx-flashing"></i>&ensp;Kindly reset your password.<br>Check your email for a password reset link.<br>The link expires in 5 minutes.</font>';
                             if ($validationresults == FALSE || $registered == FALSE)
                         echo '<br><font color="red"><i class="bx bxs-lock bx-flashing"></i>&ensp;Please enter valid email address, password <br> &ensp;&emsp;(if required).</font>';
                    ?>

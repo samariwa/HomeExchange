@@ -40,11 +40,12 @@
                  <input type="text" name="lastname" id= "lastname" class="form-control col-md-9" style="padding:15px;margin-left: 60px" required  placeholder="Last Name...">
                   </div><br>
                  <div class="row">
-                 <input type="text" name="location" id= "email" class="form-control col-md-9" required style="padding:15px;margin-left: 60px" placeholder="Email Address...">
+                 <input type="text" name="email" id= "email" class="form-control col-md-9" required style="padding:15px;margin-left: 60px" placeholder="Email Address...">
                   </div><br>
                  <div class="row">
-                 <input type="text" name="number" id= "number"class="form-control col-md-9" required style="padding:15px;margin-left: 60px" placeholder="Contact Number...">
+                 <input type="text" name="mobile" id= "mobile"class="form-control col-md-9" required style="padding:15px;margin-left: 60px" placeholder="Contact Number...">
                   </div><br>
+                  <input type="hidden" name="where" id= "where"  value="admin">
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-primary" style="margin-right: 50px" id="addAdmin">Add Admin</button>

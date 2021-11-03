@@ -1401,23 +1401,32 @@ function getIndexOfProduct(arr, k) {
 });
 
 
-  $('#stockEditable').editableTableWidget();
-  $('#stockEditable td.uneditable').on('change', function(evt, newValue) {
+  $('#adminsEditable').editableTableWidget();
+  $('#adminsEditable td.uneditable').on('change', function(evt, newValue) {
   return false;
 });
-  $('#stockEditable td').on('change', function(evt, newValue) {
+  $('#adminsEditable td').on('change', function(evt, newValue) {
    var rowx = parseInt(evt.target._DT_CellIndex.row)+1;
   var id = $(`#id${rowx}`).text();
-  var category = $(`#category${rowx}`).text();
-  var name = $(`#name${rowx}`).text();
-  var bp = $(`#bprice${rowx}`).text();
-  var discount = $(`#discount${rowx}`).text();
-  var sp = $(`#sprice${rowx}`).text();
-  var qty = $(`#qty${rowx}`).text();
-  var restock_Level = $(`#restock_Level${rowx}`).text();
-  var where = 'stock';
-  $.post("../save.php",{id:id,name:name,bp:bp,discount:discount,restock_Level:restock_Level,category:category,qty:qty,sp:sp,where:where},
+  var email = $(`#email${rowx}`).text();
+  var number = $(`#number${rowx}`).text();
+  var where = 'admin';
+  $.post("../save.php",{id:id,email:email,number:number,where:where},
   function(result){});
+});
+
+$('#deactivatedAdminsEditable').editableTableWidget();
+$('#deactivatedAdminsEditable td.uneditable').on('change', function(evt, newValue) {
+return false;
+});
+$('#deactivatedAdminsEditable td').on('change', function(evt, newValue) {
+ var rowx = parseInt(evt.target._DT_CellIndex.row)+1;
+var id = $(`#id${rowx}`).text();
+var email = $(`#email${rowx}`).text();
+var number = $(`#number${rowx}`).text();
+var where = 'admin';
+$.post("../save.php",{id:id,email:email,number:number,where:where},
+function(result){});
 });
 
 
@@ -1962,6 +1971,7 @@ function saveOrderToday(idx){
       processData : false,
       cache : false,
         success : function(data){
+          alert(data)
          if (data == 'success') {
           alert(module+' Added Successfully');
           location.reload(true);
@@ -1976,8 +1986,8 @@ function saveOrderToday(idx){
         });
  }
 
-  $(document).on('click','#addCustomer',function(){
-      formAjax('Customer');
+  $(document).on('click','#addAdmin',function(){
+      formAjax('Admin');
   });
 
    $(document).on('click','#addStock',function(){
@@ -2040,36 +2050,6 @@ function saveOrderToday(idx){
             });
         }); 
 
-  $(document).on('click','#addUnit',function(){
-    formAjax('Unit');
-       });
-
-  $(document).on('click','.editAutomation',function(){
-        var el = $(this);
-        var id = el.attr("id");
-        var stock = $(`#stock${id}`).val();
-        var unit = $(`#unit${id}`).val();
-        var contains = $(`#contains${id}`).val();
-        var subunit = $(`#subunit${id}`).val();
-        var replenish = $(`#replenish${id}`).val();
-        var restock = $(`#restock${id}`).val();
-        var where = 'stock_automation';
-        $.post("../save.php",{stock:stock,unit:unit,contains:contains,subunit:subunit,replenish:replenish,restock:restock,where:where},
-        function(result){
-         if (result == 'success') {
-          alert('Automation Successfully Set for Selected Stock');
-          location.reload(true);
-         }
-         else{
-          alert("Something went wrong");
-         }
-         });
-       });
-
-  $(document).on('click','#addSupplier',function(){
-    formAjax('Supplier');
-       });
-
   $(document).on('click','#addNote',function(){
         var title = $('#title').val();
          var message = $('#body').val();
@@ -2087,57 +2067,6 @@ function saveOrderToday(idx){
           location.reload(true);
          }
            else{
-          alert("Something went wrong");
-         }
-         });
-       });
-
-  $(document).on('click','#addVehicle',function(){
-    formAjax('Vehicle');
-       });
-
-  $(document).on('click','#addExpense',function(){
-    formAjax('Expense');
-       });
-
-  $(document).on('click','#addSickoffApplication',function(){
-        var employee = $('#employee').val();
-        var reason = $('#sickoffReason').val();
-         var start = $('#sickOffStart').val();
-         var number = $('#sickoffNumber').val();
-        var where = 'sickoff';
-        $.post("../add.php",{employee:employee,reason:reason,start:start,number:number,where:where},
-        function(result){
-         if (result == 'success') {
-          alert('Sick leave application successful');
-          location.reload(true);
-         }
-          else{
-            alert(result)
-          alert("Something went wrong");
-         }
-         });
-       });
-
-  $(document).on('click','#addLeaveApplication',function(){
-        var employee = $('#employee').val();
-         var start = $('#leaveStart').val();
-         var number = $('#leaveNumber').val();
-         var standIn = $('#standIn').val();
-        var where = 'leave';
-        $.post("../add.php",{employee:employee,standIn:standIn,start:start,number:number,where:where},
-        function(result){
-         if (result == 'success') {
-          alert('Leave application successful');
-          location.reload(true);
-         }
-         else if(result == 'exceeded'){
-          alert('Days applied exceeded days remaining. Application failed.');
-         }
-         else if(result == 'failed'){
-          alert('Kindly select another stand in employee. Application failed.');
-         }
-          else{
           alert("Something went wrong");
          }
          });
@@ -2179,11 +2108,11 @@ function saveOrderToday(idx){
     }
 
     $('.deleteCustomer').click(function(){
-       deleteAjax($(this).attr("id"),$(this),'customer', 'customer');
+       deleteAjax($(this).attr("id"),$(this),'customer', 'user');
     });
 
     $('.deleteHomeOwner').click(function(){
-      deleteAjax($(this).attr("id"),$(this),'home owner', 'customer');
+      deleteAjax($(this).attr("id"),$(this),'home owner', 'user');
    });
 
    $('.deleteHome').click(function(){
@@ -2195,48 +2124,19 @@ $('.cancelAvailability').click(function(){
  });
 
     $('.deleteBlacklist').click(function(){
-      deleteAjax($(this).attr("id"),$(this),'blacklisted customer', 'blacklist');
+      deleteAjax($(this).attr("id"),$(this),'blacklisted customer', 'user');
+    });
+
+    $('.deleteDeactivatedAdmin').click(function(){
+      deleteAjax($(this).attr("id"),$(this),'deactivated admin', 'user');
+    });
+
+    $('.deleteAdmin').click(function(){
+      deleteAjax($(this).attr("id"),$(this),'admin', 'user');
     });
 
     $('.deleteBlacklistedHome').click(function(){
       deleteAjax($(this).attr("id"),$(this),'blacklisted home', 'home');
-    });
-
-    $('.deleteExpenseHeading').click(function(){
-      deleteAjax($(this).attr("id"),$(this),'expense heading', 'expenseHeading');
-    });
-
-    $('.deleteExpense').click(function(){
-      deleteAjax($(this).attr("id"),$(this),'expense', 'expense');
-    });
-
-
-    $('.deleteCategory').click(function(){
-      deleteAjax($(this).attr("id"),$(this),'category', 'category');
-    });
-
-    $('.deleteUnit').click(function(){
-      deleteAjax($(this).attr("id"),$(this),'unit', 'unit');
-    });
-
-    $('.deleteSupplier').click(function(){
-      deleteAjax($(this).attr("id"),$(this),'supplier', 'supplier');
-    });
-
-    $('.deleteVehicle').click(function(){
-      deleteAjax($(this).attr("id"),$(this),'vehicle', 'vehicle');
-    });
-
-    $('.deleteDeliverer').click(function(){
-      deleteAjax($(this).attr("id"),$(this),'deliverer', 'deliverer');
-    });
-
-    $('.deleteCook').click(function(){
-      deleteAjax($(this).attr("id"),$(this),'cook', 'cook');
-    });
-
-    $('.deleteOffice').click(function(){
-      deleteAjax($(this).attr("id"),$(this),'office staff', 'office');
     });
 
     $('.deletePublicNote').click(function(){
@@ -2261,6 +2161,26 @@ $('.cancelAvailability').click(function(){
       var where = 'blacklist';
       var id = el.attr("id");
       bootbox.confirm('Do you really want to blacklist the selected customer?',function(result)
+        {if(result){
+          $.post("blacklist_restore.php",{id:id,where:where},
+        function(result){
+            if(result == 1){
+              $(el).closest('tr').css('background','gray');
+              $(el).closest('tr').fadeOut(800,function(){
+                $(this).remove();
+              });
+            }
+        });
+      }});
+    });
+  });
+
+  $(document).ready(function(){
+    $('.blacklistAdmin').click(function(){
+      var el = $(this);
+      var where = 'blacklist';
+      var id = el.attr("id");
+      bootbox.confirm('Do you really want to deactivate the selected admin?',function(result)
         {if(result){
           $.post("blacklist_restore.php",{id:id,where:where},
         function(result){
@@ -2301,6 +2221,26 @@ $('.cancelAvailability').click(function(){
       var where = 'restore';
       var id = el.attr("id");
       bootbox.confirm('Do you really want to restore the selected blacklisted customer?',function(result)
+        {if(result){
+          $.post("blacklist_restore.php",{id:id,where:where},
+        function(result){
+            if(result == 1){
+              $(el).closest('tr').css('background','lime');
+              $(el).closest('tr').fadeOut(800,function(){
+                $(this).remove();
+              });
+            }
+        });
+      }});
+    });
+  });
+
+  $(document).ready(function(){
+    $('.reactivateAdmin').click(function(){
+      var el = $(this);
+      var where = 'restore';
+      var id = el.attr("id");
+      bootbox.confirm('Do you really want to reactivate the selected admin?',function(result)
         {if(result){
           $.post("blacklist_restore.php",{id:id,where:where},
         function(result){
@@ -2370,98 +2310,7 @@ $('.cancelAvailability').click(function(){
           location.reload(true);
          });
        });
-       
-       $(document).on('click','.editBlog',function(){
-        var where = 'blog';
-        var el = $(this);
-        var id = el.attr("id");
-        var title = $(`#title${id}`).val();
-        var blog = tinyMCE.get('blog'+id).getContent();
-        $.post("../save.php",{id:id,title:title,blog:blog,where:where},
-        function(result){
-          location.reload(true);
-         });
-       });
-
-  $(document).on('click','.addPurchase',function(){
-        var where = 'purchase';
-        var el = $(this);
-        var id = el.attr("id");
-        var received = $(`#received${id}`).val();
-        var qty = $(`#quantity${id}`).val();
-         var bp = $(`#bp${id}`).val();
-        var sp = $(`#sp${id}`).val();
-        var expiry = $(`#expiry${id}`).val();
-        $.post("../add.php",{id:id,received:received,qty:qty,bp:bp,sp:sp,expiry:expiry,where:where},
-        function(result){
-          location.reload(true);
-         });
-       });
-
-  $(document).on('click','.addService',function(){
-        var where = 'service';
-        var el = $(this);
-        var id = el.attr("id");
-        var now = $(`#now${id}`).val();
-        var note = $(`#note${id}`).val();
-         var next = $(`#next${id}`).val();
-        $.post("../save.php",{id:id,now:now,note:note,next:next,where:where},
-        function(result){
-          location.reload(true);
-         });
-       });
-
-  $(document).on('click','.addInspection',function(){
-        var where = 'inspection';
-        var el = $(this);
-        var id = el.attr("id");
-        var now = $(`#Now${id}`).val();
-        var note = $(`#Note${id}`).val();
-         var next = $(`#Next${id}`).val();
-        $.post("../save.php",{id:id,now:now,note:note,next:next,where:where},
-        function(result){
-           location.reload(true);
-         });
-       });
-
-   $(document).on('click','.saveDriver',function(){
-        var where = 'driver';
-        var el = $(this);
-        var id = el.attr("id");
-        var driver = $(`#driver${id}`).val();
-        $.post("../save.php",{id:id,driver:driver,where:where},
-        function(result){
-           alert("Vehicle driver Successfully changed");
-         });
-       });
-
-       $("#receiptCustomer").on("keyup", function() {
-        var txt = $('#receiptCustomer').val();
-        if(txt != '')
-        {
-          $.ajax({
-            url: '../search.php',
-            type:"post",
-            data:{receiptSearch:txt},
-            dataType:"text",
-            success:function(data)
-            {
-    
-              $('#customerReceiptResult').html(data);
-            }
-          });
-        }
-        else
-        {
-          $('#customerReceiptResult').html('');
-        }
-        $(document).on('click','a',function(){
-            $("#receiptCustomer").val($(this).text());
-            var id =$(this).attr("id");
-            $('#customerId').val(id);
-            $("#customerReceiptResult").html(''); 
-        });
-      })  
+        
 
  $(document).on('click','.printCustomers',function(){
                 $.ajax({
@@ -2540,45 +2389,6 @@ $(document).on('click','.printAvailableHomes',function(){
 });
 });   
 
-      $(document).ready(function(){
-       var tableLeftovers = document.getElementById("leftoversEditable");
-       var  sumVal = 0; 
-            for(var i = 1; i < tableLeftovers.rows.length; i++)
-            {
-                sumVal += parseInt(tableLeftovers.rows[i].cells[7].innerHTML);
-                document.getElementById("totalLeftoverValue").innerHTML = sumVal;
-            }
-      });
-
-      function replenishDisable(){
-        var input = document.getElementById(`replenish`);
-        input.disabled = true;
-        input.value = "0";      
-     }
-
-     function subunitsDisable(){
-       var input1 = document.getElementById(`contains`);
-       input1.disabled = true;
-       var input2 = document.getElementById(`subunit`);
-       input2.disabled = true;
-       input1.value = "0";
-       input2.value = "1";
-     }
-
-     function processOrder(check,action) {
-       var id = check.value;
-       var value = '';
-       var where = 'process_order';
-       if (check.checked) {
-        value = '1';
-      } else {
-        value = '0';
-      }
-       $.post("../save.php",{id:id,value:value,action:action,where:where},
-        function(result){
-
-         });
-    }
 
      function displayname(input,_this) {
           if (input.files && input.files[0]) {

@@ -48,6 +48,9 @@ $useragent = $_SERVER["HTTP_USER_AGENT"];
 //minimum is 5
 $maxfailedattempts = 5;
 
+//initial admin password on registration
+$default_admin_pass = 'Kenya.2030'; 
+
 //initial exchange points awarded when customer adds home
 $initial_exchange_points = 750;
 

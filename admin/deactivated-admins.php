@@ -39,7 +39,6 @@ include('../queries.php');
          $count++;
          $id = $row['id'];
          $name =$row['first_name'].' '.$row['other_name'].' '.$row['last_name'];
-         $location = $row['physical_address'];
          $number = $row['phone_number'];
          $email = $row['email_address'];
       ?>
@@ -48,7 +47,7 @@ include('../queries.php');
       <td  class="uneditable" id="name<?php echo $count; ?>"><?php echo $name; ?></td>
       <td class="editable" id="number<?php echo $count; ?>"><?php echo $number; ?></td>
       <td class="editable" id="email<?php echo $count; ?>"><?php echo $email; ?></td>
-       <td> <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-success btn-sm active restoreDeactivatedAdmin" role="button" aria-pressed="true" >Reactivate</button>
+       <td> <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-success btn-sm active reactivateAdmin" role="button" aria-pressed="true" >Activate</button>
          <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-danger btn-sm active deleteDeactivatedAdmin" role="button" aria-pressed="true" ><i class="fa fa-user-times"></i>Delete</button>
      </td>
     </tr>

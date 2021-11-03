@@ -12,25 +12,11 @@ if ($where == 'customer' ) {
    $note = $_POST['note'];
 	mysqli_query($connection,"UPDATE `users` SET `physical_address` = '".$location."',`phone_number` = '".$number."',`email_address` = '".$email."' WHERE `id` = '".$id."'")or die($connection->error);
 }
-elseif( $where == 'stock'){
+elseif( $where == 'admin'){
    $id = $_POST['id'];
-   $category = $_POST['category'];
-   $name = $_POST['name'];
-   $bp = $_POST['bp'];
-   $discount = $_POST['discount'];
-   $sp = $_POST['sp'];
-   $qty = $_POST['qty'];
-   $restock = $_POST['restock_Level'];
-   //MariaDB
-   //$result1 = mysqli_query($connection,"SELECT sfid as batchId FROM (SELECT s.id as sid, sf.id as sfid ,sf.Created_at,ROW_NUMBER() OVER (PARTITION BY s.id ORDER BY sf.Created_at DESC) as rn FROM stock s JOIN stock_flow sf ON s.id = sf.Stock_id JOIN category c ON s.Category_id=c.id ) q WHERE rn = 1 AND sid='$id'")or die($connection->error);
-   //MySQL
-   $result1 = mysqli_query($connection,"SELECT sfid as batchId FROM stock s INNER JOIN stock_flow sf ON s.id = sf.Stock_id INNER JOIN category c ON s.Category_id=c.id INNER JOIN (SELECT s.id as sid, sf.id as sfid, MAX(sf.Created_at) AS max_created_at FROM stock s INNER JOIN stock_flow sf ON s.id = sf.Stock_id GROUP BY s.id) subQuery ON subQuery.sid = s.id AND subQuery.max_created_at = sf.Created_at AND s.id = '$id';")or die($connection->error);
-        $row = mysqli_fetch_array($result1);
-        $flowId = $row['batchId'];
-   $result2 = mysqli_query($connection,"SELECT id FROM category where Category_Name='$category';")or die($connection->error);
-        $row2 = mysqli_fetch_array($result2);
-        $categoryId = $row2['id'];
-mysqli_query($connection,"UPDATE `stock` JOIN stock_flow ON stock.id = stock_flow.Stock_id SET `Name` = '".$name."',Category_id = '".$categoryId."',Restock_Level = '".$restock."',`Discount` = '".$discount."',stock_flow.Buying_price= '".$bp."',stock_flow.Selling_price = '".$sp."',stock.Price = '".$sp."',stock.Buying_price = '".$bp."'  WHERE  stock_flow.id = '".$flowId."'")or die($connection->error);
+   $email = $_POST['email'];
+   $number = $_POST['number'];
+mysqli_query($connection,"UPDATE `users` SET `phone_number` = '".$number."',email_address = '".$email."'  WHERE  id = '".$id."'")or die($connection->error);
 }
 elseif ($where == 'blacklist') {
 	$id = $_POST['id'];
