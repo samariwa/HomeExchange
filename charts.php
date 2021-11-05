@@ -334,17 +334,22 @@ else if($where == 'salescomparison6' )
     $array = json_encode($finalArray);
     echo $array;
 }
-else if($where == 'biggestExpenses' )
-{   
-       $biggestExpensesArr = array();
-        foreach($biggestExpenses as $row){
-        $name = $row['name'];
-        $total = $row['sum'];
-        $color = "silver";
-        $resultArray = array($name, $total);
-        array_push($biggestExpensesArr, $resultArray);
-        }
-       $array = json_encode($biggestExpensesArr);
+else if($where == 'homesRegistration' )
+{    
+        $row1 = mysqli_fetch_array($newHomesWk2);
+        $row2 = mysqli_fetch_array($newHomesWk2);
+        $row3 = mysqli_fetch_array($newHomesWk3);
+        $row4 = mysqli_fetch_array($newHomesWk4);    
+        $total1 = $row1['sum'];
+        $total2 = $row2['sum'];
+        $total3 = $row4['sum'];
+        $total4 = $row4['sum'];
+        $homesRegistration = array();
+        array_push($homesRegistration, $total1);
+        array_push($homesRegistration, $total2);
+        array_push($homesRegistration, $total3);
+        array_push($homesRegistration, $total4);
+       $array = json_encode($homesRegistration);
         echo $array;
 }
 ?>

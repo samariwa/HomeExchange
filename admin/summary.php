@@ -19,136 +19,36 @@
           <br>
         <?php 
         $yesterday = date( 'l, F d, Y', strtotime("yesterday"));
-        $row = mysqli_fetch_array($salesYesterday);
-        if ($row['Sales_yesterday'] > "0") {
-          $salesYesterday = $row['Sales_yesterday'];
-        }
-        else{
-          $salesYesterday = "0.00";
-        }
-        $totalSalesYesterday = $salesYesterday;
-        if ($totalSalesYesterday > 0) {
-          $totalSalesYesterday = $totalSalesYesterday;
-        }
-        else{
-          $totalSalesYesterday = "0.00";
-        }
-        $row2 = mysqli_fetch_array($revenueYesterday);
-        if ($row2['Revenue_yesterday'] > "0") {
-        $revenueYesterday = $row2['Revenue_yesterday'];
-         }
-        else{
-          $revenueYesterday = 0;
-        }
-        $totalRevenueYesterday = $revenueYesterday;
-        if ($totalRevenueYesterday > 0) {
-          $totalRevenueYesterday = $totalRevenueYesterday;
-        }
-        else{
-          $totalRevenueYesterday = "0.00";
-        }
-        $row4 = mysqli_fetch_array($mpesaYesterday);
-         if ($row4['Mpesa_yesterday'] > "0") {
-        $mpesaYesterday = $row4['Mpesa_yesterday'];
-        }
-         else{
-          $mpesaYesterday = 0;
-        }
-        $totalMpesaYesterday = $mpesaYesterday;
-        if ($totalMpesaYesterday > 0) {
-          $totalMpesaYesterday = $totalMpesaYesterday;
-        }
-        else{
-          $totalMpesaYesterday = "0.00";
-        }
-        $row6 = mysqli_fetch_array($cashYesterday);
-        if ($row6['Cash_yesterday'] > "0") {
-        $cashYesterday = $row6['Cash_yesterday'];
-         }
-        else{
-          $cashYesterday = 0;
-        }
-        $totalCashYesterday = $cashYesterday;
-        if ($totalCashYesterday > 0) {
-          $totalCashYesterday = $totalCashYesterday;
-        }
-        else{
-          $totalCashYesterday = "0.00";
-        }
-        $row8 = mysqli_fetch_array($mpesaDebt);
-        if ( $row8['Mpesa_debt'] > "0") {
-       $mpesaDebt = $row8['Mpesa_debt']; 
-         }
-        else{
-          $mpesaDebt = 0;
-        }
-        $totalMpesaDebt = $mpesaDebt;
-        if ($totalMpesaDebt > 0) {
-          $totalMpesaDebt = $totalMpesaDebt;
-        }
-        else{
-          $totalMpesaDebt = "0.00";
-        }
-        $row10 = mysqli_fetch_array($cashDebt);
-         if ( $row10['Cash_debt'] > "0") {
-        $cashDebt = $row10['Cash_debt'];
-         }
-        else{
-          $cashDebt = 0;
-        }
-        $totalCashDebt = $cashDebt;
-        if ($totalCashDebt > 0) {
-          $totalCashDebt = $totalCashDebt;
-        }
-        else{
-          $totalCashDebt = "0.00";
-        }
-        $row12 = mysqli_fetch_array($bankedYesterday);
-        if ( $row12['Banked_yesterday'] > "0") {
-        $bankedYesterday = $row12['Banked_yesterday'];
-        }
-        else{
-          $bankedYesterday = 0;
-        }
-        $totalBankedYesterday = $bankedYesterday;
-        if ($totalBankedYesterday > 0) {
-          $totalBankedYesterday = $totalBankedYesterday;
-        }
-        else{
-          $totalBankedYesterday = "0.00";
-        }
-         $row14 = mysqli_fetch_array($expenditureYesterday);
-        if ( $row14['paid'] > "0") {
-        $expenditureYesterday = $row14['paid'];
-        }
-        else{
-          $expenditureYesterday = "0.00";
-        }
+        $week_ago = date('l, F d', strtotime('-7 days'));
+        $newsubscribers = mysqli_fetch_array($subscribersWk4);
+        $newexchanges = mysqli_fetch_array($exchangesWk4);
+        $newsignups = mysqli_fetch_array($signupsWk4);
+        $newhomes = mysqli_fetch_array($newHomesWk4);
+        $newhomeowners = mysqli_fetch_array($newHomeOwnersWk4);
+        $newlyavailable = mysqli_fetch_array($availabilitiesWk4);
+        $newrequests = mysqli_fetch_array($requestsWk4);
         ?>
-        <div class="row" style="margin-left: 50px;"><h5>Summary for <?php echo $yesterday; ?></h5> </div><br>
+        <div class="row" style="margin-left: 50px;"><h5>Summary for week <?php echo '('.$week_ago.' - '. $yesterday.')'; ?></h5> </div><br>
         <div class="row" style="margin-left: 50px;">
-            <h6>Total Sales Value: Ksh. <?php echo number_format($totalSalesYesterday); ?></h6>
+            <h6>Total of newly registered customers: <?php echo $newsignups['sum']; ?></h6>
         </div><br>
         <div class="row" style="margin-left: 50px;">
-            <h6>Revenue Realized: Ksh. <?php echo number_format($totalRevenueYesterday); ?></h6>
+            <h6>Total of newly registered homes: <?php echo $newhomes['sum']; ?></h6>
         </div><br>
         <div class="row" style="margin-left: 50px;">
-            <h6>Total Paid via M-Pesa for Yesterday's Sales: Ksh. <?php echo number_format($totalMpesaYesterday); ?></h6>
+            <h6>Total number of new home owners: <?php echo $newhomeowners['sum']; ?></h6>
         </div><br>
         <div class="row" style="margin-left: 50px;">
-            <h6>Total Paid in Cash for Yesterday's Sales: Ksh. <?php echo number_format($totalCashYesterday); ?></h6>
+            <h6>Total number of homes listed available: <?php echo $newlyavailable['sum']; ?></h6>
         </div><br>
         <div class="row" style="margin-left: 50px;">
-            <h6>Total Debt Paid via M-Pesa: Ksh. <?php echo number_format($totalMpesaDebt); ?></h6>
+            <h6>Total number of exchange requests made: <?php echo $newrequests['sum'];; ?></h6>
         </div><br>
         <div class="row" style="margin-left: 50px;">
-            <h6>Total Debt Paid in Cash: Ksh. <?php echo number_format($totalCashDebt); ?></h6>
+            <h6>Total number of exchanges made: <?php echo $newexchanges['sum']; ?></h6>
         </div><br>
         <div class="row" style="margin-left: 50px;">
-            <h6>Total Banked: Ksh. <?php echo number_format($totalBankedYesterday); ?></h6>
-        </div><br>
-        <div class="row" style="margin-left: 50px;">
-            <h6>Expenditure: Ksh. <?php echo number_format($expenditureYesterday); ?></h6>
+            <h6>Total of new newletter subscribers: <?php echo $newsubscribers['sum']; ?></h6>
         </div><br>
         
         

@@ -31,7 +31,7 @@
     <tr>
       <th scope="col" width="3%">#</th>
       <th scope="col" width="14%">Name</th>
-      <th scope="col" width="8%">Phone Number</th>
+      <th scope="col" width="14%">Phone Number</th>
       <th scope="col"width="10%">Email Address</th>
       <th scope="col" width="13%">Average Rating</th>
       <th scope="col" width="17%">Exchange Points</th>

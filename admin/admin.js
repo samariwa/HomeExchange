@@ -327,27 +327,20 @@ setTime();
       google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawExpenditureChart);
     function drawExpenditureChart() {
-      var where = 'biggestExpenses';
+      var where = 'homesRegistration';
        $.post("../charts.php",{where:where},
         function(result){
          var data = $.parseJSON(result);  
-        var data0 = data[0][0];
-          var data1 = data[0][1];
-          var data2 = data[1][0];
-          var data3 = data[1][1];
-          var data4 = data[2][0];
-          var data5 = data[2][1];
-          var data6 = data[3][0];
-          var data7 = data[3][1];
-          var data8 = data[4][0];
-          var data9 = data[4][1];
+          var data1 = data[0];
+          var data2 = data[1];
+          var data3 = data[2];
+          var data4 = data[3];
       var data = google.visualization.arrayToDataTable([
-        ["Expense", "Amount", { role: "style" } ],
-        [data0, parseInt(data1), "#b87333"],
-        [data2, parseInt(data3), "silver"],
-        [data4, parseInt(data5), "gold"],
-        [data6, parseInt(data7), "color: #e5e4e2"],
-        [data8, parseInt(data9), "brown"],
+        ["Week", "Number of homes", { role: "style" } ],
+        ["Week 1", parseInt(data1), "#b87333"],
+        ["Week 2", parseInt(data2), "silver"],
+        ["Week 3", parseInt(data3), "gold"],
+        ["Week 4", parseInt(data4), "color: #e5e4e2"]
       ]);
 
       var view = new google.visualization.DataView(data);
@@ -359,7 +352,7 @@ setTime();
                        2]);
 
       var options = {
-        title: "Expenditure comparison for the month",
+        title: "Newly registered homes comparison for the month",
         width: 600,
         height: 400,
         bar: {groupWidth: "95%"},

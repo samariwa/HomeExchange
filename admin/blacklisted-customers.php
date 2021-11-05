@@ -26,9 +26,9 @@ include('../queries.php');
   <thead class="thead-dark">
     <tr>
       <th scope="col" width="3%">#</th>
-      <th scope="col" width="25%">Name</th>
+      <th scope="col" width="22%">Name</th>
       <th scope="col" width="17%">Physical Address</th>
-      <th scope="col" width="10%">Contact Number</th>
+      <th scope="col" width="17%">Contact Number</th>
       <th scope="col" width="8%">Email Address</th>
       <th scope="col"width="22%"></th>
     </tr>
