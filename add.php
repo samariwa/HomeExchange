@@ -24,64 +24,7 @@ if($where == 'admin' )
 	   $user->create($connection, array('role_id' => '1','first_name' => $firstname,'other_name' => $othername,'last_name' => $lastname,'phone_number' => $number,'email_address' => $email,'password' => $hash, 'user_status' => '0')) or die(mysqli_error($connection));
    }
 }
-elseif($where == 'stock'){
-       $unit = $_POST['unit'];
-       $result2 = mysqli_query($connection,"SELECT Name FROM inventory_units WHERE id = '".$unit."';")or die($connection->error);
-       $row2 = mysqli_fetch_array($result2);
-       $unit_name = $row2['Name'];
-       $raw_name = $_POST['name'];
-       $raw_name2 = str_replace('  ',' ',$raw_name);
-       $raw_name3 = ltrim($raw_name2,' ');
-       $raw_name4 = rtrim($raw_name3,' ');
-       $name = $raw_name4.' '.$unit_name;
-       $category = $_POST['category'];
-       $supplier = $_POST['supplier'];
-       $received = $_POST['received'];
-       $expiry = $_POST['expiry'];
-       $fileName = $_FILES['upload']['name'];
-       $path = time().'.png';
-       move_uploaded_file($_FILES['upload']['tmp_name'], 'assets/images/products/'.$path);
-       $bp = $_POST['bp'];
-       $sp = $_POST['sp'];
-       $qty = $_POST['qty'];
-       $contains = $_POST['contains'];
-       $subunit = $_POST['subunit'];
-       $replenish = '';
-       if(isset($_POST['replenish']))
-       {
-       $replenish = $_POST['replenish'];
-       }
-       else{
-         $replenish = '0';
-       }
-       $restock = $_POST['restock'];
-       $row = mysqli_query($connection,"SELECT `Name` FROM stock WHERE Name = '".$name."'")or die($connection->error);
-       $result = mysqli_fetch_array($row);
-       if ( $result == TRUE) {
-         echo "exists";
-       }
-       else{
-         echo "success";
-          mysqli_query($connection,"INSERT INTO `stock` (`Category_id`,`Supplier_id`,`Name`,`Unit_id`,`Subunit_id`,`Contains`,`subunit_replenish_qty`,`Restock_Level`,`Buying_price`,`Price`,`Quantity`,`Opening_stock`,`image`) VALUES ('$category','$supplier','$name','$unit','$subunit','$contains','$replenish','$restock','$bp','$sp','$qty','$qty','$path');") or die(mysqli_error($connection));
-        $result1 = mysqli_query($connection,"SELECT * FROM stock WHERE Name = '".$name."';")or die($connection->error);
-       $row1 = mysqli_fetch_array($result1);
-       $Stock_id = $row1['id'];
-        mysqli_query($connection,"INSERT INTO `stock_flow` (`Stock_id`,`Expiry_date`,`Buying_price`,`Selling_Price`,`Received_date`,`Purchased`) VALUES ('$Stock_id','$expiry','$bp','$sp','$received','$qty')") or die(mysqli_error($connection));
-       }
 
-}
-else if ($where == 'categories') {
-   $category = $_POST['category'];
-   $row = mysqli_query($connection,"SELECT * FROM category WHERE Category_Name = '".$category."'")or die($connection->error);
-   $result = mysqli_fetch_array($row);
-   if ( $result == TRUE) {
-     echo "exists";
-   }
-   else{
-    echo "success";
-    mysqli_query($connection,"INSERT INTO `category` (`Category_Name`) VALUES ('$category')") or die(mysqli_error($connection));
-   }
-}
 else if ($where == 'faq') {
   $faq = new Faq();
   $question = $_POST['question'];
@@ -96,123 +39,8 @@ else if ($where == 'faq') {
    mysqli_query($connection,$faq->AddFaq($question,$answer))or die($connection->error);
   }
 }
-else if ($where == 'blog') {
-  $title = $_POST['title'];
-  $blog = $_POST['blog_text'];
-  $fileName = $_FILES['upload']['tmp_name'];
-  $sourceProperties = getimagesize($fileName);
-  $resizeFileName = time();
-  $uploadPath = 'assets/images/blog/'; 
-  $fileExt = pathinfo($_FILES['upload']['name'], PATHINFO_EXTENSION);
-  $path = $resizeFileName.'.'.$fileExt;
-  $fullPath = $uploadPath.$path;
-  $imageProcess = '';
-  $uploadImageType = $sourceProperties[2];
-  $sourceImageWidth = $sourceProperties[0];
-  $sourceImageHeight = $sourceProperties[1];
-  switch ($uploadImageType){
-    case IMAGETYPE_JPEG:
-      $resourceType = imagecreatefromjpeg($fileName);
-      $imageLayer = resizeImage($resourceType,$sourceImageWidth,$sourceImageHeight);
-      imagejpeg($imageLayer,$fullPath);
-      $imageProcess = 1;
-      break;
-    case IMAGETYPE_GIF:
-      $resourceType = imagecreatefromgif($fileName);
-      $imageLayer =  resizeImage($resourceType, $sourceImageWidth, $sourceImageHeight);
-      imagegif($imageLayer,$fullPath);
-      $imageProcess = 1;
-      break;
-    case IMAGETYPE_PNG:
-      $resourceType = imagecreatefrompng($fileName);
-      $imageLayer =  resizeImage($resourceType, $sourceImageWidth, $sourceImageHeight);
-      imagepng($imageLayer,$fullPath);
-      $imageProcess = 1;
-      break;
 
-    default:
-    $imageProcess = 0;
-    break;  
-  }
-  
-  if($imageProcess == 1)
-  {
-    move_uploaded_file($file, $fullPath);
-  $row = mysqli_query($connection,"SELECT * FROM blogs WHERE blog = '".$blog."'")or die($connection->error);
-  $result = mysqli_fetch_array($row);
-  if ( $result == TRUE) {
-    echo "exists";
-  }
-  else{
-   echo "success";
-   mysqli_query($connection,"INSERT INTO `blogs` (`title`,`blog`,`image`) VALUES ('$title','$blog','$path')") or die(mysqli_error($connection));
-  }
-  } 
-}
-else if ($where == 'units') {
-   $unit = $_POST['unit'];
-   $row = mysqli_query($connection,"SELECT * FROM inventory_units WHERE Name = '".$unit."'")or die($connection->error);
-   $result = mysqli_fetch_array($row);
-   if ( $result == TRUE) {
-     echo "exists";
-   }
-   else{
-    echo "success";
-    mysqli_query($connection,"INSERT INTO `inventory_units` (`Name`) VALUES ('$unit')") or die(mysqli_error($connection));
-   }
-} 
 
-else if ($where == 'supplier') {
-   $name = $_POST['name'];
-   $contact = $_POST['contact'];
-   $row = mysqli_query($connection,"SELECT * FROM suppliers WHERE Name = '".$name."' OR Supplier_contact = '".$contact."'")or die($connection->error);
-   $result = mysqli_fetch_array($row);
-   if ( $result == TRUE) {
-     echo "exists";
-   }
-   else{
-    echo "success";
-    mysqli_query($connection,"INSERT INTO `suppliers` (`Name`,`Supplier_contact`) VALUES ('$name','$contact')") or die(mysqli_error($connection));
-   }
-}
-else if ($where == 'vehicles') {
-   $type = $_POST['type'];
-   $driver = $_POST['driver'];
-   $reg = $_POST['reg'];
-   $route = $_POST['route'];
-   $row0 = mysqli_query($connection,"SELECT `id` FROM users WHERE firstname = '".$driver."'")or die($connection->error);
-   $result0 = mysqli_fetch_array($row0);
-   $id = $result0['id'];
-   $row = mysqli_query($connection,"SELECT * FROM vehicles WHERE Reg_Number = '".$reg."'")or die($connection->error);
-   $result = mysqli_fetch_array($row);
-   if ( $result == TRUE) {
-     echo "exists";
-   }
-   else{
-     echo "success";
-    mysqli_query($connection,"INSERT INTO `vehicles` (`Driver_id`,`Type`,`Reg_Number`,`Route`) VALUES ('$id','$type','$reg','$route')") or die(mysqli_error($connection));
-   }
-}
-else if ($where == 'deliverer') {
-     $fname = $_POST['fname'];
-     $lname = $_POST['lname'];
-     $contact = $_POST['contact'];
-     $staffId = $_POST['staffId'];
-     $nationalId = $_POST['nationalId'];
-     $yob = $_POST['yob'];
-     $gender = $_POST['gender'];
-     $salary = $_POST['salary'];
-     $role = '5';
-     $row = mysqli_query($connection,"SELECT * FROM users WHERE nationalID = '".$nationalId."' or staffID = '".$staffId."'")or die($connection->error);
-     $result = mysqli_fetch_array($row);
-     if ( $result == TRUE) {
-       echo "exists";
-     }
-     else{
-      echo "success";
-      mysqli_query($connection,"INSERT INTO `users` (`firstname`,`lastname`,`number`,`Job_Id`,`staffID`,`nationalID`,`yob`,`gender`,`salary`) VALUES ('$fname','$lname','$contact','$role','$staffId','$nationalId','$yob','$gender','$salary')") or die(mysqli_error($connection));
-     }
-}
 
 else if ($where == 'home-images') {
   $fileName = $_FILES['upload']['tmp_name'];
@@ -306,32 +134,6 @@ elseif ($where == 'rate-home-owner') {
   echo "1";
 }
 
-
-elseif ($where == 'files') {
-  $name = $_POST['name'];
-  $description = $_POST['description'];
-  $upload = $_POST['upload'];
-  $location = $_POST['location'];
-  $owner = $_SESSION['user'];
-  $owner_id= mysqli_query($connection,"SELECT staffID FROM users WHERE username = '".$owner."'")or die($connection->error);
-    $uploader_id = mysqli_fetch_array($owner_id);
-     $uploader = $uploader_id['staffID'];
-      $exists= mysqli_query($connection,"SELECT *  FROM files WHERE file_name = '".$name."'")or die($connection->error);
-      $exists_result = mysqli_fetch_array($exists);
-       if ($exists_result == TRUE) {
-       $exists_number = mysqli_query($connection,"SELECT COUNT(id) AS NumberOfFiles FROM files WHERE file_name = '".$name."'")or die($connection->error);
-      $exists_value = mysqli_fetch_array($exists_number);
-      $exists_count = $exists_value['NumberOfFiles'];
-     $total_count = $exists_count + 1;
-     $name = $name."(".$total_count.")";
-     }
-    $random = generateRandomString();
-    $save = mysqli_query($connection,"INSERT INTO `files` (`folder_serial`,`file_serial`,`file_name`,`description`,`file_owner_id`) VALUES ('$location','$random','$name','$description','$uploader')") or die(mysqli_error($connection));
-        $save = $this->db->query("INSERT INTO folders set ".$data);
-        if($save){
-         echo "success";
-      }
-}
 
 elseif ($where == 'newsletter') {
   if (isset($_POST['email'])) {
