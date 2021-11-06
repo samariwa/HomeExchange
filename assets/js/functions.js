@@ -1084,46 +1084,43 @@ function encodeHomeFeatures(value)
 $(document).on('submit','#form',function(e){
  e.preventDefault();
  e.stopPropagation();
+ $(".preloader").show();
+ var home_features = [
+    encodeHomeFeatures($('input[name="swimming"]:checked').val()),
+    $('input[name="home_type"]:checked').val(),
+    $('input[name="residence_type"]:checked').val(),
+    encodeHomeFeatures($('input[name="wifi"]:checked').val()),
+    encodeHomeFeatures($('input[name="tv"]:checked').val()),
+    encodeHomeFeatures($('input[name="ac"]:checked').val()),
+     $('#bedrooms').text(),
+     $('#bathrooms').text(),
+     $('#occupancy').text(),
+     encodeHomeFeatures($('input[name="gym"]:checked').val()),
+     encodeHomeFeatures($('input[name="parking"]:checked').val()),
+     encodeHomeFeatures($('input[name="wheelchair"]:checked').val()),
+     encodeHomeFeatures($('input[name="pets"]:checked').val()),
+     encodeHomeFeatures($('input[name="kids"]:checked').val()),
+    encodeHomeFeatures($('input[name="workers"]:checked').val()),
+    encodeHomeFeatures($('input[name="security"]:checked').val()),
+    encodeHomeFeatures($('input[name="garden"]:checked').val()),
+    encodeHomeFeatures($('input[name="smokers"]:checked').val())
+   ];
+   var features_array = JSON.stringify(home_features);
    var form_data = new FormData(this);
    form_data.append('subcounty',$('#subcounty_search').val());
    form_data.append('area',$('#area').val());
+   form_data.append('home_features',features_array);
    $.ajax({
-    url: 'add.php',
+    url: 'tiermatch/add_home.php',
     type: 'post',
     data: form_data,
     contentType : false,
     processData : false,
     cache : false,
-      success : function(data){     
-        var xml = new XMLHttpRequest();
-        xml.open("POST", "tier match/run.py",true);
-        xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xml.onload = function()
-        {
-            var dataReply = JSON.parse(this.responseText)
-            alert(dataReply)
-        }
-        var dataSend = JSON.stringify({
-            'home_type' : $('input[name="home_type"]:checked').val(),
-            'residence_type' : $('input[name="residence_type"]:checked').val(),
-            'bedrooms' : $('#bedrooms').text(),
-            'bathrooms' : $('#bathrooms').text(),
-            'occupancy' : $('#occupancy').text(),
-            'swimming' : encodeHomeFeatures($('input[name="swimming"]:checked').val()),
-            'wifi' : encodeHomeFeatures($('input[name="wifi"]:checked').val()),
-            'tv' : encodeHomeFeatures($('input[name="tv"]:checked').val()),
-            'workers' : encodeHomeFeatures($('input[name="workers"]:checked').val()),
-            'wheelchair' : encodeHomeFeatures($('input[name="wheelchair"]:checked').val()),
-            'parking' : encodeHomeFeatures($('input[name="parking"]:checked').val()),
-            'gym' : encodeHomeFeatures($('input[name="gym"]:checked').val()),
-            'kids' : encodeHomeFeatures($('input[name="kids"]:checked').val()),
-            'security' : encodeHomeFeatures($('input[name="security"]:checked').val()),
-            'garden' : encodeHomeFeatures($('input[name="garden"]:checked').val()),
-            'ac' : encodeHomeFeatures($('input[name="ac"]:checked').val()),
-            'pets' : encodeHomeFeatures($('input[name="pets"]:checked').val()),
-            'smokers' : encodeHomeFeatures($('input[name="smokers"]:checked').val())
-        });
-        xml.send(dataSend)
+      success : function(data){  
+        $(".preloader").hide();
+          alert('Home added successfully'); 
+        window.location.href = 'home-dashboard.php?id='+data;
       }
       });
 });

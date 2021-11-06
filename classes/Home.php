@@ -61,10 +61,10 @@ class Home{
       return "SELECT id, Created_at FROM homes INNER JOIN (SELECT id AS max_id, MAX(Created_at) AS max_created_at FROM homes GROUP BY id) subQuery ON subQuery.max_id = id AND subQuery.max_created_at = Created_at WHERE id = '$owner_id'";
    }
 
-   public function AddHomeFeatures($home_id, $swimming_pool, $home_type, $residence_type, $wifi, $tv, $ac, $bedrooms, $bathrooms, $capacity, $gym, $parking, $wheelchair, $pets, $kids, $workers, $security, $garden, $smokers )
+   public function AddHomeFeatures($home_id, $swimming_pool, $home_type, $residence_type, $wifi, $tv, $ac, $size, $bedrooms, $bathrooms, $capacity, $gym, $parking, $wheelchair, $pets, $kids, $workers, $security, $garden, $smokers )
    {
       $query = new Database();
-      return $query->insert("home_features", array('home_id' => $home_id,'swimming_pool' => $swimming_pool,'home_type' => $home_type ,'residence_type' => $residence_type,'wifi' => $wifi ,'tv' => $tv,'ac' => $ac,'bedrooms' => $bedrooms ,'bathrooms' => $bathrooms,'capacity' => $capacity ,'private_gym' => $gym,'parking' => $parking,'wheelchair_accessibility' => $wheelchair,'pets_allowed' => $pets,'kids_friendly' => $kids,'home_workers' => $workers,'security_guard' => $security,'private_garden' => $garden,'smokers_allowed' => $smokers ));
+      return $query->insert("home_features", array('home_id' => $home_id,'swimming_pool' => $swimming_pool,'home_type' => $home_type ,'residence_type' => $residence_type,'wifi' => $wifi ,'tv' => $tv,'ac' => $ac,'size' => $size,'bedrooms' => $bedrooms ,'bathrooms' => $bathrooms,'capacity' => $capacity ,'private_gym' => $gym,'parking' => $parking,'wheelchair_accessibility' => $wheelchair,'pets_allowed' => $pets,'kids_friendly' => $kids,'home_workers' => $workers,'security_guard' => $security,'private_garden' => $garden,'smokers_allowed' => $smokers ));
    }
 
    public function GetHomeFeatures($home_id)
