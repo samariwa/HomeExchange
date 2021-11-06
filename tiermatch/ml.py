@@ -6,11 +6,13 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report, confusion_matrix
-
+import json
+import base64
+import sys
 
 
 def knn_prediction(features):
-    #house_features = [0,0,0,0,1,1,2,1,4,0,0,0,0,0,0,0,0,1]
+    home_features = json.loads(base64.b64decode(features))
     data = pd.read_csv('/Users/Mariwa/.bitnami/stackman/machines/xampp/volumes/root/htdocs/HomeExchange/tier match/home_tier_dataset.csv')
     X = data.iloc[:,:-1].values
     Y = data.iloc[:, 18].values
@@ -27,9 +29,13 @@ def knn_prediction(features):
 
     y_pred = classifier.predict(X_test)
 
-    check_value = np.array(features)
+    check_value = np.array(home_features)
 
     tier_prediction = classifier.predict([check_value])
     tier = tier_prediction[0]
 
-    return tier
+    return tier  
+
+
+if __name__ == "__main__":
+    print(knn_prediction(sys.argv[1]))

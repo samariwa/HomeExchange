@@ -156,7 +156,7 @@
                                 <br>
                                 <h6 class="card-subtitle mb-2"><?php echo $result['first_name'].' '.$result['last_name']; ?></h6>
                                 <br>
-                                <h6 class="card-subtitle mb-2"><?php echo $request_result['sum'] ?> Exchanges</h6>
+                                <h6 class="card-subtitle mb-2"><?php if($request_result['sum'] != ''){echo $request_result['sum']; } else{ echo '0';} ?> Exchanges</h6>
                                 <br>
                                 <h6 class="card-subtitle mb-2">Ratings <?php rate($availability_result['owner_rating']) ?></h6>
                                 <br>
