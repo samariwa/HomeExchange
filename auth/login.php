@@ -64,6 +64,7 @@ $registered = TRUE;
 $botDetect = FALSE;
 $internet_connection = TRUE;
 $inactive = FALSE;
+$mailsent = FALSE;
 //Check if a user has logged-in
 if (!$session->exists('logged_in')) {
     $session->put('logged_in', FALSE);
@@ -111,6 +112,7 @@ if ((isset($_POST["pass"])) && (isset($_POST["email"])) && (!$session->get('logg
         $user_id = $row['id'];
         $user_email = $row['email_address'];
         $access = $row['role_id'];
+        $status = $row['user_status'];
         $roleSession = mysqli_query($connection,"SELECT roles.role_name as Name FROM `roles` inner join users on users.role_id = roles.id WHERE users.email_address='$user_email'");
         $row5 = mysqli_fetch_array($roleSession);
         $role = $row5['Name'];      
@@ -156,7 +158,7 @@ mysqli_query($connection,$query->update("users", "email_address", $email, array(
           $mail->SMTPAuth = true;
           $mail->Username = $authenticator_email;
           $mail->Password = $authenticator_password;
-          $mail -> Subject = "Reset Password";
+          $mail -> Subject = "Reset Admin Password";
           $mail -> isHTML(true);
           $mail -> Body = "
                 Hi $identity,<br><br>
@@ -170,6 +172,40 @@ mysqli_query($connection,$query->update("users", "email_address", $email, array(
             if($mail -> send()){
               $inactive = TRUE;
           }
+      }
+      elseif(($status == '2') && ($access == '2'))
+      {
+        $verification_key = generateRandomString();
+        $verified_link = $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/auth/registration.php?email='.$user_email.'&verification='.$verification_key;
+            mysqli_query($connection, "UPDATE users SET token = '$verification_key' WHERE email_address ='$user_email'");
+            require_once "PHPMailer/PHPMailer.php";
+            require_once "PHPMailer/Exception.php";
+            require_once "PHPMailer/SMTP.php";
+             $mail = new PHPMailer(true);
+            $mail -> addAddress($user_email,'Recepient');
+            $mail -> setFrom($authenticator_email,$organization);
+            $mail->IsSMTP();
+            $mail->Host = $mail_host;
+            // optional
+            // used only when SMTP requires authentication  
+            $mail->SMTPAuth = true;
+            $mail->Username = $authenticator_email;
+            $mail->Password = $authenticator_password;
+            $mail -> Subject = "Activate your Home Swap account";
+            $mail -> isHTML(true);
+            $mail -> Body = "
+                  Hi $first_name,<br><br>
+                    You successfully signed up for Home Swap but your account wasn't activated.
+                    In order to activate your account, please click on the link below (this will confirm you email address):<br>
+                    <a href='
+                    $verified_link'>Account Activation Link</a><br><br>
+                    
+                    Kind Regards,<br>
+                    Home Swap.
+                    ";
+              if($mail -> send()){
+                $mailsent = TRUE;
+            }  
       }
       else
       {
@@ -276,7 +312,7 @@ if (!$session->get('logged_in')):
              <p>Don't have an account?&ensp;<a href="registration.php" style="color: inherit;text-decoration: underline;">Sign Up</a></p>
           </div>
           <?php 
-          if (($validationresults == FALSE) || ($registered == FALSE) || ($botDetect == TRUE) || ($internet_connection == FALSE) || ($inactive == TRUE)){
+          if (($validationresults == FALSE) || ($registered == FALSE) || ($botDetect == TRUE) || ($internet_connection == FALSE) || ($inactive == TRUE) || ($mailsent == TRUE)){
           ?>
           <div style="margin-top: 20px">
           <!-- Display validation errors -->
@@ -284,6 +320,8 @@ if (!$session->get('logged_in')):
 		                        echo '<font color="red"><i class="bx bx-shield-quarter bx-flashing"></i>&ensp;Access Denied!</font>';
                             if ($internet_connection  == FALSE)
 		                        echo '<br><font color="red"><i class="bx bx-wifi bx-flashing"></i>&ensp;Please check your internet connection and try again.</font>';
+                            if ($mailsent == TRUE)
+					                  echo '<br><br><font color="green"><i class="bx bx-check-circle bx-flashing"></i>&ensp;You need to activate your account. Please check your email for an activation link.</font>';
                             if ($inactive  == TRUE)
 		                        echo '<br><font color="red"><i class="bx bxs-error-alt bx-flashing"></i>&ensp;Kindly reset your password.<br>Check your email for a password reset link.<br>The link expires in 5 minutes.</font>';
                             if ($validationresults == FALSE || $registered == FALSE)

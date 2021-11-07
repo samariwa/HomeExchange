@@ -11,7 +11,39 @@ $usernotduplicate = TRUE;
 $passwordnotempty = TRUE;
 $passwordvalidate = TRUE;
 $passwordmatch  = TRUE;
+$verificationmatch = TRUE;
+$mailsent = FALSE;
 $query = new Database();
+if(isset($_GET['verification']))
+	{
+		$user_details = mysqli_fetch_array(mysqli_query($connection,$query->get("users","*", array('email_address','=',$_GET['email']))));
+		if($_GET['verification'] == $user_details['token'])
+		{
+			$_SESSION['user'] = $user_details['first_name'];
+			$_SESSION['email'] = $_GET['email'];
+			$random = genRandomSaltString();
+			$salt_ip = substr($random, 0, $length_salt);
+			//hash the ip address, user-agent and the salt
+			$hash_user = sha1($salt_ip . $iptocheck . $useragent);
+			//concatenate the salt and the hash to form a signature
+			$signature = $salt_ip . $hash_user;
+			$_SESSION['signature'] = $signature;
+			$_SESSION['logged_in'] = TRUE;
+			$_SESSION['LAST_ACTIVITY'] = time();
+
+			if (isset($_SESSION['logged_in'])) {
+				mysqli_query($connection,$query->update("users", "email_address", $_GET['email'], array('online' => '1', 'user_status' => '1')));
+				mysqli_query($connection,$query->insert("logged_devices", array('user_id' => $user_details['id'], 'ip_address' => $iptocheck, 'browser/device' => $useragent))) or die(mysqli_error($connection));
+				SessionManager::flash('success', 'You have registered successfully!');
+				Redirect::to($dashboard_link);
+				exit;
+			}		
+		}
+		else
+		{
+			$verificationmatch = FALSE;
+		}
+	}
 if (isset($_REQUEST['submit_button'])) {
 	$url = $token_verification_site;
 	$data = [
@@ -39,7 +71,6 @@ if (isset($_REQUEST['submit_button'])) {
     $mobile = sanitize($_POST["mobile"]);
     $desired_password = sanitize($_POST["pass"]);
     $desired_password1 = sanitize($_POST["pass2"]);
-    $random = generateRandomString();
     $hash = password_hash($desired_password, PASSWORD_DEFAULT);
     if (!($fetch = mysqli_fetch_array(mysqli_query($connection,$query->get("users","phone_number", array('phone_number','=',$mobile)))))) {
 //no records for this user in the MySQL database
@@ -84,23 +115,37 @@ if (isset($_REQUEST['submit_button'])) {
 	//Insert details to database
 	 $user = new User();
 	 $user->create($connection, array('role_id' => '2','first_name' => $first_name,'other_name' => $other_name,'last_name' => $last_name,'phone_number' => $mobile,'email_address' => $email,'physical_address' => $location,'password' => $hash));
-        $_SESSION['user'] = $first_name;
-        $_SESSION['email'] = $email;
-        $random = genRandomSaltString();
-        $salt_ip = substr($random, 0, $length_salt);
-        //hash the ip address, user-agent and the salt
-        $hash_user = sha1($salt_ip . $iptocheck . $useragent);
-        //concatenate the salt and the hash to form a signature
-        $signature = $salt_ip . $hash_user;
-        $_SESSION['signature'] = $signature;
-        $_SESSION['logged_in'] = TRUE;
-        $_SESSION['LAST_ACTIVITY'] = time();
-        if (isset($_SESSION['logged_in'])) {
-            mysqli_query($connection,$query->update("users", "email_address", $email, array('online' => '1','ipAddress' => $iptocheck)));
+		$verification_key = generateRandomString();
+		$verified_link = $protocol.$_SERVER['HTTP_HOST'].'/HomeExchange/auth/registration.php?email='.$email.'&verification='.$verification_key;
+        mysqli_query($connection, "UPDATE users SET token= '$verification_key' WHERE email_address ='$email'");
+        require_once "PHPMailer/PHPMailer.php";
+        require_once "PHPMailer/Exception.php";
+        require_once "PHPMailer/SMTP.php";
+         $mail = new PHPMailer(true);
+        $mail -> addAddress($email,'Recepient');
+        $mail -> setFrom($authenticator_email,$organization);
+        $mail->IsSMTP();
+        $mail->Host = $mail_host;
+        // optional
+        // used only when SMTP requires authentication  
+        $mail->SMTPAuth = true;
+        $mail->Username = $authenticator_email;
+        $mail->Password = $authenticator_password;
+        $mail -> Subject = "Activate your Home Swap account";
+        $mail -> isHTML(true);
+        $mail -> Body = "
+              Hi $first_name,<br><br>
+			    You've successfully signed up for Home Swap.
+                In order to activate your account, please click on the link below (this will confirm you email address):<br>
+                <a href='
+                $verified_link'>Account Activation Link</a><br><br>
+                
+                Kind Regards,<br>
+                Home Swap.
+                ";
+          if($mail -> send()){
+            $mailsent = TRUE;
         }
-		SessionManager::flash('success', 'You have registered successfully!');
-		Redirect::to("../".$dashboard_url);
-     exit;
 	 }
 	}
 	else{
@@ -141,7 +186,7 @@ if (isset($_REQUEST['submit_button'])) {
 </head>
 <body>	
 	<div class="limiter">
-		<div class="container-login100" style="background-image:url('../assets/images/signup_bg.jpeg');background-repeat: no-repeat;background-size: 1300px 1200px;">
+		<div class="container-login100" style="background-image:url('../assets/images/signup_bg.jpeg');background-repeat: no-repeat;background-size: 1300px 1300px;">
 			<div class="wrap-login100">
 				<div class="login100-form-title" style="background-image:url('../assets/images/signup_auth_bg.jpeg')">
 					<span class="login100-form-title-1">
@@ -233,6 +278,10 @@ if (isset($_REQUEST['submit_button'])) {
 					        echo '<br><br>&emsp;&emsp;&emsp;&emsp;<font color="red"><i class="bx bx-shield-quarter bx-flashing"></i>&ensp;Your password should be greater than 8 characters.</font>'; ?>
 					   <?php if ($usernamevalidate == FALSE)
 					        echo '<br><br>&emsp;&emsp;&emsp;&emsp;<font color="red"><i class="bx bx-shield-quarter bx-flashing"></i>&ensp;Your username should be less than 11 characters.</font>'; ?>
+							<?php if ($mailsent == TRUE)
+					        echo '<br><br><font color="green"><i class="bx bx-check-circle bx-flashing"></i>&ensp;Please check your email for an activation link for your account.</font>'; ?>
+					    <?php if ($verificationmatch == FALSE)
+					        echo '<br><br><font color="red"><i class="bx bx-shield-quarter bx-flashing"></i>&ensp;Your verification keys do not match. <br>Kindly ensure that you are using the correct activation link.</font>'; ?>		
 					     <?php if ($usernotduplicate == FALSE)
 					        echo '<br><br>&emsp;&emsp;&emsp;&emsp;<font color="red"><i class="bx bxs-data bx-flashing"></i>&ensp;User already exists.</font>'; ?>
                   </div>

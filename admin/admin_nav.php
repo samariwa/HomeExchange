@@ -359,8 +359,7 @@ Preloader
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ">
              <li><?php
-                $Today = date('y:m:d',mktime());
-                $new = date('l, F d, Y', strtotime($Today));
+                $new = date('l, F d, Y', time());
                 ?><i class="fa fa-calendar"></i>&ensp;<?php
                 echo $new;
                 ?></li>
@@ -399,7 +398,7 @@ Preloader
                     </div>
                   </div>
                   <div>
-                    <div class="small text-gray-500"><?php echo $date ?></div>
+                    <div class="small text-gray-500"><?php //echo $date ?></div>
                     <?php //echo $firstname.' '.$lastname ?>: <?php //echo $title ?>
                   </div>
                 </a>
@@ -418,7 +417,7 @@ Preloader
                     </div>
                   </div>
                   <div>
-                    <div class="small text-gray-500"><?php echo $date ?></div>
+                    <div class="small text-gray-500"><?php //echo $date ?></div>
                     Kindly restock <?php //echo $Name ?>. <?php //echo $Quantity ?> units left.
                   </div>
                 </a>

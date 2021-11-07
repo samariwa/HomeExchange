@@ -41,7 +41,7 @@ require('config.php');
     <div class="col-2 col-md-1 col-lg-5">
         <ul class="site-action d-none d-lg-flex align-items-center justify-content-between  ml-auto">
             <li class="site-phone"><a href="tel:<?php echo $contact_number; ?>"><i class="fas fa-phone"></i> <?php echo $contact_number; ?></a></li>
-            <li class="site-help ml-5"><a data-toggle="collapse" href="#" style="font-size:15px">Register</a></li>
+            <li class="site-help ml-5"><a href="auth/registration.php" style="font-size:15px">Register</a></li>
             <?php
                        $redirect_page = '';
                        $neutral_link = FALSE;

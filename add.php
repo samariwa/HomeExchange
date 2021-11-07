@@ -21,7 +21,7 @@ if($where == 'admin' )
    else{
      echo "success";
      $user = new User();
-	   $user->create($connection, array('role_id' => '1','first_name' => $firstname,'other_name' => $othername,'last_name' => $lastname,'phone_number' => $number,'email_address' => $email,'password' => $hash, 'user_status' => '0')) or die(mysqli_error($connection));
+	   $user->create($connection, array('role_id' => '1','first_name' => $firstname,'other_name' => $othername,'last_name' => $lastname,'phone_number' => $number,'email_address' => $email,'password' => $hash)) or die(mysqli_error($connection));
    }
 }
 

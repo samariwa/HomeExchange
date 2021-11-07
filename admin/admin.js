@@ -1,637 +1,637 @@
 $(function() {
-    "use strict";
-    $(function() {
-        $(".preloader").fadeOut();
-    });
+  "use strict";
+  $(function() {
+      $(".preloader").fadeOut();
+  });
 
 function setTime() {
 var d = new Date(),
-  el = document.getElementById("time");
+el = document.getElementById("time");
 
-  el.innerHTML = formatAMPM(d);
+el.innerHTML = formatAMPM(d);
 
 setTimeout(setTime, 1000);
 }
 
 function formatAMPM(date) {
-  var hours = date.getHours(),
-    minutes = date.getMinutes(),
-    seconds = date.getSeconds(),
-    ampm = hours >= 12 ? 'pm' : 'am';
-  hours = hours % 12;
-  hours = hours ? hours : 12; // the hour '0' should be '12'
-  minutes = minutes < 10 ? '0'+minutes : minutes;
-  var strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
-  return strTime;
+var hours = date.getHours(),
+  minutes = date.getMinutes(),
+  seconds = date.getSeconds(),
+  ampm = hours >= 12 ? 'pm' : 'am';
+hours = hours % 12;
+hours = hours ? hours : 12; // the hour '0' should be '12'
+minutes = minutes < 10 ? '0'+minutes : minutes;
+var strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+return strTime;
 }
 
 setTime();
 
 
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-         var where = 'fastmoving';
-       $.post("../charts.php",{where:where},
-        function(result){
-          var data = $.parseJSON(result);
-          var data0 = data[0][0];
-          var data1 = data[0][1];
-          var data2 = data[1][0];
-          var data3 = data[1][1];
-          var data4 = data[2][0];
-          var data5 = data[2][1];
-          var data6 = data[3][0];
-          var data7 = data[3][1];
-          var data8 = data[4][0];
-          var data9 = data[4][1];
-          var data10 = data[5][0];
-          var data11 = data[5][1];
-          var data12 = data[6][0];
-          var data13 = data[6][1];
-        var data = google.visualization.arrayToDataTable([
-          [data0, data1],
-         [data2, parseInt(data3)],
-          [data4, parseInt(data5)],
-          [data6, parseInt(data7)],
-          [data8, parseInt(data9)],
-          [data10, parseInt(data11)],
-          [data12, parseInt(data13)],
-        ]);
-        var options = {
-          title: 'Fast moving products',
-          legend: 'none',
-           is3D:true,
-          pieSliceText: 'label',
-          slices: {  1: {offset: 0.2},
-                    4: {offset: 0.1},
-                    0: {offset: 0.2},
-                    2: {offset: 0.1},
-          },
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-        chart.draw(data, options);
-        });
-      }
-
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart2);
-      function drawChart2() {
-         var where = 'fastselling';
-       $.post("../charts.php",{where:where},
-        function(result){
-          var data = $.parseJSON(result);
-          var data0 = data[0][0];
-          var data1 = data[0][1];
-          var data2 = data[1][0];
-          var data3 = data[1][1];
-          var data4 = data[2][0];
-          var data5 = data[2][1];
-          var data6 = data[3][0];
-          var data7 = data[3][1];
-          var data8 = data[4][0];
-          var data9 = data[4][1];
-          var data10 = data[5][0];
-          var data11 = data[5][1];
-          var data12 = data[6][0];
-          var data13 = data[6][1];
-        var data = google.visualization.arrayToDataTable([
-          [data0, data1],
-         [data2, parseInt(data3)],
-          [data4, parseInt(data5)],
-          [data6, parseInt(data7)],
-          [data8, parseInt(data9)],
-          [data10, parseInt(data11)],
-          [data12, parseInt(data13)],
-        ]);
-        var options = {
-          title: 'Fast moving products',
-          legend: 'none',
-           is3D:true,
-          pieSliceText: 'label',
-          slices: {  1: {offset: 0.2},
-                    4: {offset: 0.1},
-                    0: {offset: 0.2},
-                    2: {offset: 0.1},
-          },
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
-        chart.draw(data, options);
-        });
-      }
-
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawVisualization);
-
-      function drawVisualization() {
-        var where = 'salescomparison';
-       $.post("../charts.php",{where:where},
-        function(result){
-                   var data = google.visualization.arrayToDataTable([
-          ['Day', 'Royson', 'Ken', 'Reuben', 'Damaris', 'George', 'Average'],
-          ['07/08/2020',  165,      938,         522,             998,           450,      614.6],
-          ['08/08/2020',  135,      1120,        599,             1268,          288,      682],
-          ['09/08/2020',  157,      1167,        587,             807,           397,      623],
-          ['10/08/2020',  139,      1110,        615,             968,           215,      609.4],
-          ['Yesterday',  136,      691,         629,             1026,          366,      569.6],
-          ['Today',  136,      691,         629,             1026,          366,      569.6],
-        ]);
-
-        var options = {
-          title : 'Weekly Sales Made per Deliverer',
-          vAxis: {title: 'Sales'},
-          hAxis: {title: 'Day'},
-          seriesType: 'bars',
-          series: {5: {type: 'line'}}        };
-
-        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-        });
-      }
-
-      google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawComparison1);
-    function drawComparison1() {
-      var where = 'salescomparison1';
-       $.post("../charts.php",{where:where},
-        function(result){
-     var data = google.visualization.arrayToDataTable([
-        ['Deliverer', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General',
-         'Western', 'Literature', { role: 'annotation' } ],
-        ['Today', 10, 24, 20, 32, 18, 5, '']
-      ]);
-
-     var view = new google.visualization.DataView(data);
-
-      var options = {
-        width: 550,
-        height: 100,
-        legend: { position: 'top', maxLines: 3 },
-        bar: { groupWidth: '75%' },
-        isStacked: true
-      };
-      var chart = new google.visualization.BarChart(document.getElementById("salesComparison1"));
-      chart.draw(view, options);
-      });
-  }
-
-  google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawComparison2);
-    function drawComparison2() {
-      var where = 'salescomparison2';
-       $.post("../charts.php",{where:where},
-        function(result){
-     var data = google.visualization.arrayToDataTable([
-        ['Deliverer', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General',
-         'Western', 'Literature', { role: 'annotation' } ],
-        ['Yesterday', 10, 24, 20, 32, 18, 5, '']
-      ]);
-
-     var view = new google.visualization.DataView(data);
-
-      var options = {
-        width: 550,
-        height: 100,
-        legend: { position: 'top', maxLines: 3 },
-        bar: { groupWidth: '75%' },
-        isStacked: true
-      };
-      var chart = new google.visualization.BarChart(document.getElementById("salesComparison2"));
-      chart.draw(view, options);
-       });
-  }
-
-  google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawComparison3);
-    function drawComparison3() {
-      var where = 'salescomparison3';
-       $.post("../charts.php",{where:where},
-        function(result){
-     var data = google.visualization.arrayToDataTable([
-        ['Deliverer', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General',
-         'Western', 'Literature', { role: 'annotation' } ],
-        ['Yesterday', 10, 24, 20, 32, 18, 5, '']
-      ]);
-
-     var view = new google.visualization.DataView(data);
-
-      var options = {
-        width: 550,
-        height: 100,
-        legend: { position: 'top', maxLines: 3 },
-        bar: { groupWidth: '75%' },
-        isStacked: true
-      };
-      var chart = new google.visualization.BarChart(document.getElementById("salesComparison3"));
-      chart.draw(view, options);
-        });
-  }
-
-  google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawComparison4);
-    function drawComparison4() {
-      var where = 'salescomparison4';
-       $.post("../charts.php",{where:where},
-        function(result){
-          var data = $.parseJSON(result);
-          // alert(data)
-          var names = data[0];
-          var figures = data[1];
-         // alert(names)
-         // alert(figures)
-     var data = google.visualization.arrayToDataTable([
-        names,
-        figures
-      ]);
-
-     var view = new google.visualization.DataView(data);
-
-      var options = {
-        width: 550,
-        height: 100,
-        legend: { position: 'top', maxLines: 3 },
-        bar: { groupWidth: '75%' },
-        isStacked: true
-      };
-      var chart = new google.visualization.BarChart(document.getElementById("salesComparison4"));
-      chart.draw(view, options);
-       });
-  }
-
-  google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawComparison5);
-    function drawComparison5() {
-      var where = 'salescomparison5';
-       $.post("../charts.php",{where:where},
-        function(result){
-          var data = $.parseJSON(result);
-          var data0 = data[0];
-     var data = google.visualization.arrayToDataTable([
-        ['Deliverer', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General',
-         'Western', 'Literature', { role: 'annotation' } ],
-        [data0, 10, 24, 20, 32, 18, 5, '']
-      ]);
-
-     var view = new google.visualization.DataView(data);
-
-      var options = {
-        width: 550,
-        height: 100,
-        legend: { position: 'top', maxLines: 3 },
-        bar: { groupWidth: '75%' },
-        isStacked: true
-      };
-      var chart = new google.visualization.BarChart(document.getElementById("salesComparison5"));
-      chart.draw(view, options);
-      });
-  }
-
-  google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawComparison6);
-    function drawComparison6() {
-      var where = 'salescomparison6';
-       $.post("../charts.php",{where:where},
-        function(result){
-          var data = $.parseJSON(result);
-          var data0 = data[0];
-     var data = google.visualization.arrayToDataTable([
-        ['Deliverer', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General',
-         'Western',  { role: 'annotation' } ],
-        [data0, 10, 24, 20, 32, 18, '']
-      ]);
-
-     var view = new google.visualization.DataView(data);
-      var options = {
-        width: 550,
-        height: 100,
-        legend: { position: 'top', maxLines: 3 },
-        bar: { groupWidth: '75%' },
-        isStacked: true
-      };
-      var chart = new google.visualization.BarChart(document.getElementById("salesComparison6"));
-      chart.draw(view, options);
-      });
-  }
-
-      /*  var data = google.visualization.arrayToDataTable([
-          [data0, data1],
-         [data2, parseInt(data3)],
-          [data4, parseInt(data5)],
-          [data6, parseInt(data7)],
-          [data8, parseInt(data9)],
-          [data10, parseInt(data11)],
-          [data12, parseInt(data13)],
-        ]);*/
-      google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawExpenditureChart);
-    function drawExpenditureChart() {
-      var where = 'homesRegistration';
-       $.post("../charts.php",{where:where},
-        function(result){
-         var data = $.parseJSON(result);  
-          var data1 = data[0];
-          var data2 = data[1];
-          var data3 = data[2];
-          var data4 = data[3];
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+       var where = 'fastmoving';
+     $.post("../charts.php",{where:where},
+      function(result){
+        var data = $.parseJSON(result);
+        var data0 = data[0][0];
+        var data1 = data[0][1];
+        var data2 = data[1][0];
+        var data3 = data[1][1];
+        var data4 = data[2][0];
+        var data5 = data[2][1];
+        var data6 = data[3][0];
+        var data7 = data[3][1];
+        var data8 = data[4][0];
+        var data9 = data[4][1];
+        var data10 = data[5][0];
+        var data11 = data[5][1];
+        var data12 = data[6][0];
+        var data13 = data[6][1];
       var data = google.visualization.arrayToDataTable([
-        ["Week", "Number of homes", { role: "style" } ],
-        ["Week 1", parseInt(data1), "#b87333"],
-        ["Week 2", parseInt(data2), "silver"],
-        ["Week 3", parseInt(data3), "gold"],
-        ["Week 4", parseInt(data4), "color: #e5e4e2"]
+        [data0, data1],
+       [data2, parseInt(data3)],
+        [data4, parseInt(data5)],
+        [data6, parseInt(data7)],
+        [data8, parseInt(data9)],
+        [data10, parseInt(data11)],
+        [data12, parseInt(data13)],
+      ]);
+      var options = {
+        title: 'Fast moving products',
+        legend: 'none',
+         is3D:true,
+        pieSliceText: 'label',
+        slices: {  1: {offset: 0.2},
+                  4: {offset: 0.1},
+                  0: {offset: 0.2},
+                  2: {offset: 0.1},
+        },
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+      chart.draw(data, options);
+      });
+    }
+
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart2);
+    function drawChart2() {
+       var where = 'fastselling';
+     $.post("../charts.php",{where:where},
+      function(result){
+        var data = $.parseJSON(result);
+        var data0 = data[0][0];
+        var data1 = data[0][1];
+        var data2 = data[1][0];
+        var data3 = data[1][1];
+        var data4 = data[2][0];
+        var data5 = data[2][1];
+        var data6 = data[3][0];
+        var data7 = data[3][1];
+        var data8 = data[4][0];
+        var data9 = data[4][1];
+        var data10 = data[5][0];
+        var data11 = data[5][1];
+        var data12 = data[6][0];
+        var data13 = data[6][1];
+      var data = google.visualization.arrayToDataTable([
+        [data0, data1],
+       [data2, parseInt(data3)],
+        [data4, parseInt(data5)],
+        [data6, parseInt(data7)],
+        [data8, parseInt(data9)],
+        [data10, parseInt(data11)],
+        [data12, parseInt(data13)],
+      ]);
+      var options = {
+        title: 'Fast moving products',
+        legend: 'none',
+         is3D:true,
+        pieSliceText: 'label',
+        slices: {  1: {offset: 0.2},
+                  4: {offset: 0.1},
+                  0: {offset: 0.2},
+                  2: {offset: 0.1},
+        },
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+      chart.draw(data, options);
+      });
+    }
+
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawVisualization);
+
+    function drawVisualization() {
+      var where = 'salescomparison';
+     $.post("../charts.php",{where:where},
+      function(result){
+                 var data = google.visualization.arrayToDataTable([
+        ['Day', 'Royson', 'Ken', 'Reuben', 'Damaris', 'George', 'Average'],
+        ['07/08/2020',  165,      938,         522,             998,           450,      614.6],
+        ['08/08/2020',  135,      1120,        599,             1268,          288,      682],
+        ['09/08/2020',  157,      1167,        587,             807,           397,      623],
+        ['10/08/2020',  139,      1110,        615,             968,           215,      609.4],
+        ['Yesterday',  136,      691,         629,             1026,          366,      569.6],
+        ['Today',  136,      691,         629,             1026,          366,      569.6],
       ]);
 
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation" },
-                       2]);
+      var options = {
+        title : 'Weekly Sales Made per Deliverer',
+        vAxis: {title: 'Sales'},
+        hAxis: {title: 'Day'},
+        seriesType: 'bars',
+        series: {5: {type: 'line'}}        };
+
+      var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+      });
+    }
+
+    google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawComparison1);
+  function drawComparison1() {
+    var where = 'salescomparison1';
+     $.post("../charts.php",{where:where},
+      function(result){
+   var data = google.visualization.arrayToDataTable([
+      ['Deliverer', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General',
+       'Western', 'Literature', { role: 'annotation' } ],
+      ['Today', 10, 24, 20, 32, 18, 5, '']
+    ]);
+
+   var view = new google.visualization.DataView(data);
+
+    var options = {
+      width: 550,
+      height: 100,
+      legend: { position: 'top', maxLines: 3 },
+      bar: { groupWidth: '75%' },
+      isStacked: true
+    };
+    var chart = new google.visualization.BarChart(document.getElementById("salesComparison1"));
+    chart.draw(view, options);
+    });
+}
+
+google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawComparison2);
+  function drawComparison2() {
+    var where = 'salescomparison2';
+     $.post("../charts.php",{where:where},
+      function(result){
+   var data = google.visualization.arrayToDataTable([
+      ['Deliverer', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General',
+       'Western', 'Literature', { role: 'annotation' } ],
+      ['Yesterday', 10, 24, 20, 32, 18, 5, '']
+    ]);
+
+   var view = new google.visualization.DataView(data);
+
+    var options = {
+      width: 550,
+      height: 100,
+      legend: { position: 'top', maxLines: 3 },
+      bar: { groupWidth: '75%' },
+      isStacked: true
+    };
+    var chart = new google.visualization.BarChart(document.getElementById("salesComparison2"));
+    chart.draw(view, options);
+     });
+}
+
+google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawComparison3);
+  function drawComparison3() {
+    var where = 'salescomparison3';
+     $.post("../charts.php",{where:where},
+      function(result){
+   var data = google.visualization.arrayToDataTable([
+      ['Deliverer', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General',
+       'Western', 'Literature', { role: 'annotation' } ],
+      ['Yesterday', 10, 24, 20, 32, 18, 5, '']
+    ]);
+
+   var view = new google.visualization.DataView(data);
+
+    var options = {
+      width: 550,
+      height: 100,
+      legend: { position: 'top', maxLines: 3 },
+      bar: { groupWidth: '75%' },
+      isStacked: true
+    };
+    var chart = new google.visualization.BarChart(document.getElementById("salesComparison3"));
+    chart.draw(view, options);
+      });
+}
+
+google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawComparison4);
+  function drawComparison4() {
+    var where = 'salescomparison4';
+     $.post("../charts.php",{where:where},
+      function(result){
+        var data = $.parseJSON(result);
+        // alert(data)
+        var names = data[0];
+        var figures = data[1];
+       // alert(names)
+       // alert(figures)
+   var data = google.visualization.arrayToDataTable([
+      names,
+      figures
+    ]);
+
+   var view = new google.visualization.DataView(data);
+
+    var options = {
+      width: 550,
+      height: 100,
+      legend: { position: 'top', maxLines: 3 },
+      bar: { groupWidth: '75%' },
+      isStacked: true
+    };
+    var chart = new google.visualization.BarChart(document.getElementById("salesComparison4"));
+    chart.draw(view, options);
+     });
+}
+
+google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawComparison5);
+  function drawComparison5() {
+    var where = 'salescomparison5';
+     $.post("../charts.php",{where:where},
+      function(result){
+        var data = $.parseJSON(result);
+        var data0 = data[0];
+   var data = google.visualization.arrayToDataTable([
+      ['Deliverer', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General',
+       'Western', 'Literature', { role: 'annotation' } ],
+      [data0, 10, 24, 20, 32, 18, 5, '']
+    ]);
+
+   var view = new google.visualization.DataView(data);
+
+    var options = {
+      width: 550,
+      height: 100,
+      legend: { position: 'top', maxLines: 3 },
+      bar: { groupWidth: '75%' },
+      isStacked: true
+    };
+    var chart = new google.visualization.BarChart(document.getElementById("salesComparison5"));
+    chart.draw(view, options);
+    });
+}
+
+google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawComparison6);
+  function drawComparison6() {
+    var where = 'salescomparison6';
+     $.post("../charts.php",{where:where},
+      function(result){
+        var data = $.parseJSON(result);
+        var data0 = data[0];
+   var data = google.visualization.arrayToDataTable([
+      ['Deliverer', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General',
+       'Western',  { role: 'annotation' } ],
+      [data0, 10, 24, 20, 32, 18, '']
+    ]);
+
+   var view = new google.visualization.DataView(data);
+    var options = {
+      width: 550,
+      height: 100,
+      legend: { position: 'top', maxLines: 3 },
+      bar: { groupWidth: '75%' },
+      isStacked: true
+    };
+    var chart = new google.visualization.BarChart(document.getElementById("salesComparison6"));
+    chart.draw(view, options);
+    });
+}
+
+    /*  var data = google.visualization.arrayToDataTable([
+        [data0, data1],
+       [data2, parseInt(data3)],
+        [data4, parseInt(data5)],
+        [data6, parseInt(data7)],
+        [data8, parseInt(data9)],
+        [data10, parseInt(data11)],
+        [data12, parseInt(data13)],
+      ]);*/
+    google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawExpenditureChart);
+  function drawExpenditureChart() {
+    var where = 'homesRegistration';
+     $.post("../charts.php",{where:where},
+      function(result){
+       var data = $.parseJSON(result);  
+        var data1 = data[0];
+        var data2 = data[1];
+        var data3 = data[2];
+        var data4 = data[3];
+    var data = google.visualization.arrayToDataTable([
+      ["Week", "Number of homes", { role: "style" } ],
+      ["Week 1", parseInt(data1), "#b87333"],
+      ["Week 2", parseInt(data2), "silver"],
+      ["Week 3", parseInt(data3), "gold"],
+      ["Week 4", parseInt(data4), "color: #e5e4e2"]
+    ]);
+
+    var view = new google.visualization.DataView(data);
+    view.setColumns([0, 1,
+                     { calc: "stringify",
+                       sourceColumn: 1,
+                       type: "string",
+                       role: "annotation" },
+                     2]);
+
+    var options = {
+      title: "Newly registered homes comparison for the month",
+      width: 600,
+      height: 400,
+      bar: {groupWidth: "95%"},
+      legend: { position: "none" },
+    };
+    var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+    chart.draw(view, options);
+    });
+}
+
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawKeyCustomersChart);
+    function drawKeyCustomersChart() {
+      var where = 'biggestPayers';
+     $.post("../charts.php",{where:where},
+      function(result){
+        var data = $.parseJSON(result);
+        var data0 = data[0][0];
+        var data1 = data[0][1];
+        var data2 = data[1][0];
+        var data3 = data[1][1];
+        var data4 = data[2][0];
+        var data5 = data[2][1];
+        var data6 = data[3][0];
+        var data7 = data[3][1];
+        var data8 = data[4][0];
+        var data9 = data[4][1];
+      var data = google.visualization.arrayToDataTable([
+        [data0, data1],
+       [data2, parseInt(data3)],
+        [data4, parseInt(data5)],
+        [data6, parseInt(data7)],
+        [data8, parseInt(data9)]
+      ]);
 
       var options = {
-        title: "Newly registered homes comparison for the month",
-        width: 600,
-        height: 400,
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" },
+        title: 'Biggest payers of the month',
+        width:500,
       };
-      var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
-      chart.draw(view, options);
+
+      var chart = new google.visualization.PieChart(document.getElementById('keyCutomersChart'));
+      chart.draw(data, options);
       });
-  }
+    }
 
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawKeyCustomersChart);
-      function drawKeyCustomersChart() {
-        var where = 'biggestPayers';
-       $.post("../charts.php",{where:where},
-        function(result){
-          var data = $.parseJSON(result);
-          var data0 = data[0][0];
-          var data1 = data[0][1];
-          var data2 = data[1][0];
-          var data3 = data[1][1];
-          var data4 = data[2][0];
-          var data5 = data[2][1];
-          var data6 = data[3][0];
-          var data7 = data[3][1];
-          var data8 = data[4][0];
-          var data9 = data[4][1];
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawKeyCustomersChart);
+    function drawKeyCustomersChart() {
+      var where = 'customerType';
+     $.post("../charts.php",{where:where},
+      function(result){
+        var data = $.parseJSON(result);
+        var data0 = data[0][0];
+        var data1 = data[0][1];
+        var data2 = data[1][0];
+        var data3 = data[1][1];
+        var data4 = data[2][0];
+        var data5 = data[2][1];
+      var data = google.visualization.arrayToDataTable([
+        [data0, data1],
+       [data2, parseInt(data3)],
+        [data4, parseInt(data5)]
+      ]);
+
+      var options = {
+        title: 'Customer types in the past month',
+        width:1030,
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('customerTypeChart'));
+      chart.draw(data, options);
+      });
+    }
+
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawRevenueExpenseChart);
+    function drawRevenueExpenseChart() {
+      var where = 'salesExpenses';
+     $.post("../charts.php",{where:where},
+      function(result){
+        var data = $.parseJSON(result);
+        var data0 = data[0];
+        var data1 = data[1];
+        var data2 = data[2];
+        var data3 = data[3];
+        var data4 = data[4];
+        var data5 = data[5];
+        var data6 = data[6];
+        var data7 = data[7];
+      var data = google.visualization.arrayToDataTable([
+        ['Week', 'Sales', 'Costs'],
+        ['Week 1',  parseInt(data0),  parseInt(data1)],
+        ['Week 2', parseInt(data2),   parseInt(data3)],
+        ['Week 3', parseInt(data4),    parseInt(data5)],
+        ['Week 4', parseInt(data6),    parseInt(data7)]
+      ]);
+
+      var options = {
+        title: 'Sales & Variable-Costs Comparison for the month',
+        hAxis: {title: 'Week',  titleTextStyle: {color: '#333'}},
+        vAxis: {minValue: 0}
+      };
+
+      var chart = new google.visualization.AreaChart(document.getElementById('chart_divide'));
+      chart.draw(data, options);
+      });
+    }
+
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawProfitChart);
+
+    function drawProfitChart() {
+      var where = 'profit/loss';
+     $.post("../charts.php",{where:where},
+      function(result){
+         var data = $.parseJSON(result);
+        var data0 = data[0];
+        var data1 = data[1];
+        var data2 = data[2];
+        var data3 = 0;
+        var data4 = 0;
+        if (data0 > 0 && data2 > 0) {
         var data = google.visualization.arrayToDataTable([
-          [data0, data1],
-         [data2, parseInt(data3)],
-          [data4, parseInt(data5)],
-          [data6, parseInt(data7)],
-          [data8, parseInt(data9)]
-        ]);
+        ['Title', 'Amount'],
+        ['Gross Profit',  parseInt(data0)],
+        ['Expenditure',  parseInt(data1)],
+        ['Net Profit', parseInt(data2)],
+      ]);
 
-        var options = {
-          title: 'Biggest payers of the month',
-          width:500,
-        };
+      var options = {
+        title: 'Profit for the month',
+        pieHole: 0.7,
+        pieSliceText:'none',
 
-        var chart = new google.visualization.PieChart(document.getElementById('keyCutomersChart'));
-        chart.draw(data, options);
-        });
-      }
-
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawKeyCustomersChart);
-      function drawKeyCustomersChart() {
-        var where = 'customerType';
-       $.post("../charts.php",{where:where},
-        function(result){
-          var data = $.parseJSON(result);
-          var data0 = data[0][0];
-          var data1 = data[0][1];
-          var data2 = data[1][0];
-          var data3 = data[1][1];
-          var data4 = data[2][0];
-          var data5 = data[2][1];
-        var data = google.visualization.arrayToDataTable([
-          [data0, data1],
-         [data2, parseInt(data3)],
-          [data4, parseInt(data5)]
-        ]);
-
-        var options = {
-          title: 'Customer types in the past month',
-          width:1030,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('customerTypeChart'));
-        chart.draw(data, options);
-        });
-      }
-
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawRevenueExpenseChart);
-      function drawRevenueExpenseChart() {
-        var where = 'salesExpenses';
-       $.post("../charts.php",{where:where},
-        function(result){
-          var data = $.parseJSON(result);
-          var data0 = data[0];
-          var data1 = data[1];
-          var data2 = data[2];
-          var data3 = data[3];
-          var data4 = data[4];
-          var data5 = data[5];
-          var data6 = data[6];
-          var data7 = data[7];
-        var data = google.visualization.arrayToDataTable([
-          ['Week', 'Sales', 'Costs'],
-          ['Week 1',  parseInt(data0),  parseInt(data1)],
-          ['Week 2', parseInt(data2),   parseInt(data3)],
-          ['Week 3', parseInt(data4),    parseInt(data5)],
-          ['Week 4', parseInt(data6),    parseInt(data7)]
-        ]);
-
-        var options = {
-          title: 'Sales & Variable-Costs Comparison for the month',
-          hAxis: {title: 'Week',  titleTextStyle: {color: '#333'}},
-          vAxis: {minValue: 0}
-        };
-
-        var chart = new google.visualization.AreaChart(document.getElementById('chart_divide'));
-        chart.draw(data, options);
-        });
-      }
-
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawProfitChart);
-
-      function drawProfitChart() {
-        var where = 'profit/loss';
-       $.post("../charts.php",{where:where},
-        function(result){
-           var data = $.parseJSON(result);
-          var data0 = data[0];
-          var data1 = data[1];
-          var data2 = data[2];
-          var data3 = 0;
-          var data4 = 0;
-          if (data0 > 0 && data2 > 0) {
+      };
+        }
+        else if (data0 < 0 && data2 < 0) {
+          data3 = data3 - data0;
+          data4 = parseInt(data1) + parseInt(data3);
           var data = google.visualization.arrayToDataTable([
-          ['Title', 'Amount'],
-          ['Gross Profit',  parseInt(data0)],
-          ['Expenditure',  parseInt(data1)],
-          ['Net Profit', parseInt(data2)],
-        ]);
+        ['Title', 'Amount'],
+        ['Gross Loss',  parseInt(data3)],
+        ['Expenditure',  parseInt(data1)],
+        ['Net Loss', parseInt(data4)],
+      ]);
 
-        var options = {
-          title: 'Profit for the month',
-          pieHole: 0.7,
-          pieSliceText:'none',
+      var options = {
+        title: 'Loss for the month',
+        pieHole: 0.7,
+        pieSliceText:'none',
 
-        };
-          }
-          else if (data0 < 0 && data2 < 0) {
-            data3 = data3 - data0;
-            data4 = parseInt(data1) + parseInt(data3);
-            var data = google.visualization.arrayToDataTable([
-          ['Title', 'Amount'],
-          ['Gross Loss',  parseInt(data3)],
-          ['Expenditure',  parseInt(data1)],
-          ['Net Loss', parseInt(data4)],
-        ]);
+      };
+        }
+       else if (data0 > 0 && data2 < 0) {
+          data4 = parseInt(data1) - parseInt(data0);
+          var data = google.visualization.arrayToDataTable([
+        ['Title', 'Amount'],
+        ['Gross Profit',  parseInt(data0)],
+        ['Expenditure',  parseInt(data1)],
+        ['Net Loss', parseInt(data4)],
+      ]);
 
-        var options = {
-          title: 'Loss for the month',
-          pieHole: 0.7,
-          pieSliceText:'none',
+      var options = {
+        title: 'Loss for the month',
+        pieHole: 0.7,
+        pieSliceText:'none',
 
-        };
-          }
-         else if (data0 > 0 && data2 < 0) {
-            data4 = parseInt(data1) - parseInt(data0);
-            var data = google.visualization.arrayToDataTable([
-          ['Title', 'Amount'],
-          ['Gross Profit',  parseInt(data0)],
-          ['Expenditure',  parseInt(data1)],
-          ['Net Loss', parseInt(data4)],
-        ]);
+      };
+        }
+      var chart = new google.visualization.PieChart(document.getElementById('profitchart'));
+      chart.draw(data, options);
+      });
+    }
 
-        var options = {
-          title: 'Loss for the month',
-          pieHole: 0.7,
-          pieSliceText:'none',
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawSalesChart);
 
-        };
-          }
-        var chart = new google.visualization.PieChart(document.getElementById('profitchart'));
-        chart.draw(data, options);
-        });
-      }
+    function drawSalesChart() {
+      var where = 'newsignups';
+     $.post("../charts.php",{where:where},
+      function(result){
+        var data = $.parseJSON(result);
+        var data0 = data[0];
+        var data1 = data[1];
+        var data2 = data[2];
+        var data3 = data[3];
+      var data = google.visualization.arrayToDataTable([
+        ['Week ', 'Sales'],
+        ['Week 1',  parseInt(data0)],
+        ['Week 2',  parseInt(data1)],
+        ['Week 3',  parseInt(data2)],
+        ['Week 4',  parseInt(data3)]
+      ]);
 
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawSalesChart);
+      var options = {
+        title: 'Total sign ups for the month',
+        curveType: 'function',
+        legend: { position: 'bottom' }
+      };
 
-      function drawSalesChart() {
-        var where = 'newsignups';
-       $.post("../charts.php",{where:where},
-        function(result){
-          var data = $.parseJSON(result);
-          var data0 = data[0];
-          var data1 = data[1];
-          var data2 = data[2];
-          var data3 = data[3];
-        var data = google.visualization.arrayToDataTable([
-          ['Week ', 'Sales'],
-          ['Week 1',  parseInt(data0)],
-          ['Week 2',  parseInt(data1)],
-          ['Week 3',  parseInt(data2)],
-          ['Week 4',  parseInt(data3)]
-        ]);
+      var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
-        var options = {
-          title: 'Total sign ups for the month',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
+      chart.draw(data, options);
+      });
+    }
 
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
-        chart.draw(data, options);
-        });
-      }
+$(document).ready(function(){
+       $(".paginate").DataTable({
+        "ordering": false
+       });
+
+     });
 
 
  $(document).ready(function(){
-         $(".paginate").DataTable({
-          "ordering": false
-         });
-
-       });
-
-
-   $(document).ready(function(){
-         $("#customerOrderSearch").DataTable({
-          "ordering": false,
-          "pageLength": 5,
-          "lengthChange": false,
-          "info": false,
-           "oLanguage": {
-            "sSearch": "<i class='fa fa-search'></i>&ensp;Customer Search:",
-            "sZeroRecords": "Customer Not Found"
-          }
-         });
-       });
-
-    $(document).ready(function(){
-         $("#sellerRequisitionSearch").DataTable({
-          "ordering": false,
-          "pageLength": 5,
-          "lengthChange": false,
-          "info": false,
-           "oLanguage": {
-            "sSearch": "<i class='fa fa-search'></i>&ensp;Seller Search:",
-            "sZeroRecords": "Seller Not Found"
-          }
-         });
-       });
-
-   $(document).ready(function(){
-         $("#employeePayslipSearch").DataTable({
-          "ordering": false,
-          "pageLength": 5,
-          "lengthChange": false,
-          "info": false,
-           "oLanguage": {
-            "sSearch": "<i class='fa fa-search'></i>&ensp;Employee Search:",
-            "sZeroRecords": "Employee Not Found"
-          }
-         });
-       });
-
-    $(document).ready(function(){
-         $("#productOrderSearch").DataTable({
-          "ordering": false,
-          "pageLength": 5,
-          "lengthChange": false,
-          "info": false,
-           "oLanguage": {
-          "sSearch": "<i class='fa fa-search'></i>&ensp;Product Search:",
-          "sZeroRecords": "Product Not Found"
+       $("#customerOrderSearch").DataTable({
+        "ordering": false,
+        "pageLength": 5,
+        "lengthChange": false,
+        "info": false,
+         "oLanguage": {
+          "sSearch": "<i class='fa fa-search'></i>&ensp;Customer Search:",
+          "sZeroRecords": "Customer Not Found"
         }
-         });
        });
+     });
 
-    $(document).ready(function(){
-         $("#productSalesSearch").DataTable({
-          "ordering": false,
-          "pageLength": 5,
-          "lengthChange": false,
-          "info": false,
-           "oLanguage": {
-          "sSearch": "<i class='fa fa-search'></i>&ensp;Product Search:",
-          "sZeroRecords": "Product Not Found"
+  $(document).ready(function(){
+       $("#sellerRequisitionSearch").DataTable({
+        "ordering": false,
+        "pageLength": 5,
+        "lengthChange": false,
+        "info": false,
+         "oLanguage": {
+          "sSearch": "<i class='fa fa-search'></i>&ensp;Seller Search:",
+          "sZeroRecords": "Seller Not Found"
         }
-         });
        });
+     });
+
+ $(document).ready(function(){
+       $("#employeePayslipSearch").DataTable({
+        "ordering": false,
+        "pageLength": 5,
+        "lengthChange": false,
+        "info": false,
+         "oLanguage": {
+          "sSearch": "<i class='fa fa-search'></i>&ensp;Employee Search:",
+          "sZeroRecords": "Employee Not Found"
+        }
+       });
+     });
+
+  $(document).ready(function(){
+       $("#productOrderSearch").DataTable({
+        "ordering": false,
+        "pageLength": 5,
+        "lengthChange": false,
+        "info": false,
+         "oLanguage": {
+        "sSearch": "<i class='fa fa-search'></i>&ensp;Product Search:",
+        "sZeroRecords": "Product Not Found"
+      }
+       });
+     });
+
+  $(document).ready(function(){
+       $("#productSalesSearch").DataTable({
+        "ordering": false,
+        "pageLength": 5,
+        "lengthChange": false,
+        "info": false,
+         "oLanguage": {
+        "sSearch": "<i class='fa fa-search'></i>&ensp;Product Search:",
+        "sZeroRecords": "Product Not Found"
+      }
+       });
+     });
 });
 /*
        $(document).ready(function(){
