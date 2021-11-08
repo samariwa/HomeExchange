@@ -67,11 +67,11 @@
                             <h6>What duration do you plan to stay there?</h6>
                             <h6 class="ml-3">From:</h6>
                             <div class="col-3">
-                                <input type="date" class="form-control" id="start_date" required>
+                                <input type="date" class="form-control" min="<?php echo date('Y-m-d'); ?>" id="start_date" required>
                             </div>
                             <h6>To:</h6>
                             <div class="col-3">
-                                <input type="date" class="form-control" id="end_date" required>
+                                <input type="date" class="form-control" min="<?php echo date('Y-m-d'); ?>" id="end_date" required>
                             </div>
                         </div>
                        <br>
