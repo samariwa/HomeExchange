@@ -120,6 +120,7 @@ include('header.php');
                                                }
                                                $start_date = strtotime($row['availability_start_date']);
                                                $current_date = time();
+                                               $end_date = strtotime($row['availability_end_date']);
                                                $diff_date = round(($start_date - $current_date) / (60 * 60 * 24));
                                                if($diff_date <= 10)
                                                {
@@ -138,6 +139,11 @@ include('header.php');
                                                  <span class="batch sale">Today</span>
                                                 <?php
                                                    }
+                                                   elseif(($diff_date < 0) && ($end_date > $current_date)){
+                                                    ?>
+                                                     <span class="batch sale">Available</span>
+                                                    <?php
+                                                       }
                                                }
                                            ?>
                                             <a class="wish-link"

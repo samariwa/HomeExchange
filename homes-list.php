@@ -1,5 +1,16 @@
 <?php
   include('header.php');
+  if(isset($_GET['requirements-search']))
+  {
+    if($_GET['requirements-search'] == true)
+    {
+        $cookie = new CookieManager();
+        $home = new Home();
+        $requirements = $cookie->get('requirements');
+        $requirements = json_decode($requirements, true);
+        $availableHomesList =  mysqli_query($connection,$home->searchAvailableHomes($requirements['swimming'], $requirements['wifi'], $requirements['tv'], $requirements['ac'], $capacity, $requirements['gym'], $requirements['parking'], $requirements['wheelchair'], $requirements['pets'], $requirements['kids'], $workers, $requirements['security'], $requirements['garden'], $requirements['smokers'], $requirements['county'], $requirements['subcounty'], $requirements['end_date']))or die($connection->error);
+    }
+  }
 ?> 
             <!-- page-header-section start -->
             <div class="page-header-section">
@@ -170,6 +181,7 @@
                                                    $item_in_wishlist = false;
                                                }
                                                $start_date = strtotime($row['availability_start_date']);
+                                               $end_date = strtotime($row['availability_end_date']);
                                                $current_date = time();
                                                $diff_date = round(($start_date - $current_date) / (60 * 60 * 24));
                                                if($diff_date <= 10)
@@ -189,6 +201,11 @@
                                                  <span class="batch sale">Today</span>
                                                 <?php
                                                    }
+                                                   elseif(($diff_date < 0) && ($end_date > $current_date)){
+                                                    ?>
+                                                     <span class="batch sale">Available</span>
+                                                    <?php
+                                                       }
                                                }
                                            ?>
                                             <a class="wish-link"

@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="col-4">
-                                <input type="text" class="form-control" style="font-family:Arial, FontAwesome" name="subcounty_search" id="subcounty_search" placeholder="&#xF002; Sub-County..." disabled>
+                                <input type="text" class="form-control" style="font-family:Arial, FontAwesome" name="subcounty_search" id="subcounty_search" placeholder="&#xF002; Sub-County..." disabled required>
                                 <div class="col-12" style="position: absolute;z-index: 4;">
                                     <div class="list-group" id="subcounty_list" >
                                         
@@ -67,11 +67,11 @@
                             <h6>What duration do you plan to stay there?</h6>
                             <h6 class="ml-3">From:</h6>
                             <div class="col-3">
-                                <input type="date" class="form-control" id="date">
+                                <input type="date" class="form-control" id="start_date" required>
                             </div>
                             <h6>To:</h6>
                             <div class="col-3">
-                                <input type="date" class="form-control" id="date">
+                                <input type="date" class="form-control" id="end_date" required>
                             </div>
                         </div>
                        <br>
@@ -84,7 +84,7 @@
 
                                         </div>
                                     </div>
-                                    <input type="checkbox" class="kids_coming" name="kids">
+                                    <input type="checkbox" class="kids_coming" id="kids_coming" name="kids_coming">
                                 </div>
                            </div>
                            <div class="col-6">
@@ -103,7 +103,7 @@
                     <h5>Kindly select facilities you would like to have in the home</h5>
                     <div class="row">
                     <label class="option_item">
-                    <input type="checkbox" class="checkbox">
+                    <input type="checkbox" name="swimming" class="checkbox">
                     <div class="option_inner swimming">
                         <div class="tickmark"></div>
                         <div class="icon"><i class="fas fa-swimming-pool fa-2x"></i></div>
@@ -111,7 +111,7 @@
                     </div>
                     </label>
                     <label class="option_item">
-                    <input type="checkbox" class="checkbox">
+                    <input type="checkbox" name="wifi" class="checkbox">
                     <div class="option_inner wifi">
                         <div class="tickmark"></div>
                         <div class="icon"><i class="fas fa-wifi fa-2x"></i></div>
@@ -119,7 +119,7 @@
                     </div>
                     </label>
                     <label class="option_item">
-                    <input type="checkbox" class="checkbox">
+                    <input type="checkbox" name="tv" class="checkbox">
                     <div class="option_inner tv">
                         <div class="tickmark"></div>
                         <div class="icon"><i class="fas fa-tv fa-2x"></i></div>
@@ -127,7 +127,7 @@
                     </div>
                     </label>
                     <label class="option_item">
-                    <input type="checkbox" class="checkbox">
+                    <input type="checkbox" name="smokers" class="checkbox">
                     <div class="option_inner smokers">
                         <div class="tickmark"></div>
                         <div class="icon"><i class="fas fa-smoking fa-2x"></i></div>
@@ -135,7 +135,7 @@
                     </div>
                     </label>
                     <label class="option_item">
-                    <input type="checkbox" class="checkbox">
+                    <input type="checkbox" name="wheelchair" class="checkbox">
                     <div class="option_inner wheelchair">
                         <div class="tickmark"></div>
                         <div class="icon"><i class="fab fa-accessible-icon"></i></div>
@@ -145,7 +145,7 @@
                     </div>
                     <div class="row">
                     <label class="option_item">
-                    <input type="checkbox" class="checkbox">
+                    <input type="checkbox" name="parking" class="checkbox">
                     <div class="option_inner parking">
                         <div class="tickmark"></div>
                         <div class="icon"><i class="fas fa-parking fa-2x"></i></div>
@@ -153,7 +153,7 @@
                     </div>
                     </label>
                     <label class="option_item">
-                    <input type="checkbox" class="checkbox">
+                    <input type="checkbox" name="gym" class="checkbox">
                     <div class="option_inner gym">
                         <div class="tickmark"></div>
                         <div class="icon"><i class="fas fa-dumbbell fa-2x"></i></div>
@@ -161,7 +161,7 @@
                     </div>
                     </label>
                     <label class="option_item">
-                    <input type="checkbox" class="checkbox">
+                    <input type="checkbox" name="kids" class="checkbox">
                     <div class="option_inner kids">
                         <div class="tickmark"></div>
                         <div class="icon"><i class="fas fa-child fa-2x"></i></div>
@@ -169,7 +169,7 @@
                     </div>
                     </label>
                     <label class="option_item">
-                    <input type="checkbox" class="checkbox">
+                    <input type="checkbox" name="garden" class="checkbox">
                     <div class="option_inner garden">
                         <div class="tickmark"></div>
                         <div class="icon"><h2>G</h2></div>
@@ -179,7 +179,7 @@
                     </div> 
                     <div class="row">
                     <label class="option_item">
-                    <input type="checkbox" class="checkbox">
+                    <input type="checkbox" name="ac" class="checkbox">
                     <div class="option_inner ac">
                         <div class="tickmark"></div>
                         <div class="icon"><h2>AC</h2></div>
@@ -187,7 +187,7 @@
                     </div>
                     </label>
                     <label class="option_item">
-                    <input type="checkbox" class="checkbox">
+                    <input type="checkbox" name="workers" class="checkbox">
                     <div class="option_inner workers">
                         <div class="tickmark"></div>
                         <div class="icon"><i class="fas fa-user-friends fa-2x"></i></div>
@@ -195,7 +195,7 @@
                     </div>
                     </label>
                     <label class="option_item">
-                    <input type="checkbox" class="checkbox">
+                    <input type="checkbox" name="security" class="checkbox">
                     <div class="option_inner security">
                         <div class="tickmark"></div>
                         <div class="icon"><i class="fas fa-shield-alt fa-2x"></i></div>
@@ -209,6 +209,29 @@
                   <h6>Kindly list any other requirements you have</h6>
                   <textarea id="extra-requirements" class="form-control" name="extra-requirements" rows="4" cols="50"></textarea>
                 </div>
+                <br>
+                <div class="container p-lg-0">
+                <h6>Which of your homes would you like to use for the swap?</h6>
+                <select type="text" name="exchange_home_id" id="exchange_home_id" class="form-control col-9" required onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                   <option value="" selected="selected" disabled>Swap Home...</option>
+                  <?php
+                    $home = new Home();
+                    $count = 0;
+                    $owner_id= mysqli_query($connection,"SELECT id FROM home_owners WHERE user_id = '".$customer_id."'")or die($connection->error);
+                    $owner_result = mysqli_fetch_array($owner_id);
+                    $myHomes = mysqli_query($connection,$home->getUserHomes($owner_result['id']))or die($connection->error);
+                    foreach($myHomes as $row){
+                     $count++;
+                    $home_id = $row['id'];
+                    $home = $row['name'];
+                  ?>
+                   <option value="<?php echo $home_id; ?>"><?php echo $home; ?></option>
+                  <?php
+                    }
+                  ?>
+                 </select>
+                </div>
+                <input type="hidden" id="holiday_requirements_expiry" value="<?php echo $holiday_requirements_expiry; ?>" />
                 <br>
                 <div class="row">
                     <div class="col-10"></div>

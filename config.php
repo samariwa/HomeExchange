@@ -62,7 +62,8 @@ $iptocheck = $_SERVER['REMOTE_ADDR'];
 $remember_me_expiry = time()+60*60*7*24;
 //favouritescookies
 $favourite_expiry = time() +60*60*7*24;
-
+//holidayrequirementscookies(days)
+$holiday_requirements_expiry = 1;
 spl_autoload_register(function($class)
 {
    require_once 'classes/'.$class.'.php';

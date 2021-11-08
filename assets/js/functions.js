@@ -1533,21 +1533,67 @@ $('.show-less').on('click',function(){
     $(this).parents('.order-card').removeClass("show")
 });
 
- $(document).on('click','#completeOrder',function(){
-    $('#confirmDetails input:required').each(function() {
-        if ($(this).val() === ''){
-            alert('Kindly fill in all required fields');
-        }
-      });
-        var date = $("#order_date").val();
-        var mode = $("input[type='radio'][name='delivery_location']:checked").val();
-        var payment = $("input[type='radio'][name='payment']:checked").val();
-        var id = $("#customerId").val();
-        var where = 'onlineOrder';
-        $.post("add.php",{id:id,date:date,mode:mode,payment:payment,where:where},
-        function(result){
-           alert('Your order has been successfully made.');
-           window.location.href = 'order-success.php';
-        });
+function setCookie(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+function eraseCookie(name) {   
+    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+ $(document).on('click','#requirements-submit',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    $(".preloader").show();
+    var extra_details = '';
+    if($("#extra-requirements").val() == null)
+    {
+        extra_details = 'No extra details';
+    }
+    else
+    {
+        extra_details = $("#extra-requirements").val();
+    }
+     var features_cookie = JSON.stringify({
+     swimming : encodeHomeFeatures($('input[name="swimming"]:checked').val()),
+     wifi : encodeHomeFeatures($('input[name="wifi"]:checked').val()),
+     tv : encodeHomeFeatures($('input[name="tv"]:checked').val()),
+     ac : encodeHomeFeatures($('input[name="ac"]:checked').val()),
+     gym : encodeHomeFeatures($('input[name="gym"]:checked').val()),
+     parking : encodeHomeFeatures($('input[name="parking"]:checked').val()),
+     wheelchair : encodeHomeFeatures($('input[name="wheelchair"]:checked').val()),
+     pets : encodeHomeFeatures($('input[name="pets"]:checked').val()),
+     kids : encodeHomeFeatures($('input[name="kids_coming"]:checked').val()),
+     workers : encodeHomeFeatures($('input[name="workers"]:checked').val()),
+     security : encodeHomeFeatures($('input[name="security"]:checked').val()),
+     garden : encodeHomeFeatures($('input[name="garden"]:checked').val()),
+     smokers : encodeHomeFeatures($('input[name="smokers"]:checked').val()),
+     county : $('#county_search').val(),
+     subcounty : $('#subcounty_search').val(),
+     exchange_home : $("#exchange_home_id").val(),
+     people_accompanying : $('#people_no').text(),
+     kids_accompanying : $('#kids_no').text(),
+     start_date : $("#start_date").val(),
+     end_date : $("#end_date").val(),
+     extra_requirements : extra_details
+    });
+    setCookie('requirements',features_cookie,$("#holiday_requirements_expiry").val());
+    $(".preloader").hide();
+    window.location.href = 'homes-list.php?requirements-search=true';
 });
  

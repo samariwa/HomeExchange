@@ -72,6 +72,7 @@ $location = $result['physical_address'];
                        {
                         $start_date = strtotime($row['availability_start_date']);
                         $current_date = time();
+                        $end_date = strtotime($row['availability_end_date']);
                         $diff_date = round(($start_date - $current_date) / (60 * 60 * 24));
                         ?>
                             <div class="wishlist-item product-item d-flex align-items-center <?php if($row['home_availability_status'] == 0 ){ ?>reserved<?php }?>">
@@ -94,6 +95,11 @@ $location = $result['physical_address'];
                                     ?>
                                         <span class="batch sale">Today</span>
                                     <?php
+                                        }
+                                        elseif(($diff_date < 0) && ($end_date > $current_date)){
+                                            ?>
+                                             <span class="batch sale">Available</span>
+                                            <?php
                                         }
                                     }
                                     ?>
