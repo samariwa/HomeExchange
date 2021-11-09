@@ -9,6 +9,7 @@
         $requirements = $cookie->get('requirements');
         $requirements = json_decode($requirements, true);
         $availableHomesList =  mysqli_query($connection,$home->searchAvailableHomes($requirements['swimming'], $requirements['wifi'], $requirements['tv'], $requirements['ac'], $capacity, $requirements['gym'], $requirements['parking'], $requirements['wheelchair'], $requirements['pets'], $requirements['kids'], $workers, $requirements['security'], $requirements['garden'], $requirements['smokers'], $requirements['county'], $requirements['subcounty'], $requirements['end_date']))or die($connection->error);
+        $availableHomesCount =  mysqli_num_rows($availableHomesList);
     }
   }
 ?> 
@@ -162,7 +163,14 @@
                         </div>
                         <div class="col-lg-9 order-lg-last">
                             <div class="row product-list">
-                            <?php
+                            <?php  
+                            if($availableHomesCount == 0)
+                            {
+                             ?>
+                             <h3 class="mt-5 ml-5" style="color:#FD5555;"><i class="far fa-frown"></i> Home not found</h3>
+                             <?php
+                            }
+                            else{ 
                                 foreach($availableHomesList as $row){
                             ?> 
                                 <div class="col-sm-6 col-xl-4" id="<?php echo $row['home_id']; ?>">
@@ -235,6 +243,7 @@
                                 </div>
                                         <?php
                                 }  
+                               }
                                 ?>
 
                                 <div class="col-sm-6 col-xl-4" id="kjgj">

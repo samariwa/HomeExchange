@@ -1596,4 +1596,54 @@ function eraseCookie(name) {
     $(".preloader").hide();
     window.location.href = 'homes-list.php?requirements-search=true';
 });
- 
+
+function ExchangePoints(source, unit_of_exchange, target)
+{
+    var transfered_points;
+    var unit = unit_of_exchange;
+    var diff = source - target;
+    transfered_points = unit * diff;
+    return transfered_points;
+}
+
+function makeHomeRequest(details)
+{
+    var where = 'request'
+    data = JSON.parse(details);
+    $.post("add.php",{user_id:data.user_id, availability_id:data.availability_id, exchange_home:data.exchange_home, people_accompanying:data.people_accompanying, start_date:data.start_date, end_date:data.end_date, extra_requirements:data.extra_requirements, where:where},
+    function(result){
+        if(result == 1)
+        {
+            alert('Request successful');
+            window.location.href = 'reservation-success.php';
+        }
+        else
+        {
+            alert('Something went wrong. Try again.')
+        }
+    });
+}
+
+$(document).on('click','#make-request',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var details = JSON.parse(getCookie('requirements'));
+    details.user_id = $('#user-id').val();
+    details.availability_id = $('#availability-id').val();
+    details = JSON.stringify(details);
+    var required_points = ExchangePoints($('#requester-home-tier').val(), $('#unit-of-exchange').val(), parseInt($('#home-tier-val').text()));
+    if(required_points < 0)
+    { 
+        required_points *= -1;
+        bootbox.confirm(required_points+' points will be transfered to your account on acceptance of the other party. Would you like to proceed with the request?',function(result)
+        {if(result){
+            makeHomeRequest(details);
+        }}); 
+    }
+    else{
+        bootbox.confirm(required_points+' will be deducted from your account on acceptance of the other party. Would you like to proceed with the request?',function(result)
+        {if(result){
+            makeHomeRequest(details);
+        }}); 
+    }
+});

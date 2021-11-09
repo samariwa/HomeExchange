@@ -87,17 +87,19 @@ else if ($where == 'home-images') {
   }
 }
 
-else if ($where == 'note') {
-     $title = $_POST['title'];
-     $message = $_POST['message'];
-     $access = $_POST['access'];
-     $user = $_SESSION['user'];
-      echo "success";
-     $row = mysqli_query($connection,"SELECT id FROM users WHERE username = '".$user."'")or die($connection->error);
-     $result = mysqli_fetch_array($row);
-     $id = $result['id'];
-      mysqli_query($connection,"INSERT INTO `notes` (`User_id`,`Title`,`Note`,`Public`) VALUES ('$id','$title','$message','$access')") or die(mysqli_error($connection));
+else if ($where == 'request') {
+  $extra_requirements = $_POST['extra_requirements'];
+  if($extra_requirements == '')
+  {
+    $extra_requirements = 'No extra details';
+  }
+  $owner_id= mysqli_query($connection,"SELECT id FROM home_owners WHERE user_id = '".$_POST['user_id']."'")or die($connection->error);
+  $owner_result = mysqli_fetch_array($owner_id);
+  $request = new HomeExchangeRequest();
+  mysqli_query($connection,$request->MakeExchangeRequest($owner_result['id'], $_POST['exchange_home'],$_POST['availability_id'], $_POST['people_accompanying'], $_POST['start_date'], $_POST['end_date'], $extra_requirements))or die($connection->error);
+  echo "1";
 }
+
 elseif ($where == 'rate-home') {
   $home_rating = new HomeRating();
   $rater_unique = mysqli_query($connection, $home_rating->CheckRaterUnique($_POST['home_id'],$_POST['rater_id'])) or die(mysqli_error($connection));

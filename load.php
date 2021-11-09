@@ -109,7 +109,7 @@ if( $_POST['where'] == 'filter' )
     }
     else{
         $output = '
-                <h3 class="mt-5 ml-5" style="color:#FD5555;">Home not found</h3>
+                <h3 class="mt-5 ml-5" style="color:#FD5555;"><i class="far fa-frown"></i> Home not found</h3>
         ';
     }
     echo $output;

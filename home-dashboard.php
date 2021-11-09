@@ -8,6 +8,7 @@
   $availability_result = mysqli_fetch_array($availability_details);
   $request_details = mysqli_query($connection,$requests->getExchangeRequests($_GET['id']))or die($connection->error);
   $request_result = mysqli_fetch_array($request_details);
+  $cookie = new CookieManager();
 ?> 
             <!-- page-header-section start -->
             <div class="page-header-section">
@@ -141,8 +142,23 @@
                             <div class="col-5">
                             <?php if($result['user_id'] != $customer_id){ ?>
                                 <div class="make-reservation ml-5">
-                                    <a href="#">Make Reservation</a>
+                                    <a <?php if($cookie->exists('requirements') == false){ ?>href="holiday-details.php?id=<?php echo $_GET['id']; ?>" <?php }else{ ?>href="#" id="make-request" <?php } ?>>Make Reservation</a>
                                 </div>
+                                <?php
+                                  if($cookie->exists('requirements') == true)
+                                  {
+                                    $requirements = $cookie->get('requirements');
+                                    $requirements = json_decode($requirements, true);
+                                   $my_home = mysqli_query($connection,$home->fetchHomeDetails($requirements['exchange_home']))or die($connection->error);
+                                   $my_home_results = mysqli_fetch_array($my_home);
+                                ?>
+                                   <input type="hidden" name="requester-home-tier" id="requester-home-tier" value="<?php echo $my_home_results['home_tier']; ?>">
+                                <?php
+                                  }
+                                ?>
+                                <input type="hidden" name="availability-id" id="availability-id" value="<?php echo $availability_result['availability_id']; ?>">
+                                <input type="hidden" name="unit-of-exchange" id="unit-of-exchange" value="<?php echo $unit_of_exchange; ?>">
+                                <input type="hidden" name="user-id" id="user-id" value="<?php echo $customer_id; ?>">
                                 <?php } ?>
                             </div>
                         </div>
@@ -376,7 +392,7 @@
                         ?>
                    </div>
                    <div class="col-2 text-center">
-                       <h2><?php echo $result['home_tier'] ?></h2>
+                       <h2 id="home-tier-val"><?php echo $result['home_tier'] ?></h2>
                         <h6>Tier</h6>
                    </div>
                    <div class="col-2 text-center">

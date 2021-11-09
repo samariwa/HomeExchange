@@ -1,10 +1,10 @@
 <?php
 class HomeExchangeRequest{
 
-   public function MakeExchangeRequest($requester_id, $availability_id, $no_of_occupants, $start_date, $end_date, $extra_details)
+   public function MakeExchangeRequest($requester_id, $home,$availability_id, $no_of_occupants, $start_date, $end_date, $extra_details)
    {
       $query = new Database();
-      return $query->insert("home_exchange_request", array('requester_id' => $requester_id,'availability_id' => $availability_id,'number_of_occupants' => $no_of_occupants, 'exchange_start_date' => $start_date, 'exchange_end_date' => $end_date, 'exchange_extra_details' => $extra_details ));
+      return $query->insert("home_exchange_request", array('requester_id' => $requester_id,'exchange_home_id' => $home,'availability_id' => $availability_id,'number_of_occupants' => $no_of_occupants, 'exchange_start_date' => $start_date, 'exchange_end_date' => $end_date, 'exchange_extra_details' => $extra_details ));
    }
 
    public function GetExchanges()

@@ -50,6 +50,8 @@ $default_admin_pass = 'Kenya.2030';
 
 //initial exchange points awarded when customer adds home
 $initial_exchange_points = 750;
+//number of points transfer for each tier difference
+$unit_of_exchange = 300;
 
 //Defining session timeout in seconds
 //minimum 60 (for one minute)
