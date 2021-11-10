@@ -89,10 +89,15 @@
                  </select>
                 </div>
                 <br>
+                <input type="hidden" name="availability-id" id="availability-id" value="<?php echo $_GET['availability']; ?>">
+                <input type="hidden" name="unit-of-exchange" id="unit-of-exchange" value="<?php echo $unit_of_exchange; ?>">
+                <input type="hidden" name="user-id" id="user-id" value="<?php echo $customer_id; ?>">
+                <input type="hidden" name="home-id" id="home-id" value="<?php echo $_GET['id']; ?>">
+                <input type="hidden" name="holiday_requirements_expiry" id="holiday_requirements_expiry" value="<?php echo $holiday_requirements_expiry; ?>">
                 <div class="row">
                     <div class="col-10"></div>
                     <div class="col-2">
-                    <input type="submit" value="Request Home" style="background-color: #FD5555;font-family:Arial, FontAwesome" id="request-submit" class="btn btn-danger rounded-pill mr-3"/>
+                    <input type="submit" value="Request Home" style="background-color: #FD5555;font-family:Arial, FontAwesome" id="submit-holiday-details" class="btn btn-danger rounded-pill mr-3"/>
                     </div>
                 </div>
                 </form>

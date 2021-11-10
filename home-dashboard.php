@@ -142,7 +142,7 @@
                             <div class="col-5">
                             <?php if($result['user_id'] != $customer_id){ ?>
                                 <div class="make-reservation ml-5">
-                                    <a <?php if($cookie->exists('requirements') == false){ ?>href="holiday-details.php?id=<?php echo $_GET['id']; ?>" <?php }else{ ?>href="#" id="make-request" <?php } ?>>Make Reservation</a>
+                                    <a <?php if($cookie->exists('requirements') == false){ ?>href="holiday-details.php?id=<?php echo $_GET['id']; ?>&availability=<?php echo $availability_result['availability_id']; ?>" <?php }else{ ?>href="#" id="make-request" <?php } ?>>Make Reservation</a>
                                 </div>
                                 <?php
                                   if($cookie->exists('requirements') == true)

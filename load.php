@@ -114,98 +114,17 @@ if( $_POST['where'] == 'filter' )
     }
     echo $output;
 }
-elseif( $_POST['where'] == 'pagination' )
+elseif( $_POST['where'] == 'getTier' )
 {
-    $records_per_page = 9;
-    $page = '';
-    $output = '<div class="row align-items-center">';
-    if(isset($_POST['page']))
-    {
-        $page = $_POST['page'];
-    }
-    else
-    {
-      $page = 1;
-    }
-    $start_from = ((int)$page - 1) * $records_per_page;
-    $query = "SELECT * FROM blogs ORDER BY id ASC LIMIT $start_from,$records_per_page";
-    $pageResult = mysqli_query($connection, $query)or die($connection->error);
-    foreach($pageResult as $row){
-        $id = $row['id'];
-        $title = $row['title'];
-        $blog = $row['blog'];
-        $image = $row['image'];
-        $Date = $row['Created_at'];
-        $date = date( 'F d, Y', strtotime($Date));
-        $Blog='';
-        if(strlen($blog)<=100)
-        {
-          $Blog = $blog;
-        }
-        else
-        {
-          $Blog=substr($blog,0,100) . '...';
-        }
-        $comments = mysqli_query($connection,"SELECT * FROM comments WHERE blog_id = '$id' AND belongs_to = 'blog'")or die($connection->error);
-        $comments_count = mysqli_num_rows($comments); 
-        $output .= '<div class="col-md-6 col-lg-4 mb--30">
-            <div class="post-item">
-                <div class="post-thumb">
-                    <a href="blog-single.php?id='.$id.'"><img src="assets/images/blog/'.$image.'" alt="thumb"></a>
-                </div>
-                <div class="post-content border-effect">
-                    <ul class="meta-post list-unstyled pl-0 d-flex justify-content-between">
-                        <li>
-                            <span class="icon"><i class="far fa-clock"></i></span>
-                            <span class="meta-content">'.$date.'</span>
-                        </li>
-                        <li>
-                            <span class="icon"><i class="far fa-comment-alt"></i></span>
-                            
-                            <a href="blog-single.php?id='.$id.'#comments-section" class="meta-link">'.$comments_count.' Comment';
-                            if($comments_count != 1){ 
-                            $output .= 's';  
-                            }
-                            $output .= '</a>
-                        </li>
-                    </ul>
-                    <h4 class="title mb-3">'.$title.'</h4>
-                    <h5 class="title mb-3"><a href="blog-single.php?id='.$id.'">'.$Blog.'</a></h5>
-                    <a href="blog-single.php" class="blog-btn">Read More</a>
-                </div>
-            </div>
-        </div>';
-            }
-        $blogsrowcount = mysqli_num_rows($blogsList);
-        $total_pages = ceil($blogsrowcount / $records_per_page);
-        $prev = (int)$page - 1;
-        $next = (int)$page + 1;
-        $output .= '<div class="col-12 pt--30">
-            <ul class="pagination justify-content-center justify-content-lg-start">
-                <li><a class="d-flex pagination_link" href="#" id="'.$prev.'><i class="icon fas fa-angle-left"></i><span class="text">';
-                if($page != 1){
-                $output .= 'Prev';
-                }
-                $output .= '</span></a></li>';
-               for($i=1; $i<=$total_pages; $i++){
-                $output .= '<li class="d-none d-md-block"><a class="pagination_link';
-                if( $page == $i ){
-                    $output .= ' active'; 
-                }
-                $output .= '" href="#" id="'.$i.'">'.$i.'</a></li>
-                ';
-               }
-                $output .= '<li><a class="d-flex pagination_link" href="#" id="'.$next.'"><span class="text">';
-                 if($page != $total_pages){
-                $output .= 'Next</span><i class="icon fas fa-angle-right"></i>';
-                 }
-
-                $output .= '
-                </a></li>
-            </ul>
-        </div>
-        </div>
-        ';
-        echo $output;
+    $home = new Home();
+    $tier_details = [];
+    $my_home = mysqli_query($connection,$home->fetchHomeDetails($_POST['exchange_home_id']))or die($connection->error);
+    $my_home_results = mysqli_fetch_array($my_home);
+    $other_home = mysqli_query($connection,$home->fetchHomeDetails($_POST['target_home_id']))or die($connection->error);
+    $other_home_results = mysqli_fetch_array($other_home);
+    array_push($tier_details, $my_home_results['home_tier']);
+    array_push($tier_details, $other_home_results['home_tier']);
+    $array = json_encode($tier_details);
+    echo $array;
 }
  ?>

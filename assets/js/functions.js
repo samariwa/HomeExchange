@@ -1647,3 +1647,39 @@ $(document).on('click','#make-request',function(e){
         }}); 
     }
 });
+
+$(document).on('click','#submit-holiday-details',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var details = JSON.stringify({
+    exchange_home : $("#exchange_home_id").val(),
+    people_accompanying : $('#people_no').text(),
+    start_date : $("#start_date").val(),
+    end_date : $("#end_date").val(),
+    extra_requirements : $("#extra-requirements").val(),
+    user_id : $('#user-id').val(),
+    availability_id : $('#availability-id').val()
+    });
+    setCookie('requirements',details,$("#holiday_requirements_expiry").val());
+    $.post("load.php",{exchange_home_id:$("#exchange_home_id").val(), target_home_id:$("#home-id").val(), where:'getTier'},
+    function(result){
+        var tier_data = $.parseJSON(result);
+        var required_points = ExchangePoints(tier_data[0], $('#unit-of-exchange').val(), tier_data[1]);
+        if(required_points < 0)
+        { 
+            required_points *= -1;
+            bootbox.confirm(required_points+' points will be transfered to your account on acceptance of the other party. Would you like to proceed with the request?',function(result)
+            {if(result){
+                makeHomeRequest(details);
+            }}); 
+        }
+        else{
+            bootbox.confirm(required_points+' will be deducted from your account on acceptance of the other party. Would you like to proceed with the request?',function(result)
+            {if(result){
+                makeHomeRequest(details);
+            }}); 
+        }
+    });
+    
+
+});
