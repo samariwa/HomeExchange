@@ -267,4 +267,11 @@ function resizeHomeImage($resourceType,$image_width,$image_height){
   imagecopyresampled($imageLayer,$resourceType,0,0,0,0,$resizeWidth,$resizeHeight,$image_width,$image_height);
   return $imageLayer;
 }
+
+function ExchangePoints($source, $unit_of_exchange, $target)
+{
+    $diff = $source - $target;
+    $transfered_points = $unit_of_exchange * $diff;
+    return $transfered_points;
+}
  ?>

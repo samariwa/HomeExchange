@@ -6784,6 +6784,13 @@ Preloader
 
   }
 
+  .request-status-badge{
+    font-size: 13px;
+    color: white;
+    padding: 9px 25px;
+
+  }
+
   .top-destination-text{
     position: absolute;
     top: 30%;

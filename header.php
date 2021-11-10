@@ -270,92 +270,171 @@ else{
         </div>
     </div> 
 
-
-
-    <?php
-      //  if (isset($_SESSION['logged_in'])) {
-       // if ($_SESSION['logged_in'] == TRUE) {
-    ?>
     <!-- sidebar-cart -->
     <div id="sitebar-cart" class="sitebar-cart">
         <div class="sc-head d-flex justify-content-between align-items-center">
             <div class="cart-count"><i class="fa fa-bell"></i>
                    <?php
-                        $cart_count=0;
-                        //$cart_checker = mysqli_query($connection,"SELECT s.id AS id,s.Name as Name,cart.quantity as cartQty,image,i_u.Name as unit_name,s.Discount as Discount,sf.Selling_price as Price,c.Category_Name as Category_Name,s.Restock_Level as Restock_Level,s.Quantity as Quantity FROM `cart` inner join stock s on cart.product_id = s.id INNER JOIN stock_flow sf ON s.id = sf.Stock_id JOIN inventory_units i_u ON s.Unit_id = i_u.id JOIN category c ON s.Category_id=c.id INNER JOIN (SELECT s.id AS max_id, MAX(sf.Created_at) AS max_created_at FROM stock s INNER JOIN stock_flow sf ON s.id = sf.Stock_id GROUP BY s.id) subQuery ON subQuery.max_id = s.id AND subQuery.max_created_at = sf.Created_at WHERE cart.customer_id='$customer_id';");
-                        //$cart_count = mysqli_num_rows($cart_checker);
-                        
+                        $notifications_count=0;
+                        $request = new HomeExchangeRequest();
+                        $notification_checker = mysqli_query($connection,$request->GetPendingExchangeRequests($customer_id));
+                        $response_checker = mysqli_query($connection,$request->GetPendingExchangeResponses($customer_id));
+                        $notifications_count = mysqli_num_rows($notification_checker) + mysqli_num_rows($response_checker);
                     ?>
-                   <span><?php echo $cart_count; ?> Notifications</span>
+                   <span id="notifications_number"><?php echo $notifications_count; ?> Notification<?php if($notifications_count > 1 || $notifications_count == 0 ){ ?>s<?php } ?></span>
                 </div>
                 <span onclick="cartclose()" class="close-icon"><i class="fas fa-times"></i></span>
         </div>
     <div class="cart-product-container">
         <?php
-        $total = 0;
-              //$notifications_checker = mysqli_query($connection,"SELECT s.id AS id,s.Name as Name,cart.quantity as cartQty,image,i_u.Name as unit_name,s.Discount as Discount,sf.Selling_price as Price,c.Category_Name as Category_Name,s.Restock_Level as Restock_Level,s.Quantity as Quantity FROM `cart` inner join stock s on cart.product_id = s.id INNER JOIN stock_flow sf ON s.id = sf.Stock_id JOIN inventory_units i_u ON s.Unit_id = i_u.id JOIN category c ON s.Category_id=c.id INNER JOIN (SELECT s.id AS max_id, MAX(sf.Created_at) AS max_created_at FROM stock s INNER JOIN stock_flow sf ON s.id = sf.Stock_id GROUP BY s.id) subQuery ON subQuery.max_id = s.id AND subQuery.max_created_at = sf.Created_at WHERE cart.customer_id='$customer_id';");
-             // $notifications_count = mysqli_num_rows($cart_checker);
-              $notifications_count = 0;
               if($notifications_count > 0){
+                  if(mysqli_num_rows($notification_checker) > 0)
+                  {
+                  ?>
+                <p style="text-align:center;margin-top:10px;"><b>You have <?php echo mysqli_num_rows($notification_checker); ?> new home exchange request<?php if(mysqli_num_rows($notification_checker) > 1){ ?>s<?php } ?>.</b></p>
+                <?php
+                  }
+                  elseif (mysqli_num_rows($response_checker) > 0){
+                ?>
+                 <p style="text-align:center;margin-top:10px;"><b>You have <?php echo mysqli_num_rows($response_checker); ?> new exchange request response<?php if(mysqli_num_rows($response_checker) > 1 ){ ?>s<?php } ?>.</b></p>
+                <?php
+                  }
               foreach($notification_checker as $row)
-             {
+             {     
+                $requester_details = mysqli_query($connection,$request->GetPendingRequesterDetails($row["requester_home_id"]));
+                $row2 = mysqli_fetch_array($requester_details);
                  ?>
                     <div class="cart-product-item">
                 <div class="row align-items-center">
                     <div class="col-6 p-0">
                         <div class="thumb">
-                            <a href="#"><img src="assets/images/products/<?php echo $row["image"]; ?>" alt="products"></a>
+                            <a href="#"><img src="assets/images/homes/<?php echo $row2["image"]; ?>" alt="home"></a>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="product-content">
-                            <a href="#" class="product-title"><?php echo $row["Name"]; ?></a>
+                            <a href="#" class="product-title"><?php echo $row2["name"]; ?></a>
                             <div class="product-cart-info">
-                            <?php if($row['Discount'] > 0){ ?> <del>Ksh<?php echo number_format($row["Price"],2); ?> /unit</del> <br><?php }?>
-                            Ksh<?php echo number_format($row["Price"] - $row["Discount"],2); ?> /unit
+                            <?php echo $row2["county"].', '.$row2["subcounty"]; ?></span>
                             <br>
-                            x<span id="cart_unit_qty<?php echo $row['id']; ?>"><?php echo $row["cartQty"]; ?></span> <?php echo $row["unit_name"]; ?>
+                             Tier <?php echo $row2["tier"]; ?>
                             </div>
                         </div>
                     </div>
                 </div>
-  
-                <div class="row align-items-center mt-1">
-                    <div class="col-6">
-                        <div class="price-increase-decrese-group d-flex">
-                        
-                            <span class="decrease-btn">
-                                <button type="button"
-                                    class="btn quantity-left-minus cart_decrease" id="<?php echo $row['id']; ?>" data-type="minus" data-field="">-
-                                </button> 
-                            </span>
-                            <input type="text" name="quantity" disabled class="form-controls input-number" id="cart_qty<?php echo $row["id"]; ?>" value="<?php echo $row["cartQty"]; ?>">
-                            
-                            <span class="increase">
-                                <button type="button"
-                                    class="btn quantity-right-plus cart_increase" id="<?php echo $row['id']; ?>" data-type="plus" data-field="" >+
-                                </button>
-                            </span>
-                          
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div >
-                            <span class="ml-2">Ksh<span id="cart_subtotal<?php echo $row['id']; ?>"><?php echo number_format($row["cartQty"] * ($row["Price"] - $row["Discount"]),2); ?></span></span>
-                        </div>
-                    </div>
+                <br>
+                <a href="home-dashboard.php?id=<?php echo $row['requester_home_id'] ?>" class="btn btn-outline-danger mt-n3" style="border-color: #FD5555">
+                    <span ><i class="fas fa-eye"></i> View Home</span>
+                </a>
+                <div class="align-items-center mt-1">
+                    <b>Requester Details:</b>
+                    <br>
+                    <span style="color:#FD5555">Name:</span> <i><?php echo $row2["first_name"].' '.$row2["last_name"]; ?></i>
+                    <br>
+                    <span style="color:#FD5555">Contact:</span> <i><?php echo $row2["phone_number"]; ?></i>
+                    <br>
+                    <b>Request Details:</b>
+                    <br>
+                    <input type="hidden" name="availability-id" id="availability-id" value="<?php echo $row2["availability_id"]; ?>">
+                    <input type="hidden" name="requester-tier" id="requester-tier" value="<?php echo $row2["tier"]; ?>">
+                    <input type="hidden" name="my-tier" id="my-tier" value="<?php echo $row["tier"]; ?>">
+                    <input type="hidden" name="requester-id" id="requester-id" value="<?php echo $row2["requester_id"]; ?>">
+                    <input type="hidden" name="my-id" id="my-id" value="<?php echo $row["my_id"]; ?>">
+                    <span style="color:#FD5555">Requested Home:</span> <i><?php echo $row["name"]; ?></i>
+                     <br>
+                     <span style="color:#FD5555">Start Date:</span> <i><?php echo date('d F Y', strtotime($row["exchange_start_date"])); ?></i>
+                     <br>
+                     <span style="color:#FD5555">End Date:</span> <i><?php echo date('d F Y', strtotime($row["exchange_end_date"])); ?></i>
+                     <br>
+                     <span style="color:#FD5555">No. of people:</span> <i><?php echo $row["number_of_occupants"]; ?></i>
+                    <br>
+                    <span style="color:#FD5555">Extra Details:</span> <i><?php echo $row["exchange_extra_details"]; ?></i>
+                    <?php
+                     if(ExchangePoints($row2["tier"], $unit_of_exchange, $row["tier"]) > 0)
+                      {
+                          ?>
+                         <p>If you accept this request, <?php echo ExchangePoints($row2["tier"], $unit_of_exchange, $row["tier"]); ?> exchange points will be credited to your account</p>
+                          <?php
+                      }
+                      elseif(ExchangePoints($row2["tier"], $unit_of_exchange, $row["tier"]) < 0)
+                      {
+                        ?>
+                          <p>If you accept this request, <?php echo ExchangePoints($row2["tier"], $unit_of_exchange, $row["tier"]); ?> exchange points will be debited to your account</p>
+                        <?php
+                      }
+                    ?>
                 </div>
                 <div class="row align-items-center mt-1">
-                <div class="col-6">
-
+                    <div class="col-6">
+                    <button class="btn btn-outline-success accept-request rounded-pill" id="<?php echo $row["request_id"]; ?>">Accept</button>
+                    </div>
+                    <div class="col-6">
+                    <button class="btn btn-outline-danger decline-request rounded-pill" id="<?php echo $row["request_id"]; ?>">Decline</button>
+                    </div>
                 </div>
-                  <div class="col-6">
-                    <a href="<?php echo $protocol.$_SERVER['HTTP_HOST'].'/SymphaFresh/product-list.php?action=delete&id='.$row["id"] ?>" class="ml-5 text-danger"><i class="fas fa-times"></i> Remove</a>
-                  </div>
-                </div>
+                <br>
             </div>   
         <?php 
-          $total = $total + ($row["cartQty"] * ($row["Price"] - $row["Discount"])); 
+             }
+             foreach($response_checker as $row)
+             {
+                 $responder_details = mysqli_query($connection,$request->GetPendingResponderDetails($row['availability_id'], $row['request_id']));
+                $row2 = mysqli_fetch_array($responder_details);
+                 ?>
+                    <div class="cart-product-item">
+                <div class="row align-items-center">
+                    <div class="col-6 p-0">
+                        <div class="thumb">
+                            <a href="#"><img src="assets/images/homes/<?php echo $row2["image"]; ?>" alt="home"></a>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="product-content">
+                            <a href="#" class="product-title"><?php echo $row2["name"]; ?></a>
+                            <div class="product-cart-info">
+                            <?php echo $row2["county"].', '.$row2["subcounty"]; ?></span>
+                            <br>
+                             Tier <?php echo $row2["tier"]; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-2">Exchange with <i><b><?php echo $row["name"]; ?></b></i></p>
+                <div class="align-items-center mt-n3">
+                    <b>Owner Details:</b>
+                    <br>
+                    <span style="color:#FD5555">Name:</span> <i><?php echo $row2["first_name"].' '.$row2["last_name"]; ?></i>
+                    <br>
+                    <span style="color:#FD5555">Contact:</span> <i><?php echo $row2["phone_number"]; ?></i>
+                    <br>
+                    <b>Request Status:</b>
+                    <br>
+                    <input type="hidden" name="availability-id" id="availability-id" value="<?php echo $row2["availability_id"]; ?>">    
+                </div>
+                <div class="row align-items-center mt-1">
+                    <div class="col-6">
+                    <?php
+                     if($row2['request_response'] == 1)
+                      {
+                          ?>
+                         <span class="badge badge-pill badge-success request-status-badge ml-4 mt-1">Accepted</span>
+                          <?php
+                      }
+                      elseif($row2['request_response'] == 2)
+                      {
+                        ?>
+                          <span class="badge badge-pill badge-danger request-status-badge ml-4 mt-1">Declined</span>
+                        <?php
+                      }
+                    ?>
+                    </div>
+                    <div class="col-6">
+                    <button class="btn btn-outline-danger decline-request rounded-pill ml-4" id="<?php echo $row["request_id"]; ?>">Clear</button>
+                    </div>
+                </div>
+                <br>
+            </div>  
+            <?php
              }
             }
             else{
@@ -368,24 +447,34 @@ else{
         <br><br><br>
         </div> 
         <div class="cart-footer">
-           <!-- <div class="product-other-charge">
-                <p class="d-flex justify-content-between">
-                    <span>Delivery charge</span> 
-                    <span>Ksh8.00</span> 
-                </p>
-                  <a href="#">Do you have a voucher?</a> 
-            </div> -->
-    
-            <div class="cart-total">
-                <a <?php if($cart_count == 0){?> href="#" <?php } else{ ?>href="<?php echo $protocol.$_SERVER['HTTP_HOST'].'/SymphaFresh/product-list.php?action=clear' ?>" <?php } ?> class="clear-cart" style=" background-color: #df4759;color: white;display: block;text-align: center;padding: 10px 30px;border-radius: 5px;margin-top: 10px;">Clear</a>
-            </div>
+        <div class="cart-total">
+           <?php
+              if($notifications_count == 0){
+            ?>
+            
+           <p style="text-align: center"><b>You will get notified of any home exchange requests and/or responses in this section.</b></p>
+            <?php
+              }
+              else{
+                if(mysqli_num_rows($notification_checker) > 0)
+                {
+                ?>
+              <a href="#" class="decline-all" style=" background-color: #df4759;color: white;display: block;text-align: center;padding: 10px 30px;border-radius: 5px;margin-top: 10px;">Decline All</a>
+              <?php
+                }
+                elseif (mysqli_num_rows($response_checker) > 0){
+              ?>
+               <a href="#" class="clear-all mt-1" style=" background-color: #df4759;color: white;display: block;text-align: center;padding: 10px 30px;border-radius: 5px;margin-top: 10px;">Clear All</a>
+              <?php
+                }
+                  ?>
+                <?php
+              }
+           ?>
+           </div>
         </div>
     </div>
     <!--end of side cart-->
-    <?php
-      //  }
-    //}
-    ?>
 
     <!-- header section start -->
     <header class="header">

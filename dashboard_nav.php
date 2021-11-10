@@ -133,7 +133,7 @@ require('config.php');
                     <div class="row" style="align-items:center">
                        <li class="menu mr-5"><a href="#"><b><?php echo $exchangePoints; ?> EPs</b></a></li>
                             <input type="hidden" id="navbar_cart_hidden" value="0" >
-                        <li class="cart-option"><a onclick="cartopen()" href="#"><span class="cart-icon"><i class="fa fa-bell"></i></span> <span class="cart-amount"></span></a></li>
+                            <li class="cart-option"><a onclick="cartopen()" href="#"><span class="cart-icon" id="notifications_icon"><i class="fa fa-bell"></i><span class="count" ><?php echo $notifications_count; ?></span></span></a>
                     </div>    
                    
                     </ul>

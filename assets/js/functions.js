@@ -1599,10 +1599,8 @@ function eraseCookie(name) {
 
 function ExchangePoints(source, unit_of_exchange, target)
 {
-    var transfered_points;
-    var unit = unit_of_exchange;
     var diff = source - target;
-    transfered_points = unit * diff;
+    var transfered_points = unit_of_exchange * diff;
     return transfered_points;
 }
 
@@ -1680,6 +1678,84 @@ $(document).on('click','#submit-holiday-details',function(e){
             }}); 
         }
     });
-    
+});
 
+$(document).on('click','.accept-request',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var id = $(this).attr("id");
+    var where = 'request'
+    var action = 'accept';
+    var availability = $("#availability-id").val();
+    var source_tier = $("#requester-tier").val();
+    var target_tier = $("#my-tier").val();
+    var requester_id = $("#requester-id").val();
+    var my_id = $("#my-id").val();
+    bootbox.confirm('Are you sure you want to accept the selected request?',function(result)
+    {if(result){
+    $.post("save.php",{id: id, requester_id:requester_id, my_id:my_id, source: source_tier, target: target_tier,availability:availability, action:action, where:where},
+    function(result){
+        if(result == 1)
+        {
+            alert('Request successfully accepted');
+            $( ".cart-product-container" ).load(window.location.href + " .cart-product-container" );
+            $( "#notifications_number" ).load(window.location.href + " #notifications_number" );
+            $( "#notifications_icon" ).load(window.location.href + " #notifications_icon" );
+        }
+        else
+        {
+            alert('Something went wrong. Try again.')
+        }
+    });
+   }}); 
+});
+
+$(document).on('click','.decline-request',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var id = $(this).attr("id");
+    var where = 'request'
+    var action = 'decline';
+    bootbox.confirm('Are you sure you want to decline the selected request?',function(result)
+    {if(result){
+    $.post("save.php",{id: id,action:action, where:where},
+    function(result){
+        if(result == 1)
+        {
+            alert('Request successfully declined');
+            $( ".cart-product-container" ).load(window.location.href + " .cart-product-container" );
+            $( "#notifications_number" ).load(window.location.href + " #notifications_number" );
+            $( "#notifications_icon" ).load(window.location.href + " #notifications_icon" );
+        }
+        else
+        {
+            alert('Something went wrong. Try again.')
+        }
+    });
+}}); 
+});
+
+$(document).on('click','.decline-all',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var where = 'request'
+    var action = 'decline_all';
+    var my_id = $("#my-id").val();
+    bootbox.confirm('Are you sure you want to decline all requests?',function(result)
+    {if(result){
+    $.post("save.php",{action:action,my_id:my_id, where:where},
+    function(result){
+        if(result == 1)
+        {
+            alert('Requests successfully declined');
+            $( ".cart-product-container" ).load(window.location.href + " .cart-product-container" );
+            $( "#notifications_number" ).load(window.location.href + " #notifications_number" );
+            $( "#notifications_icon" ).load(window.location.href + " #notifications_icon" );
+        }
+        else
+        {
+            alert('Something went wrong. Try again.')
+        }
+    });
+}}); 
 });
