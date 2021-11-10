@@ -1735,6 +1735,49 @@ $(document).on('click','.decline-request',function(e){
 }}); 
 });
 
+$(document).on('click','.clear-request',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var id = $(this).attr("id");
+    var where = 'clear-request'
+    var action = 'clear';
+    $.post("save.php",{id: id,action:action, where:where},
+    function(result){
+        alert(result)
+        if(result == 1)
+        {
+            $( ".cart-product-container" ).load(window.location.href + " .cart-product-container" );
+            $( "#notifications_number" ).load(window.location.href + " #notifications_number" );
+            $( "#notifications_icon" ).load(window.location.href + " #notifications_icon" );
+        }
+        else
+        {
+            alert('Something went wrong. Try again.')
+        }
+    });
+});
+
+$(document).on('click','.clear-all',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var requester_id = $("#requester-id").val();
+    var where = 'clear-request'
+    var action = 'clear-all';
+    $.post("save.php",{requester_id: requester_id,action:action, where:where},
+    function(result){
+        if(result == 1)
+        {
+            $( ".cart-product-container" ).load(window.location.href + " .cart-product-container" );
+            $( "#notifications_number" ).load(window.location.href + " #notifications_number" );
+            $( "#notifications_icon" ).load(window.location.href + " #notifications_icon" );
+        }
+        else
+        {
+            alert('Something went wrong. Try again.')
+        }
+    });
+});
+
 $(document).on('click','.decline-all',function(e){
     e.preventDefault();
     e.stopPropagation();

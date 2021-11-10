@@ -409,7 +409,8 @@ else{
                     <br>
                     <b>Request Status:</b>
                     <br>
-                    <input type="hidden" name="availability-id" id="availability-id" value="<?php echo $row2["availability_id"]; ?>">    
+                    <input type="hidden" name="availability-id" id="availability-id" value="<?php echo $row2["availability_id"]; ?>"> 
+                    <input type="hidden" name="requester-id" id="requester-id" value="<?php echo $row["requester_id"]; ?>">    
                 </div>
                 <div class="row align-items-center mt-1">
                     <div class="col-6">
@@ -429,7 +430,7 @@ else{
                     ?>
                     </div>
                     <div class="col-6">
-                    <button class="btn btn-outline-danger decline-request rounded-pill ml-4" id="<?php echo $row["request_id"]; ?>">Clear</button>
+                    <button class="btn btn-outline-danger clear-request rounded-pill ml-4" id="<?php echo $row["request_id"]; ?>">Clear</button>
                     </div>
                 </div>
                 <br>

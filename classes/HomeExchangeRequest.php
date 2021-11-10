@@ -62,4 +62,13 @@ class HomeExchangeRequest{
       return "UPDATE home_exchange_request SET request_response = '2' WHERE id = '$request_id'";
    }
 
+   public function DisableExchangeRequest($request_id)
+   {
+      return "UPDATE home_exchange_request SET request_status = '0' WHERE id = '$request_id'";
+   }
+
+   public function DisableHomeOwnerRequests($requester_id)
+   {
+      return "UPDATE home_exchange_request SET request_status = '0' WHERE request_status = '1' AND requester_id = '$requester_id' AND request_response != '0'";
+   }
 }

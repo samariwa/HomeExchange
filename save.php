@@ -130,4 +130,19 @@ elseif($where == 'request')
     echo "1";
    }
 }
+
+elseif($where == 'clear-request')
+{
+  $request = new HomeExchangeRequest();
+  if($_POST['action'] == 'clear')
+   {
+    mysqli_query($connection,$request->DisableExchangeRequest($_POST['id'])) or die(mysqli_error($connection));
+    echo "1";
+   }
+   if($_POST['action'] == 'clear-all')
+   {
+    mysqli_query($connection,$request->DisableHomeOwnerRequests($_POST['requester_id'])) or die(mysqli_error($connection));
+    echo "1";
+   }
+}
  ?>
