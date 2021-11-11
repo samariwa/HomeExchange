@@ -60,20 +60,25 @@ else if($where == 'fastselling' )
        $array = json_encode($fastmovingproducts);
         echo $array;
 }  
-else if($where == 'biggestPayers' )
+else if($where == 'tiersComparison' )
 {   
-       $payerList = array(['Customer', 'Amount Paid']);
-        foreach($biggestPayers as $row){
-        $name = $row['name'];
-        if($name == 'Unregistered Customer')
-        {
-          $name = $row['new_name'];
-        }
-        $total = $row['sum'];
-        $resultArray = array($name, $total);
-        array_push($payerList, $resultArray);
-        }
-       $array = json_encode($payerList);
+       $tierList = array(['Tier', 'Number of homes']);
+       $row1 = mysqli_fetch_array($tier1number);
+       $row2 = mysqli_fetch_array($tier2number);
+       $row3 = mysqli_fetch_array($tier3number);
+       $row4 = mysqli_fetch_array($tier4number);
+       $row5 = mysqli_fetch_array($tier5number);    
+       $total1 = ['Tier 1',$row1['sum']];
+       $total2 = ['Tier 2',$row2['sum']];
+       $total3 = ['Tier 3',$row3['sum']];
+       $total4 = ['Tier 4',$row4['sum']]; 
+       $total5 = ['Tier 5',$row5['sum']]; 
+        array_push($tierList, $total1);
+        array_push($tierList, $total2);
+        array_push($tierList, $total3);
+        array_push($tierList, $total4);
+        array_push($tierList, $total5);
+       $array = json_encode($tierList);
         echo $array;
 }
 else if($where == 'customerType' )

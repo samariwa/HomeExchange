@@ -53,7 +53,7 @@ setTime();
         [data8, parseInt(data9)],
       ]);
       var options = {
-        title: 'Exchange monthly comparison',
+        title: 'Home Exchanges for the last 4 months',
         legend: 'none',
          is3D:true,
         pieSliceText: 'label',
@@ -358,9 +358,9 @@ google.charts.load("current", {packages:["corechart"]});
 }
 
     google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawKeyCustomersChart);
-    function drawKeyCustomersChart() {
-      var where = 'biggestPayers';
+    google.charts.setOnLoadCallback(drawHomeTiersChart);
+    function drawHomeTiersChart() {
+      var where = 'tiersComparison';
      $.post("../charts.php",{where:where},
       function(result){
         var data = $.parseJSON(result);
@@ -374,20 +374,23 @@ google.charts.load("current", {packages:["corechart"]});
         var data7 = data[3][1];
         var data8 = data[4][0];
         var data9 = data[4][1];
+        var data10 = data[5][0];
+        var data11 = data[5][1];
       var data = google.visualization.arrayToDataTable([
         [data0, data1],
        [data2, parseInt(data3)],
         [data4, parseInt(data5)],
         [data6, parseInt(data7)],
-        [data8, parseInt(data9)]
+        [data8, parseInt(data9)],
+        [data10, parseInt(data11)]
       ]);
 
       var options = {
-        title: 'Biggest payers of the month',
+        title: 'Number of homes per tier',
         width:500,
       };
 
-      var chart = new google.visualization.PieChart(document.getElementById('keyCutomersChart'));
+      var chart = new google.visualization.PieChart(document.getElementById('tiersChart'));
       chart.draw(data, options);
       });
     }

@@ -18,31 +18,22 @@
         ?>
  
 <br>
-<h4>Stock Flow</h4>
-<div class="row offset-4"> <h6>Stock flow records shown are for as at now.</h6></div> 
-    <?php
-     $yesterday1 = date('d/m/Y',strtotime('-2 day'));
-     $yesterday2 = date('d/m/Y',strtotime('-3 day'));
-     $yesterday3 = date('d/m/Y',strtotime('-4 day'));
-    ?>
+<h4>Home Feature Numbers</h4>
     <table  class="table table-striped table-hover paginate" style="display:block;overflow-y:scroll;text-align: center;">
   <thead class="thead-dark">
     <tr>
-      <th scope="col" width="3%">#</th>
-      <th scope="col" width="14%">Brand Name</th>
-      <th scope="col" width="10%"><?php echo $yesterday3; ?></th>
-      <th scope="col" width="10%"><?php echo $yesterday2; ?></th>
-      <th scope="col" width="10%"><?php echo $yesterday1; ?></th>
-      <th scope="col"width="10%">Yesterday</th>
-      <th scope="col"width="10%">Today</th>
+      <th scope="col" width="20%">Feature</th>
+      <th width="15%"></th>
+      <th width="15%"></th>
+      <th scope="col" width="20%">Number of homes</th>
+      <th width="15%"></th>
+      <th width="5%"></th>
+      <th width="13%">Percentage</th>     
     </tr>
   </thead>
   <tbody >
     <?php
-        $count = 0;
-        foreach($stockFlowQuery as $row){
-         $count++;
-         $id = $row['sid'];
+         $rowHomesNumber = $row['sid'];
          $name = $row['sname'];
         $sum1 = $row['sum1'];
         $sum2 = $row['sum2'];
@@ -51,48 +42,158 @@
         $sum5 = $row['sum5'];
       ?>
     <tr>
-      <th scope="row"><?php echo $id; ?></th>
-      <td ><?php echo $name; ?></td>
-      <td ><?php echo $sum1; ?></td>
-      <td ><?php echo $sum2; ?></td>
-      <td ><?php echo $sum3; ?></td>
-      <td ><?php echo $sum4; ?></td>
-      <td ><?php echo $sum5; ?></td>
+      <th scope="row">Swimming Pool</th>
+      <td></td>
+      <td></td>
+      <td><?php echo $swimming_no['sum']; ?></td>
+      <td ></td>
+      <td></td>
+      <td><?php echo number_format((float)($swimming_no['sum']/$homes_no['sum']) * 100,2,'.','').'%'; ?></td>   
     </tr>
-    <?php
-    }
-    ?>
-  </tbody>
-</table>
-<br>
-<table  class="table table-striped table-hover paginate" style="display:block;overflow-y:scroll;text-align: center;">
-  <thead class="thead-dark">
     <tr>
-      <th scope="col" width="3%">#</th>
-      <th scope="col" width="14%">Brand Name</th>
-      <th scope="col"width="10%">Opening Stock (Today)</th>
-      <th scope="col"width="10%">Quantity (Now)</th>
+      <th scope="row">Houses</th>
+      <td></td>
+      <td></td>
+      <td><?php echo $houses_no['sum']; ?></td>
+      <td ></td>
+      <td></td>
+      <td><?php echo number_format((float)($houses_no['sum']/$homes_no['sum']) * 100,2,'.','').'%'; ?></td>
     </tr>
-  </thead>
-  <tbody >
-    <?php
-        $count = 0;
-        foreach($openingClosingQuery as $row){
-         $count++;
-         $id = $row['sid'];
-         $name = $row['sname'];
-        $opening = $row['Opening_stock'];
-        $closing = $row['Quantity'];
-      ?>
     <tr>
-      <th scope="row"><?php echo $id; ?></th>
-      <td ><?php echo $name; ?></td>
-      <td ><?php echo $opening; ?></td>
-      <td ><?php echo $closing; ?></td>
+      <th scope="row">Apartments</th>
+      <td></td>
+      <td></td>
+      <td><?php echo $apartments_no['sum']; ?></td>
+      <td ></td>
+      <td></td>
+      <td><?php echo number_format((float)($apartments_no['sum']/$homes_no['sum']) * 100,2,'.','').'%'; ?></td>
     </tr>
-    <?php
-    }
-    ?>
+    <tr>
+      <th scope="row">Primarily owned</th>
+      <td></td>
+      <td></td>
+      <td><?php echo $primary_ownership_no['sum']; ?></td>
+      <td ></td>
+      <td></td>
+      <td><?php echo number_format((float)($primary_ownership_no['sum']/$homes_no['sum']) * 100,2,'.','').'%'; ?></td>
+    </tr>
+    <tr>
+      <th scope="row">Secondarily owned</th>
+      <td></td>
+      <td></td>
+      <td><?php echo $secondary_ownership_no['sum']; ?></td>
+      <td ></td>
+      <td></td>
+      <td><?php echo number_format((float)($secondary_ownership_no['sum']/$homes_no['sum']) * 100,2,'.','').'%'; ?></td>
+    </tr>
+    <tr>
+      <th scope="row">TV</th>
+      <td></td>
+      <td></td>
+      <td><?php echo $tv_no['sum']; ?></td>
+      <td ></td>
+      <td></td>
+      <td><?php echo number_format((float)($tv_no['sum']/$homes_no['sum']) * 100,2,'.','').'%'; ?></td>
+    </tr>
+    <tr>
+      <th scope="row">WiFi</th>
+      <td></td>
+      <td></td>
+      <td><?php echo $wifi_no['sum']; ?></td>
+      <td ></td>
+      <td></td>
+      <td><?php echo number_format((float)($wifi_no['sum']/$homes_no['sum']) * 100,2,'.','').'%'; ?></td>
+    </tr>
+    <tr>
+      <th scope="row">Air Con.</th>
+      <td></td>
+      <td></td>
+      <td><?php echo $ac_no['sum']; ?></td>
+      <td ></td>
+      <td></td>
+      <td><?php echo number_format((float)($ac_no['sum']/$homes_no['sum']) * 100,2,'.','').'%'; ?></td>
+    </tr>
+    <tr>
+      <th scope="row">Private Gym</th>
+      <td></td>
+      <td></td>
+      <td><?php echo $gym_no['sum']; ?></td>
+      <td ></td>
+      <td></td>
+      <td><?php echo number_format((float)($gym_no['sum']/$homes_no['sum']) * 100,2,'.','').'%'; ?></td>
+    </tr>
+    <tr>
+      <th scope="row">Wheelchair Accessible</th>
+      <td></td>
+      <td></td>
+      <td><?php echo $wheelchair_no['sum']; ?></td>
+      <td ></td>
+      <td></td>
+      <td><?php echo number_format((float)($wheelchair_no['sum']/$homes_no['sum']) * 100,2,'.','').'%'; ?></td>
+    </tr>
+    <tr>
+      <th scope="row">Pets Allowed</th>
+      <td></td>
+      <td></td>
+      <td><?php echo $pets_no['sum']; ?></td>
+      <td ></td>
+      <td></td>
+      <td><?php echo number_format((float)($pets_no['sum']/$homes_no['sum']) * 100,2,'.','').'%'; ?></td>
+    </tr>
+    <tr>
+      <th scope="row">Kids Allowed</th>
+      <td></td>
+      <td></td>
+      <td><?php echo $kids_no['sum']; ?></td>
+      <td ></td>
+      <td></td>
+      <td><?php echo number_format((float)($kids_no['sum']/$homes_no['sum']) * 100,2,'.','').'%'; ?></td>
+    </tr>
+    <tr>
+      <th scope="row">Parking</th>
+      <td></td>
+      <td></td>
+      <td><?php echo $parking_no['sum']; ?></td>
+      <td ></td>
+      <td></td>
+      <td><?php echo number_format((float)($parking_no['sum']/$homes_no['sum']) * 100,2,'.','').'%'; ?></td>
+    </tr>
+    <tr>
+      <th scope="row">Security Guard</th>
+      <td></td>
+      <td></td>
+      <td><?php echo $security_no['sum']; ?></td>
+      <td ></td>
+      <td></td>
+      <td><?php echo number_format((float)($security_no['sum']/$homes_no['sum']) * 100,2,'.','').'%'; ?></td>
+    </tr>
+    <tr>
+      <th scope="row">Private Garden</th>
+      <td></td>
+      <td></td>
+      <td><?php echo $garden_no['sum']; ?></td>
+      <td ></td>
+      <td></td>
+      <td><?php echo number_format((float)($garden_no['sum']/$homes_no['sum']) * 100,2,'.','').'%'; ?></td>
+    </tr>
+    <tr>
+      <th scope="row">Home Workers</th>
+      <td></td>
+      <td></td>
+      <td><?php echo $workers_no['sum']; ?></td>
+      <td ></td>
+      <td></td>
+      <td><?php echo number_format((float)($workers_no['sum']/$homes_no['sum']) * 100,2,'.','').'%'; ?></td>
+    </tr>
+    <tr>
+      <th scope="row">Smokers Allowed</th>
+      <td></td>
+      <td></td>
+      <td><?php echo $smokers_no['sum']; ?></td>
+      <td ></td>
+      <td></td>
+      <td><?php echo number_format((float)($smokers_no['sum']/$homes_no['sum']) * 100,2,'.','').'%'; ?></td>
+    </tr>
   </tbody>
 </table>
 <br>
@@ -116,14 +217,14 @@
 <br>
 <div class="row">
   <div class="col-md-6">
-    <h4>Key Customers</h4>
+    <h4>Tier Numbers</h4>
   </div>
   <div class="col-md-6">
     <h4>Company Performance</h4>
   </div>
 </div>
 <div class="row">
-    <div id="keyCutomersChart" style="width: 430px; height: 400px;"></div>
+    <div id="tiersChart" style="width: 430px; height: 400px;"></div>
     <div id="chart_divide" style="width: 600px; height: 400px;"></div>    
 </div>  
 <br>
@@ -136,7 +237,7 @@
 <br>
 <div class="row">
   <div class="col-md-6">
-    <h4>Sales Performance</h4>
+    <h4>Total Sign ups</h4>
   </div>
  <div id="curve_chart" style="width: 1100px; height: 500px"></div>
 </div>
