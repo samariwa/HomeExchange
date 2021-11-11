@@ -59,26 +59,34 @@ $location = $result['physical_address'];
                     </ul>
                 </div>
 
-                <div class="container">
+                <div id="my-exchanges-section" class="container">
                     <?php
-                   /* foreach($my_orders as $row){
-                        $order_details = mysqli_query($connection,"SELECT SUM(orders.Quantity * (stock.Price - stock.Discount))as sum,COUNT(orders.Status_id) as count FROM orders INNER JOIN stock on orders.Stock_id = stock.id where orders.Status_id = '".$row ['status_id']."' ")or die($connection->error);
-                        $value = mysqli_fetch_array($order_details);
-                        $orders = mysqli_query($connection,"SELECT stock.Name as name,stock.image as image,stock.Discount as discount,stock.Price as price,inventory_units.Name as unit,orders.Quantity as quantity,order_status.delivery_fee as delivery_fee,order_status.status as status FROM order_status INNER JOIN orders ON orders.Status_id = order_status.id INNER JOIN stock ON orders.Stock_id = stock.id INNER JOIN inventory_units ON stock.Unit_id = inventory_units.id where order_status.id = '".$row['status_id']."' ORDER BY order_status.Created_at DESC")or die($connection->error);
-                   */
-                        ?>
+                    $request = new HomeExchangeRequest();
+                    $my_requests = mysqli_query($connection,$request->GetUserExchanges($customer_id))or die($connection->error);
+                    foreach($my_requests as $row){
+                     ?>
                     <div class="track-order-item bg-color-white">
                         <div class="track-order-head">
-                            <h6>View Exchange</h6>
+                            <?php
+                                if($row['request_response'] == 1)
+                                {
+                                    ?>
+                                    <span class="badge badge-pill badge-success request-status-badge ml-4 mt-1">Complete</span>
+                                    <?php
+                                }
+                                elseif($row['request_response'] == 0)
+                                {
+                                    ?>
+                                    <span class="badge badge-pill badge-warning request-status-badge ml-4 mt-1">Pending</span>
+                                    <?php
+                                }
+                            ?>
                         </div>
                         <div class="d-flex justify-content-between track-number-link align-items-center">
                             <div>
-                                <h6 class="order-number">Exchange#<?php //echo $row ['status_id']?></h6>
-                                <p class="date"><?php //echo date('d.m.Y',strtotime($row ['order_date'])); ?></p>
-                                <p class="price"> <?php //echo number_format($value['sum'],2); ?></p>
-                            </div>
-                            <div>
-                                <a href="order-details.php?id=<?php echo $row ['status_id']?>" class="order-btn">Exchange Details</a>
+                                <h6 class="order-number">Exchange# <?php echo $row ['request_id']?></h6>
+                                <p class="date">Exchange Period: <?php echo date('d.m.Y',strtotime($row ['exchange_start_date'])); ?> - <?php echo date('d.m.Y',strtotime($row ['exchange_end_date'])); ?></p>
+                                <p class="price">Home used for exchange: <?php echo $row['name']; ?></p>
                             </div>
                         </div>
                         <div class="order-details">
@@ -87,28 +95,25 @@ $location = $result['physical_address'];
                             </div>
                             <div class="order-details-container d-none d-md-block">
                             <?php
-                                $total_cost = 0;
-                                $total_discount = 0;
-                                /*foreach($orders as $row2){
-                                $total_discount += $row2['discount'];
-                                $total_cost += $row2['price'];*/
+                                $other_party_details = mysqli_query($connection,$request->GetOtherPartyExchangeDetails($row['requester_home_id']))or die($connection->error); 
+                                $row2 = mysqli_fetch_array($other_party_details);
                             ?>
                                 <div class="order-details-item d-sm-flex flex-wrap text-center text-sm-left align-items-center justify-content-between">
                                     <div class="thumb d-sm-flex flex-wrap align-items-center">
-                                        <a><img src="assets/images/products/<?php //echo $row2['image']; ?>" height="110" width="130" alt="products"></a>
+                                        <a><img src="assets/images/homes/<?php echo $row2['image']; ?>" height="110" width="130" alt="home"></a>
                                         <div class="product-content">
-                                            <a class="product-title"><?php //echo $row2['name']; ?></a>
+                                            <a class="product-title"><?php echo $row2['name']; ?></a>
                                         </div>
                                     </div>
                                     
                                     <div class="product-content pl-0">
-                                        <div class="product-cart-info">
-                                            <?php //echo $row2['quantity']; ?> <?php //echo $row2['unit']; ?>
+                                        <div class="product-price">
+                                            Tier <?php echo $row2['tier']; ?> 
                                         </div>
                                     </div>
                                     <div class="product-content pl-0">
                                         <div class="product-price">
-                                            <?php //if($row2['discount'] > 0){ ?><del> <?php //echo number_format($row2['price'],2); ?></del><?php //} ?><span class="ml-4"> <?php //echo number_format(($row2['price']-$row2['discount']),2); ?></span>
+                                            <span class="ml-4"> <?php echo $row2['county'].', '.$row2['subcounty']; ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -117,64 +122,132 @@ $location = $result['physical_address'];
                                 ?>
 
                             </div>
-                            <div class="order-details-container-mobile d-md-none">
-                            <?php
-                                $total_cost = 0;
-                                $total_discount = 0;
-                              /*  foreach($orders as $row2){
-                                $total_discount += $row2['discount'];
-                                $total_cost += $row2['price'];*/
-                            ?>
-                                <div class="cart-product-item">
-                                    <div class="row align-items-center">
-                                        <div class="col-5 p-0">
-                                            <div class="thumb">
-                                                <a ><img src="assets/images/homes/<?php //echo $row2['image']; ?>" height="110" width="130" alt="home"></a>
-                                            </div>
-                                        </div>
-                                        <div class="col-7">
-                                            <div class="product-content">
-                                                <a  onclick="openModal()" class="product-title"><?php //echo $row2['name']; ?></a>
-                                                <div class="product-cart-info">
-                                                     <?php //echo $row2['quantity']; ?> <?php //echo $row2['unit']; ?>
-                                                </div>
-                                                <div class="product-price">
-                                                    <?php //if($row2['discount'] > 0){ ?><del> <?php //echo number_format($row2['price'],2); ?></del><?php //} ?><span class="ml-4"> <?php //echo number_format(($row2['price']-$row2['discount']),2); ?></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php
-                             //   }
-                                ?>
-                            </div>
+
                         </div>
                         <div class="track-order-info">
                             <ul class="to-list">
                             <li class="d-flex flex-wrap justify-content-between">
-                                    <span class="t-title">Previous Exchange Points Balance</span>
-                                    <span class="desc"> <?php //echo number_format($row2['delivery_fee'],2); ?></span>
+                                    <span class="t-title"><b>Home Owner:</b></span>
+                                    <span class="desc"> <?php echo $row2['first_name'].' '.$row2['last_name']; ?></span>
                                 </li>
                                 <li class="d-flex flex-wrap justify-content-between">
-                                    <span class="t-title">Exchange Points Used</span>
-                                    <span class="desc"> <?php //echo number_format($total_discount,2); ?></span>
+                                    <span class="t-title"><b>Owner Contact:</b></span>
+                                    <span class="desc"> <?php echo $row2['phone_number']; ?></span>
                                 </li>
                                 <li class="inc-vat d-flex flex-wrap justify-content-between">
-                                    <span class="t-title">Exchange Points Balance</span>
-                                    <span class="desc"> <?php //echo number_format($row ['sum'],2); ?></span>
+                                    <span class="t-title">Exchange Points Transacted</span>
+                                    <span class="desc"> <?php echo ExchangePoints($row2["tier"], $unit_of_exchange, $row["tier"]); ?></span>
                                 </li>
                             </ul>
                         </div>
                         <div class="delevary-time">
-                            <p>Points Transaction Date - <?php echo date('l, F d, Y',strtotime($row ['order_date'])); ?></p>
+                            <p>Request Date - <?php echo date('l, F d, Y',strtotime($row['request_date'])); ?></p>
                         </div>
                         <div class="track-order-footer">
                             <p>Helpline - <a href="tel:<?php echo $contact_number; ?>">Call Us</a></p>
                         </div>
                     </div>
                     <?php
-                  //  }
+                    }
+                    ?>
+                    <?php
+                    $requested_by_me = mysqli_query($connection,$request->GetMyRequests($customer_id))or die($connection->error);
+                    foreach($requested_by_me as $row){
+                     ?>
+                    <div class="track-order-item bg-color-white">
+                        <div class="track-order-head">
+                        <?php
+                                if($row['request_response'] == 1)
+                                {
+                                    ?>
+                                    <span class="badge badge-pill badge-success request-status-badge ml-4 mt-1">Complete</span>
+                                    <?php
+                                }
+                                elseif($row['request_response'] == 0)
+                                {
+                                    ?>
+                                    <span class="badge badge-pill badge-warning request-status-badge ml-4 mt-1">Pending</span>
+                                    <?php
+                                }
+                            ?>
+                        </div>
+                        <div class="d-flex justify-content-between track-number-link align-items-center">
+                            <div>
+                                <h6 class="order-number">Exchange# <?php echo $row ['request_id']?></h6>
+                                <p class="date">Exchange Period: <?php echo date('d.m.Y',strtotime($row ['exchange_start_date'])); ?> - <?php echo date('d.m.Y',strtotime($row ['exchange_end_date'])); ?></p>
+                                <p class="price">Home used for exchange: <?php echo $row['name']; ?></p>
+                            </div>
+                            <div>
+                                <?php
+                                 if($row['request_response'] == 0)
+                                 {
+                                ?>
+                                <a href="#" id="<?php echo $row['request_id']; ?>" class="order-btn cancel-request">Cancel Request</a>
+                                <?php
+                                 }
+                                ?>
+                            </div>
+                        </div>
+                        <div class="order-details">
+                            <div class="order-details-head">
+                                <h6>Exchange Details</h6>
+                            </div>
+                            <div class="order-details-container d-none d-md-block">
+                            <?php
+                                $requests_other_party_details = mysqli_query($connection,$request->GetMyRequestsOtherUserDetails($row['request_id']))or die($connection->error); 
+                                $row2 = mysqli_fetch_array($requests_other_party_details);
+                            ?>
+                                <div class="order-details-item d-sm-flex flex-wrap text-center text-sm-left align-items-center justify-content-between">
+                                    <div class="thumb d-sm-flex flex-wrap align-items-center">
+                                        <a><img src="assets/images/homes/<?php echo $row2['image']; ?>" height="110" width="130" alt="home"></a>
+                                        <div class="product-content">
+                                            <a class="product-title"><?php echo $row2['name']; ?></a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="product-content pl-0">
+                                        <div class="product-price">
+                                            Tier <?php echo $row2['tier']; ?> 
+                                        </div>
+                                    </div>
+                                    <div class="product-content pl-0">
+                                        <div class="product-price">
+                                            <span class="ml-4"> <?php echo $row2['county'].', '.$row2['subcounty']; ?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                              //  }
+                                ?>
+
+                            </div>
+
+                        </div>
+                        <div class="track-order-info">
+                            <ul class="to-list">
+                            <li class="d-flex flex-wrap justify-content-between">
+                                    <span class="t-title"><b>Home Owner:</b></span>
+                                    <span class="desc"> <?php echo $row2['first_name'].' '.$row2['last_name']; ?></span>
+                                </li>
+                                <li class="d-flex flex-wrap justify-content-between">
+                                    <span class="t-title"><b>Owner Contact:</b></span>
+                                    <span class="desc"> <?php echo $row2['phone_number']; ?></span>
+                                </li>
+                                <li class="inc-vat d-flex flex-wrap justify-content-between">
+                                    <span class="t-title">Exchange Points Transacted</span>
+                                    <span class="desc"> <?php echo ExchangePoints($row2["tier"], $unit_of_exchange, $row["tier"]); ?></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="delevary-time">
+                            <p>Request Date - <?php echo date('l, F d, Y',strtotime($row2['request_date'])); ?></p>
+                        </div>
+                        <div class="track-order-footer">
+                            <p>Helpline - <a href="tel:<?php echo $contact_number; ?>">Call Us</a></p>
+                        </div>
+                    </div>
+                    <?php
+                    }
                     ?>
 
                 </div>

@@ -31,7 +31,7 @@ setTime();
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
-       var where = 'fastmoving';
+       var where = 'monthly_exchange_comparison';
      $.post("../charts.php",{where:where},
       function(result){
         var data = $.parseJSON(result);
@@ -45,21 +45,15 @@ setTime();
         var data7 = data[3][1];
         var data8 = data[4][0];
         var data9 = data[4][1];
-        var data10 = data[5][0];
-        var data11 = data[5][1];
-        var data12 = data[6][0];
-        var data13 = data[6][1];
       var data = google.visualization.arrayToDataTable([
         [data0, data1],
        [data2, parseInt(data3)],
         [data4, parseInt(data5)],
         [data6, parseInt(data7)],
         [data8, parseInt(data9)],
-        [data10, parseInt(data11)],
-        [data12, parseInt(data13)],
       ]);
       var options = {
-        title: 'Fast moving products',
+        title: 'Exchange monthly comparison',
         legend: 'none',
          is3D:true,
         pieSliceText: 'label',

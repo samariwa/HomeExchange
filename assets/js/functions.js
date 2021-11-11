@@ -1778,6 +1778,29 @@ $(document).on('click','.clear-all',function(e){
     });
 });
 
+$(document).on('click','.cancel-request',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var id = $(this).attr("id");
+    bootbox.confirm('Are you sure you want to cancel the selected request?',function(result)
+    {if(result){
+    var where = 'delete_request';
+    $.post("delete.php",{id:id, where:where},
+    function(result){
+        alert(result)
+        if(result == 1)
+        {
+            alert('Request successfully cancelled')
+            $( "#my-exchanges-section" ).load(window.location.href + " #my-exchanges-section" );
+        }
+        else
+        {
+            alert('Something went wrong. Try again.')
+        }
+    });
+}}); 
+});
+
 $(document).on('click','.decline-all',function(e){
     e.preventDefault();
     e.stopPropagation();

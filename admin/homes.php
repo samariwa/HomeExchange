@@ -17,7 +17,7 @@
           ?>
     <div class="row">
       <div class="col-md-3">
-      <a href="home-features.php" class="btn btn-light btn-md active" role="button" aria-pressed="true" >Home Features</a>
+
        </div>
        <div class="col-md-5">
       <h6 class="offset-5">Total Number: <?php echo $activeHomesCount; ?></h6>

@@ -1,22 +1,23 @@
 <?php
  include('queries.php');
 $where =$_POST['where'];
-if($where == 'fastmoving' )
+if($where == 'monthly_exchange_comparison' )
 {   
        $fastsum = 0;
-       $fastmovingproducts = array(['Products', 'Number of products sold']);
-        foreach($fastmoving as $row){
-        $name = $row['name'];
-        $total = $row['sum'];
-        $fastsum = $fastsum + $total;
-        $resultArray = array($name, $total);
-        array_push($fastmovingproducts, $resultArray);
-        }
-        $row1 = mysqli_fetch_array($sum);
-        $totalsum = $row1['sumtotal'];
-        $other = $totalsum - $fastsum;
-        array_push($fastmovingproducts,['Other',$other]);
-       $array = json_encode($fastmovingproducts);
+       $exchange_comparison = array(['Month', 'Number of exchanges made']);
+       $row1 = mysqli_fetch_array($exchangesMonth1);
+       $row2 = mysqli_fetch_array($exchangesMonth2);
+       $row3 = mysqli_fetch_array($exchangesMonth3);
+       $row4 = mysqli_fetch_array($exchangesMonth4);    
+       $total1 = ['4 months ago',$row1['sum']];
+       $total2 = ['3 months ago',$row2['sum']];
+       $total3 = ['2 months ago',$row3['sum']];
+       $total4 = ['Last 1 month',$row4['sum']]; 
+        array_push($exchange_comparison, $total1);
+        array_push($exchange_comparison, $total2);
+        array_push($exchange_comparison, $total3);
+        array_push($exchange_comparison, $total4);
+       $array = json_encode($exchange_comparison);
         echo $array;
 }  
 else if($where == 'newsignups' )

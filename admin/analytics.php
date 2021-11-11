@@ -99,7 +99,7 @@
 
 <div class="row">
   <div class="col-md-6">
-    <h4>Product Sales Comparison</h4>
+    <h4>Home Exchange Monthly Comparison</h4>
   </div>
   <div class="col-md-6">
     <h4>Home Registration</h4>

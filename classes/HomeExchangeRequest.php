@@ -13,6 +13,27 @@ class HomeExchangeRequest{
       return $query->get("home_exchange_request","*", array('request_status','=','1'));
    }
 
+   public function GetMyRequests($user_id)
+   {
+      return "SELECT home_owners.id as my_id, home_exchange_request.id as request_id,home_exchange_request.id as request_id, request_response, first_name, last_name, phone_number, homes.name as name, homes.home_tier as tier FROM home_exchange_request INNER JOIN home_availability ON home_exchange_request.availability_id = home_availability.id INNER JOIN homes ON home_exchange_request.exchange_home_id = homes.id INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id WHERE users.id = '$user_id' and request_response != '2'";
+   }
+
+   public function GetMyRequestsOtherUserDetails($request_id)
+   {
+      return "SELECT home_owners.id as my_id, home_exchange_request.exchange_home_id as requester_home_id,homes.home_image as image, home_exchange_request.id as request_id, home_exchange_request.Created_at as request_date, first_name, last_name, phone_number, exchange_start_date, exchange_end_date, exchange_extra_details, homes.name as name, county,subcounty, homes.home_tier as tier FROM home_exchange_request INNER JOIN home_availability ON home_exchange_request.availability_id = home_availability.id INNER JOIN homes ON home_availability.home_id = homes.id INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id INNER JOIN subcounties ON homes.address = subcounties.id INNER JOIN counties ON subcounties.county_id = counties.id WHERE home_exchange_request.id = '$request_id'";
+   }
+
+   public function GetUserExchanges($user_id)
+   {
+      return "SELECT home_owners.id as my_id, home_exchange_request.exchange_home_id as requester_home_id, home_exchange_request.id as request_id, home_exchange_request.Created_at as request_date, number_of_occupants,request_response, exchange_start_date, exchange_end_date, exchange_extra_details, homes.name as name, homes.home_tier as tier FROM home_exchange_request INNER JOIN home_availability ON home_exchange_request.availability_id = home_availability.id INNER JOIN homes ON home_availability.home_id = homes.id INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id INNER JOIN subcounties ON homes.address = subcounties.id INNER JOIN counties ON subcounties.county_id = counties.id WHERE users.id = '$user_id' AND request_response != '2'";
+   }
+   
+
+   public function GetOtherPartyExchangeDetails($home_id)
+   {
+      return "SELECT home_owners.id as my_id, home_exchange_request.exchange_home_id as requester_home_id, homes.home_image as image,home_exchange_request.id as request_id, first_name, last_name, phone_number, subcounty, county, homes.name as name, homes.home_tier as tier FROM home_exchange_request INNER JOIN home_availability ON home_exchange_request.availability_id = home_availability.id INNER JOIN homes ON home_exchange_request.exchange_home_id = homes.id INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id INNER JOIN subcounties ON homes.address = subcounties.id INNER JOIN counties ON subcounties.county_id = counties.id WHERE home_exchange_request.exchange_home_id = '$home_id' ";
+   }
+
    public function GetPendingExchangeRequests($user_id)
    {
       return "SELECT home_owners.id as my_id, home_exchange_request.exchange_home_id as requester_home_id, home_exchange_request.id as request_id, number_of_occupants, exchange_start_date, exchange_end_date, exchange_extra_details, homes.name as name, homes.home_tier as tier FROM home_exchange_request INNER JOIN home_availability ON home_exchange_request.availability_id = home_availability.id INNER JOIN homes ON home_availability.home_id = homes.id INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id INNER JOIN subcounties ON homes.address = subcounties.id INNER JOIN counties ON subcounties.county_id = counties.id WHERE users.id = '$user_id' AND request_status = '1' AND request_response = '0'";
