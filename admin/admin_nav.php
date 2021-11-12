@@ -331,6 +331,14 @@ Preloader
       <br>
 
       <li class="nav-item">&emsp;
+        <a style="color: black;" href="customer-feedback.php">
+           <i class="fa fa-comment"></i>
+          <span>Customer Feedback</span></a>
+      </li>
+
+      <br>
+
+      <li class="nav-item">&emsp;
         <a style="color: black;" href="faqs.php">
         <i class="fa fa-question"></i>
           <span>FAQs</span></a>

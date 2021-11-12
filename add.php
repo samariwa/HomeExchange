@@ -40,7 +40,10 @@ else if ($where == 'faq') {
   }
 }
 
-
+else if ($where == 'feedback') {
+  mysqli_query($connection,"INSERT INTO `customer_feedback` (`user_id`, `message`) VALUES ('".$_POST['user']."','".$_POST['message']."')") or die(mysqli_error($connection));
+  echo "1";
+}
 
 else if ($where == 'home-images') {
   $fileName = $_FILES['upload']['tmp_name'];

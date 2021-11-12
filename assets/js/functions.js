@@ -1701,6 +1701,7 @@ $(document).on('click','.accept-request',function(e){
             $( ".cart-product-container" ).load(window.location.href + " .cart-product-container" );
             $( "#notifications_number" ).load(window.location.href + " #notifications_number" );
             $( "#notifications_icon" ).load(window.location.href + " #notifications_icon" );
+            $( "#exchange-points-value" ).load(window.location.href + " #exchange-points-value" );
         }
         else
         {
@@ -1824,4 +1825,24 @@ $(document).on('click','.decline-all',function(e){
         }
     });
 }}); 
+});
+
+$(document).on('click','#sendFeedback',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var where = 'feedback'
+    var user = $("#customer_id").val();
+    var message = $("#feedback-message").val();
+    $.post("add.php",{user:user, message:message, where:where},
+    function(result){
+        if(result == 1)
+        {
+            alert('Feedback successfully sent. Thank you!');
+            window.location.href = 'homes-list.php';
+        }
+        else
+        {
+            alert('Something went wrong. Try again.')
+        }
+    });
 });

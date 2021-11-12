@@ -357,6 +357,47 @@ google.charts.load("current", {packages:["corechart"]});
     });
 }
 
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawCountiesChart);
+
+function drawCountiesChart() {
+  var where = 'demandedCounties';
+ $.post("../charts.php",{where:where},
+  function(result){
+     var data = $.parseJSON(result);
+     var data0 = data[0][0];
+     var data1 = data[0][1];
+     var data2 = data[1][0];
+     var data3 = data[1][1];
+     var data4 = data[2][0];
+     var data5 = data[2][1];
+     var data6 = data[3][0];
+     var data7 = data[3][1];
+     var data8 = data[4][0];
+     var data9 = data[4][1];
+     var data10 = data[5][0];
+     var data11 = data[5][1];
+    var data = google.visualization.arrayToDataTable([
+    ['County', 'Requests'],
+    [data0,  parseInt(data1)],
+    [data2,  parseInt(data3)],
+    [data4, parseInt(data5)],
+    [data6,  parseInt(data7)],
+    [data8,  parseInt(data9)],
+    [data10, parseInt(data11)]
+  ]);
+
+  var options = {
+    title: 'Top 5 on demand counties in the last 6 months',
+    pieHole: 0.7,
+    pieSliceText:'none',
+
+  };
+    var chart = new google.visualization.PieChart(document.getElementById('countiesChart'));
+  chart.draw(data, options);
+  });
+}
+
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawHomeTiersChart);
     function drawHomeTiersChart() {

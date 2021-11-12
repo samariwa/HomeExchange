@@ -42,22 +42,21 @@ else if($where == 'newsignups' )
  $array = json_encode($signupsTotal);
   echo $array;
 }
-else if($where == 'fastselling' )
+else if($where == 'demandedCounties' )
 {   
-       $fastsum = 0;
-       $fastmovingproducts = array(['Products', 'Number of products sold']);
-        foreach($fastselling as $row){
-        $name = $row['name'];
+       $demandsum = 0;
+       $mostDemandedCounties = [];
+        foreach($demandedCounties as $row){
+        $county = $row['county'];
         $total = $row['sum'];
-        $fastsum = $fastsum + $total;
-        $resultArray = array($name, $total);
-        array_push($fastmovingproducts, $resultArray);
+        $demandsum += $total;
+        $resultArray = array($county, $total);
+        array_push($mostDemandedCounties, $resultArray);
         }
-        $row1 = mysqli_fetch_array($sumSales);
-        $totalsum = $row1['sumtotal'];
-        $other = $totalsum - $fastsum;
-        array_push($fastmovingproducts,['Other',$other]);
-       $array = json_encode($fastmovingproducts);
+        $totalsum = $requests_no['sum'];
+        $other = $totalsum - $demandsum;
+        array_push($mostDemandedCounties,['Other',$other]);
+       $array = json_encode($mostDemandedCounties);
         echo $array;
 }  
 else if($where == 'tiersComparison' )

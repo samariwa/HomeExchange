@@ -141,7 +141,7 @@
       <td><?php echo number_format((float)($pets_no['sum']/$homes_no['sum']) * 100,2,'.','').'%'; ?></td>
     </tr>
     <tr>
-      <th scope="row">Kids Allowed</th>
+      <th scope="row">Kids Friendly</th>
       <td></td>
       <td></td>
       <td><?php echo $kids_no['sum']; ?></td>
@@ -220,12 +220,12 @@
     <h4>Tier Numbers</h4>
   </div>
   <div class="col-md-6">
-    <h4>Company Performance</h4>
+    <h4>Top 5 counties</h4>
   </div>
 </div>
 <div class="row">
     <div id="tiersChart" style="width: 430px; height: 400px;"></div>
-    <div id="chart_divide" style="width: 600px; height: 400px;"></div>    
+    <div id="countiesChart" style="width: 600px; height: 400px;"></div>    
 </div>  
 <br>
 <div class="row">

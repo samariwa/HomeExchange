@@ -38,10 +38,34 @@
                             <h5>Would you like to share with us about your experience on the platfrom?</h5>
                             <div class="row mt-4">
                                 <div class="col-6">
-                                    <button class="btn btn-outline-danger yes-feedback offset-9 rounded-pill">Yes</button> 
+                                    <a href="#" data-toggle="modal" data-target="#exampleModalScrollable" role="button" aria-pressed="true" class="btn btn-outline-danger yes-feedback offset-9 rounded-pill">Yes</a>
+                                    <form method="POST"> 
+                                    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Customer Feedback</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                        <div class="modal-body"> 
+                                            <div class="row">
+                                            <label for="feedback-message" style="margin-left: 60px;">Feedback:</label>
+                                            <textarea id="feedback-message" class="form-control col-md-9" style="padding:15px;margin-left: 60px" name="feedback-message" required></textarea>
+                                            </div><br>
+                                            <input type="hidden" name="customer_id" id="customer_id"  value="<?php echo $customer_id; ?>">
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="submit" class="btn btn-danger sendFeedback" role="button" aria-pressed="true" style="margin-right: 50px" id="sendFeedback">Send Feedback</button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                   </form>
                                 </div>
                                 <div class="col-6">
-                                     <button class="btn btn-outline-danger no-feedback rounded-pill">Not now</button>
+                                     <a href="homes-list.php" class="btn btn-outline-danger no-feedback rounded-pill">Not now</a>
                                 </div>
                             </div>
                         </div>

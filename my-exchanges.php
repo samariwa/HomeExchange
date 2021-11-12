@@ -136,7 +136,7 @@ $location = $result['physical_address'];
                                 </li>
                                 <li class="inc-vat d-flex flex-wrap justify-content-between">
                                     <span class="t-title">Exchange Points Transacted</span>
-                                    <span class="desc"> <?php echo ExchangePoints($row2["tier"], $unit_of_exchange, $row["tier"]); ?></span>
+                                    <span class="desc"> <?php if(ExchangePoints($row2["tier"], $unit_of_exchange, $row["tier"]) > 0) {echo '+ ';}echo ExchangePoints($row2["tier"], $unit_of_exchange, $row["tier"]).' pts'; ?></span>
                                 </li>
                             </ul>
                         </div>
@@ -235,7 +235,7 @@ $location = $result['physical_address'];
                                 </li>
                                 <li class="inc-vat d-flex flex-wrap justify-content-between">
                                     <span class="t-title">Exchange Points Transacted</span>
-                                    <span class="desc"> <?php echo ExchangePoints($row2["tier"], $unit_of_exchange, $row["tier"]); ?></span>
+                                    <span class="desc"> <?php if(ExchangePoints($row2["tier"], $unit_of_exchange, $row["tier"]) > 0) {echo '+ ';}echo ExchangePoints($row2["tier"], $unit_of_exchange, $row["tier"]).' pts'; ?></span>
                                 </li>
                             </ul>
                         </div>

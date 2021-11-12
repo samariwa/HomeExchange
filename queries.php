@@ -7,6 +7,8 @@ $admin = new Administrator();
 $home = new Home();
 $exchange = new HomeExchangeRequest();
 $subscribersList = mysqli_query($connection,"SELECT * FROM newsletter_subscribers ORDER BY id DESC")or die($connection->error);
+$feedbackList = mysqli_query($connection,"SELECT customer_feedback.id as id,first_name, last_name, message FROM customer_feedback INNER JOIN users on customer_feedback.user_id = users.id")or die($connection->error);
+$feedbackCount = mysqli_num_rows($feedbackList );
 $faqsList = mysqli_query($connection,$faq->GetAllFaqs())or die($connection->error);
 $activeCustomersList = mysqli_query($connection, $customer->GetActiveCustomer())or die($connection->error);
 $activeCustomersCount = mysqli_num_rows($activeCustomersList);
@@ -105,5 +107,8 @@ $smokers_no = mysqli_fetch_array($smokersNumber);
 $customer_preferences = mysqli_query($connection,"SELECT home_id as 'id',homes.name as 'name',COUNT(home_id) as count FROM wishlist inner join homes on home_id = homes.id  where DATE(wishlist.Created_at) >= DATE_SUB( CURDATE(), INTERVAL 3 MONTH) AND DATE(wishlist.Created_at) <= DATE_SUB( CURDATE(), INTERVAL 0 DAY ) GROUP BY home_id ORDER BY count DESC")or die($connection->error); 
 $totalPreferences = mysqli_query($connection,"SELECT COUNT(home_id) as count FROM wishlist   where DATE(wishlist.Created_at) >= DATE_SUB( CURDATE(), INTERVAL 3 MONTH) AND DATE(wishlist.Created_at) <= DATE_SUB( CURDATE(), INTERVAL 0 DAY )")or die($connection->error);
 $randomAvailableHomes = mysqli_query($connection,"SELECT homes.id as home_id, first_name, last_name, name, county, subcounty, homes.average_rating as average_rating, home_tier,home_image,home_extra_details,availability_start_date,availability_end_date,home_availability_status,extra_details  FROM homes INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id INNER JOIN subcounties ON homes.address = subcounties.id INNER JOIN counties ON subcounties.county_id = counties.id INNER JOIN home_availability ON home_availability.home_id = homes.id WHERE home_status = '1' ORDER BY RAND() LIMIT 5;")or die($connection->error);
+$demandedCounties = mysqli_query($connection,"SELECT counties.county as 'county',COUNT(home_exchange_request.id) AS 'sum' FROM home_exchange_request inner join home_availability on home_exchange_request.availability_id = home_availability.id INNER JOIN homes ON home_availability.home_id = homes.id INNER JOIN subcounties ON homes.address = subcounties.id INNER JOIN counties ON subcounties.county_id = counties.id WHERE DATE(home_exchange_request.Created_at) >= DATE_SUB( CURDATE(), INTERVAL 6 MONTH ) AND DATE(home_exchange_request.Created_at) <= DATE_SUB( CURDATE(), INTERVAL 0 DAY ) GROUP BY counties.id ORDER BY sum DESC LIMIT 5")or die($connection->error);
+$requestsNumber = mysqli_query($connection,"SELECT COALESCE(COUNT(id),0) AS 'sum' FROM home_exchange_request")or die($connection->error);
+$requests_no = mysqli_fetch_array($requestsNumber);
 ?>
 
