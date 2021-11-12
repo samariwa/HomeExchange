@@ -4,12 +4,13 @@ require_once('../tcpdf/tcpdf.php');
  include('../queries.php');
  require '../config.php';
 // create new PDF document
+
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor($_SESSION["user"]);
-$pdf->SetTitle('Sympha Fresh Report');
+$pdf->SetTitle('Home Exchange Report');
 $pdf->SetSubject('Report');
 $pdf->SetKeywords('PDF, Report, export');
 
@@ -48,345 +49,278 @@ $pdf->SetFont('helvetica', '', 10);
 // add a page
 $pdf->AddPage();
 $date = date( 'l, F d, Y ', time());
-$result1 = mysqli_fetch_array($monthSalesValue);
-$sales = $result1['sum'];
-$total_sales = $sales;
-$result2 = mysqli_fetch_array($monthIncomeValue);
-$income = $result2['sum'];
-$total_income = $income;
-$result3 = mysqli_fetch_array($monthExpenseValue);
-$expenses = $result3['sum'];
-$result4 = mysqli_fetch_array($salariesTotal);
-$salaries = $result4['salaries'];
-$gross_profit_loss = '';
-$gross = $total_income - $total_sales;
-if ($gross > 0) {
-  $gross_profit_loss = 'profit';
-}
-elseif ($gross < 0) {
-  $gross_profit_loss = 'loss';
-}
-$net_profit_loss = '';
-$net = $gross - $expenses - $salaries;
-if ($net > 0) {
-  $net_profit_loss = 'profit';
-}
-elseif ($net < 0) {
-  $net_profit_loss = 'loss';
-}
-$result5 = mysqli_fetch_array($lastmonthSalesValue);
-$last_sales = $result5['sum'];
-$result6 = mysqli_fetch_array($lastmonthIncomeValue);
-$last_income = $result6['sum'];
-$result7 = mysqli_fetch_array($lastmonthExpenseValue);
-$last_expenses = $result7['sum'];
-$last_gross = ($last_income) - ($last_sales);
-$gross_up_down = '';
-if ($last_gross < $gross) {
- $gross_up_down = 'an upward';
-}
-elseif ($last_gross > $gross) {
-  $gross_up_down = 'a downward';
-}
-$gross_pc = ($gross/($last_gross + $gross)) * 100;
-$last_net = $last_gross - $last_expenses - $salaries;
-$net_up_down = '';
-if ($last_net < $net) {
-  $net_up_down = 'an upward';
-}
-elseif ($last_net > $net) {
-  $net_up_down = 'a downward';
-}
-$net_pc = ($gross/($last_net + $net)) * 100;
-$last_gross_up_down = '';
-if ($last_gross > 0) {
-  $last_gross_up_down = 'profit';
-}
-elseif ($last_gross < 0) {
-  $last_gross_up_down = 'loss';
-}
-$last_net_up_down = '';
-if ($last_net > 0) {
-  $last_net_up_down = 'profit';
-}
-elseif ($last_net < 0) {
-  $last_net_up_down = 'loss';
-}
- $fastmovingproducts = array();
-  foreach($fastmovingMonth as $row){
-  $name = $row['name'];
-  $total = $row['sum'];
-  $resultArrayfast = array($name, $total);
-  array_push($fastmovingproducts, $resultArrayfast);
-  }
-  $slowmovingproducts = array();
-  foreach($slowmovingMonth as $row){
-  $name = $row['name'];
-  $total = $row['sum'];
-  $resultArrayslow = array($name, $total);
-  array_push($slowmovingproducts, $resultArrayslow);
-  }
-  $payerList = array();
-  foreach($biggestPayers as $row){
-  $name = $row['name'];
-  $total = $row['sum'];
-  $resultArray = array($name, $total);
-  array_push($payerList, $resultArray);
-  }
-  $customerType = array();
-  foreach($customerTypeNumbers as $row){
-  $type = $row['type'];
-  $count = $row['count'];
-  $resultArray = array($type, $count);
-  array_push($customerType, $resultArray);
-  }
-  $result8 = mysqli_fetch_array($customersTotalMonth);
-  $customersTotal = $result8['count'];
-  $result9 = mysqli_fetch_array($customersTotalLastMonth);
-  $customersTotalLast = $result9['count'];
-$customers_difference = '';
-if ($customersTotal > $customersTotalLast) {
-  $customers_difference = 'an improvement';
-}
-elseif ($customersTotal < $customersTotalLast) {
-  $customers_difference = 'a drop';
-}
-  $customersrowcount = mysqli_num_rows($customersList);
- $result9 = mysqli_fetch_array($customersTotalLastMonth);
-  $customersTotalLast = $result9['count'];
-  $result10 = mysqli_fetch_array($newCustomersMonthCount);
-  $newCustomersMonthCount = $result10['count'];
-$newCustomerStatement = '';
-if ($newCustomersMonthCount > 0) {
-  $newCustomerStatement = 'This past one month we have had <b>'.$newCustomersMonthCount.' new customer(s)</b>. The new customers with their respective locations and amount of money they have paid to the company are as follows:
-  <ol>';
-  foreach($newCustomersMonth as $rows){
-  $newName = $rows['Name'];
-  $newLocation = $rows['Location'];
-  $amount = $rows['sum'];
-  $newCustomerStatement .= '<b><li>'.$newName.' - '.$newLocation.' - Ksh. '.$amount.'</li></b>';
-  }
-  $newCustomerStatement .= '</ol>';
-}
-elseif ($newCustomersMonthCount == 0) {
-  $newCustomerStatement = 'This past one month we had <b>no new customers</b>. Sales should be done by the team for a positive improvement.';
-}
-$result11 = mysqli_fetch_array($monthLiability);
-  $monthLiability = $result11['sum'];
-$result12 = mysqli_fetch_array($totalLiability);
-  $totalLiability = $result12['sum'];  
-  $result13 = mysqli_fetch_array($newSuppliersCountMonth);
-  $newSuppliersCountMonth = $result13['count']; 
-  $newSuppliersStatement = '';
-  if ($newSuppliersCountMonth == 0) {
-    $newSuppliersStatement = 'we had <b>no new supplier</b>. ';
-  }
-  elseif ($newSuppliersCountMonth > 0) {
-    $newSuppliersStatement = 'we have had <b>'.$newSuppliersCountMonth.' new supplier(s)</b>. Below is <b>information on the new supplier(s)</b>.<br><br>
-    <table border="1" cellspacing="1" cellpadding="4" align="center">
-    <tr>
-        <th><b>Supplier Name</b></th>
-        <th><b>Supplier Contact</b></th>
-    </tr>';
-  foreach($newSuppliersDetailsMonth as $row){
-  $name = $row['Name'];
-  $contact = $row['contact'];
-   $newSuppliersStatement .= ' <tr>
-        <td>'.$name.'</td>
-        <td>'.$contact.'</td>
-    </tr>';
-  }  
-$newSuppliersStatement .= '</table>';
-  }
-// writeHTML($html, $ln=true, $fill=false, $reseth=false, $cell=false, $align='')
-// writeHTMLCell($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=0, $reseth=true, $align='', $autopadding=true)
+$month_sign_ups = mysqli_fetch_array($signupsMonth);
+$week_1_signups = mysqli_fetch_array($signupsWk1);
+$week_2_signups = mysqli_fetch_array($signupsWk2);
+$week_3_signups = mysqli_fetch_array($signupsWk3);
+$week_4_signups = mysqli_fetch_array($signupsWk4);
+$month_new_homeowners = mysqli_fetch_array($newHomeOwnersMonth);
+$week_1_homeowners = mysqli_fetch_array($newHomeOwnersWk1);
+$week_2_homeowners = mysqli_fetch_array($newHomeOwnersWk2);
+$week_3_homeowners = mysqli_fetch_array($newHomeOwnersWk3);
+$week_4_homeowners = mysqli_fetch_array($newHomeOwnersWk4);
+$week1_home_regs = mysqli_fetch_array($newHomesWk1);
+$week2_home_regs = mysqli_fetch_array($newHomesWk2);
+$week3_home_regs = mysqli_fetch_array($newHomesWk3);
+$week4_home_regs = mysqli_fetch_array($newHomesWk4);
+$tier1_no = mysqli_fetch_array($tier1number);
+$tier2_no = mysqli_fetch_array($tier2number);
+$tier3_no = mysqli_fetch_array($tier3number);
+$tier4_no = mysqli_fetch_array($tier4number);
+$tier5_no = mysqli_fetch_array($tier5number);
+$total_Home_Owners = mysqli_fetch_array($totalHomeOwners);
+$total_home_availabilities = mysqli_fetch_array($totalAvailabilitiesMonth);
+$week_1_availabilities = mysqli_fetch_array($availabilitiesWk1);
+$week_2_availabilities = mysqli_fetch_array($availabilitiesWk2);
+$week_3_availabilities = mysqli_fetch_array($availabilitiesWk3);
+$week_4_availabilities = mysqli_fetch_array($availabilitiesWk4);
+$month_requests_no = mysqli_fetch_array($newRequestsMonth);
+$week_1_requests = mysqli_fetch_array($requestsWk1);
+$week_2_requests = mysqli_fetch_array($requestsWk2);
+$week_3_requests = mysqli_fetch_array($requestsWk3);
+$week_4_requests = mysqli_fetch_array($requestsWk4);
+$week_1_exchanges = mysqli_fetch_array($exchangesWk1);
+$week_2_exchanges = mysqli_fetch_array($exchangesWk2);
+$week_3_exchanges = mysqli_fetch_array($exchangesWk3);
+$week_4_exchanges = mysqli_fetch_array($exchangesWk4);
+$exchanges_month = mysqli_fetch_array($exchangesMonth4);
 
-// create some HTML content
-$html = '<h1 style="text-align:center"><strong><img src="../assets/images/logo-footer.png" height="100" width="150"></strong></h1>
+
+
+$html = '<h1 style="text-align:center"><strong><img src="../assets/images/lOGO.png" height="100" width="150"></strong></h1>
 <b>Date: '.$date.'</b><br>
-<h3>Purpose</h3>
+<h3>Introduction</h3>
     <p>
-      '.$purpose.'
-    </p>
-    <h3>Vision</h3>
-    <p>
-      '.$vision.'
-    </p>
-    <h3>Mission Statement</h3>
-    <p>
-      '.$mission.'
+      This Company Performance Report (CPR) has been designed to assist 
+      in evaluating the companys current performance relative to previous periods. The comparative ratios and statistics contained on the following pages
+      represent broad performance "yardsticks" against which the companys
+      operating results can be measured.
     </p>
     <h2>Performance Analysis</h2>
 <p>Below is the report that examines the company performance for the last one month.</p>
-<p>This month we managed to <b>sale products worth Ksh. '.$total_sales.'</b>. This income for sale of different products whose demands depended on the customers preferences. The <b>5 most demanded products</b> this month  that were <b>ordered from the company</b> with the corresponding sales quantities(units) were as follows:</p>
+<p>This month we managed to get<b> '.$month_sign_ups['sum'].' new sign ups</b> on the platform. This reflects the interest of people in Home Swap as their holiday solution. The <b>weekly sign up comparison</b> this month is as follows:</p>
+<ul>
+    <b><li>Week 1: '.$week_1_signups['sum'].' customers</li>
+    <li>Week 2: '.$week_2_signups['sum'].' customers</li>
+    <li>Week 3: '.$week_3_signups['sum'].' customers</li>
+    <li>Week 4: '.$week_4_signups['sum'].' customers</li></b>
+</ul>
+<p>There is currently a total of <b>'.$activeCustomersCount.' active customers</b> on the platform and <b>'.$blacklistedCount.' blacklisted customers</b>. Of the registered customers, there currently are <b> '.mysqli_num_rows($subscribersList).' newsletter subscribers</b> which is <b>'.number_format((float)(mysqli_num_rows($subscribersList)/$month_sign_ups['sum']) * 100,2,'.','').'%'.' of the active customers</b> </p>
+<p>There were <b>'.$month_new_homeowners['sum'].' new home owners</b> in the previous month. This makes the <b>total home owners '.$total_Home_Owners['sum'].'</b> which is  <i>'.number_format((float)(mysqli_num_rows($totalHomeOwners)/$activeCustomersCount) * 100,2,'.','').'% of the total registered customers</i>. The weekly uptake of home owners is as follows:</p>
 <ol>
-    <b><li>'.$fastmovingproducts[0][0].' - '.number_format($fastmovingproducts[0][1]).'</li>
-    <li>'.$fastmovingproducts[1][0].' - '.number_format($fastmovingproducts[1][1]).'</li>
-    <li>'.$fastmovingproducts[2][0].' - '.number_format($fastmovingproducts[2][1]).'</li>
-    <li>'.$fastmovingproducts[3][0].' - '.number_format($fastmovingproducts[3][1]).'</li>
-    <li>'.$fastmovingproducts[4][0].' - '.number_format($fastmovingproducts[4][1]).'</li></b>
+    <b><li>Week 1: '.$week_1_homeowners['sum'].' home owners</li>
+    <li>Week 2: '.$week_2_homeowners['sum'].' home owners</li>
+    <li>Week 3: '.$week_3_homeowners['sum'].' home owners</li>
+    <li>Week 4: '.$week_4_homeowners['sum'].' home owners</li></b>
 </ol>
-<p>On the other hand the <b>5 least  demanded</b> products of the month that were <b>ordered from the company</b> with their corresponding sales quantities(units) were as follows:</p>
+<p>We also managed to get <b>5 new homes</b> on the platform. The <b>weekly home registration comparison</b> is as follows:</p>
 <ol>
-    <b><li>'.$slowmovingproducts[0][0].' - '.number_format($slowmovingproducts[0][1]).'</li>
-    <li>'.$slowmovingproducts[1][0].' - '.number_format($slowmovingproducts[1][1]).'</li>
-    <li>'.$slowmovingproducts[2][0].' - '.number_format($slowmovingproducts[2][1]).'</li>
-    <li>'.$slowmovingproducts[3][0].' - '.number_format($slowmovingproducts[3][1]).'</li>
-    <li>'.$slowmovingproducts[4][0].' - '.number_format($slowmovingproducts[4][1]).'</li></b>
+    <b><li>Week 1: '.$week1_home_regs['sum'].' homes</li>
+    <li>Week 2: '.$week2_home_regs['sum'].' homes</li>
+    <li>Week 3: '.$week3_home_regs['sum'].' homes</li>
+    <li>Week 4: '.$week4_home_regs['sum'].' homes</li></b>
 </ol>
-<p>All products combined generated a <b>revenue of Ksh. '.number_format($total_income).'</b>.</p>
-<p>With that the <b>gross '.$gross_profit_loss.' was Ksh. '.number_format($gross).'</b>.This is '.$gross_up_down.' gross projection by '.intval($gross_pc).'%.Last month there was a '.$last_gross_up_down.' of Ksh. '.number_format($last_gross).'.</p>
-<p>Various <b>expenses</b> were incurred during the month which <b>totaled to Ksh. '.number_format($expenses).'</b>. Below is a breakdown of the various expense details for the past one month with their respective amounts paid and due.</p>
+<p>There is currently a total of <b>'.$activeHomesCount.' active homes</b> on the platform and <b>'.$deactivatedHomesCount.' blacklisted homes</b>.</p>
+<p>There is a total of 5 home tiers on the basis of facilities found in the homes. Given the new home uptake, below is the <b>home tier distribution at the moment</b>.</p>
 <table border="1" cellspacing="1" cellpadding="4" align="center">
     <tr>
-        <th><b>Date of Payment</b></th>
-        <th><b>Expense Title</b></th>
-        <th><b>Paid Party</b></th>
-        <th><b>Amount Paid</b></th>
-        <th><b>Amount Due</b></th>   
-    </tr>';
-  foreach($expensesMonth as $row){
-  $name = $row['name'];
-  $party = $row['Party'];
-  $paid = $row['paid'];
-  $due = $row['due'];
-  $date = $row['date'];
-  $day = date( 'l, F d', strtotime($date) ); 
-   $html .= ' <tr>
-        <td>'.$day.'</td>
-        <td>'.$name.'</td>
-        <td>'.$name.'</td>
-        <td>Ksh. '.number_format($paid).'</td>
-        <td>Ksh. '.number_format($due).'</td>
-    </tr>';
-  }  
-$html .= '</table>
-<p>Given the data above the <b>projected '.$net_profit_loss.'</b> made during this month <b>was therefore Ksh. '.number_format($net).'</b>.This is '.$net_up_down.' net projection by '.intval($net_pc).'%.Last month there was a '.$last_net_up_down.' of Ksh. '.number_format($last_net).'.</p>
-<p>Based on the due amounts above, the <b>added liability this month resulted to Ksh. '.number_format($monthLiability).'</b> summing up the <b>total liability of the company to Ksh. '.number_format($totalLiability).'</b>.</p>
-<p>In the given period, a <b>total of '.number_format($customersTotal).' customers</b> out of the total possible '.number_format($customersrowcount).' customers have ordered various products from the company. This was '.$customers_difference.' from last month where '.number_format($customersTotalLast).' customers made orders. '.$newCustomerStatement.'</p>
+        <th></th>
+        <th><b>Tier 1</b></th>
+        <th><b>Tier 2</b></th>
+        <th><b>Tier 3</b></th>
+        <th><b>Tier 4</b></th>
+        <th><b>Tier 5</b></th>   
+    </tr>
+    <tr>
+        <td><b>Number of homes</b></td>
+        <td>'.$tier1_no['sum'].'</td>
+        <td>'.$tier2_no['sum'].'</td>
+        <td>'.$tier3_no['sum'].'</td>
+        <td>'.$tier4_no['sum'].'</td>
+        <td>'.$tier5_no['sum'].'</td>
+    </tr>
+    <tr>
+        <td><b>Percentage of total homes</b></td>
+        <td>'.number_format((float)($tier1_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+        <td>'.number_format((float)($tier2_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+        <td>'.number_format((float)($tier3_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+        <td>'.number_format((float)($tier4_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+        <td>'.number_format((float)($tier5_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+    </tr>
+    </table>
+<p>With that the <b>home features distribution</b> among the registered homes in Home Swap and their corresponding percentage of the total homes is as follows:</p>
+<table border="1" cellspacing="1" cellpadding="4" align="center">
+<tr>
+    <th width="40%"><b>Feature</b></th>
+    <th width="30%"><b>Number of homes</b></th>
+    <th width="30%"><b>Percentage</b></th>     
+</tr>
+<tr>
+  <td scope="row">Swimming Pool</td>
+  <td>'.$swimming_no['sum'].'</td>
+  <td>'.number_format((float)($swimming_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+</tr>
+<tr>
+      <th scope="row">Houses</th>
+      <td>'.$houses_no['sum'].'</td>
+      <td>'.number_format((float)($houses_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+    </tr>
+    <tr>
+      <th scope="row">Apartments</th>
+      <td>'.$apartments_no['sum'].'</td>
+      <td>'.number_format((float)($apartments_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+    </tr>
+    <tr>
+      <th scope="row">Primarily owned</th>
+      <td>'.$primary_ownership_no['sum'].'</td>
+      <td>'.number_format((float)($primary_ownership_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+    </tr>
+    <tr>
+      <th scope="row">Secondarily owned</th>
+      <td>'.$secondary_ownership_no['sum'].'</td>
+      <td>'.number_format((float)($secondary_ownership_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+    </tr>
+    <tr>
+      <th scope="row">TV</th>
+      <td>'.$tv_no['sum'].'</td>
+      <td>'.number_format((float)($tv_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+    </tr>
+    <tr>
+      <th scope="row">WiFi</th>
+      <td>'.$wifi_no['sum'].'</td>
+      <td>'.number_format((float)($wifi_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+    </tr>
+    <tr>
+      <th scope="row">Air Con.</th>
+      <td>'.$ac_no['sum'].'</td>
+      <td>'.number_format((float)($ac_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+    </tr>
+    <tr>
+      <th scope="row">Private Gym</th>
+      <td>'.$gym_no['sum'].'</td>
+      <td>'.number_format((float)($gym_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+    </tr>
+    <tr>
+      <th scope="row">Wheelchair Accessible</th>
+      <td>'.$wheelchair_no['sum'].'</td>
+      <td>'.number_format((float)($wheelchair_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+    </tr>
+    <tr>
+      <th scope="row">Pets Allowed</th>
+      <td>'.$pets_no['sum'].'</td>
+      <td>'.number_format((float)($pets_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+    </tr>
+    <tr>
+      <th scope="row">Kids Friendly</th>
+      <td>'.$kids_no['sum'].'</td>
+      <td>'.number_format((float)($kids_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+    </tr>
+    <tr>
+      <th scope="row">Parking</th>
+      <td>'.$parking_no['sum'].'</td>
+      <td>'.number_format((float)($parking_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+    </tr>
+    <tr>
+      <th scope="row">Security Guard</th>
+      <td>'.$security_no['sum'].'</td>
+      <td>'.number_format((float)($security_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+    </tr>
+    <tr>
+      <th scope="row">Private Garden</th>
+      <td>'.$garden_no['sum'].'</td>
+      <td>'.number_format((float)($garden_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+    </tr>
+    <tr>
+      <th scope="row">Home Workers</th>
+      <td>'.$workers_no['sum'].'</td>
+      <td>'.number_format((float)($workers_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+    </tr>
+    <tr>
+      <th scope="row">Smokers Allowed</th>
+      <td>'.$smokers_no['sum'].'</td>
+      <td>'.number_format((float)($smokers_no['sum']/$homes_no['sum']) * 100,2,'.','').'%</td>
+    </tr>
+</table>
+<p>In the past month, there has been a total of <b>'.$total_home_availabilities['sum'].' home availabilities</b> Below is the <b>home availability distribution in the previous 4 weeks</b>.</p>
+<ol>
+    <b><li>Week 1: '.$week_1_availabilities['sum'].' homes were newly available</li>
+    <li>Week 2: '.$week_2_availabilities['sum'].' homes were newly available</li>
+    <li>Week 3: '.$week_3_availabilities['sum'].' homes were newly available</li>
+    <li>Week 4: '.$week_4_availabilities['sum'].' homes were newly available</li></b>
+</ol>
+<p>The past month has seen<b> '.$month_requests_no['sum'].' new home exchange requests</b> and a total of <b>'.$exchanges_month['sum'].' home exchanges</b>. Below is a <b>weekly distribution of home requests</b> and a <b>weekly distribution of home exchanges</b> made on through the platform respectively.</p>
+<p>Some exchanges made are from home availabilities sloted in previous months.</p>
+<h4>Exchange Requests</h4>
+<table border="1" cellspacing="1" cellpadding="4" align="center">
+    <tr>
+        <th><b>Week</b></th>
+        <th><b>Number of requests</b></th>
+    </tr>
+     <tr>
+        <td>Week 1</td>
+        <td>'.$week_1_requests['sum'].'</td>
+    </tr>
+    <tr>
+        <td>Week 2</td>
+        <td>'.$week_2_requests['sum'].'</td>
+    </tr>
+    <tr>
+        <td>Week 3</td>
+        <td>'.$week_3_requests['sum'].'</td>
+    </tr>
+    <tr>
+        <td>Week 4</td>
+        <td>'.$week_4_requests['sum'].'</td>
+    </tr>
+</table>
 
-<p>In general all the customers had different payment tendencies during the period. The <b>top 5 customers who made the biggest payments</b> during the period with their corresponding payments were as follows:</p>
-<ol>
-    <b><li>'.$payerList[0][0].' - Ksh.'.number_format($payerList[0][1]).'</li>
-    <li>'.$payerList[1][0].' - Ksh.'.number_format($payerList[1][1]).'</li>
-    <li>'.$payerList[2][0].' - Ksh.'.number_format($payerList[2][1]).'</li>
-    <li>'.$payerList[3][0].' - Ksh.'.number_format($payerList[3][1]).'</li>
-    <li>'.$payerList[4][0].' - Ksh.'.number_format($payerList[4][1]).'</li></b>
-</ol>
-<p>The above customers are the new key customers for the coming month given that they made the biggest orders and made timely payments.</p>
-<p>We had different types of customers based on their purchasing method(online or physical). The <b>numbers of each type of customer</b> during the period were as follows:</p>
-<ol>
-    <b><li>'.$customerType[0][0].' - '.$customerType[0][1].'</li>
-    <li>'.$customerType[1][0].' - '.$customerType[1][1].'</li></b>
-</ol>
-<p>During the month, we had deliverers who made deliveries to the various customers. Each deliverer had their own sub-set of customers that they made deliveries to. The <b>deliverers <u>this month</u> with their corresponding value of worth of orders delivered to customers and amount of money collected</b> durig the period are as follows:</p>
+<h4>Home Exchanges</h4>
 <table border="1" cellspacing="1" cellpadding="4" align="center">
     <tr>
-        <th><b>Deliverer</b></th>
-        <th><b>Worth of Sales</b></th>
-        <th><b>Amount Collected</b></th> 
-    </tr>';
-  foreach($delivererSalesMonth as $row){
-$deliverer = $row['deliverer'];
-  $collected = $row['sum'];
-  $worth = $row['worth'];
-   $html .= ' <tr>
-        <td>'.$deliverer.'</td>
-        <td>Ksh. '.number_format($worth).'</td>
-        <td>Ksh. '.number_format($collected).'</td>
-    </tr>';
-  }  
-$html .= '</table>
-<p>Broken down, The <b>deliverers <u>this past week</u> with their corresponding value of worth of orders delivered to customers and amount of money collected</b> durig the period are as follows:</p>
+        <th><b>Week</b></th>
+        <th><b>Number of exchanges</b></th>
+    </tr>
+     <tr>
+        <td>Week 1</td>
+        <td>'.$week_1_exchanges['sum'].'</td>
+    </tr>
+    <tr>
+        <td>Week 2</td>
+        <td>'.$week_2_exchanges['sum'].'</td>
+    </tr>
+    <tr>
+        <td>Week 3</td>
+        <td>'.$week_3_exchanges['sum'].'</td>
+    </tr>
+    <tr>
+        <td>Week 4</td>
+        <td>'.$week_4_exchanges['sum'].'</td>
+    </tr>
+</table>
+<p>The <b>top 5 demanded counties</b> in terms of requests in the past 6 months are as follows:</p>
 <table border="1" cellspacing="1" cellpadding="4" align="center">
     <tr>
-        <th><b>Deliverer</b></th>
-        <th><b>Worth of Sales</b></th>
-        <th><b>Amount Collected</b></th> 
+        <th><b>County</b></th>
+        <th><b>Number of requests</b></th>
+    </tr>
+    ';
+    $totalDemand = 0;
+    foreach($demandedCounties as $row){
+     $html .= '<tr>
+        <td>'.$row['county'].'</td>
+        <td>'.$row['sum'].'</td>
     </tr>';
-  foreach($delivererSalesWeek as $row){
-$deliverer = $row['deliverer'];
-  $collected = $row['sum'];
-  $worth = $row['worth'];
-   $html .= ' <tr>
-        <td>'.$deliverer.'</td>
-        <td>Ksh. '.number_format($worth).'</td>
-        <td>Ksh. '.number_format($collected).'</td>
-    </tr>';
-  }  
-$html .= '</table>
-<p>The tables above will be used as the basis to which each and every deliverer will be credited with regards to contribution in company growth.</p>
-<h2>Suppliers</h2>
-<p>This past month, '.$newSuppliersStatement.'</p>
-<h2>Vehicles</h2>
-<p>Below is the details for the company vehicles.</p>
-<table border="1" cellspacing="1" cellpadding="4" align="center">
-    <tr>
-        <th><b>Registration Number</b></th>
-        <th><b>Type</b></th>
-        <th><b>Driver</b></th>
-        <th><b>Route</b></th> 
-    </tr>';
-  foreach($vehicleFullDetails as $row){
-$reg = $row['Reg_Number'];
-  $type = $row['Type'];
-  $driverFirstName = $row['firstname'];
-  $driverLastName = $row['lastname'];
-  $route = $row['Route'];
-   $html .= ' <tr>
-        <td>'.$reg.'</td>
-        <td>'.$type.'</td>
-        <td>'.$driverFirstName.' '.$driverLastName.'</td>
-         <td>'.$route.'</td>
-    </tr>';
-  }  
-$html .= '</table>
-<h4>Inspection</h4>
-<p>The current inspection details for the company vehicles are as follows:</p>
-<table border="1" cellspacing="1" cellpadding="4" align="center">
-    <tr>
-    <th><b>Registration Number</b></th>
-        <th><b>Inspection Date</b></th>
-        <th><b>Notes</b></th>
-        <th><b>Next Inspection Date</b></th> 
-    </tr>';
-  foreach($vehicleFullDetails as $row){
-    $reg = $row['Reg_Number'];
-$Last_Inspection = $row['Last_Inspection'];
-  $inspectionNotes = $row['inspectionNotes'];
-  $Next_Inspection = $row['Next_Inspection'];
-   $html .= ' <tr>
-        <td>'.$reg.'</td>
-        <td>'.$Last_Inspection.'</td>
-        <td>'.$inspectionNotes.'</td>
-        <td>'.$Next_Inspection.'</td>
-    </tr>';
-  }  
-$html .= '</table>
-<h4>Service</h4>
-<p>The current service details for the company vehicles are as follows:</p>
-<table border="1" cellspacing="1" cellpadding="4" align="center">
-    <tr>
-    <th><b>Registration Number</b></th>
-        <th><b>Service Date</b></th>
-        <th><b>Notes</b></th>
-        <th><b>Next Service Date</b></th> 
-    </tr>';
-  foreach($vehicleFullDetails as $row){
-    $reg = $row['Reg_Number'];
-$Last_Service = $row['Last_service'];
-  $serviceNotes = $row['serviceNotes'];
-  $Next_Service = $row['Next_service'];
-   $html .= ' <tr>
-        <td>'.$reg.'</td>
-        <td>'.$Last_Service.'</td>
-        <td>'.$serviceNotes.'</td>
-        <td>'.$Next_Service.'</td>
-    </tr>';
-  }  
-$html .= '</table>
+    $totalDemand += $row['sum'];
+    }
+    $totalsum = $requests_no['sum'];
+    $other = $totalsum - $totalDemand;
+$html .= '
+     <tr>
+        <td>Others</td>
+        <td>'.$other.'</td>
+    </tr>
+</table>
 ';
-
 
 $pdf->writeHTML($html, true, false, true, false, '');
 // reset pointer to the last page
