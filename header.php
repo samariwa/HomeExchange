@@ -353,13 +353,13 @@ else{
                      if(ExchangePoints($row2["tier"], $unit_of_exchange, $row["tier"]) > 0)
                       {
                           ?>
-                         <p>If you accept this request, <?php echo ExchangePoints($row2["tier"], $unit_of_exchange, $row["tier"]); ?> exchange points will be credited to your account</p>
+                         <p>If you accept this request, <?php echo ExchangePoints($row2["tier"], $unit_of_exchange, $row["tier"]); ?> exchange points will be debited to your account</p>
                           <?php
                       }
                       elseif(ExchangePoints($row2["tier"], $unit_of_exchange, $row["tier"]) < 0)
                       {
                         ?>
-                          <p>If you accept this request, <?php echo ExchangePoints($row2["tier"], $unit_of_exchange, $row["tier"]); ?> exchange points will be debited to your account</p>
+                          <p>If you accept this request, <?php echo ExchangePoints($row2["tier"], $unit_of_exchange, $row["tier"]); ?> exchange points will be credited from your account</p>
                         <?php
                       }
                     ?>

@@ -1627,7 +1627,7 @@ $(document).on('click','#make-request',function(e){
     e.stopPropagation();
     var details = JSON.parse(getCookie('requirements'));
     details.user_id = $('#user-id').val();
-    details.availability_id = $('#availability-id').val();
+    details.availability_id = $('#availability_id').val();
     details = JSON.stringify(details);
     var required_points = ExchangePoints($('#requester-home-tier').val(), $('#unit-of-exchange').val(), parseInt($('#home-tier-val').text()));
     if(required_points < 0)
@@ -1744,7 +1744,6 @@ $(document).on('click','.clear-request',function(e){
     var action = 'clear';
     $.post("save.php",{id: id,action:action, where:where},
     function(result){
-        alert(result)
         if(result == 1)
         {
             $( ".cart-product-container" ).load(window.location.href + " .cart-product-container" );
@@ -1788,7 +1787,6 @@ $(document).on('click','.cancel-request',function(e){
     var where = 'delete_request';
     $.post("delete.php",{id:id, where:where},
     function(result){
-        alert(result)
         if(result == 1)
         {
             alert('Request successfully cancelled')

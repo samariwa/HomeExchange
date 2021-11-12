@@ -468,7 +468,7 @@ function drawCountiesChart() {
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawRevenueExpenseChart);
     function drawRevenueExpenseChart() {
-      var where = 'salesExpenses';
+      var where = 'tierDemand';
      $.post("../charts.php",{where:where},
       function(result){
         var data = $.parseJSON(result);
@@ -480,21 +480,33 @@ function drawCountiesChart() {
         var data5 = data[5];
         var data6 = data[6];
         var data7 = data[7];
+        var data8 = data[8];
+        var data9 = data[9];
+        var data10 = data[10];
+        var data11 = data[11];
+        var data12 = data[12];
+        var data13 = data[13];
+        var data14 = data[14];
+        var data15 = data[15];
+        var data16 = data[16];
+        var data17 = data[17];
+        var data18 = data[18];
+        var data19 = data[19];
       var data = google.visualization.arrayToDataTable([
-        ['Week', 'Sales', 'Costs'],
-        ['Week 1',  parseInt(data0),  parseInt(data1)],
-        ['Week 2', parseInt(data2),   parseInt(data3)],
-        ['Week 3', parseInt(data4),    parseInt(data5)],
-        ['Week 4', parseInt(data6),    parseInt(data7)]
+        ['Week', 'Tier 1', 'Tier 2', 'Tier 3', 'Tier 4', 'Tier 5'],
+        ['Week 1',  parseInt(data0),  parseInt(data1), parseInt(data2), parseInt(data3), parseInt(data4)],
+        ['Week 2', parseInt(data5),  parseInt(data6), parseInt(data7), parseInt(data8), parseInt(data9)],
+        ['Week 3', parseInt(data10),  parseInt(data11), parseInt(data12), parseInt(data13), parseInt(data14)],
+        ['Week 4', parseInt(data15),  parseInt(data16), parseInt(data17), parseInt(data18), parseInt(data19)]
       ]);
 
       var options = {
-        title: 'Sales & Variable-Costs Comparison for the month',
+        title: 'Tier demand comparison for the month',
         hAxis: {title: 'Week',  titleTextStyle: {color: '#333'}},
         vAxis: {minValue: 0}
       };
 
-      var chart = new google.visualization.AreaChart(document.getElementById('chart_divide'));
+      var chart = new google.visualization.AreaChart(document.getElementById('tierDemand'));
       chart.draw(data, options);
       });
     }

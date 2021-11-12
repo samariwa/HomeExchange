@@ -74,7 +74,7 @@ class HomeExchangeRequest{
    public function AcceptExchangeRequest($request_id, $availability_id)
    {
       $home_availability = new HomeAvailabilityDetails();
-      return "UPDATE home_exchange_request SET request_response = '1' WHERE id = '$request_id'";
+      return "UPDATE home_exchange_request INNER JOIN home_availability ON home_exchange_request.availability_id = home_availability.id SET request_response = '1', home_availability_status = '2' WHERE home_exchange_request.id = '$request_id'";
       $home_availability->RemoveHomeAvailability($availability_id);
    }
 

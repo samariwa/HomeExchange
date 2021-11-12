@@ -40,7 +40,7 @@ if( $_POST['where'] == 'filter' )
             $output .= '
             <div class="col-sm-6 col-xl-4" id="'.$row['home_id'].'">
             <div class="product-item ';
-            if($row['home_availability_status'] == 0 ){ 
+            if($row['home_availability_status'] == 2 ){ 
                 $output .= ' reserved ';
              }
              $output .= '" id="'.$row['home_id'].'">

@@ -212,10 +212,6 @@
 </div>
 <br>
 <div class="row">
-  <div id="piechart2" style="width: 420px; height: 400px;"></div>   
-</div>
-<br>
-<div class="row">
   <div class="col-md-6">
     <h4>Tier Numbers</h4>
   </div>
@@ -230,9 +226,9 @@
 <br>
 <div class="row">
   <div class="col-md-6">
-    <h4>Customer Type Comparison</h4>
+    <h4>Tier demand comparison</h4>
   </div>
- <div id="customerTypeChart" style="width: 1100px; height: 500px"></div>
+ <div id="tierDemand" style="width: 1100px; height: 500px"></div>
 </div>
 <br>
 <div class="row">
@@ -241,14 +237,5 @@
   </div>
  <div id="curve_chart" style="width: 1100px; height: 500px"></div>
 </div>
-<br>
-<div class="row">
-  <div class="col-md-6">
-    <h4>Profit / Loss</h4>
-  </div>
-</div>
-<div class="row">
-    <div id="profitchart" style="width: 1200px; height: 600px;"></div>   
-</div>  
   <!-- Scroll to Top Button-->
   <?php include "admin_footer.php" ?> 

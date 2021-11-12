@@ -156,7 +156,7 @@
                                 <?php
                                   }
                                 ?>
-                                <input type="hidden" name="availability-id" id="availability-id" value="<?php echo $availability_result['availability_id']; ?>">
+                                <input type="hidden" name="availability_id" id="availability_id" value="<?php echo $availability_result['availability_id']; ?>">
                                 <input type="hidden" name="unit-of-exchange" id="unit-of-exchange" value="<?php echo $unit_of_exchange; ?>">
                                 <input type="hidden" name="user-id" id="user-id" value="<?php echo $customer_id; ?>">
                                 <?php } ?>

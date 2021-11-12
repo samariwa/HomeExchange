@@ -114,8 +114,8 @@ elseif($where == 'request')
      }
      elseif($points > 0)
      {
-      mysqli_query($connection,"UPDATE home_owners set exchange_points = exchange_points - $points WHERE id = '".$_POST['my_id']."'") or die(mysqli_error($connection));
-      mysqli_query($connection,"UPDATE home_owners set exchange_points = exchange_points + $points WHERE id = '".$_POST['requester_id']."'") or die(mysqli_error($connection));
+      mysqli_query($connection,"UPDATE home_owners set exchange_points = exchange_points + $points WHERE id = '".$_POST['my_id']."'") or die(mysqli_error($connection));
+      mysqli_query($connection,"UPDATE home_owners set exchange_points = exchange_points - $points WHERE id = '".$_POST['requester_id']."'") or die(mysqli_error($connection));
      }
      echo "1";
    }

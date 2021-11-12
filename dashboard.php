@@ -104,7 +104,7 @@ include('header.php');
                                 foreach($randomAvailableHomes as $row){
                                ?> 
                                <div class="swiper-slide">
-                                    <div class="product-item <?php if($row['home_availability_status'] == 0 ){ ?> reserved <?php }?>" id="<?php echo $row['home_id']; ?>">
+                                    <div class="product-item <?php if($row['home_availability_status'] == 2){ ?> reserved <?php }?>" id="<?php echo $row['home_id']; ?>">
                                         <div class="product-thumb">
                                             <a  href="home-dashboard.php?id=<?php echo $row['home_id'] ?>" class="modalOpen" id="<?php echo $row['home_id']; ?>"><img src="assets/images/homes/<?php echo $row['home_image']; ?>" alt="product"></a> 
                                            <?php
