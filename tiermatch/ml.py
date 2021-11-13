@@ -19,6 +19,7 @@ def knn_prediction(features):
     return tier  
 
 
-
 if __name__ == "__main__":
     print(knn_prediction(sys.argv[1]))
+
+ 

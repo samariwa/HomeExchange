@@ -351,7 +351,7 @@ else if($where == 'homesRegistration' )
         $row4 = mysqli_fetch_array($newHomesWk4);    
         $total1 = $row1['sum'];
         $total2 = $row2['sum'];
-        $total3 = $row4['sum'];
+        $total3 = $row3['sum'];
         $total4 = $row4['sum'];
         $homesRegistration = array();
         array_push($homesRegistration, $total1);
