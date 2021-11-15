@@ -86,13 +86,13 @@ require('config.php');
 
                 <div class="col-md-12">
                     <div class="menu-area d-none d-xl-flex justify-content-between align-items-center">
-                        <ul class="menu d-xl-flex flex-wrap list-unstyled">
-                            <li class="item-has-children" ><a href="#"> Learn More<i class="fas fa-angle-down"></i></a>
+                        <ul class="menu d-xl-flex flex-wrap list-unstyled ">
+                            <li class="item-has-children" ><a href="#"><i class="fas fa-question-circle"></i> Help & More&nbsp;<i class="fas fa-angle-down"></i></a>
                             <ul class="submenu">
-                                    <li><a href="#">How it works</a></li>
+                                    <!--<li><a href="#">How it works</a></li>-->
                                     <li><a href="contact.php">Contact Us</a></li>
+                                    <li><a href="faq.php">FAQs</a></li>
                             </ul>  
-                            <li class="nav-item"><a href="faq.php">FAQs</a></li>
                             </li>      
                         </ul>
                     </div>

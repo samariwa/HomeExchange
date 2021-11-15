@@ -315,7 +315,7 @@ else{
                         <div class="product-content">
                             <a href="#" class="product-title"><?php echo $row2["name"]; ?></a>
                             <div class="product-cart-info">
-                            <?php echo $row2["county"].', '.$row2["subcounty"]; ?></span>
+                            <i class="fas fa-map-marker-alt"></i> <?php echo $row2["county"].', '.$row2["subcounty"]; ?></span>
                             <br>
                              Tier <?php echo $row2["tier"]; ?>
                             </div>
@@ -392,7 +392,7 @@ else{
                         <div class="product-content">
                             <a href="#" class="product-title"><?php echo $row2["name"]; ?></a>
                             <div class="product-cart-info">
-                            <?php echo $row2["county"].', '.$row2["subcounty"]; ?></span>
+                            <i class="fas fa-map-marker-alt"></i> <?php echo $row2["county"].', '.$row2["subcounty"]; ?></span>
                             <br>
                              Tier <?php echo $row2["tier"]; ?>
                             </div>

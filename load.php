@@ -97,7 +97,7 @@ if( $_POST['where'] == 'filter' )
                 <div class="product-content">
                     <a href="home-dashboard.php?id='.$row['home_id'].'" class="cata" id="itemCategory'.$row['home_id'].'">Tier'.$row['home_tier'].'</a>
                     <h6><a href="home-dashboard.php?id='.$row['home_id'].'" class="product-title">'.$row['name'].'</a></h6>
-                    <p class="quantity">'.$row['county'].'</p>
+                    <p class="quantity"><i class="fas fa-map-marker-alt"></i> '.$row['county'].'</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="price">Ratings</div>'.rateFilter($row['average_rating']);
              $output .= '</div>

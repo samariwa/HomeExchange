@@ -113,7 +113,7 @@ $location = $result['physical_address'];
                                     </div>
                                     <div class="product-content pl-0">
                                         <div class="product-price">
-                                            <span class="ml-4"> <?php echo $row2['county'].', '.$row2['subcounty']; ?></span>
+                                            <span class="ml-4"><i class="fas fa-map-marker-alt"></i> <?php echo $row2['county'].', '.$row2['subcounty']; ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -212,7 +212,7 @@ $location = $result['physical_address'];
                                     </div>
                                     <div class="product-content pl-0">
                                         <div class="product-price">
-                                            <span class="ml-4"> <?php echo $row2['county'].', '.$row2['subcounty']; ?></span>
+                                            <span class="ml-4"><i class="fas fa-map-marker-alt"></i> <?php echo $row2['county'].', '.$row2['subcounty']; ?></span>
                                         </div>
                                     </div>
                                 </div>

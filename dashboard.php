@@ -163,7 +163,7 @@ include('header.php');
                                         <div class="product-content">
                                             <a href="home-dashboard.php?id=<?php echo $row['home_id'] ?>" class="cata" id="itemCategory<?php echo $row['home_id']; ?>">Tier <?php echo $row['home_tier']; ?></a>
                                             <h6><a href="home-dashboard.php?id=<?php echo $row['home_id'] ?>" class="product-title"><?php echo $row['name']; ?></a></h6>
-                                            <p class="quantity"><?php echo $row['county']; ?></p>
+                                            <p class="quantity"><i class="fas fa-map-marker-alt"></i> <?php echo $row['county']; ?></p>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="price">Ratings</div><?php  rate($row['average_rating']); ?>
                                                 

@@ -86,7 +86,7 @@
                         <br>
                         <div class=" col-12 row">
                             <div class="col-5 ml-5">
-                                    <h6>Kenya > <?php echo $result['county'].' > '.$result['subcounty'] ?></h6>
+                                    <h6><i class="fas fa-map-marker-alt"></i>  Kenya > <?php echo $result['county'].' > '.$result['subcounty'] ?></h6>
                             </div>
                             <div class="col-5 ml-5">
                                 <div class="row">
@@ -137,7 +137,7 @@
                         ?>
                         <div class="col-12 row">
                             <div class="col-5 ml-5">
-                                    <p><b>Next Availability: <?php echo $from; ?> - <?php echo $to; ?></b></p>
+                                    <p><i class="fas fa-calendar"></i>&ensp;<b>Next Availability: <?php echo $from; ?> - <?php echo $to; ?></b></p>
                             </div>
                             <div class="col-5">
                             <?php if($result['user_id'] != $customer_id){ ?>
@@ -240,7 +240,7 @@
                         <br>
                         <div class=" col-12 row">
                             <div class="col-5 ml-5">
-                                    <h6>Kenya > <?php echo $result['county'].' > '.$result['subcounty'] ?></h6>
+                                    <h6><i class="fas fa-map-marker-alt"></i>  Kenya > <?php echo $result['county'].' > '.$result['subcounty'] ?></h6>
                             </div>
                             <div class="col-5 ml-5">
                                 <h6>Ratings   <?php rate($result['average_rating']) ?></h6>
@@ -257,7 +257,7 @@
                                         if($availability_result == TRUE)
                                         {
                                     ?>
-                                    <p><b>Next Availability: <?php echo $from; ?> - <?php echo $to; ?></b></p>
+                                    <p><i class="fas fa-calendar"></i>&ensp;<b>Next Availability: <?php echo $from; ?> - <?php echo $to; ?></b></p>
                                     <?php
                                         }
                                     ?>
