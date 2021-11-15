@@ -12,6 +12,12 @@
         $availableHomesCount =  mysqli_num_rows($availableHomesList);
     }
   }
+  if(isset($_GET['location']))
+  {
+        $home = new Home();
+        $availableHomesList =  mysqli_query($connection,$home->fetchHomesInLocation($_GET['location']))or die($connection->error);
+        $availableHomesCount =  mysqli_num_rows($availableHomesList);
+  }
 ?> 
             <!-- page-header-section start -->
             <div class="page-header-section">

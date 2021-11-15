@@ -13,7 +13,7 @@ if(isset($_POST['search'])){
         while($row = mysqli_fetch_array($result))
         {
           $result_output .= '
-          <a href="homes-list.php#'.$row["subcounty"].'" class="list-group-item list-group-item-action border-1">'.$row["subcounty"].'</a>
+          <a href="homes-list.php?location='.$row["subcounty"].'" class="list-group-item list-group-item-action border-1">'.$row["subcounty"].'</a>
           ';
         }                      
        }
@@ -21,7 +21,7 @@ if(isset($_POST['search'])){
         while($row2 = mysqli_fetch_array($result2))
         {
           $result_output .= '
-          <a href="homes-list.php#'.$row2["county"].'" class="list-group-item list-group-item-action border-1">'.$row2["county"].'</a>
+          <a href="homes-list.php?location='.$row2["county"].'" class="list-group-item list-group-item-action border-1">'.$row2["county"].'</a>
           ';
         }
        }

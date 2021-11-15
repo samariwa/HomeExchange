@@ -1468,6 +1468,20 @@ $('#location_Search').keyup(function(){
     });
  });
 
+ $(document).on('click','#search-Location-Submit',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var location = $("#Location_Search").val();
+    window.location.href = 'homes-list.php?location='+location;
+});
+
+$(document).on('click','#searchLocationSubmit',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var location = $("#location_Search").val();
+    window.location.href = 'homes-list.php?location='+location;
+});
+
  $('#county_search').keyup(function(){
     var subcounty = document.getElementById('subcounty_search');
     var text = $("#county_search").val();

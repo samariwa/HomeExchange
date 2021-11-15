@@ -2014,7 +2014,6 @@ function saveOrderToday(idx){
       processData : false,
       cache : false,
         success : function(data){
-          alert(data)
          if (data == 'success') {
           alert(module+' Added Successfully');
           location.reload(true);

@@ -238,7 +238,7 @@ else{
 
                         <form action="search" method="POST" class="search-form">
                             <input type="text" name="search" id="Location_Search" placeholder="Where are you visiting?">
-                            <button type="submit" class="submit-btn" name="searchSubmit"><i class="fas fa-search"></i></button>
+                            <button type="submit" class="submit-btn" id="search-Location-Submit" name="search-Location-Submit"><i class="fas fa-search"></i></button>
                         </form>
                         <div class="col-12" style="position: relative;z-index: 4;">
                             <div class="list-group" id="Show_List" >

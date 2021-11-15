@@ -30,7 +30,7 @@ require('config.php');
         <div class="select-search-option d-none d-md-flex">
             <form action="search" method="POST" class="search-form">
                 <input type="text" name="search" id="location_Search" placeholder="Where are you visiting?">
-                <button type="submit" class="submit-btn" name="searchSubmit"><i class="fas fa-search"></i></button>
+                <button type="submit" class="submit-btn" id= "searchLocationSubmit" name="searchLocationSubmit"><i class="fas fa-search"></i></button>
             </form>
         </div>
         <div class="col-7" style="position: absolute;z-index: 4;">
