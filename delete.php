@@ -14,6 +14,7 @@ else if($where == 'home' )
 {  
     $home = new Home();
     mysqli_query($connection, $home->DeleteHome($_POST['id']))or die($connection->error);
+    mysqli_query($connection, "DELETE FROM home_features WHERE home_id = '".$_POST['id']."'")or die($connection->error);
     echo 1;
     exit();
 }
