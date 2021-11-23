@@ -8,6 +8,13 @@
   $availability_result = mysqli_fetch_array($availability_details);
   $request_details = mysqli_query($connection,$requests->getExchangeRequests($_GET['id']))or die($connection->error);
   $request_result = mysqli_fetch_array($request_details);
+  $unique_visitor = mysqli_query($connection,$home->fetchDashboardVisitor($iptocheck ,$_GET['id']))or die($connection->error);
+  $visitor_result = mysqli_fetch_array($unique_visitor);
+  if($visitor_result['sum'] == 0)
+  {
+    mysqli_query($connection,$home->addUniqueVisitor($iptocheck ,$_GET['id']))or die($connection->error);
+    mysqli_query($connection,$home->increaseUniqueVisitorCount($_GET['id']))or die($connection->error);
+  }
   $cookie = new CookieManager();
 ?> 
             <!-- page-header-section start -->
@@ -236,6 +243,9 @@
                                 <div class="col-5 ml-5">
                                     <h2><?php echo $result['name'] ?></h2>
                                 </div>
+                                <div class="col-5 ml-5 mt-3">
+                                    <h6 class="card-subtitle mb-2">My ratings <?php rate($availability_result['owner_rating']) ?></h6>
+                                </div>
                         </div>
                         <br>
                         <div class=" col-12 row">
@@ -243,7 +253,7 @@
                                     <h6><i class="fas fa-map-marker-alt"></i>  Kenya > <?php echo $result['county'].' > '.$result['subcounty'] ?></h6>
                             </div>
                             <div class="col-5 ml-5">
-                                <h6>Ratings   <?php rate($result['average_rating']) ?></h6>
+                                <h6>Home ratings   <?php rate($result['average_rating']) ?></h6>
                             </div>
                         </div>
                         <br>
@@ -262,12 +272,8 @@
                                         }
                                     ?>
                             </div>
-                            <div class="col-5">
-                            <?php if($result['user_id'] != $customer_id){ ?>
-                                <div class="make-reservation ml-5">
-                                    <a href="#">Make Reservation</a>
-                                </div>
-                                <?php } ?>
+                            <div class="col-5 ml-5 mt-2">
+                                <h6 class="card-subtitle mb-2"><i class="fas fa-eye"></i>&ensp;Unique dashboard visitors: <?php echo $result['dashboard_views']; ?></h6>
                             </div>
                         </div>
                         <br>

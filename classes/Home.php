@@ -12,7 +12,7 @@ class Home{
 
    public function fetchHomeDetails($home_id)
    {
-      return "SELECT homes.id as home_id, users.id as user_id, home_owners.id as owner_id, first_name, last_name, name,description, county, subcounty, homes.average_rating as average_rating, home_tier,home_image,home_extra_details  FROM homes INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id INNER JOIN subcounties ON homes.address = subcounties.id INNER JOIN counties ON subcounties.county_id = counties.id WHERE homes.id = '$home_id'";
+      return "SELECT homes.id as home_id, users.id as user_id, home_owners.id as owner_id, first_name, last_name, name,description, county, subcounty, dashboard_views, homes.average_rating as average_rating, home_tier,home_image,home_extra_details  FROM homes INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id INNER JOIN subcounties ON homes.address = subcounties.id INNER JOIN counties ON subcounties.county_id = counties.id WHERE homes.id = '$home_id'";
    }
 
    public function fetchAvailabilityDetails($home_id)
@@ -24,6 +24,22 @@ class Home{
    {
       $query = new Database();
       return $query->get("homes","*", array('home_owner_id','=', $owner_id));
+   }
+
+   public function fetchDashboardVisitor($ip_address, $home_id)
+   {
+      return "SELECT COALESCE(COUNT(id),0) as sum FROM home_dashboard_views WHERE ip_address = '$ip_address' AND home_id = '$home_id'";
+   }
+
+   public function increaseUniqueVisitorCount($home_id)
+   {
+      return "UPDATE homes SET dashboard_views = dashboard_views + '1' WHERE id = '$home_id'";
+   }
+
+   public function addUniqueVisitor($ip_address, $home_id)
+   {
+      $query = new Database();
+      return $query->insert("home_dashboard_views", array('home_id' => $home_id, 'ip_address' => $ip_address));
    }
 
    public function searchAvailableHomes($swimming_pool, $wifi, $tv, $ac, $capacity, $gym, $parking, $wheelchair, $pets, $kids, $workers, $security, $garden, $smokers, $county, $subcounty, $enddate)
