@@ -11,7 +11,7 @@ if (isset($_SESSION['logged_in'])) {
 }
 if( $_POST['where'] == 'filter' )
 {
-    $filterList = "SELECT homes.id as home_id, first_name, last_name, name, county, subcounty, homes.average_rating as average_rating, home_tier,home_image,home_extra_details,availability_start_date,availability_end_date,home_availability_status,extra_details  FROM homes INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id INNER JOIN subcounties ON homes.address = subcounties.id INNER JOIN counties ON subcounties.county_id = counties.id INNER JOIN home_availability ON home_availability.home_id = homes.id INNER JOIN home_features ON homes.id = home_features.home_id WHERE home_status = '1'";
+    $filterList = "SELECT homes.id as home_id, first_name, last_name, name, county, subcounty, homes.average_rating as average_rating, home_tier,home_image,home_extra_details,availability_start_date,availability_end_date,home_availability_status,extra_details  FROM homes INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id INNER JOIN subcounties ON homes.address = subcounties.id INNER JOIN counties ON subcounties.county_id = counties.id INNER JOIN home_availability ON home_availability.home_id = homes.id INNER JOIN home_features ON homes.id = home_features.home_id WHERE home_status = '1' AND NOT home_availability_status = '0'";
     if(isset($_POST['minimum_rating'],$_POST['minimum_rating']))
     {
         $filterList .= "AND homes.average_rating BETWEEN '".$_POST['minimum_rating']."' AND '".$_POST['maximum_rating']."'";
@@ -50,6 +50,7 @@ if( $_POST['where'] == 'filter' )
                     <a  href="home-dashboard.php?id='.$row['home_id'].'" class="modalOpen" id="'.$row['home_id'].'"><img src="assets/images/homes/'.$row['home_image'].'" alt="home"></a>
                     ';
                     $start_date = strtotime($row['availability_start_date']);
+                    $end_date = strtotime($row['availability_end_date']);
                         $current_date = time();
                         $diff_date = round(($start_date - $current_date) / (60 * 60 * 24));
                         if($diff_date <= 10)
@@ -67,6 +68,9 @@ if( $_POST['where'] == 'filter' )
                         
                                 $output .= '<span class="batch sale">Today</span>';
                         
+                            }
+                            elseif(($diff_date < 0) && ($end_date > $current_date)){
+                                $output .= '<span class="batch sale">Available</span>';
                             }
                         }
                         $item_in_wishlist = '';
