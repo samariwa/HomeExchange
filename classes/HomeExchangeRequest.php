@@ -15,7 +15,7 @@ class HomeExchangeRequest{
 
    public function GetMyRequests($user_id)
    {
-      return "SELECT home_owners.id as my_id, home_exchange_request.id as request_id,home_exchange_request.id as request_id, request_response, first_name, last_name, phone_number, homes.name as name, homes.home_tier as tier FROM home_exchange_request INNER JOIN home_availability ON home_exchange_request.availability_id = home_availability.id INNER JOIN homes ON home_exchange_request.exchange_home_id = homes.id INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id WHERE users.id = '$user_id' and request_response != '2'";
+      return "SELECT home_owners.id as my_id, home_exchange_request.id as request_id,home_exchange_request.id as request_id, request_response, first_name, last_name, phone_number, exchange_start_date, exchange_end_date, homes.name as name, homes.home_tier as tier FROM home_exchange_request INNER JOIN home_availability ON home_exchange_request.availability_id = home_availability.id INNER JOIN homes ON home_exchange_request.exchange_home_id = homes.id INNER JOIN home_owners ON homes.home_owner_id = home_owners.id INNER JOIN users ON home_owners.user_id = users.id WHERE users.id = '$user_id' and request_response != '2'";
    }
 
    public function GetMyRequestsOtherUserDetails($request_id)
