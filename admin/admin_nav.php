@@ -426,7 +426,7 @@ Preloader
                   </div>
                   <div>
                     <div class="small text-gray-500"><?php //echo $date ?></div>
-                    Kindly restock <?php //echo $Name ?>. <?php //echo $Quantity ?> units left.
+                    <!--Kindly restock <?php //echo $Name ?>. <?php //echo $Quantity ?> units left.-->
                   </div>
                 </a>
                 <?php

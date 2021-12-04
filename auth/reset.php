@@ -27,7 +27,8 @@ if (isset($_REQUEST['reset_button'])) {
    if (isset($_GET['email']) && isset($_GET['token'])){
       $email = $connection->real_escape_string($_GET['email']);
       $token = $connection->real_escape_string($_GET['token']);
-      $exists=mysqli_num_rows(mysqli_query($connection,"SELECT role_id, phone_number FROM users WHERE email_address='$email' AND token='$token' AND tokenExpire > NOW()"));
+      $user_details = mysqli_query($connection,"SELECT role_id, phone_number FROM users WHERE email_address='$email' AND token='$token' AND tokenExpire > NOW()");
+      $exists=mysqli_num_rows($user_details);
       if($exists > 0){
          if ((isset($_POST["pass"])) &&  (isset($_POST["pass2"]))) {
          $desired_password = sanitize($_POST["pass"]);
@@ -57,14 +58,14 @@ if (isset($_REQUEST['reset_button'])) {
              if(($passwordnotempty == TRUE) && ($passwordnotempty1 == TRUE) && ($passwordmatch == TRUE)){
                  $hash = password_hash($desired_password, PASSWORD_DEFAULT);
                  mysqli_query($connection,$query->update("users", "email_address", $email, array('password' => $hash))) or die(mysqli_error($connection));
-                 $role_id = mysqli_fetch_array($exists);
-                  if($role_id['role_id'] == 1)
+                 $roleId = mysqli_fetch_array($user_details);
+                  if($roleId['role_id'] == 1)
                   {
                     mysqli_query($connection,$query->update("users", "email_address", $email, array('user_status' => '1'))) or die(mysqli_error($connection));
                   }  
                  //redirect to login page
-                 echo '<script type="text/javascript">
-                alert("Your password reset was successfull!");
+                echo '<script type="text/javascript">
+                alert("Your password reset was successful!");
                 window.location.href="login.php?page_url=../template/index.php";
                 </script>';
              }
