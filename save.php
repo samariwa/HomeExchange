@@ -86,7 +86,7 @@ if ($row3[0] == 1 && $_POST['mobile'] !== $row2['phone_number'] && $_POST['email
     echo "exists";
 }
 else{
-mysqli_query($connection,"UPDATE `users`  SET `first_name` = '".$_POST['firstname']."',`other_name` = '".$_POST['othername']."',`last_name` = '".$_POST['lastname']."', `email_address` = '".$_POST['email']."',`phone_number` = '".$_POST['mobile']."' WHERE `phone_number` = '".$row2['phone_number']."'") or die(mysqli_error($connection));
+mysqli_query($connection,"UPDATE `users`  SET `first_name` = '".$_POST['firstname']."',`other_name` = '".$_POST['othername']."',`last_name` = '".$_POST['lastname']."', `email_address` = '".$_POST['email']."',`phone_number` = '".$_POST['mobile']."',`physical_address` = '".$_POST['location']."' WHERE `phone_number` = '".$row2['phone_number']."'") or die(mysqli_error($connection));
 echo "success";
 unset($_SESSION['user']);
 unset($_SESSION['email']);
