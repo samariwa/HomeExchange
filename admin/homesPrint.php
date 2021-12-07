@@ -19,7 +19,7 @@ $today = date('l, F d, Y h:i A', time());
 <hr>
 <p> <?php echo $today ?></p>
 <hr>
-<table  class="table table-striped " style="display:block;overflow-y:scroll;">
+<table  class="table table-striped" style="display:block;overflow-y:scroll;">
   <thead class="thead-dark">
     <tr>
       <th scope="col" width="3%">#</th>

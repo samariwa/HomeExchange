@@ -792,7 +792,7 @@ $(document).on('click','.anonymousSubscription',function(){
     var home_id = $(this).attr("id");
     var start_date = $(`#start_date${home_id}`).val();
     var end_date = $(`#end_date${home_id}`).val();
-    var extra_details = $(`#extra_details${home_id}`).val();
+    var extra_details = $(`#extra-details${home_id}`).val();
     if(extra_details == null)
     {
         extra_details = 'No extra details';
@@ -1133,7 +1133,7 @@ $('#home-dashboard-image').on('change',function(){
         data: form_data,
         contentType : false,
         processData : false,
-      cache : false,
+        cache : false,
         success : function(result){
             $( "#home-image-section" ).load(window.location.href + " #home-image-section" );
          }
