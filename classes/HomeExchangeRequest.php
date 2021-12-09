@@ -62,7 +62,7 @@ class HomeExchangeRequest{
    public function CancelExchangeRequest($request_id)
    {
       $query = new Database();
-      return $query->delete("home_exchange_request",$request_id);
+      return $query->delete("home_exchange_request",array('id', '=', $request_id));
    }
 
    public function FetchExchangeRequests($availability_id)

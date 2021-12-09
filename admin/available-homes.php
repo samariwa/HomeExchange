@@ -44,7 +44,7 @@
         $count = 0;
         foreach($availableHomesList as $row){
          $count++;
-         $id = $row['home_id'];
+         $id = $row['availability_id'];
          $owner_name = $row['first_name'].' '.$row['last_name'];
          $name = $row['name'];
         $location = $row['county'].', '.$row['subcounty'];

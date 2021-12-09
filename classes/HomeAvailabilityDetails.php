@@ -16,7 +16,7 @@ class HomeAvailabilityDetails{
     public function RemoveHomeAvailability($availability_id)
     {
         $query = new Database();
-        return $query->delete("home_availability",$availability_id);
+        return $query->delete("home_availability",array('id', '=', $availability_id));
     }
 
 }

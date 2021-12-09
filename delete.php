@@ -36,10 +36,6 @@ else if($where == 'delete_request' )
     exit();
 }
 
-elseif ($where == 'cancel_availability') {
-    mysqli_query($connection,"DELETE FROM `home_availability` WHERE `id` = '".$_POST['availability_id']."'") or die(mysqli_error($connection));
-    echo 'success';
-  }
   elseif ($where == 'delete_home') {
     mysqli_query($connection,"DELETE FROM `homes` WHERE `id` = '".$_POST['id']."'") or die(mysqli_error($connection));
     echo 'success';

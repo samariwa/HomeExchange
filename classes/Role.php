@@ -27,6 +27,6 @@ class Role{
     public function DeleteRole($role_id)
     {
         $query = new Database();
-      return $query->delete("roles",$role_id);
+      return $query->delete("roles",array('id', '=', $role_id));
     }
 }

@@ -88,6 +88,6 @@ class User{
     public function DeleteUser($user_id)
     {
         $db = new Database();
-       return $db->delete("users", $user_id);
+       return $db->delete("users", array('id', '=', $user_id));
     }
 }

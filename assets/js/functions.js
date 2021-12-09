@@ -1145,9 +1145,9 @@ $(document).on('click','#cancel-availability',function(e){
     {if(result){
     e.preventDefault();
     e.stopPropagation();
-    var where = 'cancel_availability';
+    var where = 'home_avaliability';
     var availability_id = $('#availability_id').val();
-    $.post("delete.php",{availability_id:availability_id, where:where},
+    $.post("delete.php",{id:availability_id, where:where},
     function(result){
         if (result == 'success') {
             alert("The home's availbility has been cancelled");
