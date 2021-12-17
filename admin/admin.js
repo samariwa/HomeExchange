@@ -590,7 +590,7 @@ function drawCountiesChart() {
         var data2 = data[2];
         var data3 = data[3];
       var data = google.visualization.arrayToDataTable([
-        ['Week ', 'Sales'],
+        ['Week ', 'Number of sign ups'],
         ['Week 1',  parseInt(data0)],
         ['Week 2',  parseInt(data1)],
         ['Week 3',  parseInt(data2)],
