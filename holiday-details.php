@@ -89,7 +89,7 @@
                  </select>
                 </div>
                 <br>
-                <input type="hidden" name="availability-id" id="availability-id" value="<?php echo $_GET['availability']; ?>">
+                <input type="hidden" name="availability-id" id="availabilityId" value="<?php echo $_GET['availability']; ?>">
                 <input type="hidden" name="unit-of-exchange" id="unit-of-exchange" value="<?php echo $unit_of_exchange; ?>">
                 <input type="hidden" name="user-id" id="user-id" value="<?php echo $customer_id; ?>">
                 <input type="hidden" name="home-id" id="home-id" value="<?php echo $_GET['id']; ?>">

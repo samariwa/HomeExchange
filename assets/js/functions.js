@@ -1670,7 +1670,7 @@ $(document).on('click','#submit-holiday-details',function(e){
     end_date : $("#end_date").val(),
     extra_requirements : $("#extra-requirements").val(),
     user_id : $('#user-id').val(),
-    availability_id : $('#availability-id').val()
+    availability_id : $('#availabilityId').val()
     });
     setCookie('requirements',details,$("#holiday_requirements_expiry").val());
     $.post("load.php",{exchange_home_id:$("#exchange_home_id").val(), target_home_id:$("#home-id").val(), where:'getTier'},
