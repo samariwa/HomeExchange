@@ -62,7 +62,7 @@
       <td class="editable"id="extra<?php echo $count; ?>"><?php echo $extra_details; ?></td>
        <td>&emsp;&emsp;
          <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-dark btn-sm active blacklistHome" role="button" aria-pressed="true" >Blacklist</button>
-       <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-danger btn-sm active deleteHome" role="button" aria-pressed="true" ><i class="fa fa-trash"></i>Delete</button></td>
+       <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-danger btn-sm active deleteHome" role="button" aria-pressed="true" ><i class="fa fa-trash"></i> Delete</button></td>
     </tr>
     <?php
     }

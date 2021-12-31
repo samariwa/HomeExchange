@@ -9,6 +9,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <title>Customers Print</title>
 </head><body>
 <p align="center"><strong><img src="../assets/images/LOGO.png" height="100" width="150"></strong></p>
@@ -23,12 +24,12 @@ $today = date('l, F d, Y h:i A', time());
 <table  class="table table-striped " style="display:block;overflow-y:scroll;">
   <thead class="thead-dark">
     <tr>
-      <th scope="col" width="3%">#</th>
-      <th scope="col" width="14%">Name</th>
-      <th scope="col" width="12%">Physical Address</th>
-      <th scope="col" width="17%">Contact Number</th>
-      <th scope="col" width="10%">Email Address</th>
-      <th scope="col"width="10%">Exchange Points</th>
+      <th class="text-center" scope="col" width="3%">#</th>
+      <th class="text-center" scope="col" width="14%">Name</th>
+      <th class="text-center" scope="col" width="12%">Physical Address</th>
+      <th class="text-center" scope="col" width="17%">Contact Number</th>
+      <th class="text-center" scope="col" width="10%">Email Address</th>
+      <th class="text-center" scope="col"width="10%">Exchange Points</th>
     </tr>
   </thead>
   <tbody >
@@ -53,12 +54,12 @@ $today = date('l, F d, Y h:i A', time());
         $email = $row['email_address'];
       ?>
     <tr>
-      <th scope="row"><?php echo $id; ?></th>
-      <td ><?php echo $name; ?></td>
-      <td><?php echo $location; ?></td>
-      <td><?php echo $number; ?></td>
-      <td ><?php echo $email; ?></td>
-      <td ><?php echo $points; ?></td>
+      <th class="text-center" scope="row"><?php echo $id; ?></th>
+      <td class="text-center"><?php echo $name; ?></td>
+      <td class="text-center"><?php echo $location; ?></td>
+      <td class="text-center"><?php echo $number; ?></td>
+      <td class="text-center"><?php echo $email; ?></td>
+      <td class="text-center"><?php echo $points; ?></td>
     </tr>
     <?php
     }

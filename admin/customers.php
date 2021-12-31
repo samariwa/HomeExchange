@@ -32,9 +32,9 @@
       <th scope="col" width="3%">#</th>
       <th scope="col" width="22%">Name</th>
       <th scope="col" width="17%">Physical Address</th>
-      <th scope="col" width="17%">Contact Number</th>
+      <th scope="col" width="16%">Contact Number</th>
       <th scope="col" width="8%">Email Address</th>
-      <th scope="col"width="22%"></th>
+      <th scope="col"width="23%"></th>
     </tr>
   </thead>
   <tbody >
@@ -56,7 +56,7 @@
       <td class="editable" id="email<?php echo $count; ?>"><?php echo $email; ?></td>
        <td>&emsp;&emsp;
          <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-dark btn-sm active blacklistCustomer" role="button" aria-pressed="true" >Blacklist</button>
-       <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-danger btn-sm active deleteCustomer" role="button" aria-pressed="true" ><i class="fa fa-user-times"></i>Delete</button></td>
+       <button id="<?php echo $id; ?>" data_id="<?php echo $id; ?>" class="btn btn-danger btn-sm active deleteCustomer" role="button" aria-pressed="true" ><i class="fa fa-user-times"></i> Delete</button></td>
     </tr>
     <?php
     }

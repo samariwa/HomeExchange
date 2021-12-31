@@ -8,6 +8,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <title>Homes Print</title>
 </head><body>
 <p align="center"><strong><img src="../assets/images/LOGO.png" height="100" width="150"></strong></p>
@@ -22,13 +23,13 @@ $today = date('l, F d, Y h:i A', time());
 <table  class="table table-striped" style="display:block;overflow-y:scroll;">
   <thead class="thead-dark">
     <tr>
-      <th scope="col" width="3%">#</th>
-      <th scope="col" width="14%">Home Owner</th>
-      <th scope="col" width="14%">Name</th>
-      <th scope="col" width="12%">Location</th>
-      <th scope="col" width="17%">Rating</th>
-      <th scope="col" width="10%">Tier</th>
-      <th scope="col"width="10%">Extra Details</th>
+      <th class="text-center" scope="col" width="3%">#</th>
+      <th class="text-center" scope="col" width="14%">Home Owner</th>
+      <th class="text-center" scope="col" width="14%">Name</th>
+      <th class="text-center" scope="col" width="12%">Location</th>
+      <th class="text-center" scope="col" width="17%">Rating</th>
+      <th class="text-center" scope="col" width="10%">Tier</th>
+      <th class="text-center" scope="col"width="10%">Extra Details</th>
     </tr>
   </thead>
   <tbody >
@@ -45,13 +46,13 @@ $today = date('l, F d, Y h:i A', time());
          $extra_details = $row['home_extra_details'];
       ?>
     <tr>
-      <th scope="row"><?php echo $id; ?></th>
-      <td ><?php echo $owner_name; ?></td>
-      <td><?php echo $name; ?></td>
-      <td><?php echo $location; ?></td>
-      <td ><?php echo  $rating; ?></td>
-      <td ><?php echo $tier; ?></td>
-      <td><?php echo $extra_details; ?></td>
+      <th scope="row" class="text-center"><?php echo $id; ?></th>
+      <td class="text-center"><?php echo $owner_name; ?></td>
+      <td class="text-center"><?php echo $name; ?></td>
+      <td class="text-center"><?php echo $location; ?></td>
+      <td class="text-center"><?php echo  $rating; ?></td>
+      <td class="text-center"><?php echo $tier; ?></td>
+      <td class="text-center"><?php echo $extra_details; ?></td>
     </tr>
     <?php
     }

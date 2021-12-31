@@ -402,7 +402,7 @@
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <div class="testimonial-body">
-                                        <div class="testi-author-pic"><img src="assets/images/testimonial/author.jpg" alt="author"></div>
+                                        <div class="testi-author-pic"><img src="assets/images/testimonial/author4.jpeg" alt="author"></div>
                                         <p class="desc">What a load of rubbish bits and bobs pear shaped owt to do with me good tinkety tonk old fruit, car boot my good sir buggered plastered cheeky David, haggle young delinquent say so I said bite your arm off</p>
                                         <div class="author-info">
                                             <h6 class="name">Jhon Doe</h6>
