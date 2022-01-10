@@ -160,7 +160,15 @@ mysqli_query($connection,$query->update("users", "email_address", $email, array(
           $mail->Password = $authenticator_password;
           $mail -> Subject = "Reset Admin Password";
           $mail -> isHTML(true);
+          $mail->AddEmbeddedImage('../assets/images/logo.png', 'logo');
+          $mail->AddEmbeddedImage('../assets/images/socials/facebook.png', 'facebook');
+          $mail->AddEmbeddedImage('../assets/images/socials/twitter.png', 'twitter');
+          $mail->AddEmbeddedImage('../assets/images/socials/instagram.png', 'instagram');
+          $mail->AddEmbeddedImage('../assets/images/socials/youtube.png', 'youtube');
           $mail -> Body = "
+              <p style='text-align:center'><img src='cid:logo' height='80px' width='80px' alt='logo'></p>
+              <hr style='border-top: 3px solid #FD5555;'>
+              <br>
                 Hi $identity,<br><br>
                   Kindly reset your default administrator password for security purposes. In order to reset it, please click on the link below:<br>
                   <a href='
@@ -168,6 +176,17 @@ mysqli_query($connection,$query->update("users", "email_address", $email, array(
                   Kindly reset your password in the given time limit of 5 minutes.<br><br>
                   Kind Regards,<br>
                   Home Swap.
+                  <br><br><br><br><br><br>
+                  <hr style='border-top: 1px solid #666666;'>
+                  <br>
+                    <a href='#'><img src='cid:facebook' style='width:25px;height:25px;' alt='facebook'></a>
+                    <a href='#'><img src='cid:twitter' style='width:25px;height:25px;' alt='twitter'></a>
+                    <a href='#'><img src='cid:instagram' style='width:25px;height:25px;' alt='instagram'></a>
+                    <a href='#'><img src='cid:youtube' style='width:25px;height:25px;' alt='youtube'></a>
+                  
+                    <a href='#' style='margin-left:10px;color: #666666; text-align:right'>Unsubscribe</a>
+                    <a href='#' style='margin-left:10px;color: #666666; text-align:right'>Privacy Policy</a>
+                    <a href='#' style='margin-left:10px;color: #666666; text-align:right'>Terms of Service</a>
                   ";
             if($mail -> send()){
               $inactive = TRUE;

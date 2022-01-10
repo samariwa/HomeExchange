@@ -133,7 +133,15 @@ if (isset($_REQUEST['submit_button'])) {
         $mail->Password = $authenticator_password;
         $mail -> Subject = "Activate your Home Swap account";
         $mail -> isHTML(true);
+		$mail->AddEmbeddedImage('../assets/images/logo.png', 'logo');
+        $mail->AddEmbeddedImage('../assets/images/socials/facebook.png', 'facebook');
+        $mail->AddEmbeddedImage('../assets/images/socials/twitter.png', 'twitter');
+        $mail->AddEmbeddedImage('../assets/images/socials/instagram.png', 'instagram');
+        $mail->AddEmbeddedImage('../assets/images/socials/youtube.png', 'youtube');
         $mail -> Body = "
+		      <p style='text-align:center'><img src='cid:logo' height='80px' width='80px' alt='logo'></p>
+              <hr style='border-top: 3px solid #FD5555;'>
+              <br>
               Hi $first_name,<br><br>
 			    You've successfully signed up for Home Swap.
                 In order to activate your account, please click on the link below (this will confirm you email address):<br>
@@ -142,6 +150,17 @@ if (isset($_REQUEST['submit_button'])) {
                 
                 Kind Regards,<br>
                 Home Swap.
+				<br><br><br><br><br><br>
+                <hr style='border-top: 1px solid #666666;'>
+                <br>
+				<a href='#'><img src='cid:facebook' style='width:25px;height:25px;' alt='facebook'></a>
+				<a href='#'><img src='cid:twitter' style='width:25px;height:25px;' alt='twitter'></a>
+				<a href='#'><img src='cid:instagram' style='width:25px;height:25px;' alt='instagram'></a>
+				<a href='#'><img src='cid:youtube' style='width:25px;height:25px;' alt='youtube'></a>
+				
+				<a href='#' style='margin-left:10px;color: #666666; text-align:right'>Unsubscribe</a>
+				<a href='#' style='margin-left:10px;color: #666666; text-align:right'>Privacy Policy</a>
+				<a href='#' style='margin-left:10px;color: #666666; text-align:right'>Terms of Service</a>
                 ";
           if($mail -> send()){
             $mailsent = TRUE;
