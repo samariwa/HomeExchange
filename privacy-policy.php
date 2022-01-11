@@ -63,7 +63,7 @@ include('neutral-header.php');
                         <div class="col-lg-12 order-lg-last pr-xl-5">
                             <div class="about-content mb-4 mb-lg-0 pr-lg-5">
                                 <h4>Safeguarding and Securing the Data</h4>
-                                <p>Sympha Fresh is committed to securing your data and keeping it confidential. 
+                                <p>Home Swap is committed to securing your data and keeping it confidential. 
                                    We have done all in our power to prevent data theft, unauthorized access, 
                                    and disclosure by implementing the latest technologies and software,
                                     which help us safeguard all the information we collect online.</p>
@@ -108,7 +108,7 @@ include('neutral-header.php');
                                  personal information.</p>
                                 <p>If you have already agreed to share your information with us, feel free to 
                                 contact us via email and we will be more than happy to change this for you.</p>
-                                 <p>Sympha Fresh will not lease, sell or distribute your personal information to any 
+                                 <p>Home Swap will not lease, sell or distribute your personal information to any 
                                  third parties, unless we have your permission. We might do so if the law forces 
                                  us. Your personal information will be used when we need to send you promotional
                                   materials if you agree to this privacy policy.</p>

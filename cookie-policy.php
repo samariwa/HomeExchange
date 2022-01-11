@@ -19,9 +19,9 @@ include('neutral-header.php');
                         <div class="col-lg-12 order-lg-last pr-xl-5">
                             <div class="about-content mb-4 mb-lg-0 pr-lg-5">
                                 <h3>Cookie Policy</h3>
-                                <p>Sympha Fresh may use cookies, web beacons, 
+                                <p>Home Swap may use cookies, web beacons, 
                                 tracking pixels, and other tracking technologies when you visit our website 
-                                www.symphafresh.com, including any other media form, media channel, mobile website, 
+                                www.homeswap.com, including any other media form, media channel, mobile website, 
                                 or mobile application related or connected thereto (collectively, the “Site”) to help 
                                 customize the Site and improve your experience. We reserve the right to make changes to 
                                 this Cookie Policy at any time and for any reason. We will alert you about any changes by 
