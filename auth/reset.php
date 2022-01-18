@@ -5,6 +5,7 @@ $passwordnotempty = TRUE;
 $passwordvalidate = TRUE;
 $passwordmatch  = TRUE;
 $botDetect = FALSE;
+$internet_connection = TRUE;
 $query = new Database();
 if (isset($_REQUEST['reset_button'])) {
 	$url = $token_verification_site;
@@ -17,11 +18,21 @@ if (isset($_REQUEST['reset_button'])) {
 		'http' => array(
 		 'header' => "Content-type: application/x-www-form-urlencoded\r\n",
 		     'method' => 'POST',
+         // 'ignore_errors' => true,
 		     'content' => http_build_query($data)
 		 )
 	);
 	$context = stream_context_create($options);
-	$response = file_get_contents($url, false, $context);
+  try
+	{
+	  $response = file_get_contents($url, false, $context);
+	if(empty($response)){
+	  $internet_connection = FALSE;
+   }
+	}
+	catch (Exception $e) {
+	  echo $e;
+  }
 	$res = json_decode($response, true);
 	if ($res['success'] == true && $res['score'] >= 0.5) {
    if (isset($_GET['email']) && isset($_GET['token'])){
@@ -150,12 +161,13 @@ if (isset($_REQUEST['reset_button'])) {
           
           <div style="margin-top: 20px">
           <!-- Display validation errors -->
-          <?php if ($botDetect == TRUE)
+          <?php if ($botDetect == TRUE && $internet_connection  == TRUE)
               echo '<font color="red"><i class="bx bx-shield-quarter bx-flashing"></i>&ensp;Access Denied!</font>';
-          ?>
-          <?php if ($passwordmatch == FALSE)
-            echo '<br><font color="red"><i class="bx bxs-lock bx-flashing"></i>&ensp;<font color="red"><i class="bx bxs-error bx-flashing"></i>&ensp;Your passwords do not match.</font>'; ?>
-            <?php if ($passwordvalidate = FALSE)
+              if ($internet_connection  == FALSE)
+		                    echo '<br><font color="red"><i class="bx bx-wifi bx-flashing"></i>&ensp;Please check your internet connection and try again.</font>';
+           if ($passwordmatch == FALSE)
+            echo '<br><font color="red"><i class="bx bxs-lock bx-flashing"></i>&ensp;<font color="red"><i class="bx bxs-error bx-flashing"></i>&ensp;Your passwords do not match.</font>'; 
+           if ($passwordvalidate = FALSE)
                 echo '<br><br><font color="red"><i class="bx bx-shield-quarter bx-flashing"></i>&ensp;Your password should be greater than 8 characters.</font>'; ?>
             <br>
         </div>  

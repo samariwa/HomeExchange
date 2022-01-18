@@ -8,6 +8,7 @@ $verified = FALSE;
 $no_Error = TRUE;
 $exists = TRUE;
 $botDetect = FALSE;
+$internet_connection = TRUE;
 if (isset($_REQUEST['forgot-button'])) {
 	$url = $token_verification_site;
 	$data = [
@@ -19,11 +20,21 @@ if (isset($_REQUEST['forgot-button'])) {
 		'http' => array(
 		 'header' => "Content-type: application/x-www-form-urlencoded\r\n",
 		     'method' => 'POST',
+         // 'ignore_errors' => true,
 		     'content' => http_build_query($data)
 		 )
 	);
 	$context = stream_context_create($options);
-	$response = file_get_contents($url, false, $context);
+  try
+	{
+	  $response = file_get_contents($url, false, $context);
+	if(empty($response)){
+	  $internet_connection = FALSE;
+   }
+	}
+	catch (Exception $e) {
+	  echo $e;
+  }
 	$res = json_decode($response, true);
 	if ($res['success'] == true && $res['score'] >= 0.5) {
    if (isset($_POST['email'])){
@@ -153,14 +164,15 @@ if (isset($_REQUEST['forgot-button'])) {
               Verify
             </button>
           </div>
-          <?php if ($botDetect == TRUE)
+          <?php if ($botDetect == TRUE && $internet_connection  == TRUE)
               echo '<font color="red"><i class="bx bx-shield-quarter bx-flashing"></i>&ensp;Access Denied!</font>';
-          ?>
-            <?php if ($verified == TRUE)
-            echo '&emsp;<font color="green"><i class="bx bx-check-circle bx-flashing"></i>&ensp;Please check your email for verification code.<br><i class="bx bxs-hourglass-bottom bx-flashing"></i>&ensp;The code expires in 5 minutes.</font>'; ?>
-            <?php if ($no_Error == FALSE)
-            echo '<br><br>&emsp;&emsp;<font color="red"><i class="bx bx-error-alt bx-flashing"></i>&ensp;Something went wrong. Please try again.</font>'; ?>
-            <?php if ($exists == FALSE)
+            if ($internet_connection  == FALSE)
+		          echo '<br><font color="red"><i class="bx bx-wifi bx-flashing"></i>&ensp;Please check your internet connection and try again.</font>';
+           if ($verified == TRUE)
+            echo '&emsp;<font color="green"><i class="bx bx-check-circle bx-flashing"></i>&ensp;Please check your email for verification code.<br><i class="bx bxs-hourglass-bottom bx-flashing"></i>&ensp;The code expires in 5 minutes.</font>';
+             if ($no_Error == FALSE)
+            echo '<br><br>&emsp;&emsp;<font color="red"><i class="bx bx-error-alt bx-flashing"></i>&ensp;Something went wrong. Please try again.</font>';
+             if ($exists == FALSE)
             echo '<br>&emsp;&emsp;<font color="red"><i class="bx bx-error-alt bx-flashing"></i>&ensp;Please ensure that the email address entered was <br>&emsp;&ensp;used in registration.</font>'; ?>
             <br><br>
           <div>
