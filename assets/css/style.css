@@ -51,6 +51,7 @@ body {
   color: #4b566b;
 }
 
+
 h1, h2, h3, h4, h5, h6 {
   color: #BDBBBB;
   font-weight: 600;
@@ -170,6 +171,10 @@ ul {
   list-style: outside none none;
   margin: 0;
   padding: 0;
+}
+
+ol {
+	color: #BDBBBB;
 }
 
 /*-- 

@@ -68,7 +68,7 @@
                                     <h5 class="footer-title">Get to know more</h5>
                                     <div class="widget-wrapper">
                                         <ul>
-                                        <li><a href="about.php#who_we_are">How it works</a></li>
+                                        <li><a href="index.php#how-it-works">How it works</a></li>
                                         <li><a href="faq.php">FAQs</a></li>
                                         <li><a href="privacy-policy.php">Privacy policy</a></li>
                                         <li><a href="cookie-policy.php">Cookies</a></li>

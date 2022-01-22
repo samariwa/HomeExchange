@@ -20,8 +20,9 @@ include('neutral-header.php');
                             <div class="about-content mb-4 mb-lg-0 pr-lg-5">
                                 <h3>Learn More</h3>
                                 <ul>
-                                    <li><a href="about.php#who_we_are">How it works</a></li>
-                                    <li><a href="about.php#mission&vision">Exchange points system</a></li>
+                                    <li><a href="index.php#how-it-works">How it works</a></li>
+                                    <li><a href="index.php#home-tier-system">Home Tier system</a></li>
+                                    <li><a href="index.php#exchange-points-system">Exchange points system</a></li>
                                     <li><a href="faq.php">FAQs</a></li>
                                 </ul>
                             </div>

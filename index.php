@@ -242,7 +242,7 @@
                                 <div class="slider-image slider-image2" style="background-image:url('assets/images/banner/banner-bg1.jpeg');background-repeat: no-repeat;background-size: 130%;"></div>
                                 <div class="container">
                                     <div class="banner-content text-center text-lg-left">
-                                        <h6 style="color: rgb(77, 72, 72);">Lorem Ipsum</h6>
+                                        <h6 style="color: rgb(77, 72, 72);">Holiday Swap</h6>
                                         <h3 style="color: black;">Get your next magical experience<br>anywhere, anytime, at a low cost.</h3>
                                         <a href="auth/registration.php" class="banner-btn">Sign up for free</a>
                                     </div>
@@ -255,8 +255,8 @@
                                 <div class="slider-image slider-image1" style="background-image:url('assets/images/banner/banner-bg5.jpeg');background-repeat: no-repeat;background-size: 100%;"></div>
                                 <div class="container">
                                     <div class="banner-content text-center">
-                                        <h6 style="color: rgb(77, 72, 72);">Lorem Ipsum</h6>
-                                        <h3 style="color: black;">Get your next magical experience<br>anywhere, anytime, at a low cost.</h3>
+                                        <h6 style="color: rgb(77, 72, 72);">Holiday Swap</h6>
+                                        <h3 style="color: black;">Make new discoveries with family and friends<br>anytime, at a low cost.</h3>
                                         <a href="auth/registration.php" class="banner-btn">Sign up for free</a>
                                     </div>
                                 </div>
@@ -265,11 +265,11 @@
 
                         <div class="swiper-slide">
                             <div class="banner-content-area">
-                                <div class="slider-image slider-image3" style="background-image:url('assets/images/banner/bog4.jpeg');background-size: 130%;"></div>
+                                <div class="slider-image slider-image3" style="background-image:url('assets/images/banner/banner-bg7.jpeg');background-size: 130%;"></div>
                                 <div class="container">
                                     <div class="banner-content text-center text-lg-left">
-                                        <h6 style="color: rgb(77, 72, 72);">Lorem Ipsum</h6>
-                                        <h3 style="color: black;">Get your next magical experience<br>anywhere, anytime, at a low cost.</h3>
+                                        <h6 style="color: rgb(77, 72, 72);">Holiday Swap</h6>
+                                        <h3 style="color: black;">Unlock the world and create new memories<br>at a low cost.</h3>
                                         <a href="auth/registration.php" class="banner-btn">Sign up for free</a>
                                     </div>
                                 </div>
@@ -297,16 +297,25 @@
                    </div>
                 </div>
             </section>
-
+            <br>
              <!-- category section start -->
-            <section class="catagory-section">
+            <section class="catagory-section" id="how-it-works">
                 <div class="container p-lg-0">
                     <div class="section-heading">
                         <h4 class="heading-title"><span class="heading-circle"></span> How it works</h4>
                     </div>
 
                     <div class="section-wrapper">
-                       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur quibusdam enim expedita sed nesciunt incidunt accusamus adipisci officia libero laboriosam! Proin gravida nibh vel velit auctor aliquet. nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vultate cursus a sit amet mauris. Duis sed odio sit amet nibh vultate cursus a sit amet mauris.</p>
+                        <h5>What is a holiday swap?</h5>
+                        <p>It is as simple as it sounds. You swap your home with another person or family with the aim of using it as a vacation home at your holiday destination.</p>
+                        <p>Sign up for free and organize your next vacation in 5 easy steps.</p>
+                        <ol>
+                            <li><b><i>Add home:</i></b> Add one or more homes that you will use to do the holiday swaps.</li>
+                            <li><b><i>List home(s):</i></b> Add the home to the list of available homes so that the community can be able to see when browsing for homes.</li>
+                            <li><b><i>Search for a holiday home:</i></b> Enter details of your vacation and get the most suitable homes for you to select and make a reservation.</li>
+                            <li><b><i>Make holiday swap request:</i></b> Request for a swap for the home you have identified and contact the owner if you need need more details.</li>
+                            <li><b><i>Complete reservation:</i></b> Wait for the home owners response through a notification you will get. Alternatively since you listed your home, if you get a request, approve it if the home you will exchange with suits you.</li>
+                        </ol>
                     </div>
                 </div>
             </section>
@@ -324,7 +333,7 @@
                                     </div>
                                     <div class="info-content">
                                         <h6>Cost Effective</h6>
-                                        <p>Lorem ipsum dolor sit amet, conse ctetur adipisicing elit, sed do.</p>
+                                        <p>Get the ultimate holiday experience for family and/or friends at a very low cost.</p>
                                     </div>
                                 </div>
                             </div>
@@ -336,7 +345,7 @@
                                     </div>
                                     <div class="info-content">
                                         <h6>Centered on you</h6>
-                                        <p>Lorem ipsum dolor sit amet, conse ctetur adipisicing elit, sed do.</p>
+                                        <p>Get holiday homes that are tailored for your stay at the holiday destination.</p>
                                     </div>
                                 </div>
                             </div>
@@ -348,7 +357,7 @@
                                     </div>
                                     <div class="info-content">
                                         <h6>24/7 Support</h6>
-                                        <p>Lorem ipsum dolor sit amet, conse ctetur adipisicing elit, sed do.</p>
+                                        <p>Get customer support at any given time from our dedicated support team.</p>
                                     </div>
                                 </div>
                             </div>
@@ -358,32 +367,30 @@
             </section>
             <!-- info-box-section end -->
 
-
-
-
+            <br>
             <!-- category section start -->
-            <section class="catagory-section">
-                <div class="container p-lg-0">
-                    <div class="section-heading">
-                        <h4 class="heading-title"><span class="heading-circle green"></span> Exchange Points System</h4>
-                    </div>
-
-                    <div class="section-wrapper">
-                       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur quibusdam enim expedita sed nesciunt incidunt accusamus adipisci officia libero laboriosam! Proin gravida nibh vel velit auctor aliquet. nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vultate cursus a sit amet mauris. Duis sed odio sit amet nibh vultate cursus a sit amet mauris.</p>
-                    </div>
-                </div>
-            </section>
-            <!-- category section end -->
-
-            <!-- category section start -->
-            <section class="catagory-section">
+            <section class="catagory-section" id="home-tier-system">
                 <div class="container p-lg-0">
                     <div class="section-heading">
                         <h4 class="heading-title"><span class="heading-circle"></span> The Home Tier System</h4>
                     </div>
 
                     <div class="section-wrapper">
-                       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur quibusdam enim expedita sed nesciunt incidunt accusamus adipisci officia libero laboriosam! Proin gravida nibh vel velit auctor aliquet. nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vultate cursus a sit amet mauris. Duis sed odio sit amet nibh vultate cursus a sit amet mauris.</p>
+                       <p>The home tier system classifies homes based on the facilities they have. Homes will be classified in one of the 5 tiers after an analysis of its details when the home is added onto the platform. This will help bring a distinction between the homes to help home owners choose homes that match with theirs. However this does not limit the home owners to only swap with homes that match theirs. Swapping homes that are in different tiers will need a compensatory mechanism that will be made possible using the exchange points system.</p>
+                    </div>
+                </div>
+            </section>
+            <!-- category section end -->
+
+            <!-- category section start -->
+            <section class="catagory-section" id="exchange-points-system">
+                <div class="container p-lg-0">
+                    <div class="section-heading">
+                        <h4 class="heading-title"><span class="heading-circle green"></span> Exchange Points System</h4>
+                    </div>
+
+                    <div class="section-wrapper">
+                       <p>Exchange Points make swapping your homes easy since they make it possible to exchange homes that are not in the same tier. In situations where there is a difference in the  home tiers of the homes you need to swap, exchange points will facilitiate a cashless transaction between the two parties as a way of compensating the difference. Each time you add a home, you will be awarded <?php echo $initial_exchange_points;?> points. The Exchange Points System will make your experience even better and make the holiday as affordable as possible.</p>
                     </div>
                 </div>
             </section>
@@ -403,9 +410,9 @@
                                 <div class="swiper-slide">
                                     <div class="testimonial-body">
                                         <div class="testi-author-pic"><img src="assets/images/testimonial/author4.jpeg" alt="author"></div>
-                                        <p class="desc">What a load of rubbish bits and bobs pear shaped owt to do with me good tinkety tonk old fruit, car boot my good sir buggered plastered cheeky David, haggle young delinquent say so I said bite your arm off</p>
+                                        <p class="desc">Holiday Swap allowed us to travel more and discovery more in this beautiful country because we saved on accomodation costs each trip made, so we could afford to visit more places on a lower budget.</p>
                                         <div class="author-info">
-                                            <h6 class="name">Jhon Doe</h6>
+                                            <h6 class="name">Jane Doe</h6>
                                             <div class="rating">
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star"></i>

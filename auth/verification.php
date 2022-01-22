@@ -6,7 +6,7 @@ $query = new Database();
 if($where == 'email' )
 {
     $email = sanitize($_POST['email']);
-   $result = mysqli_fetch_array(mysqli_query($connection,$query->get("users","*", array('email_address','=',$email)))or die($connection->error));
+   $result = mysqli_fetch_array(mysqli_query($connection,$query->get("users","*", array('email_address','=',$email))));
    if ( $result == TRUE) {
     echo "exists";
    }
@@ -20,7 +20,7 @@ if($where == 'email' )
 elseif($where == 'mobile' )
 {
     $mobile = sanitize($_POST['mobile']);
-   $result = mysqli_fetch_array(mysqli_query($connection,$query->get("users","phone_number", array('phone_number','=',$mobile)))or die($connection->error));
+   $result = mysqli_fetch_array(mysqli_query($connection,$query->get("users","phone_number", array('phone_number','=',$mobile))));
    if ( $result == TRUE) {
     echo "exists";
    }
