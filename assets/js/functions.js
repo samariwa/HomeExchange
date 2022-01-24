@@ -1149,7 +1149,7 @@ $(document).on('click','#cancel-availability',function(e){
     var availability_id = $('#availability_id').val();
     $.post("delete.php",{id:availability_id, where:where},
     function(result){
-        if (result == 'success') {
+        if (result == '1') {
             alert("The home's availbility has been cancelled");
             location.reload(true);
            }
@@ -1167,7 +1167,7 @@ $(document).on('click','#delete-home',function(){
     var id = $('#home_id').val();
     $.post("delete.php",{id:id, where:where},
     function(result){
-        if (result == 'success') {
+        if (result == '1') {
             alert("Home successfully deleted");
             window.location.href = 'my-homes.php';
            }
