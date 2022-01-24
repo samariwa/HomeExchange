@@ -16,7 +16,7 @@
                                     if (isset($_SESSION['logged_in'])) {
                                     if ($_SESSION['logged_in'] == TRUE) {
                                 ?>
-                                   <input type="hidden" class="newsletter_token" id="token" name="token">
+                                   <input type="hidden" class="newsletter_token" id="token2" name="token">
                                    <button class="btn btn-md active userSubscription" value="<?php echo $logged_in_email; ?>" style="background-color: #FD5555; color: white;" role="button" aria-pressed="true" >SUBSCRIBE</button>
                                 <?php
                                     }
@@ -183,7 +183,7 @@
     <script src='assets/js/fly-cart.js?359597'></script>
     <script src='assets/js/multi-countdown.js'></script>
     <script src='assets/js/theia-sticky-sidebar.js'></script>
-    <script src='assets/js/functions.js?3043458'></script>
+    <script src='assets/js/functions.js?30435'></script>
    <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 $(function() {
@@ -211,6 +211,8 @@ grecaptcha.ready(function() {
                   .then(function(token) {
             // add token value to form
             document.getElementById('token').value = token;
+            document.getElementById('token2').value = token;
+
         });
     });
 

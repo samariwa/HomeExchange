@@ -105,7 +105,7 @@ $html = '<h1 style="text-align:center"><strong><img src="../assets/images/lOGO.p
     <li>Week 3: '.$week_3_signups['sum'].' customers</li>
     <li>Week 4: '.$week_4_signups['sum'].' customers</li></b>
 </ul>
-<p>There is currently a total of <b>'.$activeCustomersCount.' active customers</b> on the platform and <b>'.$blacklistedCount.' blacklisted customers</b>. Of the registered customers, there currently are <b> '.mysqli_num_rows($subscribersList).' newsletter subscribers</b> which is <b>'.number_format((float)(mysqli_num_rows($subscribersList)/$month_sign_ups['sum']) * 100,2,'.','').'%'.' of the active customers</b> </p>
+<p>There is currently a total of <b>'.$activeCustomersCount.' active customers</b> on the platform and <b>'.$blacklistedCount.' blacklisted customers</b>. Of the registered customers, there currently are <b> '.mysqli_num_rows($subscribersList).' newsletter subscribers</b> which is <b>'.number_format((float)(mysqli_num_rows($subscribersList)/$activeCustomersCount) * 100,2,'.','').'%'.' of the active customers</b> </p>
 <p>There were <b>'.$month_new_homeowners['sum'].' new home owners</b> in the previous month. This makes the <b>total home owners '.$total_Home_Owners['sum'].'</b> which is  <i>'.number_format((float)(mysqli_num_rows($totalHomeOwners)/$activeCustomersCount) * 100,2,'.','').'% of the total registered customers</i>. The weekly uptake of home owners is as follows:</p>
 <ol>
     <b><li>Week 1: '.$week_1_homeowners['sum'].' home owners</li>

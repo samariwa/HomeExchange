@@ -117,7 +117,7 @@ elseif ($where == 'rate-home') {
   }
   $avg_rating = mysqli_query($connection, $home_rating->GetAverageHomeRating($_POST['home_id'])) or die(mysqli_error($connection));
   $result = mysqli_fetch_array($avg_rating);
-  mysqli_query($connection, $home_rating->SetAverageHomeRating($_POST['home_id'],$result['rating'])) or die(mysqli_error($connection));
+  mysqli_query($connection, $home_rating->SetAverageHomeRating($_POST['home_id'],round($result['rating']))) or die(mysqli_error($connection));
   echo "1";
 }
 
@@ -135,7 +135,7 @@ elseif ($where == 'rate-home-owner') {
   }
   $avg_rating = mysqli_query($connection, $home_owner_rating->GetAverageHomeOwnerRating($_POST['owner_id'])) or die(mysqli_error($connection));
   $result = mysqli_fetch_array($avg_rating);
-  mysqli_query($connection, $home_owner_rating->SetAverageHomeOwnerRating($_POST['owner_id'],$result['rating'])) or die(mysqli_error($connection));
+  mysqli_query($connection, $home_owner_rating->SetAverageHomeOwnerRating($_POST['owner_id'],round($result['rating']))) or die(mysqli_error($connection));
   echo "1";
 }
 
