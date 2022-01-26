@@ -5,7 +5,7 @@ if($where == 'user' )
 {  
     $user = new User();
 	$id =$_POST['id'];
-    mysqli_query($connection, $customer->DeleteUser($id));
+    mysqli_query($connection, $user->DeleteUser($id));
     echo 1;
     exit();
 }
@@ -40,6 +40,7 @@ else if($where == 'delete_request' )
     mysqli_query($connection,"DELETE FROM `homes` WHERE `id` = '".$_POST['id']."'") or die(mysqli_error($connection));
     echo 'success';
   }
+
  else if($where == 'remove_image' )
 {   
     mysqli_query($connection,"Delete from `images` where id='".$_POST['id']."'")or die($connection->error);
